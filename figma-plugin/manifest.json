@@ -1,0 +1,8 @@
+{
+  "name": "React Component Library",
+  "id": "react-component-library-generator",
+  "api": "1.0.0",
+  "main": "dist/main.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page"
+}
