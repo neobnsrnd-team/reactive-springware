@@ -1,0 +1,64 @@
+{
+  "name": "@react-page-forge/component-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Hana Bank App 기반)",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "rpf-init": "./scripts/init.mjs"
+  },
+  "files": [
+    "dist",
+    "packages/component-library",
+    ".storybook",
+    "docs/setup-guide.md",
+    "docs/CLAUDE.md",
+    "rules",
+    "scripts/init.mjs",
+    "design-tokens"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:manifest": "node scripts/build-manifest.mjs",
+    "extract:manifest": "tsx scripts/extract-manifest.ts",
+    "build:all": "npm run build && npm run build:manifest && npm run extract:manifest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext ts,tsx",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^10.3.3",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "storybook": "^10.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.3",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

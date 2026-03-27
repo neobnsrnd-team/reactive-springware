@@ -1,0 +1,15 @@
+# 의존성
+node_modules/
+
+# 빌드 산출물
+dist/
+storybook-static/
+
+# 환경 변수
+.env
+.env.local
+.env.*.local
+
+# 에디터
+.DS_Store
+*.log
