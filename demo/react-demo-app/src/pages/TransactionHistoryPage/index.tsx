@@ -21,7 +21,7 @@ import {
   CardHeader,
   TransactionList,
   Button,
-} from '@react-page-forge/component-library';
+} from '@reactive-springware/component-library';
 import { useTransactionHistory } from './useTransactionHistory';
 
 // ──────────────────────────────────────────────

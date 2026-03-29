@@ -15,7 +15,7 @@ import {
   CardRowPlain,
   CardHighlight,
   Stack,
-} from '@react-page-forge/component-library';
+} from '@reactive-springware/component-library';
 
 interface TransferSummaryCardProps {
   targetAccount:         string;

@@ -21,7 +21,7 @@ import {
   SuccessHero,
   ActionLinkItem,
   Button,
-} from '@react-page-forge/component-library';
+} from '@reactive-springware/component-library';
 import { useTransferSuccess } from './useTransferSuccess';
 import { TransferSummaryCard } from './TransferSummaryCard';
 

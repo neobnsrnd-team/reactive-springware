@@ -1,9 +1,9 @@
 {
-  "name": "@react-page-forge/component-library",
-  "version": "0.1.0",
+  "name": "@reactive-springware/component-lib",
+  "version": "0.1.6",
   "private": true,
   "type": "module",
-  "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Hana Bank App 기반)",
+  "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Bank App 기반)",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,24 +11,29 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./dist/index.css": "./dist/index.css",
+    "./design-tokens": "./design-tokens/globals.css"
   },
   "bin": {
-    "rpf-init": "./scripts/init.mjs"
+    "rs-init": "./scripts/init.mjs",
+    "rs-cleanup": "./scripts/cleanup.mjs"
   },
   "files": [
     "dist",
+    "lib",
     "packages/component-library",
     ".storybook",
-    "docs/setup-guide.md",
-    "docs/CLAUDE.md",
+    "docs",
     "rules",
     "scripts/init.mjs",
+    "scripts/cleanup.mjs",
     "design-tokens"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --config vite.lib.config.js",
+    "prepack": "npm run build",
     "build:manifest": "node scripts/build-manifest.mjs",
     "extract:manifest": "tsx scripts/extract-manifest.ts",
     "build:all": "npm run build && npm run build:manifest && npm run extract:manifest",

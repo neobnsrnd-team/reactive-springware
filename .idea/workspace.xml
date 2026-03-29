@@ -11,7 +11,29 @@
       <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/eslint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reactive-springware-component-lib-0.1.3.tgz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/cleanup.mjs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/components/AccountGroupSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/components/AccountGroupSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/pages/AccountListPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/pages/AccountListPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/pages/HomeDashboardPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/pages/HomeDashboardPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransactionDetailPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransactionDetailPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransactionHistoryPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransactionHistoryPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransferSuccessPage/TransferSummaryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransferSuccessPage/TransferSummaryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransferSuccessPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/src/pages/TransferSuccessPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/react-demo-app/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/demo/react-demo-app/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design-tokens/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/design-tokens/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.claude.rules" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.claude.rules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CLAUDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CLAUDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/component-library/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/component-library/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-page-forge-component-library-0.1.0.tgz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/01-architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/rules/01-architecture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/03-component.md" beforeDir="false" afterPath="$PROJECT_DIR$/rules/03-component.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/init.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/init.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,21 +43,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "umyewon"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;umyewon&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/neobnsrnd-team/reactive-springware.git",
-    "accountId": "dc24681f-4782-44f5-946f-7fc2b736871c"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/neobnsrnd-team/reactive-springware.git&quot;,
+    &quot;accountId&quot;: &quot;dc24681f-4782-44f5-946f-7fc2b736871c&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="3BWRwLYKQ6OO4gd71uWrXXNm4mw" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -45,20 +67,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/reactive-springware",
-    "settings.editor.selected.configurable": "com.intellij.mcpserver.settings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/reactive-springware&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.mcpserver.settings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\reactive-springware" />
@@ -90,7 +112,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774623881310</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="commit">
+      <option name="closed" value="true" />
+      <created>1774624157029</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774624157029</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

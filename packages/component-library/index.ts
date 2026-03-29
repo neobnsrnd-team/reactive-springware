@@ -1,9 +1,9 @@
 /**
  * @file index.ts
- * @description @react-page-forge/component-library 패키지 진입점.
+ * @description @reactive-springware/component-library 패키지 진입점.
  *
  * 카테고리별 모든 컴포넌트와 타입을 re-export합니다.
- * 외부에서 `import { Button } from '@react-page-forge/component-library'` 형태로 사용.
+ * 외부에서 `import { Button } from '@reactive-springware/component-library'` 형태로 사용.
  */
 
 /* ── Core (원자 컴포넌트) ─────────────────────────────────────── */

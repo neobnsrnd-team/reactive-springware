@@ -6,7 +6,7 @@ Claude가 Figma 기반 React 코드를 생성할 때
 일관된 프로젝트 구조와 레이어 분리 원칙을 유지하기 위한 규칙 정의
 
 본 프로젝트는 **Figma UI → Claude → React 코드 생성** 구조를 기반으로 한다.
-공통 UI는 **Component Library (`@component-library`)** 를 사용한다.
+공통 UI는 **Component Library (`@reactivespringware/component-library`)** 를 사용한다.
 
 ---
 
@@ -15,7 +15,7 @@ Claude가 Figma 기반 React 코드를 생성할 때
 Claude는 반드시 아래 구조를 기준으로 코드를 생성한다.
 
 ```
-src/
+src/reactive-springware/
   pages/
   hooks/
   repositories/
@@ -27,7 +27,7 @@ src/
 
 ---
 
-## pages/
+## src/reactive-springware/pages/
 
 페이지 컴포넌트를 생성한다. 라우팅 단위이며, 비즈니스 로직을 포함하지 않는다.
 
@@ -45,7 +45,7 @@ pages/
 
 ---
 
-## hooks/
+## src/reactive-springware/hooks/
 
 페이지 상태 관리 및 데이터 패칭 Hook을 생성한다. 데이터 패칭·상태 로직을 전담한다.
 
@@ -63,7 +63,7 @@ hooks/
 
 ---
 
-## repositories/
+## src/reactive-springware/repositories/
 
 HTTP 호출·데이터 가공·모델 변환·에러 처리를 전담한다.
 
@@ -81,7 +81,7 @@ repositories/
 
 ---
 
-## types/
+## src/reactive-springware/types/
 
 TypeScript 타입 정의 전담
 
@@ -98,7 +98,7 @@ types/
 
 ---
 
-## components/
+## src/reactive-springware/components/
 
 페이지 전용 UI 컴포넌트 생성. 데이터 패칭 로직을 포함하지 않는다.
 
@@ -211,9 +211,9 @@ Repository는 데이터 호출을 담당한다.
 공통 UI는 반드시 component-library 사용
 
 ```ts
-import { Button } from "@component-library/button"
-import { Stack } from "@component-library/layout"
-import { TextField } from "@component-library/input"
+import { Button } from "@reactivespringware/component-library"
+import { Stack } from "@reactivespringware/component-library"
+import { TextField } from "@reactivespringware/component-library"
 ```
 
 component-library가 유일한 UI 소스다.

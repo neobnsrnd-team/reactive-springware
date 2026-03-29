@@ -1,5 +1,5 @@
 {
-  "name": "@react-page-forge/design-tokens",
+  "name": "@reactive-springware/design-tokens",
   "version": "0.1.0",
   "description": "Multi-domain white-label 테마 엔진을 위한 디자인 토큰 (Tailwind CSS v4 기반)",
   "type": "module",

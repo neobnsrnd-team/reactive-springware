@@ -27,7 +27,7 @@ import {
   CardRowPlain,
   CardActionRowPlain,
   EmptyState,
-} from '@react-page-forge/component-library';
+} from '@reactive-springware/component-library';
 import { useTransactionDetail } from './useTransactionDetail';
 
 // ──────────────────────────────────────────────

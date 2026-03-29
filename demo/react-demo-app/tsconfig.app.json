@@ -25,7 +25,7 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@react-page-forge/component-library": ["../../packages/component-library/index.ts"],
+      "@reactive-springware/component-library": ["../../packages/component-library/index.ts"],
       "@lib/*": ["../../lib/*"]
     }
   },

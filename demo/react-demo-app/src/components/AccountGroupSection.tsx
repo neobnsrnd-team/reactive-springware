@@ -27,7 +27,7 @@ import {
   LabelValueRow,
   CollapsibleSection,
   AccountSummaryCard,
-} from '@react-page-forge/component-library';
+} from '@reactive-springware/component-library';
 import type { AccountGroup } from '../types/accountListTypes';
 
 interface AccountGroupSectionProps {

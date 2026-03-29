@@ -22,7 +22,7 @@ import {
   Stack,
   Button,
   EmptyState,
-} from '@react-page-forge/component-library';
+} from '@reactive-springware/component-library';
 import { useAccountList } from '../hooks/useAccountList';
 import { AccountGroupSection } from '../components/AccountGroupSection';
 
