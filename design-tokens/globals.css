@@ -11,12 +11,35 @@
    직접 편집하지 마세요. JSON 수정 후 npm run build:css-all 을 실행하세요.
 ================================================================ */
 
-@import "tailwindcss";
+/* ================================================================
+   FONTS
+   컴포넌트 라이브러리가 사용하는 폰트를 여기서 로드하여 dist/index.css에 번들링한다.
+   고객사 프로젝트에서 별도로 폰트를 설치·설정할 필요 없다.
+
+   @import url() 은 반드시 파일 최상단에 위치해야 CSS 스펙을 준수한다.
+================================================================ */
+
+/* Noto Sans KR: 본문·레이블 기본 폰트 (--font-sans) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+/* Manrope: 금액·숫자 전용 폰트 (--font-numeric) */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+/* Material Symbols Outlined: 아이콘 폰트 (--font-icon) */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+/* ================================================================
+   TAILWIND v4
+   preflight(CSS reset)는 의도적으로 제외한다.
+   고객사 프로젝트에 Tailwind v4가 이미 설치되어 있을 경우
+   preflight가 중복 적용되어 컴포넌트 스타일을 덮어쓰는 문제를 방지한다.
+   - theme.css  : 디폴트 테마 변수 (@theme 블록의 커스텀 토큰과 병합됨)
+   - utilities.css : 유틸리티 클래스 생성 (@source 지정 파일 스캔 결과 포함)
+================================================================ */
+@import "tailwindcss/theme" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
 
 /* Tailwind v4: 자동 스캔 범위 밖에 있는 컴포넌트 디렉토리를 명시적으로 추가.
-   packages/@shared/components/ 는 각 앱의 Vite 루트 밖에 위치하므로
+   packages/component-library 는 각 앱의 Vite 루트 밖에 위치하므로
    @source 없이는 Tailwind가 해당 파일의 클래스명을 수집하지 못한다. */
-/* figma-react-generator 컴포넌트 경로로 수정 */
 @source "../packages/component-library/**/*.{ts,tsx}";
 
 /* ================================================================

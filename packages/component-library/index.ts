@@ -6,6 +6,12 @@
  * 외부에서 `import { Button } from '@reactive-springware/component-library'` 형태로 사용.
  */
 
+// 디자인 토큰 + Tailwind 유틸리티 CSS를 빌드에 포함시킨다.
+// 이 import가 있어야 vite build 시 tailwindcss() 플러그인이 globals.css를 처리하고
+// globals.css 내부의 @source 지시어로 모든 컴포넌트 파일을 스캔하여
+// 실제로 사용된 Tailwind 유틸리티 클래스를 dist/index.css에 출력한다.
+import '../../design-tokens/globals.css';
+
 /* ── Core (원자 컴포넌트) ─────────────────────────────────────── */
 export * from './core/Badge';
 export * from './core/Button';

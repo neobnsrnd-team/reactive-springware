@@ -23,7 +23,11 @@ export default defineConfig({
     dts({
       include: ['packages/component-library', 'lib'],
       outDir: 'dist',
-      tsconfigPath: './tsconfig.json',
+      // IDE/typecheck용 tsconfig.json(noEmit:true)와 분리된 빌드 전용 설정 사용
+      tsconfigPath: './tsconfig.build.json',
+      // 분산된 .d.ts 파일들을 dist/index.d.ts 단일 파일로 번들링
+      // → package.json의 "types": "./dist/index.d.ts"가 실제 파일을 가리키게 됨
+      rollupTypes: true,
     }),
   ],
   resolve: {

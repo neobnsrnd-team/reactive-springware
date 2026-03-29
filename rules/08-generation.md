@@ -31,16 +31,37 @@ components/
 
 ---
 
+# 생성 전 사전 확인 — CSS import
+
+페이지·컴포넌트 생성 전, 아래 두 import가 진입 파일(`src/main.tsx` 또는 `src/main.jsx` 등)에 **이미 존재하는지** 확인한다.
+
+```ts
+import '@reactive-springware/component-lib/dist/index.css';
+```
+
+- 없으면 진입 파일 **최상단**에 추가한다.
+- 이미 있으면 건너뛴다.
+
+이 import가 없으면 Tailwind 유틸리티 클래스와 디자인 토큰이 적용되지 않아
+생성된 모든 컴포넌트의 스타일이 깨진다.
+
+`design-tokens/globals.css`는 `@import "tailwindcss"`를 포함하므로 직접 import하면
+고객사 프로젝트에 Tailwind가 없을 때 에러가 발생한다. 절대 주입하지 않는다.
+`dist/index.css` 한 줄로 충분하다.
+
+---
+
 # 생성 순서
 
 의존성 순서로 생성한다. 의존 대상을 먼저 생성해야 오류 없이 import 가능하다.
 
-1. **Types 생성** — 모든 파일이 참조하는 타입 정의
-2. **Repository 생성** — Types 참조
-3. **Hooks 생성** — Repository 참조
-4. **Components 생성** — Hook 참조
-5. **Page 생성** — Component·Hook 참조
-6. **라우터 URL 등록** — Page 생성 후 반드시 수행
+1. **CSS import 사전 확인** — 진입 파일에 CSS import 존재 여부 확인·추가
+2. **Types 생성** — 모든 파일이 참조하는 타입 정의
+3. **Repository 생성** — Types 참조
+4. **Hooks 생성** — Repository 참조
+5. **Components 생성** — Hook 참조
+6. **Page 생성** — Component·Hook 참조
+7. **라우터 URL 등록** — Page 생성 후 반드시 수행
 
 ---
 
