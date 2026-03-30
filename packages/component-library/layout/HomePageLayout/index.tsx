@@ -71,7 +71,7 @@ export function HomePageLayout({
                   <Bell className="size-4" aria-hidden="true" />
                   {hasNotification && (
                     /* 알림 뱃지: Figma node 1:234 — 빨간 원, 흰 테두리 */
-                    <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-error border-2 border-white" aria-hidden="true" />
+                    <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-danger-badge border-2 border-white" aria-hidden="true" />
                   )}
                 </button>
 
