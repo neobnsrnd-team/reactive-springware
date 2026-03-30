@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="18cf3e81-5007-46bf-a06b-8d1d8ccd05d4" name="변경" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/design-tokens/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/design-tokens/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.claude.rules" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.claude.rules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/setup-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/setup-guide.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/01-architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/rules/01-architecture.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/08-generation.md" beforeDir="false" afterPath="$PROJECT_DIR$/rules/08-generation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/init.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/init.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +14,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/#3" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -100,8 +98,52 @@
       <option name="project" value="LOCAL" />
       <updated>1774624157029</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="commit">
+      <option name="closed" value="true" />
+      <created>1774836967699</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774836967700</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="b0bcdee8-a22d-44d7-8a11-804635e513bd" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="b0bcdee8-a22d-44d7-8a11-804635e513bd">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/reactive-springware/figma-plugin/src/components" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="repository migration" />
