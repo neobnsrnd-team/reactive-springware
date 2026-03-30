@@ -2,7 +2,7 @@
 
 Figma 디자인과 API 정보를 Claude에 입력하면 React 코드를 자동 생성하는 AI 개발 워크플로우
 
-컴포넌트 UI는 라이브러리 설치 후 `npm run storybook`으로 확인하세요.
+컴포넌트 UI는 라이브러리 저장소에서 `npm run rs-stories`로 확인하세요.
 
 ---
 
