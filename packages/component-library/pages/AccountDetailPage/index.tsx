@@ -36,7 +36,7 @@
  * @param onTransactionMore  - "거래내역 더보기" 클릭 핸들러
  * @param onTransactionClick - 거래 항목 클릭 핸들러
  */
-import React from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { Menu, ChevronRight, Search, Calendar } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
@@ -53,6 +53,7 @@ import { Typography } from '../../core/Text';
 import { Card }            from '../../modules/Card';
 import { TransactionList } from '../../modules/TransactionList';
 import { Divider }         from '../../modules/Divider';
+import { DatePicker }      from '../../modules/DatePicker';
 
 import type { TransactionItem }                          from '../../modules/TransactionList/types';
 import type { AccountDetailPageProps, AccountDetailType } from './types';
@@ -161,6 +162,14 @@ function LoadingSkeleton() {
 
 // ── 메인 페이지 컴포넌트 ──────────────────────────────────────
 
+/** 날짜 → 'YYYY.MM.DD' 표시용 문자열 */
+function formatDate(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+}
+
 export function AccountDetailPage({
   accountType       = 'deposit',
   accountName       = '하나 주거래 통장',
@@ -176,6 +185,23 @@ export function AccountDetailPage({
   onTransactionMore,
   onTransactionClick,
 }: AccountDetailPageProps) {
+  /* 거래내역 기간 선택 DatePicker 상태 (Storybook 확인용 — 실제 앱에서는 Hook에서 관리) */
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
+
+  /* "거래내역 더보기" 버튼의 DOM 위치를 DatePicker 달력 패널 위치 계산에 사용 */
+  const moreButtonRef = useRef<HTMLButtonElement>(null);
+
+  /* 선택된 날짜 범위를 섹션 헤더 텍스트에 반영 */
+  const transactionSectionTitle = useMemo(() => {
+    const [start, end] = dateRange;
+    if (start && end) return `거래내역 (${formatDate(start)} ~ ${formatDate(end)})`;
+    return '최근거래내역 (7일)';
+  }, [dateRange]);
+
+  /* 오늘 이후 날짜는 거래 내역이 없으므로 미래 날짜 선택 제한 */
+  const today = useMemo(() => new Date(), []);
+
   return (
     <PageLayout
       title="계좌상세"
@@ -259,8 +285,9 @@ export function AccountDetailPage({
             {/* 섹션 헤더: 제목+검색아이콘(좌) / 더보기 링크(우) */}
             <Inline justify="between" align="center">
               <Inline gap="xs" align="center">
+                {/* 선택된 날짜 범위가 있으면 헤더 텍스트를 해당 기간으로 업데이트 */}
                 <Typography variant="body" weight="bold" color="heading" as="span">
-                  최근거래내역 (7일)
+                  {transactionSectionTitle}
                 </Typography>
                 {/* 검색 아이콘 — 거래 내역 검색 진입점 */}
                 <button
@@ -273,17 +300,38 @@ export function AccountDetailPage({
                 </button>
               </Inline>
 
-              {/* 거래내역 더보기 링크 */}
+              {/* 거래내역 더보기 — 클릭 시 기간 선택 DatePicker를 팝업으로 출력 */}
               <button
+                ref={moreButtonRef}
                 type="button"
-                onClick={onTransactionMore}
+                onClick={() => {
+                  onTransactionMore?.();
+                  setDatePickerOpen(o => !o);
+                }}
+                aria-haspopup="dialog"
+                aria-expanded={datePickerOpen}
                 className="flex items-center gap-xs text-xs text-text-secondary hover:text-brand-text transition-colors"
-                aria-label="전체 거래내역 더보기"
+                aria-label="거래내역 기간 선택"
               >
                 거래내역 더보기
                 <Calendar className="size-3.5" aria-hidden="true" />
               </button>
             </Inline>
+
+            {/*
+             * DatePicker는 제어 모드(open/onOpenChange/anchorRef)로 렌더링된다.
+             * 달력 패널은 document.body portal이므로 여기서의 DOM 위치는 무관하다.
+             * maxDate=today: 미래 날짜 선택 차단 (존재하지 않는 거래 내역)
+             */}
+            <DatePicker
+              mode="range"
+              open={datePickerOpen}
+              onOpenChange={setDatePickerOpen}
+              anchorRef={moreButtonRef}
+              rangeValue={dateRange}
+              onRangeChange={setDateRange}
+              maxDate={today}
+            />
 
             {/*
              * -mx-standard: PageLayout main의 px-standard를 상쇄해 TransactionList를
@@ -297,9 +345,12 @@ export function AccountDetailPage({
               />
             </div>
 
-            {/* 하단 안내 문구 — Figma: "최근 7일간의 거래내역입니다." */}
+            {/* 하단 안내 문구 — 날짜 범위 선택 시 해당 기간으로 안내 문구 업데이트 */}
             <Typography variant="caption" color="muted" className="text-center py-sm">
-              최근 7일간의 거래내역입니다.
+              {dateRange[0] && dateRange[1]
+                ? `${formatDate(dateRange[0])} ~ ${formatDate(dateRange[1])} 거래내역입니다.`
+                : '최근 7일간의 거래내역입니다.'
+              }
             </Typography>
           </Stack>
         </Stack>

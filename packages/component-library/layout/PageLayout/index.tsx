@@ -78,7 +78,8 @@ export function PageLayout({
           강제 변경되어 수평 내용이 잘릴 수 있음. 모바일 레이아웃에서 수평 스크롤은
           불필요하므로 hidden으로 명시적으로 차단한다. */}
       {/* px-standard py-md: 좌우 기본 여백 + 상하 여백 — 고객 프로젝트에서 별도 패딩 없이 바로 사용 가능 */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden px-standard py-md">
+      {/* flex flex-col: 자식 컴포넌트가 flex-1을 사용해 남은 높이를 채울 수 있도록 flex 컨테이너로 설정 */}
+      <main className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden px-standard py-md">
         {children}
         {/* bottomBar가 있을 때 하단 고정 바 높이만큼 spacer를 추가하여
             마지막 콘텐츠가 고정 바에 가려지지 않도록 한다 */}

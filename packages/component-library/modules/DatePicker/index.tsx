@@ -65,11 +65,18 @@ export function DatePicker({
   placeholder = '날짜를 선택하세요',
   label,
   disabled    = false,
+  open:         openProp,
+  onOpenChange,
+  anchorRef:    anchorRefProp,
   className,
 }: DatePickerProps) {
   const today = useMemo(() => new Date(), []);
 
-  const [open,      setOpen]     = useState(false);
+  /* 제어 모드: openProp이 주입된 경우 내장 open 상태를 사용하지 않음 */
+  const isControlled = openProp !== undefined;
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = isControlled ? (openProp ?? false) : internalOpen;
+
   const [viewYear,  setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
 
@@ -77,53 +84,70 @@ export function DatePicker({
   const calendarRef = useRef<HTMLDivElement>(null);
 
   /**
-   * 달력 패널의 fixed 위치 — 트리거 버튼의 getBoundingClientRect 기반.
+   * 달력 패널의 fixed 위치 — 앵커 요소의 getBoundingClientRect 기반.
    * overflow: hidden/auto 조상 안에서도 달력이 잘리지 않도록 portal로 렌더링한다.
    */
   const [calendarStyle, setCalendarStyle] = useState<React.CSSProperties>({});
 
-  /** 트리거 클릭: 버튼 위치를 계산해 달력 패널 위치를 결정 */
-  const handleToggle = useCallback(() => {
-    if (!open && triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect();
-      const CALENDAR_WIDTH = 288; /* w-72 = 288px */
-      /* 오른쪽 화면 밖으로 나가면 오른쪽 정렬로 전환 */
-      const left = rect.left + CALENDAR_WIDTH > window.innerWidth
-        ? rect.right - CALENDAR_WIDTH
-        : rect.left;
-      setCalendarStyle({
-        position: 'fixed',
-        top:      rect.bottom + 4,
-        left,
-        width:    CALENDAR_WIDTH,
-        zIndex:   9999,
-      });
+  /**
+   * isOpen이 true로 바뀔 때 달력 위치를 계산한다.
+   * 제어 모드: anchorRefProp(외부 트리거 버튼)를 기준으로 위치를 잡는다.
+   * 비제어 모드: 내장 triggerRef를 기준으로 위치를 잡는다.
+   */
+  useEffect(() => {
+    if (!isOpen) return;
+    const anchor = anchorRefProp?.current ?? triggerRef.current;
+    if (!anchor) return;
 
-      /* 달력 뷰를 현재 선택된 value의 연/월로 맞춘다.
-         value가 없으면 오늘 기준으로 유지 */
-      const base = mode === 'single' ? value : (rangeValue[0] ?? null);
-      if (base) {
-        setViewYear(base.getFullYear());
-        setViewMonth(base.getMonth());
-      }
+    const rect = anchor.getBoundingClientRect();
+    const CALENDAR_WIDTH = 288; /* w-72 = 288px */
+    /* 오른쪽 화면 밖으로 나가면 오른쪽 정렬로 전환 */
+    const left = rect.left + CALENDAR_WIDTH > window.innerWidth
+      ? rect.right - CALENDAR_WIDTH
+      : rect.left;
+    setCalendarStyle({
+      position: 'fixed',
+      top:      rect.bottom + 4,
+      left,
+      width:    CALENDAR_WIDTH,
+      zIndex:   9999,
+    });
+
+    /* 달력 뷰를 현재 선택된 value의 연/월로 맞춘다.
+       value가 없으면 오늘 기준으로 유지 */
+    const base = mode === 'single' ? value : (rangeValue[0] ?? null);
+    if (base) {
+      setViewYear(base.getFullYear());
+      setViewMonth(base.getMonth());
     }
-    setOpen(o => !o);
-  }, [open, mode, value, rangeValue]);
+  }, [isOpen, mode, value, rangeValue, anchorRefProp]);
+
+  /** 달력을 닫는 공통 함수 */
+  const closeCalendar = useCallback(() => {
+    if (isControlled) onOpenChange?.(false);
+    else setInternalOpen(false);
+  }, [isControlled, onOpenChange]);
+
+  /** 내장 트리거 버튼 클릭 — 비제어 모드에서만 호출 */
+  const handleToggle = useCallback(() => {
+    setInternalOpen(o => !o);
+  }, []);
 
   /** 외부 클릭 시 달력 닫기.
-   * triggerRef 또는 calendarRef 내부 클릭은 무시한다.
+   * triggerRef / anchorRefProp / calendarRef 내부 클릭은 무시한다.
    * calendarRef도 체크하지 않으면 날짜 셀 mousedown 시 portal이 먼저 닫혀
    * click 이벤트가 발생하기 전에 날짜 버튼이 DOM에서 사라지고 onChange가 호출되지 않는다. */
   useEffect(() => {
-    if (!open) return;
+    if (!isOpen) return;
     function handleOutside(e: MouseEvent) {
-      if (triggerRef.current  && triggerRef.current.contains(e.target as Node))  return;
-      if (calendarRef.current && calendarRef.current.contains(e.target as Node)) return;
-      setOpen(false);
+      if (triggerRef.current?.contains(e.target as Node))       return;
+      if (anchorRefProp?.current?.contains(e.target as Node))   return;
+      if (calendarRef.current?.contains(e.target as Node))      return;
+      closeCalendar();
     }
     document.addEventListener('mousedown', handleOutside);
     return () => document.removeEventListener('mousedown', handleOutside);
-  }, [open]);
+  }, [isOpen, closeCalendar, anchorRefProp]);
 
   /* range 모드에서 첫 번째 클릭 임시 저장 */
   const [rangeStart, setRangeStart] = useState<Date | null>(null);
@@ -166,7 +190,7 @@ export function DatePicker({
       if (isDisabledDay(d)) return;
       if (mode === 'single') {
         onChange?.(d);
-        setOpen(false);
+        closeCalendar();
       } else {
         /* range 모드: 첫 클릭 → 시작, 두 번째 클릭 → 종료 */
         if (!rangeStart || (rangeStart && d < rangeStart)) {
@@ -175,11 +199,11 @@ export function DatePicker({
         } else {
           onRangeChange?.([rangeStart, d]);
           setRangeStart(null);
-          setOpen(false);
+          closeCalendar();
         }
       }
     },
-    [mode, rangeStart, isDisabledDay, onChange, onRangeChange],
+    [mode, rangeStart, isDisabledDay, onChange, onRangeChange, closeCalendar],
   );
 
   /* 트리거 버튼 표시 텍스트 */
@@ -199,27 +223,30 @@ export function DatePicker({
     <div className={cn('relative flex flex-col gap-xs', className)}>
       {label && <span className="text-xs font-bold text-text-label">{label}</span>}
 
-      {/* 날짜 선택 트리거 버튼 */}
-      <button
-        ref={triggerRef}
-        type="button"
-        disabled={disabled}
-        onClick={handleToggle}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        className={cn(
-          'h-12 px-standard rounded-lg border text-sm text-left',
-          'bg-surface border-border',
-          'hover:border-brand-text transition-colors duration-150',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          value || (s ?? null) ? 'text-text-heading font-bold' : 'text-text-placeholder',
-        )}
-      >
-        {triggerText}
-      </button>
+      {/* 내장 트리거 버튼 — 비제어 모드(open prop 미제공)에서만 렌더링
+          제어 모드에서는 부모가 anchorRef 버튼을 직접 트리거로 사용한다 */}
+      {!isControlled && (
+        <button
+          ref={triggerRef}
+          type="button"
+          disabled={disabled}
+          onClick={handleToggle}
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
+          className={cn(
+            'h-12 px-standard rounded-lg border text-sm text-left',
+            'bg-surface border-border',
+            'hover:border-brand-text transition-colors duration-150',
+            'disabled:opacity-50 disabled:cursor-not-allowed',
+            value || (s ?? null) ? 'text-text-heading font-bold' : 'text-text-placeholder',
+          )}
+        >
+          {triggerText}
+        </button>
+      )}
 
       {/* 달력 패널 — overflow:hidden/auto 조상에 잘리지 않도록 document.body에 portal로 렌더링 */}
-      {open && typeof document !== 'undefined' && createPortal(
+      {isOpen && typeof document !== 'undefined' && createPortal(
         <div
           ref={calendarRef}
           role="dialog"
