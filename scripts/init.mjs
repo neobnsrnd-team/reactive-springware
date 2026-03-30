@@ -13,6 +13,8 @@
  *     rs-docs/
  *       component-map.md ← docs/component-map.md
  *       setup-guide.md   ← docs/setup-guide.md
+ *     src/
+ *       index.css        ← demo/react-demo-app/src/index.css  (Tailwind + 디자인 토큰 진입점)
  *
  * @example
  * npx rs-init
@@ -121,6 +123,16 @@ copyFile(
   resolve(cwd, 'rs-docs/setup-guide.md'),
   'rs-docs/setup-guide.md',
 );
+
+/** demo/react-demo-app/src/index.css → <project-root>/src/index.css
+ *  기존 index.css가 있으면 덮어쓰지 않고 index.css.bak으로 이름을 바꿔 보존한다. */
+const indexCssDest = resolve(cwd, 'src/index.css');
+if (existsSync(indexCssDest)) {
+  const bakPath = resolve(cwd, 'src/index.css.bak');
+  renameSync(indexCssDest, bakPath);
+  console.log('[rs-init] 기존 src/index.css → src/index.css.bak 으로 백업합니다.');
+}
+copyFile(resolve(pkgRoot, 'demo/react-demo-app/src/index.css'), indexCssDest, 'src/index.css');
 
 /** vite.config.{ts,js} 에 @tailwindcss/vite 플러그인 자동 등록.
  *  이미 등록되어 있으면 건너뛴다. */

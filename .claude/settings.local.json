@@ -1,0 +1,12 @@
+{
+  "env": {
+    "FIGMA_TOKEN": "figd_ZugTjBPFYxjGnskGFCK2Sws_GRUiZHxFR3OLLHB9"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

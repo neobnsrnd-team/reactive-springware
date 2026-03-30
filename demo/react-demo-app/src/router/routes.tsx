@@ -15,6 +15,8 @@ import { TransferSuccessPage } from '@/pages/TransferSuccessPage';
 import { KbHomePage } from '@/features/kbHome/page';
 import { KbTransactionHistoryListPage } from '@/features/kbTransactionHistory/page';
 import { HanaTransactionHistoryListPage } from '@/features/hanaTransactionHistory/page';
+import TransactionHistoryFeaturePage from '@/features/transactionHistory/page';
+import TransactionHistoryFilterPage from '@/features/transactionHistory/TransactionHistoryFilterPage';
 
 const routes = [
   {
@@ -48,6 +50,14 @@ const routes = [
   {
     path: '/hana-transactions',
     element: <HanaTransactionHistoryListPage />,
+  },
+  {
+    path: '/transaction-history',
+    element: <TransactionHistoryFeaturePage />,
+  },
+  {
+    path: '/transaction-history/filter',
+    element: <TransactionHistoryFilterPage />,
   },
 ];
 
