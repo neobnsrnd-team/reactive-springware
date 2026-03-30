@@ -54,6 +54,7 @@
 | `rules/08-generation.md`   | 페이지 생성 시 처리 절차 및 라우터 등록               |
 | `rules/09-confirmation.md` | 개발자 확인이 필요한 상황 정의                        |
 | `rules/10-brand.md`        | 페이지 루트 data-brand / data-domain 적용 규칙        |
+| `rules/11-component-props.md` | 컴포넌트별 허용 prop 값 레퍼런스 (variant·size·color 등) |
 
 ---
 
