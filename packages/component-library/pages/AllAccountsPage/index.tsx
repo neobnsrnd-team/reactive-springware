@@ -205,7 +205,7 @@ function MineTabContent({
                   </Button>
                   <Button
                     size="sm"
-                    variant="outline"
+                    variant="primary"
                     fullWidth
                     onClick={(e) => {
                       e.stopPropagation();
@@ -258,7 +258,7 @@ function MineTabContent({
                   </Button>
                   <Button
                     size="sm"
-                    variant="outline"
+                    variant="primary"
                     fullWidth
                     onClick={(e) => {
                       e.stopPropagation();
@@ -306,27 +306,45 @@ function MineTabContent({
 // ── 다른금융 탭 콘텐츠 ────────────────────────────────────────
 
 function OtherTabContent({
+  activeSegment,
+  onSegmentChange,
   onConnectAccount,
 }: {
+  activeSegment: AccountSegment;
+  onSegmentChange: (id: AccountSegment) => void;
   onConnectAccount?: () => void;
 }) {
   return (
-    <Stack gap="lg" align="center" className="py-xl">
-      <EmptyState
-        illustration={<Landmark className="size-16 text-text-muted" aria-hidden="true" />}
-        title="연결된 다른 금융 계좌가 없습니다."
-        description="다른 금융사 계좌를 연결하면 한 곳에서 모든 계좌를 조회할 수 있어요."
-      />
-      {/* 연결하기 버튼 — 빈 상태에서 주요 CTA */}
-      <Button
-        variant="primary"
-        size="lg"
-        fullWidth
-        leftIcon={<Link className="size-4" aria-hidden="true" />}
-        onClick={onConnectAccount}
-      >
-        연결하기
-      </Button>
+    <Stack gap="sm">
+      {/* 세그먼트 탭 — 해당금융과 동일하게 다른금융에도 표시 */}
+      <div className="bg-white rounded-lg px-md py-sm">
+        <TabNav
+          items={SEGMENT_TABS}
+          activeId={activeSegment}
+          onTabChange={(id) => onSegmentChange(id as AccountSegment)}
+          variant="pill"
+          fullWidth
+        />
+      </div>
+
+      {/* 빈 상태 + 연결하기 CTA */}
+      <Stack gap="lg" align="center" className="py-xl">
+        <EmptyState
+          illustration={<Landmark className="size-16 text-text-muted" aria-hidden="true" />}
+          title="연결된 다른 금융 계좌가 없습니다."
+          description="다른 금융사 계좌를 연결하면 한 곳에서 모든 계좌를 조회할 수 있어요."
+        />
+        {/* 연결하기 버튼 — 빈 상태에서 주요 CTA */}
+        <Button
+          variant="primary"
+          size="lg"
+          fullWidth
+          leftIcon={<Link className="size-4" aria-hidden="true" />}
+          onClick={onConnectAccount}
+        >
+          연결하기
+        </Button>
+      </Stack>
     </Stack>
   );
 }
@@ -410,7 +428,11 @@ export function AllAccountsPage({
         )}
 
         {activeTab === 'other' && (
-          <OtherTabContent onConnectAccount={onConnectAccount} />
+          <OtherTabContent
+            activeSegment={activeSegment}
+            onSegmentChange={setActiveSegment}
+            onConnectAccount={onConnectAccount}
+          />
         )}
       </Stack>
     </PageLayout>
