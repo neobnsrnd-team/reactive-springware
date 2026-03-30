@@ -12,6 +12,7 @@ import { AccountListPage } from '@/pages/AccountListPage';
 import { TransactionHistoryPage } from '@/pages/TransactionHistoryPage';
 import { TransactionDetailPage } from '@/pages/TransactionDetailPage';
 import { TransferSuccessPage } from '@/pages/TransferSuccessPage';
+import { KbHomePage } from '@/features/kbHome/page';
 
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/transfer/success',
     element: <TransferSuccessPage />,
+  },
+  {
+    path: '/kb-home',
+    element: <KbHomePage />,
   },
 ];
 

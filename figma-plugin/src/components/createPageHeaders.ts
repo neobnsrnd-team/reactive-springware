@@ -4,10 +4,10 @@
  *
  * 컴포넌트:
  * - "PageHeader" (PageLayout 상단 헤더: 뒤로가기 + 타이틀 + 우측 액션)
- * - "HomeHeader"  (HomePageLayout 상단 헤더: 인사말 + 타이틀 + 알림 아이콘)
+ * - "HomeHeader"  (HomePageLayout 상단 헤더: 브랜드 타이틀 + 프로필·벨·메뉴 3버튼)
  */
 
-import { COLOR, SPACING, FONT_SIZE } from '../tokens';
+import { COLOR, BRAND, SPACING, FONT_SIZE } from '../tokens';
 import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
 import { createIcon } from '../icons';
 
@@ -61,30 +61,63 @@ export function createHomeHeader(): ComponentNode {
   comp.counterAxisSizingMode = 'FIXED';
   comp.primaryAxisAlignItems = 'SPACE_BETWEEN';
   comp.counterAxisAlignItems = 'CENTER';
-  setFill(comp, COLOR.surface);
+  /* backdrop-blur는 Figma에서 직접 표현 불가 — 흰 배경 80% 불투명도로 대체 */
+  setFill(comp, { ...COLOR.surface, a: 0.8 });
 
+  /* 좌측: 브랜드 타이틀 (greeting 제거됨) */
   const left = figma.createFrame();
   left.name = 'TitleArea';
-  setAutoLayout(left, 'VERTICAL', 2);
+  setAutoLayout(left, 'HORIZONTAL', SPACING.xs);
   left.layoutGrow = 1;
   left.primaryAxisSizingMode = 'AUTO';
   left.counterAxisSizingMode = 'FIXED';
+  left.counterAxisAlignItems = 'CENTER';
   clearFill(left);
-  addText(left, '홍길동님, 안녕하세요', FONT_SIZE.xs, COLOR.textMuted);
-  addText(left, '하나은행', FONT_SIZE.base, COLOR.textHeading, true);
+  /* 타이틀: text-xl + text-brand (teal) */
+  addText(left, '하나은행', FONT_SIZE.xl, BRAND.primary, true);
   comp.appendChild(left);
 
-  /* 알림 버튼 — Bell 아이콘 */
-  const bellBtn = figma.createFrame();
-  bellBtn.name = 'BellButton';
-  setAutoLayout(bellBtn, 'HORIZONTAL', 0);
-  bellBtn.resize(36, 36);
-  bellBtn.primaryAxisAlignItems = 'CENTER';
-  bellBtn.counterAxisAlignItems = 'CENTER';
-  bellBtn.cornerRadius = 8;
-  clearFill(bellBtn);
-  bellBtn.appendChild(createIcon('Bell', 20, COLOR.textMuted));
-  comp.appendChild(bellBtn);
+  /* 우측: 프로필·벨·메뉴 3버튼 — Figma node 1:227 기준 */
+  const rightGroup = figma.createFrame();
+  rightGroup.name = 'RightActions';
+  setAutoLayout(rightGroup, 'HORIZONTAL', SPACING.xs);
+  rightGroup.primaryAxisAlignItems = 'CENTER';
+  rightGroup.counterAxisAlignItems = 'CENTER';
+  clearFill(rightGroup);
+
+  const makeIconBtn = (name: string, icon: string): FrameNode => {
+    const btn = figma.createFrame();
+    btn.name = name;
+    setAutoLayout(btn, 'HORIZONTAL', 0);
+    btn.resize(36, 36);
+    btn.primaryAxisAlignItems = 'CENTER';
+    btn.counterAxisAlignItems = 'CENTER';
+    btn.cornerRadius = 9999; /* rounded-full */
+    clearFill(btn);
+    btn.appendChild(createIcon(icon, 16, COLOR.textMuted));
+    return btn;
+  };
+
+  rightGroup.appendChild(makeIconBtn('ProfileButton', 'User'));
+
+  /* 벨 버튼 — 알림 뱃지(빨간 원) 포함 */
+  const bellBtn = makeIconBtn('BellButton', 'Bell');
+  const badge = figma.createEllipse();
+  badge.name = 'NotificationBadge';
+  badge.resize(8, 8);
+  badge.x = 22; /* 우측 상단 — top-1.5 right-1.5 근사값 */
+  badge.y = 4;
+  /* --color-danger-badge: #ef4444 */
+  badge.fills = [{ type: 'SOLID', color: { r: 0.937, g: 0.267, b: 0.267 }, opacity: 1 }];
+  /* 흰 테두리 2px */
+  badge.strokes = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+  badge.strokeWeight = 2;
+  badge.strokeAlign = 'OUTSIDE';
+  bellBtn.appendChild(badge);
+  rightGroup.appendChild(bellBtn);
+
+  rightGroup.appendChild(makeIconBtn('MenuButton', 'Menu'));
+  comp.appendChild(rightGroup);
 
   figma.currentPage.appendChild(comp);
   return comp;
