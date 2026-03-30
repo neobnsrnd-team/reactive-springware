@@ -16,17 +16,24 @@
  * </HomePageLayout>
  */
 import React from 'react';
-import { Bell } from 'lucide-react';
+import { Bell, User, Menu } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { HomePageLayoutProps } from './types';
 
 export type { HomePageLayoutProps } from './types';
 
+/** 헤더 아이콘 버튼 공통 스타일 */
+const iconBtnCls = cn(
+  'flex items-center justify-center size-9 rounded-full',
+  'text-text-muted hover:bg-surface-raised hover:text-text-heading',
+  'transition-colors duration-150',
+);
+
 export function HomePageLayout({
   title,
   logo,
-  greeting,
   rightAction,
+  hasNotification = false,
   withBottomNav = true,
   className,
   children,
@@ -35,32 +42,44 @@ export function HomePageLayout({
   return (
     <div className={cn('flex flex-col min-h-dvh', className)} {...props}>
       {/* ── 상단 고정 헤더 ────────────────────────────── */}
-      <header className="sticky top-0 z-sticky bg-surface border-b border-border-subtle">
+      {/*
+       * backdrop-blur + 반투명 흰 배경: 스크롤 시 콘텐츠가 헤더 아래로 자연스럽게 가려짐.
+       * Figma 디자인(node 1:221) 기준: backdrop-blur-sm / bg-white/80 / border-b
+       */}
+      <header className="sticky top-0 z-sticky backdrop-blur-sm bg-white/80 border-b border-border-subtle">
         <div className="flex items-center h-14 px-standard gap-sm">
           <div className="flex-1 flex flex-col justify-center">
-            {/* 인사말 — greeting 전달 시만 노출 */}
-            {greeting && <p className="text-xs text-text-muted leading-none mb-0.5">{greeting}</p>}
             <div className="flex items-center gap-xs">
               {/* 로고 아이콘 — logo 전달 시만 노출 */}
               {logo && <span aria-hidden="true">{logo}</span>}
-              <h1 className="text-base font-bold text-text-heading leading-none">{title}</h1>
+              {/* 타이틀: 브랜드 컬러(teal) + 볼드 — Figma node 1:226 */}
+              <h1 className="text-xl font-bold text-brand leading-none">{title}</h1>
             </div>
           </div>
 
-          {/* 우측 액션 슬롯 — 미전달 시 기본 Bell 아이콘 버튼 */}
+          {/* 우측 액션 슬롯 — 미전달 시 프로필·벨·메뉴 기본 3버튼 */}
           <div className="shrink-0">
             {rightAction ?? (
-              <button
-                type="button"
-                aria-label="알림"
-                className={cn(
-                  'flex items-center justify-center size-9 rounded-lg',
-                  'text-text-muted hover:bg-surface-raised hover:text-text-heading',
-                  'transition-colors duration-150',
-                )}
-              >
-                <Bell className="size-5" aria-hidden="true" />
-              </button>
+              <div className="flex items-center gap-1">
+                {/* 프로필 버튼 */}
+                <button type="button" aria-label="프로필" className={iconBtnCls}>
+                  <User className="size-4" aria-hidden="true" />
+                </button>
+
+                {/* 알림(벨) 버튼 — hasNotification 시 빨간 뱃지 표시 */}
+                <button type="button" aria-label="알림" className={cn(iconBtnCls, 'relative')}>
+                  <Bell className="size-4" aria-hidden="true" />
+                  {hasNotification && (
+                    /* 알림 뱃지: Figma node 1:234 — 빨간 원, 흰 테두리 */
+                    <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-danger-badge border-2 border-white" aria-hidden="true" />
+                  )}
+                </button>
+
+                {/* 메뉴 버튼 */}
+                <button type="button" aria-label="메뉴" className={iconBtnCls}>
+                  <Menu className="size-4" aria-hidden="true" />
+                </button>
+              </div>
             )}
           </div>
         </div>

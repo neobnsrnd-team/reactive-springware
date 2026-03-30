@@ -22,7 +22,12 @@
 
     /* 미사용 변수/파라미터 오류는 끔 (컴포넌트 prop 미사용 케이스 허용) */
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+
+    /* Storybook viteFinalConfig의 alias(@lib → lib/)와 동기화 */
+    "paths": {
+      "@lib/*": ["./lib/*"]
+    }
   },
   "include": ["packages/**/*", "lib/**/*"]
 }

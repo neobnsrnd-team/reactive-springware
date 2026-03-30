@@ -15,15 +15,16 @@ export interface HomePageLayoutProps extends React.HTMLAttributes<HTMLDivElement
    */
   logo?: React.ReactNode;
   /**
-   * 헤더 타이틀 위에 표시할 인사말 (예: '홍길동님, 안녕하세요')
-   * 미전달 시 인사말 영역 렌더링 안 함
-   */
-  greeting?: string;
-  /**
    * 헤더 우측 슬롯.
-   * 미전달 시 기본 Bell(알림) 아이콘 버튼 표시
+   * 미전달 시 기본 프로필·벨·메뉴 3개 아이콘 버튼 표시
    */
   rightAction?: React.ReactNode;
+  /**
+   * 알림 뱃지 표시 여부.
+   * rightAction을 직접 전달한 경우 무시됨.
+   * 기본: false
+   */
+  hasNotification?: boolean;
   /** 하단 글로벌 탭바 영역 여백 자동 추가 여부. 기본: true */
   withBottomNav?: boolean;
   className?: string;
