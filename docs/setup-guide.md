@@ -173,8 +173,8 @@ import '@reactive-springware/component-lib/dist/index.css';
 ```json
 {
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "rs-storybook": "storybook dev -p 6006",
+    "build-rs-storybook": "storybook build"
   }
 }
 ```
@@ -221,7 +221,7 @@ import '@reactive-springware/component-lib/dist/index.css';
 ### Step 1. Storybook으로 컴포넌트 확인
 
 ```bash
-npm run storybook
+npm run rs-storybook
 ```
 
 사용 가능한 컴포넌트와 props를 Storybook에서 먼저 확인합니다.
@@ -309,11 +309,11 @@ import '@reactive-springware/component-lib/dist/index.css';
 
 ### Storybook이 실행되지 않는 경우
 
-`rs-init`을 실행했는지 확인합니다. `.storybook/` 폴더와 `storybook` 스크립트가 자동으로 생성됩니다.
+`rs-init`을 실행했는지 확인합니다. `.storybook/` 폴더와 `rs-storybook` 스크립트가 자동으로 생성됩니다.
 
 ```bash
 npx rs-init   # 재실행 (이미 있는 파일은 건너뜀)
-npm run storybook
+npm run rs-storybook
 ```
 
 ### vite.config에서 Tailwind 관련 오류가 나는 경우

@@ -40,8 +40,8 @@
     "build:all": "npm run build && npm run build:manifest && npm run extract:manifest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext ts,tsx",
-    "rs-stories": "storybook dev -p 6006",
-    "build-rs-stories": "storybook build"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@storybook/react-vite": "^10.3.3",

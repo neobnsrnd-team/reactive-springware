@@ -316,12 +316,12 @@ function setupStorybook() {
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
     pkg.scripts = pkg.scripts ?? {};
     let scriptAdded = false;
-    if (!pkg.scripts['storybook']) {
-      pkg.scripts['storybook'] = 'storybook dev -p 6006';
+    if (!pkg.scripts['rs-storybook']) {
+      pkg.scripts['rs-storybook'] = 'storybook dev -p 6006';
       scriptAdded = true;
     }
-    if (!pkg.scripts['build-storybook']) {
-      pkg.scripts['build-storybook'] = 'storybook build';
+    if (!pkg.scripts['build-rs-storybook']) {
+      pkg.scripts['build-rs-storybook'] = 'storybook build';
       scriptAdded = true;
     }
     if (scriptAdded) {
@@ -473,10 +473,10 @@ export default preview;
   // 스토리 파일이 하나도 없으면 Storybook이 실행되지 않는다.
   // 초기 프로젝트에서 바로 실행 가능하도록 소개 스토리를 하나 생성한다.
   const storiesDir = resolve(cwd, 'src/stories');
-  const introPath  = resolve(storiesDir, 'Introduction.stories.tsx');
+  const introPath  = resolve(storiesDir, 'ReactiveSpringware.stories.tsx');
 
   if (existsSync(introPath)) {
-    console.log('[rs-init] src/stories/Introduction.stories.tsx가 이미 존재합니다. 건너뜁니다.');
+    console.log('[rs-init] src/stories/ReactiveSpringware.stories.tsx가 이미 존재합니다. 건너뜁니다.');
   } else {
     mkdirSync(storiesDir, { recursive: true });
     writeFileSync(introPath, `\
@@ -514,7 +514,7 @@ export const GettingStarted: StoryObj = {
   ),
 };
 `, 'utf8');
-    console.log('[rs-init] ✔ src/stories/Introduction.stories.tsx 생성 완료');
+    console.log('[rs-init] ✔ src/stories/ReactiveSpringware.stories.tsx 생성 완료');
   }
 }
 
