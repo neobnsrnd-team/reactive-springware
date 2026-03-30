@@ -32,7 +32,7 @@
  * @param onTransfer    - 이체 버튼 핸들러
  */
 import React, { useState } from 'react';
-import { Landmark, Link } from 'lucide-react';
+import { Landmark, Link, ChevronRight } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
 import { PageLayout } from '../../layout/PageLayout';
@@ -91,17 +91,6 @@ const MOCK_DEPOSIT_ACCOUNTS = [
   },
 ];
 
-/** 신탁 계좌 샘플 (1개) */
-const MOCK_TRUST_ACCOUNTS = [
-  {
-    id: 'acc-003',
-    type: 'savings' as const,
-    accountName: '하나 특정금전신탁',
-    accountNumber: '180-920058-00301',
-    balance: 3000000,
-  },
-];
-
 /** 펀드 계좌 샘플 (1개) */
 const MOCK_FUND_ACCOUNTS = [
   {
@@ -128,30 +117,44 @@ const MOCK_LOAN_ACCOUNTS = [
 // ── 계좌 그룹 섹션 헤더 ───────────────────────────────────────
 
 /**
- * CollapsibleSection 헤더 구성 — 그룹명 + 계좌 수 + 총 잔액 표시.
+ * CollapsibleSection 헤더 구성 — 그룹명 + 배지 + 총 잔액 표시.
  *
  * Figma: 각 그룹 헤더는 "예금 [2] 1,500,000원" 형식으로 좌우 구분 레이아웃.
+ * 계좌가 아예 없는 경우(미보유)에는 count 대신 badgeLabel("미보유")을 중립 배지로 표시한다.
+ *
+ * @param count      - 계좌 수 (숫자 배지). badgeLabel 전달 시 무시됨
+ * @param badgeLabel - 숫자 대신 표시할 텍스트 배지 (예: "미보유")
  */
 function AccountGroupHeader({
   title,
   count,
   totalAmount,
+  badgeLabel,
 }: {
   title: string;
-  count: number;
+  count?: number;
   totalAmount?: string;
+  /** 숫자 배지 대신 표시할 텍스트 (예: "미보유") — 중립 회색 배지로 렌더링 */
+  badgeLabel?: string;
 }) {
   return (
     <Inline justify="between" align="center" className="w-full">
-      {/* 그룹명 + 계좌 수 배지 */}
+      {/* 그룹명 + 배지 */}
       <Inline gap="xs" align="center">
         <Typography variant="body" weight="bold" color="heading" as="span">
           {title}
         </Typography>
-        {/* 계좌 수 — 브랜드 색상 배지 */}
-        <span className="inline-flex items-center rounded-full px-xs py-0.5 text-xs font-bold bg-brand-10 text-brand-text">
-          {count}
-        </span>
+        {badgeLabel ? (
+          /* 미보유 등 텍스트 배지 — 회색 중립 스타일 */
+          <span className="inline-flex items-center rounded-full px-xs py-0.5 text-xs font-medium bg-surface-raised text-text-muted">
+            {badgeLabel}
+          </span>
+        ) : count !== undefined ? (
+          /* 계좌 수 숫자 배지 — 브랜드 색상 */
+          <span className="inline-flex items-center rounded-full px-xs py-0.5 text-xs font-bold bg-brand-10 text-brand-text">
+            {count}
+          </span>
+        ) : null}
       </Inline>
       {/* 총 잔액 — 우측 표시, 숫자는 numeric 폰트 적용 */}
       {totalAmount && (
@@ -245,40 +248,23 @@ function MineTabContent({
         </Stack>
       </CollapsibleSection>
 
-      {/* ── 신탁 그룹 ─────────────────────────────────────────── */}
+      {/* ── 신탁 그룹 — 미보유 빈 상태 ──────────────────────────── */}
       <CollapsibleSection
         key={`trust-${activeSegment}`}
         header={
-          <AccountGroupHeader
-            title="신탁"
-            count={MOCK_TRUST_ACCOUNTS.length}
-            totalAmount="3,000,000원"
-          />
+          /* 계좌 없음 → 숫자 배지 대신 "미보유" 텍스트 배지로 표시 */
+          <AccountGroupHeader title="신탁" badgeLabel="미보유" />
         }
         defaultExpanded={isGroupExpanded(activeSegment, 'trust')}
       >
-        <Stack gap="sm">
-          {MOCK_TRUST_ACCOUNTS.map((account) => (
-            <AccountSummaryCard
-              key={account.id}
-              type={account.type}
-              accountName={account.accountName}
-              accountNumber={account.accountNumber}
-              balance={account.balance}
-              onClick={() => onAccountClick?.(account.id)}
-              actions={
-                <>
-                  <Button size="sm" variant="outline" fullWidth
-                    onClick={(e) => { e.stopPropagation(); onTransactionHistory?.(account.id); }}
-                  >거래내역</Button>
-                  <Button size="sm" variant="primary" fullWidth
-                    onClick={(e) => { e.stopPropagation(); onTransfer?.(account.id); }}
-                  >이체</Button>
-                </>
-              }
-            />
-          ))}
-        </Stack>
+        <EmptyState
+          title="보유하신 신탁 계좌가 없습니다."
+          action={
+            <Button variant="ghost" size="sm" rightIcon={<ChevronRight className="size-4" aria-hidden="true" />}>
+              신탁 가입하기
+            </Button>
+          }
+        />
       </CollapsibleSection>
 
       {/* ── 펀드 그룹 ─────────────────────────────────────────── */}
@@ -434,8 +420,23 @@ export function AllAccountsPage({
     <PageLayout
       title="전계좌 조회"
       onBack={onBack}
+      bottomBar={
+        // 다른금융 탭일 때만 연결하기 버튼을 PageLayout 최하단 고정 바로 노출
+        activeTab === 'other' ? (
+          <Button
+            variant="primary"
+            size="lg"
+            fullWidth
+            leftIcon={<Link className="size-4" aria-hidden="true" />}
+            onClick={onConnectAccount}
+          >
+            연결하기
+          </Button>
+        ) : undefined
+      }
     >
-      <Stack gap="sm">
+      {/* flex-1: OtherTabContent가 남은 높이를 채워 EmptyState 세로 중앙 정렬을 위한 부모 flex 컨텍스트 */}
+      <Stack gap="sm" className="flex-1">
         {/* 상단 탭: 해당금융 | 다른금융 */}
         <div className="bg-white -mx-standard px-standard">
           <TabNav
@@ -474,7 +475,6 @@ export function AllAccountsPage({
           <OtherTabContent
             activeSegment={activeSegment}
             onSegmentChange={setActiveSegment}
-            onConnectAccount={onConnectAccount}
           />
         )}
       </Stack>
