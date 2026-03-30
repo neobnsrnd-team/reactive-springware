@@ -597,9 +597,12 @@ export interface PageLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 
 // ── HomePageLayout ────────────────────────────────────────────
 export interface HomePageLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
-  title:        string;
-  rightAction?: React.ReactNode;    // 미전달 시 기본 Bell 버튼
-  className?:   string;
+  title:            string;
+  logo?:            React.ReactNode;  // 타이틀 좌측 로고 슬롯
+  rightAction?:     React.ReactNode;  // 미전달 시 기본 User·Bell·Menu 3버튼
+  hasNotification?: boolean;          // 기본 벨 버튼 알림 뱃지 표시 여부 (기본: false)
+  withBottomNav?:   boolean;          // 하단 탭바 여백 자동 추가 (기본: true)
+  className?:       string;
 }
 
 // ── BlankPageLayout ───────────────────────────────────────────
@@ -1105,8 +1108,8 @@ BlankPageLayout
 
 ```
 HomePageLayout
-  title="Hana Bank"  logo={<Building2 />}  rightAction={<HeaderRightActions />}  withBottomNav
-├─ Text as="h2" variant="heading"    → "안녕하세요, 김하나님!"
+  title="Hana Bank"  logo={<Building2 />}  hasNotification  withBottomNav
+├─ Text as="h2" variant="heading"    → "안녕하세요, 김하나님!"  {/* greeting prop 제거 → 본문 내 직접 표시 */}
 ├─ TabNav                            → 해당금융 / 다른금융 / 자산관리
 ├─ Stack gap="md" px-standard
 │   ├─ [mine]  AccountSummaryCard    → 계좌 카드
@@ -1120,16 +1123,20 @@ HomePageLayout
 └─ BottomNav activeId="home"         → 하단 고정 탭바
 ```
 
-**헤더 rightAction 구성** (`HomePageLayout` 기본 Bell 버튼 override):
+**헤더 기본 rightAction** (User·Bell·Menu 3버튼 내장):
+- `hasNotification={true}` 전달 시 벨 아이콘 우측 상단에 `bg-danger-badge` 빨간 뱃지 자동 표시
+- 커스텀 우측 영역이 필요한 경우 `rightAction` prop으로 직접 전달
+
 ```tsx
-<Inline gap="xs" align="center">
-  <Button variant="ghost" size="sm" iconOnly>  <User size={16} />  </Button>
-  <div className="relative">
-    <Button variant="ghost" size="sm" iconOnly>  <Bell size={16} />  </Button>
-    <span className="absolute top-1 right-1 size-2 rounded-full bg-danger border-2 border-surface" />
-  </div>
-  <Button variant="ghost" size="sm" iconOnly>  <Menu size={18} />  </Button>
-</Inline>
+{/* 기본 사용 — 알림 뱃지 있음 */}
+<HomePageLayout title="Hana Bank" logo={<HanaLogo />} hasNotification withBottomNav>
+  ...
+</HomePageLayout>
+
+{/* rightAction 커스텀 override */}
+<HomePageLayout title="Hana Bank" rightAction={<MyCustomActions />} withBottomNav>
+  ...
+</HomePageLayout>
 ```
 
 ---
