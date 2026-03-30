@@ -9,8 +9,6 @@
 
 import { HomeDashboardPage } from '@/pages/HomeDashboardPage';
 import { AccountListPage } from '@/pages/AccountListPage';
-import { TransactionHistoryPage } from '@/pages/TransactionHistoryPage';
-import { TransactionDetailPage } from '@/pages/TransactionDetailPage';
 import { TransferSuccessPage } from '@/pages/TransferSuccessPage';
 import { KbHomePage } from '@/features/kbHome/page';
 import { KbTransactionHistoryListPage } from '@/features/kbTransactionHistory/page';
@@ -26,14 +24,6 @@ const routes = [
   {
     path: '/accounts',
     element: <AccountListPage />,
-  },
-  {
-    path: '/transactions',
-    element: <TransactionHistoryPage />,
-  },
-  {
-    path: '/transactions/:id',
-    element: <TransactionDetailPage />,
   },
   {
     path: '/transfer/success',
