@@ -24,7 +24,7 @@ export interface TypographyProps {
   className?: string;
 }
 
-/* 하위 호환성 — 기존 TextProps 참조가 있는 소비자 코드를 위해 alias 유지 */
+/* 하위 호환성 — 기존 TextProps 참조가 있는 고객 코드를 위해 alias 유지 */
 export type TextProps    = TypographyProps;
 export type TextVariant  = TypographyVariant;
 export type TextWeight   = TypographyWeight;

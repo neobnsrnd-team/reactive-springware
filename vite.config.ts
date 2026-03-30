@@ -29,7 +29,7 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      /* React/lucide는 소비자 환경에서 제공하므로 번들에서 제외 */
+      /* React/lucide는 고객 프로젝트에서 제공하므로 번들에서 제외 */
       external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react'],
       output: {
         globals: {

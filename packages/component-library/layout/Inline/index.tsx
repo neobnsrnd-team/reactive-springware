@@ -50,7 +50,7 @@ const justifyClass: Record<InlineJustify, string> = {
   evenly:  'justify-evenly',
 };
 
-/* 외부 소비자가 타입을 직접 import할 수 있도록 re-export */
+/* 고객 프로젝트에서 타입을 직접 import할 수 있도록 re-export */
 export type { InlineProps, InlineAlign, InlineJustify } from './types';
 
 export function Inline({

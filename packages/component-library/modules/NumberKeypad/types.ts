@@ -27,7 +27,7 @@ export interface NumberKeypadProps {
   onDigitPress: (digit: number) => void;
   /** 지우기(⌫) 버튼 클릭 시 호출 */
   onDelete: () => void;
-  /** 재배열 버튼 클릭 시 호출 — 소비자가 digits를 다시 셔플해서 전달해야 한다 */
+  /** 재배열 버튼 클릭 시 호출 — 고객이 digits를 다시 셔플해서 전달해야 한다 */
   onShuffle: () => void;
   /** 추가 Tailwind 클래스 */
   className?: string;

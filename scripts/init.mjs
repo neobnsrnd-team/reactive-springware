@@ -138,6 +138,10 @@ injectCssImports();
  *  이미 존재하면 건너뛴다. */
 setupStorybook();
 
+/** .mcp.json에 Figma MCP 서버 설정을 추가한다.
+ *  이미 설정되어 있으면 건너뛴다. */
+setupFigmaMcp();
+
 console.log('\n[rs-init] ✨ 초기화 완료. 이제 Reactive-Springware를 사용할 수 있습니다.');
 console.log('[rs-init] 📖 다음 단계는 rs-docs/setup-guide.md 를 확인하세요.');
 
@@ -512,4 +516,55 @@ export const GettingStarted: StoryObj = {
 `, 'utf8');
     console.log('[rs-init] ✔ src/stories/Introduction.stories.tsx 생성 완료');
   }
+}
+
+/**
+ * 고객사 프로젝트의 .mcp.json에 Figma MCP 서버 설정을 추가한다.
+ *
+ * Claude Code가 Figma API를 통해 디자인 레이어 트리를 직접 읽으려면
+ * Figma MCP 서버가 필요하다. MCP 없이 Figma URL만 주면 Claude는 디자인을
+ * 추측해서 코드를 생성하므로 섹션 누락·불완전 구현이 발생할 수 있다.
+ *
+ * 이미 .mcp.json에 'figma' 서버가 등록되어 있으면 건너뛴다.
+ * 생성 후 사용자가 FIGMA_API_KEY 값을 실제 Figma PAT으로 교체해야 한다.
+ *
+ * Figma PAT 발급: https://www.figma.com/settings → Account → Personal access tokens
+ */
+function setupFigmaMcp() {
+  const mcpPath = resolve(cwd, '.mcp.json');
+
+  // 기존 .mcp.json 읽기 — 없으면 빈 구조로 초기화
+  let mcp = { mcpServers: {} };
+  if (existsSync(mcpPath)) {
+    try {
+      mcp = JSON.parse(readFileSync(mcpPath, 'utf8'));
+      mcp.mcpServers = mcp.mcpServers ?? {};
+    } catch {
+      // JSON 파싱 실패 시 기존 내용을 유지하지 않고 새로 작성
+      console.warn('[rs-init] ⚠ .mcp.json 파싱 실패. 새로 작성합니다.');
+      mcp = { mcpServers: {} };
+    }
+  }
+
+  // 이미 figma MCP가 등록되어 있으면 건너뜀
+  if (mcp.mcpServers['figma']) {
+    console.log('[rs-init] Figma MCP가 이미 설정되어 있습니다. 건너뜁니다.');
+    return;
+  }
+
+  // figma-developer-mcp: Figma 공식 MCP 패키지
+  // --stdio: Claude Code와 표준 입출력으로 통신
+  // FIGMA_API_KEY: Figma Personal Access Token (사용자가 직접 교체 필요)
+  mcp.mcpServers['figma'] = {
+    command: 'npx',
+    args: ['-y', 'figma-developer-mcp', '--stdio'],
+    env: {
+      FIGMA_API_KEY: 'YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE',
+    },
+  };
+
+  writeFileSync(mcpPath, JSON.stringify(mcp, null, 2) + '\n', 'utf8');
+  console.log('[rs-init] ✔ Figma MCP 설정 완료 → .mcp.json');
+  console.log('[rs-init] ⚠ 필수: .mcp.json의 YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE를 실제 Figma PAT으로 교체하세요.');
+  console.log('[rs-init]   발급 경로: Figma → Settings → Account → Personal access tokens');
 }

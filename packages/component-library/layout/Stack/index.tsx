@@ -39,7 +39,7 @@ const alignClass: Record<StackAlign, string> = {
   stretch: 'items-stretch',
 };
 
-/* 외부 소비자가 타입을 직접 import할 수 있도록 re-export */
+/* 고객 프로젝트에서 타입을 직접 import할 수 있도록 re-export */
 export type { StackProps, StackGap, StackAlign } from './types';
 
 export function Stack({

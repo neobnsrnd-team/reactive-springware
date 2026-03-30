@@ -308,3 +308,87 @@ Figma 설계 시 확인
 ✔ Naming 규칙 적용
 ✔ Component 사용
 ✔ 반복 구조 명확
+
+---
+
+# ⚠️ 레이아웃 패딩 규칙 (CRITICAL)
+
+## HomePageLayout / PageLayout 내부 패딩
+
+`HomePageLayout`과 `PageLayout`의 `main` 영역에 `px-standard py-md` 패딩이 내장되어 있다.
+내부 `Stack`에 별도 패딩을 추가하지 않는다.
+
+```tsx
+// ✅ GOOD — 패딩은 HomePageLayout이 처리
+<HomePageLayout title="...">
+  <Stack gap="lg">
+    <AccountSummaryCard ... />
+    <QuickMenuGrid ... />
+  </Stack>
+</HomePageLayout>
+
+// ❌ BAD — 패딩 중복
+<HomePageLayout title="...">
+  <Stack gap="lg" className="px-standard py-md">
+    <AccountSummaryCard ... />
+  </Stack>
+</HomePageLayout>
+```
+
+## BottomNav 위치
+
+`BottomNav`는 반드시 `HomePageLayout` **바깥**에 배치한다.
+`HomePageLayout` 안에 넣으면 `main`(스크롤 영역)에 포함되어 DOM 구조가 잘못된다.
+
+```tsx
+// ✅ GOOD
+<>
+  <HomePageLayout title="..." withBottomNav>
+    <Stack gap="lg" className="px-standard py-md">...</Stack>
+  </HomePageLayout>
+  <BottomNav items={...} activeId={...} />
+</>
+
+// ❌ BAD — HomePageLayout children 안에 BottomNav
+<HomePageLayout title="..." withBottomNav>
+  <Stack>...</Stack>
+  <BottomNav ... />  {/* 잘못된 위치 */}
+</HomePageLayout>
+```
+
+---
+
+# ⚠️ 구현 완성도 규칙 (CRITICAL)
+
+Claude는 Figma 프레임을 **전체 구현**해야 한다.
+일부만 생성하고 나머지를 빈 공간으로 두는 것은 절대 금지한다.
+
+## 코드 생성 전 필수 절차
+
+1. Figma 프레임의 **전체 레이어 트리**를 먼저 파악한다
+2. 최상위 섹션 목록을 나열한다 (예: Header, LoanSection, QuickMenu, BannerSection, ...)
+3. 각 섹션을 체크리스트로 관리하며 **모두 구현**한다
+4. 스크롤 가능한 영역은 반드시 스크롤 컨테이너로 감싼다
+
+## 금지 사항
+
+❌ 일부 섹션만 구현하고 나머지 빈 공간으로 방치
+❌ "TODO: 추가 구현 필요" 주석만 남기고 미완성 제출
+❌ 스크롤 영역 안의 콘텐츠를 생략
+
+## GOOD
+
+```
+Figma 프레임에 6개 섹션이 있으면 → 6개 모두 구현 후 제출
+```
+
+## BAD
+
+```
+Figma 프레임에 6개 섹션이 있는데 → 3개만 구현하고 나머지 공백
+```
+
+## 구현하기 어려운 섹션이 있는 경우
+
+component-map.md에 없는 컴포넌트가 필요하거나 데이터 구조가 불명확한 경우,
+임의로 생략하지 말고 **개발자에게 확인 후 진행**한다. (rules/09-confirmation.md 참조)

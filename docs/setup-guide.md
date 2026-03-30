@@ -6,6 +6,7 @@
 2. [사전 준비](#2-사전-준비)
 3. [설치](#3-설치)
 4. [rs-init이 하는 일](#4-rs-init이-하는-일)
+   - 4-8. Figma MCP 자동 설정
 5. [초기화 후 프로젝트 구조](#5-초기화-후-프로젝트-구조)
 6. [코드 생성 흐름](#6-코드-생성-흐름)
 7. [주의사항](#7-주의사항)
@@ -137,7 +138,33 @@ import '@reactive-springware/component-lib/dist/index.css';
 이 파일 하나에 Tailwind 유틸리티 클래스·디자인 토큰·브랜드 변수·폰트가 모두 번들링되어 있습니다.
 별도로 Tailwind를 설치하거나 설정할 필요가 없습니다.
 
-### 4-8. Storybook 자동 설정
+### 4-8. Figma MCP 자동 설정
+
+`.mcp.json`에 Figma MCP 서버 설정을 추가합니다.
+
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--stdio"],
+      "env": {
+        "FIGMA_API_KEY": "YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE"
+      }
+    }
+  }
+}
+```
+
+**Figma MCP가 필요한 이유**: Claude Code가 Figma URL만으로는 디자인 레이어 구조를 읽지 못합니다. MCP 없이 생성하면 섹션 누락·불완전 구현이 발생할 수 있습니다.
+
+**설정 후 필수 작업**: `.mcp.json`의 `YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE`를 실제 Figma PAT으로 교체하세요.
+
+> Figma PAT 발급: Figma → Settings → Account → Personal access tokens
+
+이미 `.mcp.json`에 `figma` 서버가 있으면 건너뜁니다.
+
+### 4-9. Storybook 자동 설정
 
 `npx storybook init` 없이 바로 Storybook을 사용할 수 있도록 자동으로 설정합니다.
 

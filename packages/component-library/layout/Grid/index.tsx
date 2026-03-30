@@ -44,7 +44,7 @@ const gapClass: Record<StackGap, string> = {
   '2xl': 'gap-2xl',
 };
 
-/* 외부 소비자가 타입을 직접 import할 수 있도록 re-export */
+/* 고객 프로젝트에서 타입을 직접 import할 수 있도록 re-export */
 export type { GridProps } from './types';
 
 export function Grid({
