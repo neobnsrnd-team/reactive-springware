@@ -72,10 +72,11 @@ const SEGMENT_TABS: { id: AccountSegment; label: string }[] = [
 
 // ── Mock 데이터 (Storybook 전용) ──────────────────────────────
 
-/** Figma 시안 기준 예금 계좌 샘플 (2개) */
+/** 예금 계좌 샘플 (2개) */
 const MOCK_DEPOSIT_ACCOUNTS = [
   {
     id: 'acc-001',
+    type: 'deposit' as const,
     accountName: '하나 청년도약계좌',
     accountNumber: '180-910058-09304',
     balance: 1000000,
@@ -83,22 +84,44 @@ const MOCK_DEPOSIT_ACCOUNTS = [
   },
   {
     id: 'acc-002',
+    type: 'deposit' as const,
     accountName: '하나 자유적금',
     accountNumber: '180-910058-12201',
     balance: 500000,
   },
 ];
 
-/** Figma 시안 기준 외화예금 계좌 샘플 (1개) */
-const MOCK_FOREIGN_ACCOUNTS = [
+/** 신탁 계좌 샘플 (1개) */
+const MOCK_TRUST_ACCOUNTS = [
   {
     id: 'acc-003',
-    accountName: '하나 외화예금 (USD)',
-    accountNumber: '180-910059-00412',
-    /** 외화는 USD 기준 표시 — balanceDisplay로 override */
-    balance: 0,
-    balanceDisplay: '$1,234.56',
-    balanceLabel: '잔액(USD)',
+    type: 'savings' as const,
+    accountName: '하나 특정금전신탁',
+    accountNumber: '180-920058-00301',
+    balance: 3000000,
+  },
+];
+
+/** 펀드 계좌 샘플 (1개) */
+const MOCK_FUND_ACCOUNTS = [
+  {
+    id: 'acc-004',
+    type: 'securities' as const,
+    accountName: '하나 글로벌성장펀드',
+    accountNumber: '180-930058-00501',
+    balance: 1500000,
+    balanceLabel: '평가금액',
+  },
+];
+
+/** 대출 계좌 샘플 (1개) */
+const MOCK_LOAN_ACCOUNTS = [
+  {
+    id: 'acc-005',
+    type: 'loan' as const,
+    accountName: '하나 신용대출',
+    accountNumber: '180-940058-00701',
+    balance: 5000000,
   },
 ];
 
@@ -145,19 +168,15 @@ function AccountGroupHeader({
 /**
  * 세그먼트 탭 선택에 따라 계좌 그룹을 펼칠지 결정한다.
  *
- * - 전체: 데이터가 있는 그룹(예금·외화예금)만 펼침
- * - 예금: 예금·외화예금 그룹 펼침 (외화예금은 예금 계열)
- * - 신탁·펀드·대출: 해당 Mock 그룹 없음 → 모두 접힘
+ * - 전체: 모든 그룹 펼침
+ * - 예금·신탁·펀드·대출: 선택된 세그먼트와 일치하는 그룹만 펼침
  */
 function isGroupExpanded(
   segment: AccountSegment,
-  group: 'deposit' | 'foreignDeposit' | 'retirement' | 'securities',
-  hasData: boolean,
+  group: 'deposit' | 'trust' | 'fund' | 'loan',
 ): boolean {
-  if (segment === 'all')     return hasData;
-  if (segment === 'deposit') return group === 'deposit' || group === 'foreignDeposit';
-  /* 신탁·펀드·대출 세그먼트에 해당하는 그룹이 없으므로 모두 접힘 */
-  return false;
+  if (segment === 'all') return true;
+  return segment === group;
 }
 
 // ── 해당금융 탭 콘텐츠 ────────────────────────────────────────
@@ -189,7 +208,7 @@ function MineTabContent({
       </div>
 
       {/* ── 예금 그룹 ─────────────────────────────────────────── */}
-      {/* key={activeSegment}: 세그먼트 변경 시 remount → defaultExpanded 재적용 */}
+      {/* key: 세그먼트 변경 시 remount → defaultExpanded 재적용 */}
       <CollapsibleSection
         key={`deposit-${activeSegment}`}
         header={
@@ -199,43 +218,26 @@ function MineTabContent({
             totalAmount="1,500,000원"
           />
         }
-        defaultExpanded={isGroupExpanded(activeSegment, 'deposit', true)}
+        defaultExpanded={isGroupExpanded(activeSegment, 'deposit')}
       >
         <Stack gap="sm">
           {MOCK_DEPOSIT_ACCOUNTS.map((account) => (
             <AccountSummaryCard
               key={account.id}
-              type="deposit"
+              type={account.type}
               accountName={account.accountName}
               accountNumber={account.accountNumber}
               balance={account.balance}
               badgeText={account.badgeText}
               onClick={() => onAccountClick?.(account.id)}
               actions={
-                /* 거래내역·이체 버튼 — Figma 시안 기준 2개 버튼 */
                 <>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    fullWidth
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onTransactionHistory?.(account.id);
-                    }}
-                  >
-                    거래내역
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="primary"
-                    fullWidth
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onTransfer?.(account.id);
-                    }}
-                  >
-                    이체
-                  </Button>
+                  <Button size="sm" variant="outline" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransactionHistory?.(account.id); }}
+                  >거래내역</Button>
+                  <Button size="sm" variant="primary" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransfer?.(account.id); }}
+                  >이체</Button>
                 </>
               }
             />
@@ -243,53 +245,72 @@ function MineTabContent({
         </Stack>
       </CollapsibleSection>
 
-      {/* ── 외화예금 그룹 ─────────────────────────────────────── */}
+      {/* ── 신탁 그룹 ─────────────────────────────────────────── */}
       <CollapsibleSection
-        key={`foreignDeposit-${activeSegment}`}
+        key={`trust-${activeSegment}`}
         header={
           <AccountGroupHeader
-            title="외화예금"
-            count={MOCK_FOREIGN_ACCOUNTS.length}
-            totalAmount="$1,234.56"
+            title="신탁"
+            count={MOCK_TRUST_ACCOUNTS.length}
+            totalAmount="3,000,000원"
           />
         }
-        defaultExpanded={isGroupExpanded(activeSegment, 'foreignDeposit', true)}
+        defaultExpanded={isGroupExpanded(activeSegment, 'trust')}
       >
         <Stack gap="sm">
-          {MOCK_FOREIGN_ACCOUNTS.map((account) => (
+          {MOCK_TRUST_ACCOUNTS.map((account) => (
             <AccountSummaryCard
               key={account.id}
-              type="foreignDeposit"
+              type={account.type}
               accountName={account.accountName}
               accountNumber={account.accountNumber}
               balance={account.balance}
-              balanceDisplay={account.balanceDisplay}
+              onClick={() => onAccountClick?.(account.id)}
+              actions={
+                <>
+                  <Button size="sm" variant="outline" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransactionHistory?.(account.id); }}
+                  >거래내역</Button>
+                  <Button size="sm" variant="primary" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransfer?.(account.id); }}
+                  >이체</Button>
+                </>
+              }
+            />
+          ))}
+        </Stack>
+      </CollapsibleSection>
+
+      {/* ── 펀드 그룹 ─────────────────────────────────────────── */}
+      <CollapsibleSection
+        key={`fund-${activeSegment}`}
+        header={
+          <AccountGroupHeader
+            title="펀드"
+            count={MOCK_FUND_ACCOUNTS.length}
+            totalAmount="1,500,000원"
+          />
+        }
+        defaultExpanded={isGroupExpanded(activeSegment, 'fund')}
+      >
+        <Stack gap="sm">
+          {MOCK_FUND_ACCOUNTS.map((account) => (
+            <AccountSummaryCard
+              key={account.id}
+              type={account.type}
+              accountName={account.accountName}
+              accountNumber={account.accountNumber}
+              balance={account.balance}
               balanceLabel={account.balanceLabel}
               onClick={() => onAccountClick?.(account.id)}
               actions={
                 <>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    fullWidth
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onTransactionHistory?.(account.id);
-                    }}
-                  >
-                    거래내역
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="primary"
-                    fullWidth
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onTransfer?.(account.id);
-                    }}
-                  >
-                    이체
-                  </Button>
+                  <Button size="sm" variant="outline" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransactionHistory?.(account.id); }}
+                  >거래내역</Button>
+                  <Button size="sm" variant="primary" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransfer?.(account.id); }}
+                  >이체</Button>
                 </>
               }
             />
@@ -297,32 +318,40 @@ function MineTabContent({
         </Stack>
       </CollapsibleSection>
 
-      {/* ── 퇴직연금 그룹 — 계좌 없음 빈 상태 ─────────────────── */}
+      {/* ── 대출 그룹 ─────────────────────────────────────────── */}
       <CollapsibleSection
-        key={`retirement-${activeSegment}`}
+        key={`loan-${activeSegment}`}
         header={
-          <AccountGroupHeader title="퇴직연금" count={0} />
+          <AccountGroupHeader
+            title="대출"
+            count={MOCK_LOAN_ACCOUNTS.length}
+            totalAmount="5,000,000원"
+          />
         }
-        defaultExpanded={isGroupExpanded(activeSegment, 'retirement', false)}
+        defaultExpanded={isGroupExpanded(activeSegment, 'loan')}
       >
-        <EmptyState
-          title="퇴직연금 계좌가 없어요"
-          description="하나은행 퇴직연금 계좌를 개설하시면 여기에 표시됩니다."
-        />
-      </CollapsibleSection>
-
-      {/* ── 증권 그룹 — 미보유 빈 상태 ───────────────────────── */}
-      <CollapsibleSection
-        key={`securities-${activeSegment}`}
-        header={
-          <AccountGroupHeader title="증권" count={0} />
-        }
-        defaultExpanded={isGroupExpanded(activeSegment, 'securities', false)}
-      >
-        <EmptyState
-          title="증권 계좌를 보유하고 있지 않아요"
-          description="연결된 증권 계좌가 없습니다."
-        />
+        <Stack gap="sm">
+          {MOCK_LOAN_ACCOUNTS.map((account) => (
+            <AccountSummaryCard
+              key={account.id}
+              type={account.type}
+              accountName={account.accountName}
+              accountNumber={account.accountNumber}
+              balance={account.balance}
+              onClick={() => onAccountClick?.(account.id)}
+              actions={
+                <>
+                  <Button size="sm" variant="outline" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransactionHistory?.(account.id); }}
+                  >거래내역</Button>
+                  <Button size="sm" variant="primary" fullWidth
+                    onClick={(e) => { e.stopPropagation(); onTransfer?.(account.id); }}
+                  >이체</Button>
+                </>
+              }
+            />
+          ))}
+        </Stack>
       </CollapsibleSection>
     </Stack>
   );
@@ -333,14 +362,13 @@ function MineTabContent({
 function OtherTabContent({
   activeSegment,
   onSegmentChange,
-  onConnectAccount,
 }: {
   activeSegment: AccountSegment;
   onSegmentChange: (id: AccountSegment) => void;
-  onConnectAccount?: () => void;
 }) {
   return (
-    <Stack gap="sm">
+    // flex-1: PageLayout main(flex flex-col)에서 남은 높이를 모두 채워 EmptyState 세로 중앙 정렬을 가능하게 함
+    <Stack gap="sm" className="flex-1">
       {/* 세그먼트 탭 — 해당금융과 동일하게 다른금융에도 표시 */}
       <div className="bg-white rounded-lg px-md py-sm">
         <TabNav
@@ -352,24 +380,14 @@ function OtherTabContent({
         />
       </div>
 
-      {/* 빈 상태 + 연결하기 CTA */}
-      <Stack gap="lg" align="center" className="py-xl">
+      {/* flex-1 + items-center: 세그먼트 탭 아래 남은 공간에서 EmptyState 세로 중앙 정렬 */}
+      <div className="flex flex-1 items-center justify-center">
         <EmptyState
           illustration={<Landmark className="size-16 text-text-muted" aria-hidden="true" />}
           title="연결된 다른 금융 계좌가 없습니다."
           description="다른 금융사 계좌를 연결하면 한 곳에서 모든 계좌를 조회할 수 있어요."
         />
-        {/* 연결하기 버튼 — 빈 상태에서 주요 CTA */}
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          leftIcon={<Link className="size-4" aria-hidden="true" />}
-          onClick={onConnectAccount}
-        >
-          연결하기
-        </Button>
-      </Stack>
+      </div>
     </Stack>
   );
 }
