@@ -140,6 +140,26 @@ function AccountGroupHeader({
   );
 }
 
+// ── 세그먼트-그룹 펼침 매핑 ──────────────────────────────────
+
+/**
+ * 세그먼트 탭 선택에 따라 계좌 그룹을 펼칠지 결정한다.
+ *
+ * - 전체: 데이터가 있는 그룹(예금·외화예금)만 펼침
+ * - 예금: 예금·외화예금 그룹 펼침 (외화예금은 예금 계열)
+ * - 신탁·펀드·대출: 해당 Mock 그룹 없음 → 모두 접힘
+ */
+function isGroupExpanded(
+  segment: AccountSegment,
+  group: 'deposit' | 'foreignDeposit' | 'retirement' | 'securities',
+  hasData: boolean,
+): boolean {
+  if (segment === 'all')     return hasData;
+  if (segment === 'deposit') return group === 'deposit' || group === 'foreignDeposit';
+  /* 신탁·펀드·대출 세그먼트에 해당하는 그룹이 없으므로 모두 접힘 */
+  return false;
+}
+
 // ── 해당금융 탭 콘텐츠 ────────────────────────────────────────
 
 function MineTabContent({
@@ -169,7 +189,9 @@ function MineTabContent({
       </div>
 
       {/* ── 예금 그룹 ─────────────────────────────────────────── */}
+      {/* key={activeSegment}: 세그먼트 변경 시 remount → defaultExpanded 재적용 */}
       <CollapsibleSection
+        key={`deposit-${activeSegment}`}
         header={
           <AccountGroupHeader
             title="예금"
@@ -177,7 +199,7 @@ function MineTabContent({
             totalAmount="1,500,000원"
           />
         }
-        defaultExpanded
+        defaultExpanded={isGroupExpanded(activeSegment, 'deposit', true)}
       >
         <Stack gap="sm">
           {MOCK_DEPOSIT_ACCOUNTS.map((account) => (
@@ -223,6 +245,7 @@ function MineTabContent({
 
       {/* ── 외화예금 그룹 ─────────────────────────────────────── */}
       <CollapsibleSection
+        key={`foreignDeposit-${activeSegment}`}
         header={
           <AccountGroupHeader
             title="외화예금"
@@ -230,7 +253,7 @@ function MineTabContent({
             totalAmount="$1,234.56"
           />
         }
-        defaultExpanded
+        defaultExpanded={isGroupExpanded(activeSegment, 'foreignDeposit', true)}
       >
         <Stack gap="sm">
           {MOCK_FOREIGN_ACCOUNTS.map((account) => (
@@ -276,10 +299,11 @@ function MineTabContent({
 
       {/* ── 퇴직연금 그룹 — 계좌 없음 빈 상태 ─────────────────── */}
       <CollapsibleSection
+        key={`retirement-${activeSegment}`}
         header={
           <AccountGroupHeader title="퇴직연금" count={0} />
         }
-        defaultExpanded={false}
+        defaultExpanded={isGroupExpanded(activeSegment, 'retirement', false)}
       >
         <EmptyState
           title="퇴직연금 계좌가 없어요"
@@ -289,10 +313,11 @@ function MineTabContent({
 
       {/* ── 증권 그룹 — 미보유 빈 상태 ───────────────────────── */}
       <CollapsibleSection
+        key={`securities-${activeSegment}`}
         header={
           <AccountGroupHeader title="증권" count={0} />
         }
-        defaultExpanded={false}
+        defaultExpanded={isGroupExpanded(activeSegment, 'securities', false)}
       >
         <EmptyState
           title="증권 계좌를 보유하고 있지 않아요"
