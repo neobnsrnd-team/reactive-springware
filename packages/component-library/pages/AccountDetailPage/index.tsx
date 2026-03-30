@@ -285,10 +285,17 @@ export function AccountDetailPage({
               </button>
             </Inline>
 
-            <TransactionList
-              items={transactions}
-              onItemClick={onTransactionClick}
-            />
+            {/*
+             * -mx-standard: PageLayout main의 px-standard를 상쇄해 TransactionList를
+             * 좌우 full-bleed로 확장한다. TransactionList 내부가 자체 px-standard를
+             * 갖고 있으므로, 결과적으로 섹션 헤더와 같은 x축에 정렬된다.
+             */}
+            <div className="-mx-standard">
+              <TransactionList
+                items={transactions}
+                onItemClick={onTransactionClick}
+              />
+            </div>
 
             {/* 하단 안내 문구 — Figma: "최근 7일간의 거래내역입니다." */}
             <Typography variant="caption" color="muted" className="text-center py-sm">
