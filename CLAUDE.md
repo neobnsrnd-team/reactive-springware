@@ -53,6 +53,7 @@
 | `rules/07-figma.md`        | Figma 디자인 구조 해석 기준                           |
 | `rules/08-generation.md`   | 페이지 생성 시 처리 절차 및 라우터 등록               |
 | `rules/09-confirmation.md` | 개발자 확인이 필요한 상황 정의                        |
+| `rules/10-brand.md`        | 페이지 루트 data-brand / data-domain 적용 규칙        |
 
 ---
 
