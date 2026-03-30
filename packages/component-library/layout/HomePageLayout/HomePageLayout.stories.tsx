@@ -14,14 +14,14 @@ const meta = {
   parameters: { brand: 'hana', domain: 'banking' },
   decorators: [(Story: React.ComponentType) => <div style={{ width: 390, height: 700, overflow: 'hidden', border: '1px solid #e2e8f0', borderRadius: 16 }}><Story /></div>],
   argTypes: {
-    withBottomNav: { control: 'boolean' },
-    greeting:      { control: 'text' },
-    title:         { control: 'text' },
+    withBottomNav:   { control: 'boolean' },
+    hasNotification: { control: 'boolean' },
+    title:           { control: 'text' },
   },
   args: {
     title: '하나은행',
-    greeting: '홍길동님, 안녕하세요',
     withBottomNav: true,
+    hasNotification: false,
   },
 } satisfies Meta<typeof HomePageLayout>;
 
@@ -41,11 +41,11 @@ export const Default: Story = {
   ),
 };
 
-export const WithoutGreeting: Story = {
-  args: { greeting: undefined },
+export const WithNotification: Story = {
+  args: { hasNotification: true },
   render: (args) => (
     <HomePageLayout {...args}>
-      <div style={{ padding: 16, color: '#94a3b8', fontSize: 14 }}>인사말 없는 홈 헤더</div>
+      <div style={{ padding: 16, color: '#94a3b8', fontSize: 14 }}>벨 아이콘에 알림 뱃지 표시</div>
     </HomePageLayout>
   ),
 };
