@@ -6,7 +6,8 @@ Claude가 Figma 기반 React 코드를 생성할 때
 일관된 프로젝트 구조와 레이어 분리 원칙을 유지하기 위한 규칙 정의
 
 본 프로젝트는 **Figma UI → Claude → React 코드 생성** 구조를 기반으로 한다.
-공통 UI는 **Component Library (`@reactivespringware/component-library`)** 를 사용한다.
+공통 UI는 **`@reactive-springware/component-lib`** 패키지를 사용한다.
+패키지에 없는 공통 컴포넌트를 별도로 만들지 않는다.
 
 ---
 
@@ -15,104 +16,35 @@ Claude가 Figma 기반 React 코드를 생성할 때
 Claude는 반드시 아래 구조를 기준으로 코드를 생성한다.
 
 ```
-src/reactive-springware/
-  pages/
-  hooks/
-  repositories/
-  types/
-  components/
+src/
+  features/
+    transactionDetail/     ← Figma 화면 1개 = 폴더 1개
+      page.tsx
+      hook.ts
+      repository.ts
+      types.ts
+    accountList/
+      page.tsx
+      hook.ts
+      repository.ts
+      types.ts
+  router/
+    routes.tsx
 ```
 
-각 폴더는 하나의 역할만 가진다. 역할을 벗어난 코드는 해당 폴더에 두지 않는다.
+**핵심 원칙: Figma 화면 1개 = `features/` 하위 폴더 1개**
 
----
+각 feature 폴더 안에서 파일은 역할에 따라 고정된 이름을 사용한다.
+feature 폴더 이름은 화면 이름을 camelCase로 변환한다. (예: "거래 상세" → `transactionDetail`)
 
-## src/reactive-springware/pages/
+| 파일명 | 역할 |
+|---|---|
+| `page.tsx` | 라우팅 단위 페이지 컴포넌트 (UI만 담당) |
+| `hook.ts` | 데이터 패칭·상태 관리 |
+| `repository.ts` | HTTP 호출·데이터 가공·에러 처리 |
+| `types.ts` | TypeScript 타입 정의 |
 
-페이지 컴포넌트를 생성한다. 라우팅 단위이며, 비즈니스 로직을 포함하지 않는다.
-
-```
-pages/
-  UserListPage.tsx
-  UserDetailPage.tsx
-  DashboardPage.tsx
-```
-
-**규칙:**
-- 페이지 컴포넌트만 생성
-- 페이지별 하위 폴더를 생성하지 않음 (폴더가 늘어날수록 공통 컴포넌트의 위치가 모호해짐)
-- `Page` 접미사 사용
-
----
-
-## src/reactive-springware/hooks/
-
-페이지 상태 관리 및 데이터 패칭 Hook을 생성한다. 데이터 패칭·상태 로직을 전담한다.
-
-```
-hooks/
-  useUserList.ts
-  useUserDetail.ts
-  usePagination.ts
-```
-
-**규칙:**
-- API 호출 Hook 생성 (Repository를 통해)
-- 상태 관리 Hook 생성
-- 재사용 가능 Hook 생성
-
----
-
-## src/reactive-springware/repositories/
-
-HTTP 호출·데이터 가공·모델 변환·에러 처리를 전담한다.
-
-```
-repositories/
-  userRepository.ts
-  dashboardRepository.ts
-```
-
-**규칙:**
-- `fetch` / `axios` 직접 호출은 이 폴더에서만 허용
-- API 응답을 클라이언트 모델로 변환하는 로직 포함
-- Hook에서 호출
-- UI 로직 포함 금지
-
----
-
-## src/reactive-springware/types/
-
-TypeScript 타입 정의 전담
-
-```
-types/
-  userTypes.ts
-  dashboardTypes.ts
-```
-
-**규칙:**
-- API Response 타입 정의
-- DTO 타입 정의
-- 공통 타입 정의
-
----
-
-## src/reactive-springware/components/
-
-페이지 전용 UI 컴포넌트 생성. 데이터 패칭 로직을 포함하지 않는다.
-
-```
-components/
-  UserTable.tsx
-  UserFilter.tsx
-  DashboardCard.tsx
-```
-
-**규칙:**
-- 페이지 전용 컴포넌트 생성
-- 공통 컴포넌트 생성 금지
-- 공통 컴포넌트는 component-library 사용
+필요한 파일만 생성한다. API 호출이 없으면 `repository.ts`와 `types.ts`는 생성하지 않는다.
 
 ---
 
@@ -121,18 +53,18 @@ components/
 ## 구조 흐름
 
 ```
-Page (UI Layer)
+page.tsx  (UI Layer)
   ↓
-Hook (Logic Layer)
+hook.ts   (Logic Layer)
   ↓
-Repository (Data Layer)
+repository.ts  (Data Layer)
   ↓
 서버 API
 ```
 
 ---
 
-## Page (UI Layer)
+## page.tsx (UI Layer)
 
 Page는 UI만 담당한다.
 
@@ -148,28 +80,26 @@ Page는 UI만 담당한다.
 
 GOOD
 ```tsx
-// Page는 Hook 호출만
-const { users, isLoading, handleDelete } = useUserList()
+// page.tsx — Hook 호출만
+const { users, isLoading, handleDelete } = useUserList();
 ```
 
 BAD
 ```tsx
-// Page에서 직접 API 호출 또는 상태 생성 금지
-useEffect(() => {
-  axios.get('/users')
-})
-const [users, setUsers] = useState([])
+// page.tsx에서 직접 API 호출 또는 상태 생성 금지
+useEffect(() => { axios.get('/users') });
+const [users, setUsers] = useState([]);
 ```
 
 ---
 
-## Hook (Logic Layer)
+## hook.ts (Logic Layer)
 
 Hook은 로직을 담당한다.
 
 **허용:**
 - 상태 관리
-- API 호출 (Repository 호출)
+- API 호출 (repository 호출)
 - 데이터 가공
 - 이벤트 핸들러 정의
 
@@ -179,18 +109,18 @@ Hook은 로직을 담당한다.
 
 GOOD
 ```ts
-export const useUserList = () => {
+export const useTransactionDetail = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: userRepository.getUsers,
-  })
-  return { data, isLoading }
-}
+    queryKey: ['transactionDetail'],
+    queryFn: transactionDetailRepository.get,
+  });
+  return { data, isLoading };
+};
 ```
 
 ---
 
-## Repository (Data Layer)
+## repository.ts (Data Layer)
 
 Repository는 데이터 호출을 담당한다.
 
@@ -208,15 +138,13 @@ Repository는 데이터 호출을 담당한다.
 
 # 3. Component Library 사용 원칙
 
-공통 UI는 반드시 component-library 사용
+공통 UI는 반드시 `@reactive-springware/component-lib`를 사용한다.
 
 ```ts
-import { Button } from "@reactivespringware/component-library"
-import { Stack } from "@reactivespringware/component-library"
-import { TextField } from "@reactivespringware/component-library"
+import { Button, Stack, TextField } from '@reactive-springware/component-lib';
 ```
 
-component-library가 유일한 UI 소스다.
+component-lib가 유일한 UI 소스다.
 직접 HTML 태그(`div`, `button` 등)를 사용하거나 외부 UI 라이브러리를 추가하지 않는다.
 이 원칙을 지켜야 디자인 시스템과 코드가 항상 동기화된다.
 
@@ -261,18 +189,24 @@ BAD
 # 5. 컴포넌트 200줄 제한
 
 컴포넌트는 200줄을 넘지 않도록 한다.
-200줄을 초과한다면 역할이 두 개 이상이라는 신호다. 분리를 검토한다.
+200줄을 초과한다면 역할이 두 개 이상이라는 신호다.
+같은 feature 폴더 안에 별도 파일로 분리한다.
 
 GOOD
 ```
-UserListPage.tsx   → 상태·이벤트 관리 (50줄)
-UserTable.tsx      → 테이블 UI (80줄)
-UserTableRow.tsx   → 행 UI (40줄)
+features/userList/
+  page.tsx          (50줄 — 레이아웃·Hook 호출)
+  UserTable.tsx     (80줄 — 테이블 UI 분리)
+  UserTableRow.tsx  (40줄 — 행 UI 분리)
+  hook.ts
+  repository.ts
+  types.ts
 ```
 
 BAD
 ```
-UserListPage.tsx   → 상태 + 테이블 + 행 + 모달 + 폼 (350줄)
+features/userList/
+  page.tsx   (350줄 — 상태 + 테이블 + 행 + 모달 + 폼 전부)
 ```
 
 ---
@@ -281,9 +215,9 @@ UserListPage.tsx   → 상태 + 테이블 + 행 + 모달 + 폼 (350줄)
 
 Claude는 다음을 생성하지 않는다.
 
-❌ `shared` 폴더 생성 금지
-❌ 공통 컴포넌트 직접 생성 금지 (component-library 사용)
-❌ `layout` 폴더 생성 금지
+❌ `features/` 밖에 페이지·Hook·Repository 파일 생성 금지
+❌ `components/` 폴더 생성 금지 (component-lib 사용)
+❌ `shared/` 폴더 생성 금지
+❌ `layout/` 폴더 생성 금지
 ❌ 디자인 토큰 직접 정의 금지
-❌ 페이지별 하위 폴더 생성 금지
-❌ `index.ts` 남발 금지 (파일 역할이 불명확해짐)
+❌ feature 폴더 안에 `index.ts` 생성 금지 (파일 역할이 불명확해짐)

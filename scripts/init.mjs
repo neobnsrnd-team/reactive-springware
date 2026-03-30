@@ -95,8 +95,15 @@ if (existsSync(claudeDest)) {
 }
 copyFile(resolve(pkgRoot, 'docs/CLAUDE.md'), claudeDest, 'CLAUDE.md');
 
-/** docs/.claude.rules → <project-root>/.claude.rules (Claude Code가 루트에서만 자동 로드) */
-copyFile(resolve(pkgRoot, 'docs/.claude.rules'), resolve(cwd, '.claude.rules'), '.claude.rules');
+/** docs/.claude.rules → <project-root>/.claude.rules (Claude Code가 루트에서만 자동 로드)
+ *  기존 .claude.rules가 있으면 덮어쓰지 않고 .claude.rules.bak으로 이름을 바꿔 보존한다. */
+const claudeRulesDest = resolve(cwd, '.claude.rules');
+if (existsSync(claudeRulesDest)) {
+  const bakPath = resolve(cwd, '.claude.rules.bak');
+  renameSync(claudeRulesDest, bakPath);
+  console.log('[rs-init] 기존 .claude.rules → .claude.rules.bak 으로 백업합니다.');
+}
+copyFile(resolve(pkgRoot, 'docs/.claude.rules'), claudeRulesDest, '.claude.rules');
 
 /** rules/ → <project-root>/rs-rules/ */
 copyDir('rules', 'rs-rules', 'rs-rules/');
@@ -119,13 +126,17 @@ copyFile(
  *  이미 등록되어 있으면 건너뛴다. */
 injectTailwindPlugin();
 
-/** src/**/*.css 에서 중복 Tailwind import를 자동 주석 처리.
- *  dist/index.css에 Tailwind가 이미 번들링되어 있으므로 중복 시 스타일이 깨진다. */
+// src/ 하위 CSS 파일에서 중복 Tailwind import를 자동 주석 처리.
+// dist/index.css에 Tailwind가 이미 번들링되어 있으므로 중복 시 스타일이 깨진다.
 commentOutDuplicateTailwindImports();
 
 /** src/main.{tsx,jsx,ts,js} 또는 src/index.{tsx,jsx,ts,js} 에 CSS import 자동 주입.
  *  이미 import가 존재하면 건너뛴다. */
 injectCssImports();
+
+/** package.json에 storybook 스크립트 추가 + .storybook/ 설정 파일 생성.
+ *  이미 존재하면 건너뛴다. */
+setupStorybook();
 
 console.log('\n[rs-init] ✨ 초기화 완료. 이제 Reactive-Springware를 사용할 수 있습니다.');
 console.log('[rs-init] 📖 다음 단계는 rs-docs/setup-guide.md 를 확인하세요.');
@@ -279,5 +290,226 @@ function commentOutDuplicateTailwindImports() {
 
   if (totalCommented === 0) {
     console.log('[rs-init] Tailwind 중복 import 없음. 건너뜁니다.');
+  }
+}
+
+/**
+ * 고객사 프로젝트에 Storybook을 설정한다.
+ *
+ * 1) package.json에 storybook / build-storybook 스크립트 추가
+ * 2) .storybook/main.ts 생성 — src/features/ 하위 stories 탐색, tailwindcss 플러그인 주입
+ * 3) .storybook/preview.ts 생성 — dist/index.css import, 모바일 뷰포트, 브랜드 데코레이터
+ *
+ * @storybook/react-vite와 storybook 패키지는 이미 dependencies로 자동 설치되므로
+ * 별도 `npx storybook init` 없이 `npm run storybook`으로 바로 실행 가능하다.
+ */
+function setupStorybook() {
+  // ── 1) package.json 스크립트 추가 ─────────────────────────────
+  const pkgPath = resolve(cwd, 'package.json');
+  if (!existsSync(pkgPath)) {
+    console.warn('[rs-init] ⚠ package.json을 찾지 못했습니다. Storybook 스크립트를 건너뜁니다.');
+  } else {
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+    pkg.scripts = pkg.scripts ?? {};
+    let scriptAdded = false;
+    if (!pkg.scripts['storybook']) {
+      pkg.scripts['storybook'] = 'storybook dev -p 6006';
+      scriptAdded = true;
+    }
+    if (!pkg.scripts['build-storybook']) {
+      pkg.scripts['build-storybook'] = 'storybook build';
+      scriptAdded = true;
+    }
+    if (scriptAdded) {
+      writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
+      console.log('[rs-init] ✔ package.json에 storybook 스크립트 추가 완료');
+    } else {
+      console.log('[rs-init] storybook 스크립트가 이미 존재합니다. 건너뜁니다.');
+    }
+  }
+
+  // ── 2) .storybook/main.ts ──────────────────────────────────────
+  const storybookDir = resolve(cwd, '.storybook');
+  mkdirSync(storybookDir, { recursive: true });
+
+  const mainPath = resolve(storybookDir, 'main.ts');
+  if (existsSync(mainPath)) {
+    console.log('[rs-init] .storybook/main.ts가 이미 존재합니다. 건너뜁니다.');
+  } else {
+    writeFileSync(mainPath, `\
+/**
+ * @file .storybook/main.ts
+ * @description Storybook 빌드 및 개발 서버 설정.
+ *
+ * Storybook 10: controls, actions, viewport, backgrounds 등 essentials 기능이 코어 내장.
+ * viteFinal: @tailwindcss/vite 플러그인을 최우선 주입하여 CSS 변수 토큰이 정상 처리되도록 한다.
+ *
+ * stories 배열에 컴포넌트 라이브러리 패키지의 stories 경로를 포함한다.
+ * createRequire로 패키지 루트를 동적으로 해석하므로 node_modules 위치에 무관하게 동작한다.
+ */
+import type { StorybookConfig } from '@storybook/react-vite';
+import path from 'path';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+// 패키지 루트 — stories 경로 및 @lib alias 해석에 사용
+const pkgDir = path.dirname(require.resolve('@reactive-springware/component-lib/package.json'));
+
+const config: StorybookConfig = {
+  stories: [
+    // 고객사 프로젝트의 feature 스토리
+    '../src/**/*.stories.@(ts|tsx)',
+    // 컴포넌트 라이브러리 스토리 — node_modules에서 직접 참조하여 항상 최신 상태 유지
+    \`\${pkgDir}/packages/component-library/**/*.stories.@(ts|tsx)\`,
+  ],
+
+  /* Storybook 10: essentials이 코어 내장이므로 addons 불필요 */
+  addons: [],
+
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+
+  viteFinal: async (viteConfig) => {
+    /* @tailwindcss/vite 플러그인을 최우선으로 주입 — CSS 변수 토큰 처리에 필수 */
+    const { default: tailwindcss } = await import('@tailwindcss/vite');
+    viteConfig.plugins = [tailwindcss(), ...(viteConfig.plugins ?? [])];
+
+    viteConfig.resolve = viteConfig.resolve ?? {};
+    viteConfig.resolve.alias = {
+      ...(viteConfig.resolve.alias as Record<string, string> | undefined),
+      /* 컴포넌트 내부의 @lib/cn 등 유틸리티 경로를 패키지의 lib/ 폴더로 연결 */
+      '@lib': path.resolve(pkgDir, 'lib'),
+    };
+
+    /* React 중복 로드 방지 */
+    viteConfig.resolve.dedupe = ['react', 'react-dom'];
+
+    return viteConfig;
+  },
+};
+
+export default config;
+`, 'utf8');
+    console.log('[rs-init] ✔ .storybook/main.ts 생성 완료');
+  }
+
+  // ── 3) .storybook/preview.ts ──────────────────────────────────
+  const previewPath = resolve(storybookDir, 'preview.ts');
+  if (existsSync(previewPath)) {
+    console.log('[rs-init] .storybook/preview.ts가 이미 존재합니다. 건너뜁니다.');
+  } else {
+    writeFileSync(previewPath, `\
+/**
+ * @file .storybook/preview.ts
+ * @description Storybook 전역 미리보기 설정.
+ *
+ * - 전역 CSS(Tailwind 유틸리티 + 디자인 토큰 + 브랜드 변수) 적용
+ * - 기본 뷰포트: 모바일(390px)
+ * - data-brand / data-domain 전역 데코레이터로 CSS 변수 활성화
+ *
+ * @example
+ * // 스토리에서 특정 브랜드로 미리보기
+ * export default {
+ *   parameters: { brand: 'kb', domain: 'banking' },
+ * } satisfies Meta;
+ */
+import '@reactive-springware/component-lib/dist/index.css';
+import type { Preview } from '@storybook/react';
+
+const preview: Preview = {
+  parameters: {
+    /* 기본 뷰포트: 모바일(390px) 우선 */
+    viewport: {
+      viewports: {
+        mobile:  { name: 'Mobile (390px)',  styles: { width: '390px',  height: '844px'  }, type: 'mobile'  },
+        tablet:  { name: 'Tablet (768px)',  styles: { width: '768px',  height: '1024px' }, type: 'tablet'  },
+        desktop: { name: 'Desktop (1280px)', styles: { width: '1280px', height: '800px'  }, type: 'desktop' },
+      },
+      defaultViewport: 'mobile',
+    },
+
+    backgrounds: {
+      default: 'page',
+      values: [
+        { name: 'page',  value: '#f5f8f8' },
+        { name: 'white', value: '#ffffff' },
+        { name: 'dark',  value: '#1e293b' },
+      ],
+    },
+
+    controls: { matchers: {}, sort: 'alpha' },
+  },
+
+  /**
+   * 전역 데코레이터 — HTML 루트에 data-brand/data-domain 속성을 주입해
+   * CSS 변수(--brand-primary 등)가 올바르게 cascade 되도록 한다.
+   * 스토리 parameters.brand / parameters.domain 으로 재정의 가능.
+   */
+  decorators: [
+    (Story, context) => {
+      const brand  = (context.parameters['brand']  as string | undefined) ?? 'hana';
+      const domain = (context.parameters['domain'] as string | undefined) ?? 'banking';
+
+      document.documentElement.setAttribute('data-brand',  brand);
+      document.documentElement.setAttribute('data-domain', domain);
+
+      return Story();
+    },
+  ],
+};
+
+export default preview;
+`, 'utf8');
+    console.log('[rs-init] ✔ .storybook/preview.ts 생성 완료');
+  }
+
+  // ── 4) src/stories/Introduction.stories.tsx 생성 ──────────────
+  // 스토리 파일이 하나도 없으면 Storybook이 실행되지 않는다.
+  // 초기 프로젝트에서 바로 실행 가능하도록 소개 스토리를 하나 생성한다.
+  const storiesDir = resolve(cwd, 'src/stories');
+  const introPath  = resolve(storiesDir, 'Introduction.stories.tsx');
+
+  if (existsSync(introPath)) {
+    console.log('[rs-init] src/stories/Introduction.stories.tsx가 이미 존재합니다. 건너뜁니다.');
+  } else {
+    mkdirSync(storiesDir, { recursive: true });
+    writeFileSync(introPath, `\
+/**
+ * @file Introduction.stories.tsx
+ * @description Reactive Springware 컴포넌트 라이브러리 소개 스토리.
+ *
+ * rs-init이 자동 생성한 파일입니다.
+ * Figma 화면 코드 생성 후에는 src/features/ 하위에 스토리 파일이 추가됩니다.
+ */
+import type { Meta, StoryObj } from '@storybook/react';
+
+const meta = {
+  title: 'Introduction',
+  parameters: { layout: 'fullscreen' },
+} satisfies Meta;
+
+export default meta;
+
+export const GettingStarted: StoryObj = {
+  render: () => (
+    <div style={{ padding: '2rem', fontFamily: 'Noto Sans KR, sans-serif' }}>
+      <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
+        Reactive Springware
+      </h1>
+      <p style={{ color: '#475569', marginBottom: '1.5rem' }}>
+        컴포넌트 라이브러리가 정상적으로 설치되었습니다.
+      </p>
+      <ul style={{ color: '#334155', lineHeight: 2 }}>
+        <li>좌측 사이드바에서 사용 가능한 컴포넌트를 확인하세요.</li>
+        <li>Figma 화면을 Claude에 입력하면 src/features/ 에 코드가 생성됩니다.</li>
+        <li>생성된 화면의 스토리 파일도 자동으로 Storybook에 표시됩니다.</li>
+      </ul>
+    </div>
+  ),
+};
+`, 'utf8');
+    console.log('[rs-init] ✔ src/stories/Introduction.stories.tsx 생성 완료');
   }
 }

@@ -28,15 +28,15 @@
 
 /* ================================================================
    TAILWIND v4
-   preflight(CSS reset)는 의도적으로 제외한다.
-   고객사 프로젝트에 Tailwind v4가 이미 설치되어 있을 경우
-   preflight가 중복 적용되어 컴포넌트 스타일을 덮어쓰는 문제를 방지한다.
-   - theme.css  : 디폴트 테마 변수 (@theme 블록의 커스텀 토큰과 병합됨)
+   preflight는 포함한다. 고객사 프로젝트에 Tailwind가 이미 있어도
+   preflight는 동일한 규칙을 @layer base에 중복 선언하는 것이므로
+   시각적 충돌이 발생하지 않는다. 제거하면 <button> 등의 브라우저
+   기본 테두리·여백이 살아나 컴포넌트 스타일이 깨진다.
+   - preflight.css : 브라우저 기본 스타일 리셋 (버튼 테두리 제거 등)
+   - theme.css     : 디폴트 테마 변수 (@theme 블록의 커스텀 토큰과 병합됨)
    - utilities.css : 유틸리티 클래스 생성 (@source 지정 파일 스캔 결과 포함)
-
-  tailwindcss 는 Storybook 등을 확인할 때 사용한다.
 ================================================================ */
-/* @import 'tailwindcss'; */
+@import 'tailwindcss/preflight' layer(base);
 @import 'tailwindcss/theme' layer(base);
 @import 'tailwindcss/utilities' layer(utilities);
 

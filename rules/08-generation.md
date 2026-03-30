@@ -7,33 +7,9 @@ Claude가 페이지 생성 시 누락 없이 필요한 파일을 생성하고,
 
 ---
 
-# 페이지 생성 시 생성 파일 목록
-
-Claude는 페이지 생성 시 다음 파일을 생성한다.
-**필요한 경우에만 생성한다.**
-
-```
-pages/
-  UserListPage.tsx          # 라우팅 단위 페이지 컴포넌트
-
-hooks/
-  useUserList.ts            # 데이터 패칭·상태 관리 Hook (상태 관리 필요 시 생성)
-
-repositories/
-  userRepository.ts         # HTTP 호출·데이터 가공·모델 변환·에러 처리 (API 호출 필요 시 생성)
-
-types/
-  userTypes.ts              # TypeScript 타입 정의 (API 응답 타입 정의 필요 시 생성)
-
-components/
-  UserTable.tsx             # 페이지 전용 UI 컴포넌트 (UI 복잡할 경우 생성)
-```
-
----
-
 # 생성 전 사전 확인 — CSS import
 
-페이지·컴포넌트 생성 전, 아래 두 import가 진입 파일(`src/main.tsx` 또는 `src/main.jsx` 등)에 **이미 존재하는지** 확인한다.
+페이지·컴포넌트 생성 전, 아래 import가 진입 파일(`src/main.tsx` 또는 `src/main.jsx` 등)에 **이미 존재하는지** 확인한다.
 
 ```ts
 import '@reactive-springware/component-lib/dist/index.css';
@@ -51,17 +27,50 @@ import '@reactive-springware/component-lib/dist/index.css';
 
 ---
 
+# 생성 파일 구조
+
+**Figma 화면 1개 = `src/features/` 하위 폴더 1개**
+
+```
+src/features/transactionDetail/
+  page.tsx          ← 라우팅 단위 페이지 컴포넌트
+  hook.ts           ← 데이터 패칭·상태 관리 (상태 필요 시)
+  repository.ts     ← HTTP 호출·데이터 가공·에러 처리 (API 필요 시)
+  types.ts          ← TypeScript 타입 정의 (API 타입 필요 시)
+```
+
+필요한 파일만 생성한다.
+
+| 파일 | 생성 조건 |
+|---|---|
+| `page.tsx` | 항상 생성 |
+| `hook.ts` | 상태 관리 또는 데이터 패칭이 필요한 경우 |
+| `repository.ts` | API 호출이 필요한 경우 |
+| `types.ts` | API 응답 타입 정의가 필요한 경우 |
+
+페이지 컴포넌트가 200줄을 초과할 것 같으면 같은 폴더 안에 별도 파일로 분리한다.
+
+```
+src/features/userList/
+  page.tsx
+  UserTable.tsx     ← page.tsx에서 분리한 UI 컴포넌트
+  hook.ts
+  repository.ts
+  types.ts
+```
+
+---
+
 # 생성 순서
 
 의존성 순서로 생성한다. 의존 대상을 먼저 생성해야 오류 없이 import 가능하다.
 
 1. **CSS import 사전 확인** — 진입 파일에 CSS import 존재 여부 확인·추가
-2. **Types 생성** — 모든 파일이 참조하는 타입 정의
-3. **Repository 생성** — Types 참조
-4. **Hooks 생성** — Repository 참조
-5. **Components 생성** — Hook 참조
-6. **Page 생성** — Component·Hook 참조
-7. **라우터 URL 등록** — Page 생성 후 반드시 수행
+2. **`types.ts` 생성** — 모든 파일이 참조하는 타입 정의
+3. **`repository.ts` 생성** — types 참조
+4. **`hook.ts` 생성** — repository 참조
+5. **`page.tsx` 생성** — hook 참조
+6. **라우터 URL 등록** — page 생성 후 반드시 수행
 
 ---
 
@@ -73,14 +82,12 @@ Page 파일 생성 후 반드시 `src/router/routes.tsx`에 URL을 등록한다.
 GOOD
 ```tsx
 // src/router/routes.tsx
-import { UserListPage } from '@/pages/UserListPage';
-import { UserDetailPage } from '@/pages/UserDetailPage';
+import { TransactionDetailPage } from '@/features/transactionDetail/page';
+import { AccountListPage } from '@/features/accountList/page';
 
 const routes = [
-  { path: '/users',          element: <UserListPage /> },
-  { path: '/users/:id',      element: <UserDetailPage /> },
-  { path: '/users/create',   element: <UserCreatePage /> },
-  { path: '/users/:id/edit', element: <UserEditPage /> },
+  { path: '/transactions/:id', element: <TransactionDetailPage /> },
+  { path: '/accounts',         element: <AccountListPage /> },
 ];
 
 export default routes;
@@ -88,11 +95,11 @@ export default routes;
 
 BAD
 ```tsx
-// Page 파일만 생성하고 라우터 등록 누락
-// → 생성된 페이지에 접근할 방법이 없음
+// features/ 밖에 페이지 파일 생성
+// pages/TransactionDetailPage.tsx  ← 금지
 
 // App.tsx에 직접 Route 추가 (routes.tsx를 거치지 않음)
-<Route path="/users" element={<UserListPage />} />
+<Route path="/transactions/:id" element={<TransactionDetailPage />} />
 ```
 
 ---
@@ -103,8 +110,8 @@ BAD
 - entity명은 복수형을 사용한다. (예: `/users`, `/accounts`)
 
 | 페이지 타입 | URL 패턴 | 예시 |
-|------------|---------|------|
-| 목록 | `/{entity}` | `/users` |
-| 상세 | `/{entity}/:id` | `/users/:id` |
-| 등록 | `/{entity}/create` | `/users/create` |
-| 수정 | `/{entity}/:id/edit` | `/users/:id/edit` |
+|---|---|---|
+| 목록 | `/{entity}` | `/accounts` |
+| 상세 | `/{entity}/:id` | `/accounts/:id` |
+| 등록 | `/{entity}/create` | `/accounts/create` |
+| 수정 | `/{entity}/:id/edit` | `/accounts/:id/edit` |

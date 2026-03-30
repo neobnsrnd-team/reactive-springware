@@ -1,6 +1,6 @@
 {
   "name": "@reactive-springware/component-lib",
-  "version": "0.2.1",
+  "version": "0.2.4",
   "private": true,
   "type": "module",
   "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Bank App 기반)",
@@ -12,6 +12,7 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./package.json": "./package.json",
     "./dist/index.css": "./dist/index.css",
     "./design-tokens": "./design-tokens/globals.css"
   },
@@ -43,21 +44,21 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@storybook/react-vite": "^10.3.3",
     "@tailwindcss/vite": "^4.2.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.0",
+    "storybook": "^10.3.3",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@storybook/react-vite": "^10.3.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
-    "storybook": "^10.3.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.1.3",

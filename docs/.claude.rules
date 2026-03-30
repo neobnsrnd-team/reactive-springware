@@ -1,12 +1,12 @@
 # Claude 코드 생성 규칙 Quick Reference
 
 이 파일은 9개 규칙 파일의 핵심 규칙을 한눈에 확인할 수 있는 빠른 참조용 문서다.
-각 규칙의 상세 내용은 `rules/` 폴더의 해당 파일을 참조한다.
+각 규칙의 상세 내용은 `rs-rules/` 폴더의 해당 파일을 참조한다.
 
 ---
 
 ## RULE 1 — Component Library 사용
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 모든 UI 컴포넌트는 component-library에서 import 한다.
 
@@ -23,7 +23,7 @@ BAD
 ---
 
 ## RULE 2 — HTML 태그 사용 금지
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 `div`, `span`, `button`, `input`, `select`, `table`, `h1~h6`, `p`, `a`, `img`, `svg`, `ul`, `li` 사용 금지.
 반드시 component-library 컴포넌트 사용.
@@ -41,7 +41,7 @@ BAD
 ---
 
 ## RULE 2-1 — 아이콘 사용 규칙
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 아이콘은 반드시 `lucide-react`에서 import해서 사용한다.
 
@@ -61,7 +61,7 @@ BAD
 ---
 
 ## RULE 3 — inline style / 임의 수치 금지
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 BAD
 ```tsx
@@ -78,7 +78,7 @@ GOOD
 ---
 
 ## RULE 4 — Import 순서
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 ```
 1. component-library
@@ -91,7 +91,7 @@ GOOD
 ---
 
 ## RULE 5 — 파일 구조
-> 상세: `rules/01-architecture.md`
+> 상세: `rs-rules/01-architecture.md`
 
 ```
 pages/         라우팅 단위 페이지 컴포넌트
@@ -104,7 +104,7 @@ types/         TypeScript 타입 정의
 ---
 
 ## RULE 6 — Repository 패턴
-> 상세: `rules/05-repository.md`
+> 상세: `rs-rules/05-repository.md`
 
 데이터 흐름: `repositories → hooks → page`. Hook·Component에서 직접 HTTP 호출 금지.
 
@@ -136,7 +136,7 @@ export const useUsers = () =>
 ---
 
 ## RULE 7 — 상태 관리
-> 상세: `rules/04-state-data.md`
+> 상세: `rs-rules/04-state-data.md`
 
 | 상태 유형 | 사용 방법 |
 |-----------|-----------|
@@ -147,7 +147,7 @@ export const useUsers = () =>
 ---
 
 ## RULE 8 — 레이아웃 구조
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 Page 구조: `Page → Layout → Section → Component`
 
@@ -164,7 +164,7 @@ Page 구조: `Page → Layout → Section → Component`
 ---
 
 ## RULE 9 — Props 규칙
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 열거형 props 사용. boolean 나열 금지.
 
@@ -181,7 +181,7 @@ BAD
 ---
 
 ## RULE 10 — 디자인 토큰 규칙
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 GOOD
 ```tsx
@@ -198,7 +198,7 @@ margin="10px"
 ---
 
 ## RULE 11 — Figma 매핑 규칙
-> 상세: `rules/07-figma.md`
+> 상세: `rs-rules/07-figma.md`
 
 `component-map.md` 기준으로 생성.
 
@@ -210,7 +210,7 @@ Button/Primary → <Button variant="primary" />
 ---
 
 ## RULE 12 — 코드 생성 순서
-> 상세: `rules/08-generation.md`
+> 상세: `rs-rules/08-generation.md`
 
 1. Types 생성
 2. Repository 생성
@@ -255,7 +255,7 @@ const UserCard = ({ user, onSelect }: any) => { ... }
 ---
 
 ## RULE 14 — 네이밍 규칙
-> 상세: `rules/02-naming.md`
+> 상세: `rs-rules/02-naming.md`
 
 | 대상 | 규칙 | 예시 |
 |------|------|------|
@@ -287,7 +287,7 @@ GOOD
 ---
 
 ## RULE 16 — 컴포넌트 계층 규칙
-> 상세: `rules/01-architecture.md`
+> 상세: `rs-rules/01-architecture.md`
 
 Page → Layout → Section → Component 순서. 역방향 중첩 절대 금지.
 
@@ -304,14 +304,14 @@ BAD
 ---
 
 ## RULE 17 — Props 최소화 규칙
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 Props는 최소한으로 설계. `variant`, `size` 열거형 사용. boolean 나열 금지.
 
 ---
 
 ## RULE 18 — 이벤트 처리 규칙
-> 상세: `rules/06-event.md`
+> 상세: `rs-rules/06-event.md`
 
 이벤트 핸들러는 Hook에서 정의. Page는 전달만. Component는 callback props로만 수신.
 
@@ -339,7 +339,7 @@ const handleDelete = async (id: string) => {
 ---
 
 ## RULE 19 — 데이터 상태 처리 규칙
-> 상세: `rules/04-state-data.md`
+> 상세: `rs-rules/04-state-data.md`
 
 반드시 이 순서로: `isLoading` → `isError` → empty check → 정상 렌더링
 
@@ -361,7 +361,7 @@ return <UserTable data={data} />
 ---
 
 ## RULE 20 — Page 상태 생성 금지
-> 상세: `rules/04-state-data.md`
+> 상세: `rs-rules/04-state-data.md`
 
 Page에서 `useState` 직접 사용 금지. 상태는 반드시 Hook을 통해 가져온다.
 
@@ -380,7 +380,7 @@ const [isOpen, setIsOpen] = useState(false)
 ---
 
 ## RULE 21 — Figma 레이아웃 변환 규칙
-> 상세: `rules/03-component.md`
+> 상세: `rs-rules/03-component.md`
 
 | Figma | React |
 |-------|-------|
@@ -401,7 +401,7 @@ const [isOpen, setIsOpen] = useState(false)
 ---
 
 ## RULE 22 — 개발자 확인 규칙
-> 상세: `rules/09-confirmation.md`
+> 상세: `rs-rules/09-confirmation.md`
 
 판단할 수 없는 상황에서 임의로 가정하지 않는다. 반드시 확인 후 진행.
 
@@ -433,7 +433,7 @@ BAD
 ---
 
 ## RULE 23 — 컴포넌트 크기 규칙
-> 상세: `rules/01-architecture.md`
+> 상세: `rs-rules/01-architecture.md`
 
 컴포넌트는 200줄을 넘지 않는다. 초과 시 역할을 분리한다.
 
