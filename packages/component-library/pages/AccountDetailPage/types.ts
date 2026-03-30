@@ -41,8 +41,12 @@ export interface AccountDetailPageProps {
   onBack?: () => void;
   /** 우측 메뉴 버튼 클릭 핸들러 */
   onMenu?: () => void;
-  /** 예금자보호 정보 행 클릭 핸들러 */
+  /** 예금자보호 카드 클릭 핸들러 */
   onInsuranceInfo?: () => void;
+  /** 거래내역 검색 아이콘 클릭 핸들러 */
+  onTransactionSearch?: () => void;
+  /** "거래내역 더보기" 클릭 핸들러 */
+  onTransactionMore?: () => void;
   /** 거래 항목 클릭 핸들러 */
   onTransactionClick?: (item: TransactionItem) => void;
 }
