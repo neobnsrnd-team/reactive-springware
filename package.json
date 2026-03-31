@@ -1,6 +1,6 @@
 {
   "name": "@reactive-springware/component-lib",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Bank App 기반)",

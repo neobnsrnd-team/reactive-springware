@@ -2,7 +2,7 @@
 
 ## 목적
 
-Claude가 UI 생성 시 반드시 Component Library만 사용하도록 강제하고,
+Claude가 UI 생성 시 반드시 @reactive-springware/component-lib만 사용하도록 강제하고,
 Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변환하는 규칙을 정의한다.
 
 이 규칙이 없으면 HTML 태그가 남발되거나 레이아웃이 깨진다.
@@ -23,7 +23,7 @@ Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변
 
 # 2. 허용 UI 컴포넌트 목록
 
-Component Library에서 제공하는 컴포넌트만 사용한다.
+@reactive-springware/component-lib에서 제공하는 컴포넌트만 사용한다.
 
 ```
 Button
@@ -47,19 +47,19 @@ Pagination
 # 3. 컴포넌트 선택 우선순위
 
 ```
-1순위: component-library 컴포넌트
-2순위: component-library 컴포넌트 + props 조합
-3순위: component-map.md에서 가장 유사한 컴포넌트 선택
+1순위: @reactive-springware/component-lib 컴포넌트
+2순위: @reactive-springware/component-lib 컴포넌트 + props 조합
+3순위: docs/component-map.md에서 가장 유사한 컴포넌트 선택
 ```
 
-`component-map.md`에 없다고 임의 컴포넌트를 새로 만들지 않는다.
+`docs/component-map.md`에 없다고 임의 컴포넌트를 새로 만들지 않는다.
 
 ---
 
-# 4. 레이아웃 컴포넌트 사용 규칙
+# 4. Layout Component 사용 규칙
 
-레이아웃은 반드시 component-library의 레이아웃 컴포넌트를 사용한다.
-`div`로 레이아웃을 구성하지 않는다.
+layout은 반드시 @reactive-springware/component-lib의 layout 컴포넌트를 사용한다.
+`div`로 layout을 구성하지 않는다.
 Page → Layout → Section → Component 계층을 유지한다.
 
 **허용:**
@@ -102,7 +102,7 @@ BAD
 
 ---
 
-# 5. 페이지 레이아웃 구조
+# 5. PageLayout 구조
 
 모든 Page는 반드시 아래 구조를 사용한다.
 
