@@ -161,8 +161,13 @@ setupStorybook();
 setupFigmaMcp();
 
 console.log('\n[rs-init] ✨ 초기화 완료. 이제 Reactive-Springware를 사용할 수 있습니다.');
-console.log('[rs-init] ⚠ Claude Code를 재시작하세요. MCP 설정은 Claude Code 시작 시점에 로드됩니다.');
-console.log('[rs-init] 📖 다음 단계는 rs-docs/setup-guide.md 를 확인하세요.');
+console.log('\n[rs-init] 👉 Figma 연동을 위한 다음 단계를 완료하세요:');
+console.log('[rs-init]   1. Claude Code를 재시작합니다. (MCP 설정은 시작 시점에 로드됩니다.)');
+console.log('[rs-init]   2. Claude Code에서 /mcp 를 입력합니다.');
+console.log('[rs-init]   3. figma 항목에서 Enter 를 눌러 인증을 시작합니다.');
+console.log('[rs-init]   4. 브라우저에서 Figma 로그인 후 돌아옵니다.');
+console.log('[rs-init]   5. figma 상태가 connected 로 바뀌면 Figma URL 입력이 가능합니다.');
+console.log('\n[rs-init] 📖 상세 내용은 rs-docs/setup-guide.md 를 확인하세요.');
 
 /**
  * 고객사 프로젝트의 진입 파일을 찾아 컴포넌트 라이브러리 CSS import를 주입한다.

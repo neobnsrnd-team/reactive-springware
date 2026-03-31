@@ -44,10 +44,12 @@ npm install @reactive-springware/component-lib
 # 2. 프로젝트 초기화 (규칙 파일·Tailwind·Storybook·Figma MCP 자동 설정)
 npx rs-init
 
-# 3. Claude Code 재시작 (Figma MCP 적용을 위해 필수)
-```
+# 3. Claude Code 재시작
 
-재시작 후 Figma URL을 처음 입력하면 브라우저에서 Figma 로그인 창이 열립니다. 로그인하면 바로 사용 가능합니다.
+# 4. /mcp 입력 → figma 항목 Enter → 브라우저 Figma 로그인
+
+# 5. figma connected 확인 후 Figma URL 입력 가능
+```
 
 초기화 상세 내용은 `rs-docs/setup-guide.md`를 확인하세요.
 
