@@ -125,6 +125,8 @@ copyFile(
 );
 
 /** demo/react-demo-app/src/index.css → <project-root>/src/index.css
+ *  복사 시 모노레포 내부 경로인 @import '../../../design-tokens/globals.css' 를 주석 처리한다.
+ *  해당 경로는 외부 프로젝트에 존재하지 않으며, 디자인 토큰은 dist/index.css에 이미 번들링되어 있다.
  *  기존 index.css가 있으면 덮어쓰지 않고 index.css.bak으로 이름을 바꿔 보존한다.
  *  패키지에 해당 파일이 없으면 경고만 출력하고 계속 진행한다. */
 const indexCssSrc  = resolve(pkgRoot, 'demo/react-demo-app/src/index.css');
@@ -137,7 +139,15 @@ if (!existsSync(indexCssSrc)) {
     renameSync(indexCssDest, bakPath);
     console.log('[rs-init] 기존 src/index.css → src/index.css.bak 으로 백업합니다.');
   }
-  copyFile(indexCssSrc, indexCssDest, 'src/index.css');
+  mkdirSync(resolve(indexCssDest, '..'), { recursive: true });
+  // 모노레포 내부 design-tokens 상대 경로를 주석 처리한다.
+  // 외부 프로젝트에는 해당 경로가 존재하지 않으며, 디자인 토큰은 dist/index.css에 번들링되어 있다.
+  const indexCssContent = readFileSync(indexCssSrc, 'utf8').replace(
+    /^(@import\s+['"]\.\.\/\.\.\/\.\.\/design-tokens\/globals\.css['"]\s*;)/m,
+    '/* [rs-init] 모노레포 내부 경로 — 외부 프로젝트에서는 dist/index.css에 번들링되어 있으므로 비활성화합니다.\n   $1 */',
+  );
+  writeFileSync(indexCssDest, indexCssContent, 'utf8');
+  console.log('[rs-init] ✔ src/index.css 복사 완료 (design-tokens import 주석 처리됨)');
 }
 
 /** vite.config.{ts,js} 에 @tailwindcss/vite 플러그인 자동 등록.
