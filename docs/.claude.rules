@@ -12,7 +12,7 @@
 
 GOOD
 ```ts
-import { Button } from "@reactivespringware/component-library"
+import { Button } from "@reactive-springware/component-lib"
 ```
 
 BAD

@@ -2,7 +2,7 @@
 
 > **대상 Figma 파일**: Hana Bank App (`eRnV2DPVtHbGn5HSISS65O`)
 > **작성 기준**: 기존 코드베이스(`packages/@shared/components`) 분석 + theme.json v2.0.0
-> **패키지 네임스페이스**: `@ReactPageForge/component-library`
+> **패키지 네임스페이스**: `@reactive-springware/component-lib`
 > **최종 수정**: 2026-03-26
 
 ---
@@ -281,7 +281,7 @@ Figma: [탭1] [탭2] [탭3]  (선택된 탭 하단 인디케이터)
 ### 4.1 패키지 네임스페이스 규칙
 
 ```
-@ReactPageForge/component-library
+@reactive-springware/component-lib
 ├── core/        → 원자(Atom) 컴포넌트
 ├── modules/     → 분자(Molecule) 컴포넌트
 ├── biz/         → 도메인 특화 컴포넌트
@@ -410,7 +410,7 @@ layout/  → 페이지 전체 구조 담당.
 
 ## 5. 주요 컴포넌트 TypeScript Interface 초안
 
-> **네이밍**: `@ReactPageForge/component-library` 기준으로 제안.
+> **네이밍**: `@reactive-springware/component-lib` 기준으로 제안.
 > 현재 코드베이스의 기존 타입과 호환성 유지.
 
 ### 5.1 Core 컴포넌트

@@ -391,9 +391,9 @@ design tokens (color="primary", spacing="md")
 모든 UI 컴포넌트는 Component Library에서 import
 
 ```ts
-import { Button, TextField, Select } from "@reactivespringware/component-library"
-import { Stack, Row, Card, Section } from "@reactivespringware/component-library"
-import { Title, Text, Caption } from "@reactivespringware/component-library"
+import { Button, TextField, Select } from "@reactive-springware/component-lib"
+import { Stack, Row, Card, Section } from "@reactive-springware/component-lib"
+import { Title, Text, Caption } from "@reactive-springware/component-lib"
 import { Search, X, ChevronDown } from "lucide-react" // 아이콘은 lucide-react에서 직접 import
 ```
 
