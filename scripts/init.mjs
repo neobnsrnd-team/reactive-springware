@@ -155,6 +155,7 @@ setupStorybook();
 setupFigmaMcp();
 
 console.log('\n[rs-init] ✨ 초기화 완료. 이제 Reactive-Springware를 사용할 수 있습니다.');
+console.log('[rs-init] ⚠ Claude Code를 재시작하세요. MCP 설정은 Claude Code 시작 시점에 로드됩니다.');
 console.log('[rs-init] 📖 다음 단계는 rs-docs/setup-guide.md 를 확인하세요.');
 
 /**
@@ -574,5 +575,6 @@ function setupFigmaMcp() {
 
   writeFileSync(mcpPath, JSON.stringify(mcp, null, 2) + '\n', 'utf8');
   console.log('[rs-init] ✔ Figma MCP 설정 완료 → .mcp.json');
-  console.log('[rs-init]   Figma URL을 Claude에 처음 입력하면 브라우저에서 Figma 로그인 창이 열립니다.');
+  console.log('[rs-init] ⚠ Claude Code를 재시작해야 .mcp.json이 적용됩니다.');
+  console.log('[rs-init]   재시작 후 Figma URL을 처음 입력하면 브라우저에서 Figma 로그인 창이 열립니다.');
 }

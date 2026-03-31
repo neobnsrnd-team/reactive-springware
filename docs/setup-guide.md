@@ -43,7 +43,11 @@ npm install @reactive-springware/component-lib
 
 # 2. 프로젝트 초기화
 npx rs-init
+
+# 3. Claude Code 재시작 (MCP 설정 적용을 위해 필수)
 ```
+
+> **재시작이 필요한 이유**: `rs-init`이 생성한 `.mcp.json`(Figma MCP 설정)은 Claude Code 시작 시점에 로드됩니다. 재시작하지 않으면 Figma MCP가 활성화되지 않습니다.
 
 ---
 
@@ -142,17 +146,14 @@ import '@reactive-springware/component-lib/dist/index.css';
 
 ### 4-8. Figma MCP 자동 설정
 
-`.mcp.json`에 Figma MCP 서버 설정을 추가합니다.
+`.mcp.json`에 Figma 공식 원격 MCP 서버 설정을 추가합니다.
 
 ```json
 {
   "mcpServers": {
     "figma": {
-      "command": "npx",
-      "args": ["-y", "figma-developer-mcp", "--stdio"],
-      "env": {
-        "FIGMA_API_KEY": "YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE"
-      }
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }
@@ -160,9 +161,10 @@ import '@reactive-springware/component-lib/dist/index.css';
 
 **Figma MCP가 필요한 이유**: Claude Code가 Figma URL만으로는 디자인 레이어 구조를 읽지 못합니다. MCP 없이 생성하면 섹션 누락·불완전 구현이 발생할 수 있습니다.
 
-**설정 후 필수 작업**: `.mcp.json`의 `YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE`를 실제 Figma PAT으로 교체하세요.
+**설정 후 필수 작업**: `npx rs-init` 완료 후 **Claude Code를 재시작**하세요.
+Claude Code는 MCP 설정을 시작 시점에 로드하므로 재시작 전까지 Figma MCP가 활성화되지 않습니다.
 
-> Figma PAT 발급: Figma → Settings → Account → Personal access tokens
+**Figma 로그인**: 재시작 후 Figma URL을 처음 입력하면 브라우저에서 Figma 로그인 창이 자동으로 열립니다. 로그인하면 바로 사용 가능합니다. PAT 발급이나 별도 설정은 필요 없습니다.
 
 이미 `.mcp.json`에 `figma` 서버가 있으면 건너뜁니다.
 
@@ -339,3 +341,23 @@ export default defineConfig({
 ```bash
 npm install @reactive-springware/component-lib
 ```
+
+### Figma MCP가 연결되지 않는 경우
+
+`npx rs-init` 실행 후 Claude Code를 재시작했는지 확인합니다.
+Claude Code는 MCP 설정을 시작 시점에만 로드하므로 재시작 없이는 Figma MCP가 활성화되지 않습니다.
+
+재시작 후에도 연결되지 않으면 프로젝트 루트의 `.mcp.json`에 아래 내용이 있는지 확인합니다.
+
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    }
+  }
+}
+```
+
+없으면 `npx rs-init`을 다시 실행하거나 위 내용을 직접 추가합니다.
