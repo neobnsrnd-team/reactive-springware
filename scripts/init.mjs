@@ -537,10 +537,11 @@ export const GettingStarted: StoryObj = {
  * Figma MCP 서버가 필요하다. MCP 없이 Figma URL만 주면 Claude는 디자인을
  * 추측해서 코드를 생성하므로 섹션 누락·불완전 구현이 발생할 수 있다.
  *
- * 이미 .mcp.json에 'figma' 서버가 등록되어 있으면 건너뛴다.
- * 생성 후 사용자가 FIGMA_API_KEY 값을 실제 Figma PAT으로 교체해야 한다.
+ * Figma 공식 원격 MCP 서버(HTTP transport)를 사용한다.
+ * OAuth 기반이므로 PAT 발급·입력 없이 Claude Code에서 Figma URL을 처음 사용할 때
+ * 브라우저 로그인 한 번으로 인증이 완료된다.
  *
- * Figma PAT 발급: https://www.figma.com/settings → Account → Personal access tokens
+ * 이미 .mcp.json에 'figma' 서버가 등록되어 있으면 건너뛴다.
  */
 function setupFigmaMcp() {
   const mcpPath = resolve(cwd, '.mcp.json');
@@ -564,19 +565,14 @@ function setupFigmaMcp() {
     return;
   }
 
-  // figma-developer-mcp: Figma 공식 MCP 패키지
-  // --stdio: Claude Code와 표준 입출력으로 통신
-  // FIGMA_API_KEY: Figma Personal Access Token (사용자가 직접 교체 필요)
+  // Figma 공식 원격 MCP 서버 — HTTP transport + OAuth 방식
+  // PAT 발급·입력 불필요. Claude Code에서 Figma URL 첫 사용 시 브라우저 로그인으로 자동 인증.
   mcp.mcpServers['figma'] = {
-    command: 'npx',
-    args: ['-y', 'figma-developer-mcp', '--stdio'],
-    env: {
-      FIGMA_API_KEY: 'YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE',
-    },
+    type: 'http',
+    url: 'https://mcp.figma.com/mcp',
   };
 
   writeFileSync(mcpPath, JSON.stringify(mcp, null, 2) + '\n', 'utf8');
   console.log('[rs-init] ✔ Figma MCP 설정 완료 → .mcp.json');
-  console.log('[rs-init] ⚠ 필수: .mcp.json의 YOUR_FIGMA_PERSONAL_ACCESS_TOKEN_HERE를 실제 Figma PAT으로 교체하세요.');
-  console.log('[rs-init]   발급 경로: Figma → Settings → Account → Personal access tokens');
+  console.log('[rs-init]   Figma URL을 Claude에 처음 입력하면 브라우저에서 Figma 로그인 창이 열립니다.');
 }
