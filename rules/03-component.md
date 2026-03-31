@@ -23,23 +23,50 @@ Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변
 
 # 2. 허용 UI 컴포넌트 목록
 
-@reactive-springware/component-lib에서 제공하는 컴포넌트만 사용한다.
+`@reactive-springware/component-library`에서 제공하는 컴포넌트만 사용한다.
+아래 목록에 없는 컴포넌트는 `11-component-props.md`를 확인한 후 사용한다.
+
+**레이아웃**
+
+```
+HomePageLayout      ← 홈 화면 전용 레이아웃 (헤더 + 인사말 + 스크롤 본문)
+PageLayout          ← 일반 페이지 레이아웃 (헤더 + 뒤로가기)
+Stack               ← 수직 레이아웃 (gap prop 사용)
+Inline              ← 수평 레이아웃 (Row 대체. gap / justify / align prop 사용)
+Grid                ← 그리드 레이아웃 (cols prop 사용)
+Card                ← 테두리 있는 컨테이너
+```
+
+**입력**
 
 ```
 Button
-Input / TextField / SearchInput / NumberField
-Select / MultiSelect
-Checkbox
-Radio
-Form / FormItem
-DataTable / Table / SimpleTable
-Card
-Title / Text / Caption
-Icon
-Loading / Skeleton / Spinner
-EmptyState / NoData
-ErrorState / Alert
-Pagination
+Input / TextField / SearchInput
+Select
+```
+
+**표시**
+
+```
+Text (Typography)   ← variant로 heading/body/caption 등 구분
+Badge
+AlertBanner         ← 인라인 경고·안내 배너
+```
+
+**Biz 컴포넌트**
+
+```
+AccountSummaryCard  ← 계좌 잔액 + 버튼
+AccountSelectorCard ← 계좌 선택·변경
+QuickMenuGrid       ← 퀵메뉴 그리드
+BrandBanner         ← 브랜드 배경 배너
+BannerCarousel      ← 슬라이드 배너
+BottomNav           ← 하단 탭바
+TabNav              ← 상단 탭 네비게이션
+SectionHeader       ← 섹션 제목 + 뱃지 + 액션
+CollapsibleSection  ← 접기/펼치기 섹션
+InfoRow             ← 라벨+값 (string만)
+LabelValueRow       ← 라벨+값 (JSX 허용)
 ```
 
 ---
@@ -63,34 +90,39 @@ layout은 반드시 @reactive-springware/component-lib의 layout 컴포넌트를
 Page → Layout → Section → Component 계층을 유지한다.
 
 **허용:**
+
 ```
-PageLayout
-Section
-Stack
-Row
-Column
-Card
-Grid
+HomePageLayout / PageLayout
+Stack       ← 수직 (gap prop)
+Inline      ← 수평 (gap / justify / align prop). Row 대신 사용
+Grid        ← 그리드 (cols prop)
+Card        ← 테두리 있는 컨테이너
 ```
 
 **금지:**
+
 ```
 div
+Row         ← 존재하지 않음. Inline 사용
+Column      ← 존재하지 않음. Stack 사용
+Section     ← 존재하지 않음. PageLayout 또는 SectionHeader 사용
 flex 직접 작성
 grid 직접 작성
 ```
 
 GOOD
+
 ```tsx
-<Stack direction="vertical" spacing="md">
-  <Row spacing="sm">
+<Stack gap="md">
+  <Inline gap="sm">
     <Button variant="primary" />
-    <Button variant="secondary" />
-  </Row>
+    <Button variant="outline" />
+  </Inline>
 </Stack>
 ```
 
 BAD
+
 ```tsx
 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
   <div style={{ display: 'flex', gap: 8 }}>
@@ -104,58 +136,89 @@ BAD
 
 # 5. PageLayout 구조
 
-모든 Page는 반드시 아래 구조를 사용한다.
+Page 타입에 따라 레이아웃 컴포넌트를 구분하여 사용한다.
+
+**일반 페이지** (헤더 + 뒤로가기)
 
 ```tsx
-<PageLayout>
-  <Section>
-    {/* 컴포넌트 */}
-  </Section>
+<PageLayout title="페이지 제목" onBack={() => {}}>
+  <Stack gap="md">{/* 컴포넌트 */}</Stack>
 </PageLayout>
+```
+
+**홈 화면** (로고 헤더 + 인사말 + BottomNav)
+
+```tsx
+<>
+  <HomePageLayout title="..." logo={<Logo />} greeting="..." withBottomNav>
+    <Stack gap="md">
+      {/* 컴포넌트 */}
+    </Stack>
+  </HomePageLayout>
+  <BottomNav items={...} activeId={...} />  {/* 반드시 바깥에 배치 */}
+</>
 ```
 
 ---
 
 # 6. Figma Auto Layout → React 컴포넌트 변환표
 
-| Figma | React |
-|-------|-------|
-| Auto Layout (Vertical) | `<Stack direction="vertical" />` |
-| Auto Layout (Horizontal) | `<Stack direction="horizontal" />` 또는 `<Row />` |
-| Grid Layout (N열) | `<Grid columns={N} />` |
-| 테두리 있는 컨테이너 | `<Card />` |
-| 제목 + 하위 컨텐츠 묶음 | `<Section title="..." />` |
+| Figma                    | React                           |
+| ------------------------ | ------------------------------- |
+| Auto Layout (Vertical)   | `<Stack gap="md" />`            |
+| Auto Layout (Horizontal) | `<Inline gap="md" />`           |
+| Grid Layout (N열)        | `<Grid cols={N} />`             |
+| 테두리 있는 컨테이너     | `<Card />`                      |
+| 섹션 제목 + 하위 컨텐츠  | `<SectionHeader title="..." />` |
+
+> ❌ `<Stack direction="vertical" />` — Stack에 direction prop 없음. 기본값이 수직
+> ❌ `<Stack direction="horizontal" />` — 수평은 `Inline` 사용
+> ❌ `<Grid columns={N} />` — prop명은 `cols`
 
 ---
 
 # 7. Spacing 토큰 변환표
 
-Figma gap 값을 다음 토큰으로 변환한다.
+Figma gap 값을 `gap` prop 토큰으로 변환한다. (`spacing` prop은 존재하지 않음)
 
-| Figma gap | spacing token |
-|-----------|---------------|
-| 4px | `spacing="xs"` |
-| 8px | `spacing="sm"` |
-| 16px | `spacing="md"` |
-| 24px | `spacing="lg"` |
-| 32px 이상 | `spacing="xl"` |
+| Figma gap | gap token  |
+| --------- | ---------- |
+| 4px       | `gap="xs"` |
+| 8px       | `gap="sm"` |
+| 16px      | `gap="md"` |
+| 24px      | `gap="lg"` |
+| 32px 이상 | `gap="xl"` |
 
 GOOD
+
 ```tsx
-{/* Figma: Vertical Auto Layout, gap 16px */}
-<Stack direction="vertical" spacing="md">
+{
+  /* Figma: Vertical Auto Layout, gap 16px */
+}
+<Stack gap="md">
   <SearchInput />
   <UserTable />
-</Stack>
+</Stack>;
 ```
 
 BAD
+
 ```tsx
-{/* div + 인라인 스타일로 레이아웃 직접 구성 */}
+{
+  /* direction / spacing prop은 존재하지 않음 */
+}
+<Stack direction="vertical" spacing="md">
+  <SearchInput />
+  <UserTable />
+</Stack>;
+
+{
+  /* div + 인라인 스타일 금지 */
+}
 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
   <SearchInput />
   <UserTable />
-</div>
+</div>;
 ```
 
 ---
@@ -165,165 +228,68 @@ BAD
 ## 검색 + 테이블 패턴
 
 ```tsx
-<PageLayout>
-  <Section>
-    <Stack direction="vertical" spacing="md">
-      <SearchInput />
-      <Table />
-    </Stack>
-  </Section>
+<PageLayout title="...">
+  <Stack gap="md">
+    <SearchInput />
+    <Table />
+  </Stack>
 </PageLayout>
 ```
 
 ## 카드 그리드 패턴
 
 ```tsx
-<PageLayout>
-  <Section>
-    <Row spacing="md">
-      <Card />
-      <Card />
-      <Card />
-    </Row>
-  </Section>
+<PageLayout title="...">
+  <Inline gap="md">
+    <Card />
+    <Card />
+    <Card />
+  </Inline>
 </PageLayout>
 ```
 
 ## 폼 패턴
 
 ```tsx
-{/* Section title은 Figma에서 읽은 값을 사용한다 */}
-<PageLayout>
-  <Section title="{pageTitle}">
-    <Stack direction="vertical" spacing="lg">
-      <Stack direction="vertical" spacing="sm">
-        <TextField />
-        <TextField />
-        <Select />
-      </Stack>
-      <Row justify="end">
-        <Button variant="secondary">취소</Button>
-        <Button variant="primary">저장</Button>
-      </Row>
+<PageLayout title="{pageTitle}">
+  <Stack gap="lg">
+    <Stack gap="sm">
+      <TextField />
+      <TextField />
+      <Select />
     </Stack>
-  </Section>
+    <Inline justify="end">
+      <Button variant="outline">취소</Button>
+      <Button variant="primary">저장</Button>
+    </Inline>
+  </Stack>
 </PageLayout>
 ```
 
-## Header + Sidebar 패턴
+## 홈 화면 패턴 (BottomNav 포함)
 
 ```tsx
-<PageLayout>
-  <Header />
-  <Row>
-    <Sidebar />
-    <Section>
-      {/* 메인 컨텐츠 */}
-    </Section>
-  </Row>
-</PageLayout>
+<>
+  <HomePageLayout title="..." logo={<Logo />} greeting="..." withBottomNav>
+    <Stack gap="md">
+      <AccountSummaryCard ... />
+      <QuickMenuGrid ... />
+    </Stack>
+  </HomePageLayout>
+  {/* BottomNav는 반드시 HomePageLayout 바깥에 배치 */}
+  <BottomNav items={...} activeId={...} />
+</>
 ```
 
 ---
 
-# 9. Form 구성 규칙
-
-Form은 반드시 Form Component 사용
-
-GOOD
-```tsx
-<Form>
-  <FormItem label="이름">
-    <TextField />
-  </FormItem>
-  <FormItem label="날짜">
-    <DatePicker />
-  </FormItem>
-  <FormItem label="유형">
-    <Select />
-  </FormItem>
-</Form>
-```
-
-BAD
-```tsx
-<div>
-  <label>이름</label>
-  <input type="text" />
-  <label>날짜</label>
-  <input type="date" />
-</div>
-```
-
----
-
-# 10. Table 구성 규칙
-
-Table은 반드시 `DataTable` / `Table` / `SimpleTable` 사용
-
-GOOD
-```tsx
-<DataTable data={users} columns={columns} />
-<SimpleTable data={users} />
-```
-
-BAD
-```tsx
-<table>
-  <thead><tr><th>이름</th></tr></thead>
-  <tbody><tr><td>{user.name}</td></tr></tbody>
-</table>
-```
-
----
-
-# 11. Button 구성 규칙
-
-버튼은 반드시 Button 컴포넌트 사용
-
-GOOD
-```tsx
-<Button variant="primary" size="md">저장</Button>
-<Button variant="secondary">취소</Button>
-<Button variant="danger">삭제</Button>
-<Button variant="ghost">닫기</Button>
-```
-
-BAD
-```tsx
-<button>저장</button>
-<button className="btn-primary">저장</button>
-<button style={{ background: 'blue' }}>저장</button>
-```
-
----
-
-# 12. 텍스트 구성 규칙
-
-텍스트는 반드시 Typography Component 사용
-
-GOOD
-```tsx
-<Title>페이지 제목</Title>
-<Text>본문 내용</Text>
-<Caption>보조 설명</Caption>
-```
-
-BAD
-```tsx
-<h1>페이지 제목</h1>
-<p>본문 내용</p>
-<span>보조 설명</span>
-```
-
----
-
-# 13. 아이콘 구성 규칙
+# 9. 아이콘 구성 규칙
 
 아이콘은 반드시 `lucide-react` 라이브러리에서 import해서 사용한다.
 SVG를 직접 작성하거나 이미지 파일로 아이콘을 표시하지 않는다.
 
 GOOD
+
 ```tsx
 import { Search, X, ChevronDown } from "lucide-react";
 
@@ -333,6 +299,7 @@ import { Search, X, ChevronDown } from "lucide-react";
 ```
 
 BAD
+
 ```tsx
 <svg>...</svg>
 <img src="search-icon.svg" />
@@ -341,63 +308,74 @@ BAD
 
 ---
 
-# 14. 반복 UI 규칙
+# 10. 반복 UI 규칙
 
 반복 UI는 Component 기반으로 작성하고 반드시 `key`를 포함한다.
 
 GOOD
+
 ```tsx
-{items.map(item => (
-  <Card key={item.id}>
-    <Text>{item.name}</Text>
-  </Card>
-))}
+{
+  items.map((item) => (
+    <Card key={item.id}>
+      <Typograpy>{item.name}</Typograpy>
+    </Card>
+  ));
+}
 ```
 
 BAD
+
 ```tsx
-{items.map(item => (
-  <div key={item.id} className="card">
-    <p>{item.name}</p>
-  </div>
-))}
+{
+  items.map((item) => (
+    <div key={item.id} className="card">
+      <p>{item.name}</p>
+    </div>
+  ));
+}
 ```
 
 ---
 
-# 15. 스타일 규칙
+# 11. 스타일 규칙
 
 스타일 직접 작성 금지
 
 **금지:**
+
 ```
-style={{ }}
-className 직접 작성
-inline style
-임의 색상값 (#fff, rgba 등)
-임의 수치 (px, rem 직접 입력)
+style={{ }}                      ← inline style 전면 금지
+임의 색상값 (#fff, rgba 등)       ← 하드코딩 금지
+임의 수치 (px, rem 직접 입력)     ← 하드코딩 금지
+className="text-[#333] mt-[20px]" ← 임의 값 Tailwind 금지
 ```
 
 **허용:**
+
 ```
-Component props (variant, size, spacing 등)
-design tokens (color="primary", spacing="md")
+Component props (variant, size, gap 등)
+디자인 토큰 기반 Tailwind 유틸리티 클래스
+  예: className="px-standard pb-standard"  ← 토큰 기반이므로 허용
 ```
 
 ---
 
-# 16. Import 규칙
+# 12. Import 규칙
 
 모든 UI 컴포넌트는 Component Library에서 import
 
 ```ts
-import { Button, TextField, Select } from "@reactive-springware/component-lib"
-import { Stack, Row, Card, Section } from "@reactive-springware/component-lib"
-import { Title, Text, Caption } from "@reactive-springware/component-lib"
-import { Search, X, ChevronDown } from "lucide-react" // 아이콘은 lucide-react에서 직접 import
+import { Button, TextField, Select } from '@reactive-springware/component-library';
+import { Stack, Inline, Grid, Card } from '@reactive-springware/component-library';
+import { Text } from '@reactive-springware/component-library';
+import { Search, X, ChevronDown } from 'lucide-react'; // 아이콘은 lucide-react에서 직접 import
 ```
 
+> ❌ `"@reactive-springware/component-lib"` — 패키지명 오류. **`component-library`** 사용
+
 파일 내 import 순서:
+
 ```
 1. component-library
 2. lucide-react (아이콘)
@@ -408,23 +386,29 @@ import { Search, X, ChevronDown } from "lucide-react" // 아이콘은 lucide-rea
 
 ---
 
-# 17. Props 설계 규칙
+# 13. Props 설계 규칙
 
 Props는 최소화한다. 불필요하게 많은 props는 컴포넌트의 역할이 불분명하다는 신호다.
 `variant`, `size` 같은 열거형 props를 사용하고, boolean을 나열하는 방식은 피한다.
 
 GOOD
+
 ```tsx
 <Button variant="primary" size="lg" disabled={isLoading} />
 ```
 
 BAD
-```tsx
-{/* boolean 나열 */}
-<Button primary large rounded outlined />
 
-{/* 의미 불명확한 props 과다 */}
-<Button type1 type2 big small active />
+```tsx
+{
+  /* boolean 나열 */
+}
+<Button primary large rounded outlined />;
+
+{
+  /* 의미 불명확한 props 과다 */
+}
+<Button type1 type2 big small active />;
 ```
 
 ---
@@ -433,10 +417,10 @@ BAD
 
 ✔ HTML 직접 사용 금지
 ✔ Component Library 사용
-✔ 레이아웃 컴포넌트 사용 (Stack, Row, Grid 등)
+✔ 레이아웃 컴포넌트 사용 (Stack 수직 / Inline 수평 / Grid)
 ✔ 스타일 직접 작성 금지
 ✔ 텍스트 Typography 컴포넌트 사용
 ✔ 아이콘 lucide-react에서 import
 ✔ 반복 UI에 key 포함
-✔ Figma gap → spacing token 변환
+✔ Figma gap → gap token 변환 (gap="xs/sm/md/lg/xl")
 ✔ Page → Layout → Section → Component 계층 유지

@@ -141,15 +141,21 @@ interface UserTableProps {
 
 # 폴더 네이밍 규칙
 
-camelCase 사용
+`features/` 하위 feature 폴더는 **camelCase** 사용 (`01-architecture.md` 참고).
+Figma 화면 이름을 camelCase로 변환한다.
 
 ```
-pages/
-hooks/
-repositories/
-types/
-components/
+src/
+  features/
+    transactionDetail/   ← camelCase (✅)
+    accountList/         ← camelCase (✅)
+    hanaHome/            ← camelCase (✅)
+  router/
 ```
+
+❌ `TransactionDetail/` — PascalCase 금지
+❌ `transaction-detail/` — kebab-case 금지
+❌ `transaction_detail/` — snake_case 금지
 
 ---
 
