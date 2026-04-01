@@ -6,7 +6,7 @@ Claude가 Figma 기반 React 코드를 생성할 때
 일관된 프로젝트 구조와 레이어 분리 원칙을 유지하기 위한 규칙 정의
 
 본 프로젝트는 **Figma UI → Claude → React 코드 생성** 구조를 기반으로 한다.
-공통 UI는 **`@reactive-springware/component-lib`** 패키지를 사용한다.
+공통 UI는 **`@reactive-springware/component-library`** 패키지를 사용한다.
 패키지에 없는 공통 컴포넌트를 별도로 만들지 않는다.
 
 ---
@@ -159,13 +159,13 @@ Repository는 데이터 호출을 담당한다.
 
 # 3. Component Library 사용 원칙
 
-공통 UI는 반드시 `@reactive-springware/component-lib`를 사용한다.
+공통 UI는 반드시 `@reactive-springware/component-library`를 사용한다.
 
 ```ts
-import { Button, Stack, TextField } from '@reactive-springware/component-lib';
+import { Button, Stack, Input } from '@reactive-springware/component-library';
 ```
 
-component-lib가 유일한 UI 소스다.
+component-library가 유일한 UI 소스다.
 직접 HTML 태그(`div`, `button` 등)를 사용하거나 외부 UI 라이브러리를 추가하지 않는다.
 이 원칙을 지켜야 디자인 시스템과 코드가 항상 동기화된다.
 
@@ -241,7 +241,7 @@ features/userList/
 Claude는 다음을 생성하지 않는다.
 
 - ❌ `features/` 밖에 페이지·Hook·Repository 파일 생성 금지
-- ❌ `components/` 폴더 생성 금지 (component-lib 사용)
+- ❌ `components/` 폴더 생성 금지 (component-library 사용)
 - ❌ `shared/` 폴더 생성 금지
 - ❌ `layout/` 폴더 생성 금지
 - ❌ 디자인 토큰 직접 정의 금지

@@ -2,7 +2,7 @@
 
 ## 목적
 
-Claude가 UI 생성 시 반드시 @reactive-springware/component-lib만 사용하도록 강제하고,
+Claude가 UI 생성 시 반드시 @reactive-springware/component-library만 사용하도록 강제하고,
 Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변환하는 규칙을 정의한다.
 
 이 규칙이 없으면 HTML 태그가 남발되거나 레이아웃이 깨진다.
@@ -31,6 +31,7 @@ Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변
 ```
 HomePageLayout      ← 홈 화면 전용 레이아웃 (헤더 + 인사말 + 스크롤 본문)
 PageLayout          ← 일반 페이지 레이아웃 (헤더 + 뒤로가기)
+Section             ← SectionHeader + 콘텐츠를 수직으로 묶는 레이아웃 (title / gap)
 Stack               ← 수직 레이아웃 (gap prop 사용)
 Inline              ← 수평 레이아웃 (Row 대체. gap / justify / align prop 사용)
 Grid                ← 그리드 레이아웃 (cols prop 사용)
@@ -41,7 +42,7 @@ Card                ← 테두리 있는 컨테이너
 
 ```
 Button
-Input / TextField / SearchInput
+Input                ← label / leftIcon / formatPattern 등 (SearchInput, TextField 없음)
 Select
 ```
 
@@ -51,6 +52,8 @@ Select
 Text (Typography)   ← variant로 heading/body/caption 등 구분
 Badge
 AlertBanner         ← 인라인 경고·안내 배너
+EmptyState          ← 데이터 없음 상태 (title / description / action)
+ErrorState          ← API 오류 상태 (description / onRetry)
 ```
 
 **Biz 컴포넌트**
@@ -74,8 +77,8 @@ LabelValueRow       ← 라벨+값 (JSX 허용)
 # 3. 컴포넌트 선택 우선순위
 
 ```
-1순위: @reactive-springware/component-lib 컴포넌트
-2순위: @reactive-springware/component-lib 컴포넌트 + props 조합
+1순위: @reactive-springware/component-library 컴포넌트
+2순위: @reactive-springware/component-library 컴포넌트 + props 조합
 3순위: docs/component-map.md에서 가장 유사한 컴포넌트 선택
 ```
 
@@ -85,7 +88,7 @@ LabelValueRow       ← 라벨+값 (JSX 허용)
 
 # 4. Layout Component 사용 규칙
 
-layout은 반드시 @reactive-springware/component-lib의 layout 컴포넌트를 사용한다.
+layout은 반드시 @reactive-springware/component-library의 layout 컴포넌트를 사용한다.
 `div`로 layout을 구성하지 않는다.
 Page → Layout → Section → Component 계층을 유지한다.
 
@@ -105,7 +108,6 @@ Card        ← 테두리 있는 컨테이너
 div
 Row         ← 존재하지 않음. Inline 사용
 Column      ← 존재하지 않음. Stack 사용
-Section     ← 존재하지 않음. PageLayout 또는 SectionHeader 사용
 flex 직접 작성
 grid 직접 작성
 ```
@@ -161,77 +163,21 @@ Page 타입에 따라 레이아웃 컴포넌트를 구분하여 사용한다.
 
 ---
 
-# 6. Figma Auto Layout → React 컴포넌트 변환표
+# 6. Figma Auto Layout 변환 규칙
 
-| Figma                    | React                           |
-| ------------------------ | ------------------------------- |
-| Auto Layout (Vertical)   | `<Stack gap="md" />`            |
-| Auto Layout (Horizontal) | `<Inline gap="md" />`           |
-| Grid Layout (N열)        | `<Grid cols={N} />`             |
-| 테두리 있는 컨테이너     | `<Card />`                      |
-| 섹션 제목 + 하위 컨텐츠  | `<SectionHeader title="..." />` |
-
-> ❌ `<Stack direction="vertical" />` — Stack에 direction prop 없음. 기본값이 수직
-> ❌ `<Stack direction="horizontal" />` — 수평은 `Inline` 사용
-> ❌ `<Grid columns={N} />` — prop명은 `cols`
+Figma Auto Layout → React 컴포넌트 변환 기준 및 Spacing 토큰 변환표는 `rules/07-figma.md`를 참고한다.
 
 ---
 
-# 7. Spacing 토큰 변환표
+# 7. 자주 쓰는 레이아웃 패턴
 
-Figma gap 값을 `gap` prop 토큰으로 변환한다. (`spacing` prop은 존재하지 않음)
-
-| Figma gap | gap token  |
-| --------- | ---------- |
-| 4px       | `gap="xs"` |
-| 8px       | `gap="sm"` |
-| 16px      | `gap="md"` |
-| 24px      | `gap="lg"` |
-| 32px 이상 | `gap="xl"` |
-
-GOOD
-
-```tsx
-{
-  /* Figma: Vertical Auto Layout, gap 16px */
-}
-<Stack gap="md">
-  <SearchInput />
-  <UserTable />
-</Stack>;
-```
-
-BAD
-
-```tsx
-{
-  /* direction / spacing prop은 존재하지 않음 */
-}
-<Stack direction="vertical" spacing="md">
-  <SearchInput />
-  <UserTable />
-</Stack>;
-
-{
-  /* div + 인라인 스타일 금지 */
-}
-<div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-  <SearchInput />
-  <UserTable />
-</div>;
-```
-
----
-
-# 8. 자주 쓰는 레이아웃 패턴
-
-## 검색 + 테이블 패턴
+## 검색 + 목록 패턴
 
 ```tsx
 <PageLayout title="...">
   <Stack gap="md">
-    <SearchInput />
-    <Table />
+    <Input leftIcon={<Search size={16} />} />
+    <TransactionList items={data} />
   </Stack>
 </PageLayout>
 ```
@@ -254,8 +200,8 @@ BAD
 <PageLayout title="{pageTitle}">
   <Stack gap="lg">
     <Stack gap="sm">
-      <TextField />
-      <TextField />
+      <Input label="..." />
+      <Input label="..." />
       <Select />
     </Stack>
     <Inline justify="end">
@@ -366,7 +312,7 @@ Component props (variant, size, gap 등)
 모든 UI 컴포넌트는 Component Library에서 import
 
 ```ts
-import { Button, TextField, Select } from '@reactive-springware/component-library';
+import { Button, Input, Select } from '@reactive-springware/component-library';
 import { Stack, Inline, Grid, Card } from '@reactive-springware/component-library';
 import { Text } from '@reactive-springware/component-library';
 import { Search, X, ChevronDown } from 'lucide-react'; // 아이콘은 lucide-react에서 직접 import
@@ -419,8 +365,8 @@ BAD
 ✔ Component Library 사용
 ✔ 레이아웃 컴포넌트 사용 (Stack 수직 / Inline 수평 / Grid)
 ✔ 스타일 직접 작성 금지
-✔ 텍스트 Typography 컴포넌트 사용
+✔ 텍스트 Text 컴포넌트 사용 (Typography 아님)
 ✔ 아이콘 lucide-react에서 import
 ✔ 반복 UI에 key 포함
-✔ Figma gap → gap token 변환 (gap="xs/sm/md/lg/xl")
 ✔ Page → Layout → Section → Component 계층 유지
+✔ Figma Auto Layout 변환 기준 → `rules/07-figma.md` 참고
