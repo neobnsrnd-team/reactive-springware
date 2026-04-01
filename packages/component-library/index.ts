@@ -34,6 +34,7 @@ export * from './modules/DatePicker';
 export * from './modules/Divider';
 export * from './modules/DividerWithLabel';
 export * from './modules/EmptyState';
+export * from './modules/ErrorState';
 export * from './modules/LabelValueRow';
 export * from './modules/Modal';
 export * from './modules/OtpInput';
@@ -56,6 +57,7 @@ export * from './layout/Grid';
 export * from './layout/HomePageLayout';
 export * from './layout/Inline';
 export * from './layout/PageLayout';
+export * from './layout/Section';
 export * from './layout/Stack';
 
 /* ── Hooks (상태·데이터 로직) ────────────────────────────────── */

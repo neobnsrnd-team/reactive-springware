@@ -26,25 +26,14 @@ Repository
 
 Repository는 아래 4가지를 모두 담당한다.
 
-| 역할 | 설명 |
-|------|------|
-| HTTP 호출 | axios를 사용한 서버 요청 |
-| 데이터 가공 | 불필요한 필드 제거, 정렬 등 |
-| 모델 변환 | 서버 필드명 → 클라이언트 모델 변환 |
-| 에러 처리 | HTTP 에러를 클라이언트 에러로 변환 |
+| 역할        | 설명                               |
+| ----------- | ---------------------------------- |
+| HTTP 호출   | axios를 사용한 서버 요청           |
+| 데이터 가공 | 불필요한 필드 제거, 정렬 등        |
+| 모델 변환   | 서버 필드명 → 클라이언트 모델 변환 |
+| 에러 처리   | HTTP 에러를 클라이언트 에러로 변환 |
 
 Hook과 Component는 이 역할을 절대 담당하지 않는다.
-
----
-
-# 파일 구조
-
-```
-repositories/
-  userRepository.ts
-  dashboardRepository.ts
-  transactionRepository.ts
-```
 
 ---
 
@@ -73,15 +62,15 @@ export const userRepository = {
 
 ```ts
 getUsers: async (): Promise<User[]> => {
-  const response = await axios.get('/api/users')
+  const response = await axios.get('/api/users');
   // 서버 snake_case → 클라이언트 camelCase 변환
-  return response.data.map(item => ({
+  return response.data.map((item) => ({
     id: item.user_id,
     name: item.user_name,
     email: item.user_email,
     createdAt: item.created_at,
-  }))
-}
+  }));
+};
 ```
 
 ## 에러 처리 포함
@@ -89,16 +78,16 @@ getUsers: async (): Promise<User[]> => {
 ```ts
 getUserById: async (id: string): Promise<User> => {
   try {
-    const response = await axios.get(`/api/users/${id}`)
-    return response.data
+    const response = await axios.get(`/api/users/${id}`);
+    return response.data;
   } catch (error) {
     // HTTP 에러를 클라이언트가 이해할 수 있는 형태로 변환
     if (axios.isAxiosError(error) && error.response?.status === 404) {
-      throw new Error('사용자를 찾을 수 없습니다.')
+      throw new Error('사용자를 찾을 수 없습니다.');
     }
-    throw error
+    throw error;
   }
-}
+};
 ```
 
 ---
@@ -113,13 +102,13 @@ getUserById: async (id: string): Promise<User> => {
 export const useUsers = () =>
   useQuery({
     queryKey: ['users'],
-    queryFn: userRepository.getUsers,  // Repository 함수만 호출
-  })
+    queryFn: userRepository.getUsers, // Repository 함수만 호출
+  });
 
 export const useCreateUser = () =>
   useMutation({
     mutationFn: userRepository.createUser,
-  })
+  });
 ```
 
 ---
@@ -127,50 +116,53 @@ export const useCreateUser = () =>
 # 금지 규칙
 
 ❌ Hook 내부에서 axios 직접 호출
+
 ```ts
 // 금지
-export const useUsers = () =>
-  useQuery({ queryFn: () => axios.get('/api/users') })
+export const useUsers = () => useQuery({ queryFn: () => axios.get('/api/users') });
 ```
 
 ❌ Component 내부에서 axios 직접 호출
+
 ```ts
 // 금지
 useEffect(() => {
-  axios.get('/api/users').then(res => setUsers(res.data))
-}, [])
+  axios.get('/api/users').then((res) => setUsers(res.data));
+}, []);
 ```
 
 ❌ Repository에서 React 상태 관리 (`useState`, `useEffect` 사용 금지)
+
 ```ts
 // 금지 — Repository는 순수 함수여야 함
 export const userRepository = {
   getUsers: async () => {
-    const [data, setData] = useState([])  // 금지
-  }
-}
+    const [data, setData] = useState([]); // 금지
+  },
+};
 ```
 
 ❌ Repository에서 UI 로직 포함
+
 ```ts
 // 금지 — UI 관련 코드는 Component에서 처리
 export const userRepository = {
   getUsers: async () => {
-    const result = await axios.get('/users')
-    alert('로드 완료')  // 금지
-    return result.data
-  }
-}
+    const result = await axios.get('/users');
+    alert('로드 완료'); // 금지
+    return result.data;
+  },
+};
 ```
 
 ---
 
 # 네이밍 규칙
 
-| 대상 | 규칙 | 예시 |
-|------|------|------|
-| 파일명 | `{entity}Repository.ts` | `userRepository.ts` |
+| 대상          | 규칙                              | 예시                     |
+| ------------- | --------------------------------- | ------------------------ |
+| 파일명        | `{entity}Repository.ts`           | `userRepository.ts`      |
 | 함수명 (조회) | `get{Entity}` / `get{Entity}List` | `getUser`, `getUserList` |
-| 함수명 (생성) | `create{Entity}` | `createUser` |
-| 함수명 (수정) | `update{Entity}` | `updateUser` |
-| 함수명 (삭제) | `delete{Entity}` | `deleteUser` |
+| 함수명 (생성) | `create{Entity}`                  | `createUser`             |
+| 함수명 (수정) | `update{Entity}`                  | `updateUser`             |
+| 함수명 (삭제) | `delete{Entity}`                  | `deleteUser`             |

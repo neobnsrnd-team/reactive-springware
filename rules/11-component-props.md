@@ -144,6 +144,23 @@ gap?:        'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 ---
 
+### Section
+
+```ts
+title?:       string           // 전달 시 SectionHeader 노출
+badge?:       number
+actionLabel?: string
+onAction?:    () => void
+children:     React.ReactNode
+gap?:         'xs' | 'sm' | 'md' | 'lg' | 'xl'  // 기본: 'md'
+className?:   string
+```
+
+> title 없이 사용하면 `Stack` 역할(수직 배치)만 한다.
+> title 있으면 `SectionHeader` + 콘텐츠를 묶는다.
+
+---
+
 ## Modules 컴포넌트
 
 ### TabNav
@@ -230,6 +247,20 @@ showBorder?:     boolean  // 기본: true
 label: string
 value: React.ReactNode  // string 또는 JSX 모두 허용 (InfoRow와 다름)
 ```
+
+---
+
+### ErrorState
+
+```ts
+title?:       string           // 기본: '오류가 발생했습니다'
+description?: string
+onRetry?:     () => void       // 전달 시 재시도 버튼 노출
+retryLabel?:  string           // 기본: '다시 시도'
+className?:   string
+```
+
+> `isError` 상태에서만 렌더링. 데이터 없음(정상 응답)은 `EmptyState` 사용.
 
 ---
 
@@ -350,3 +381,6 @@ activeId: string
 | 계좌 잔액 표시 | `AccountSummaryCard` |
 | 좌우 정렬 텍스트 | `LabelValueRow` (value에 JSX 가능) |
 | 좌우 정렬 텍스트(string만) | `InfoRow` |
+| API 오류 상태 표시 | `ErrorState` |
+| 데이터 없음 표시 | `EmptyState` |
+| 섹션 제목 + 콘텐츠 묶음 | `Section` (title prop으로 SectionHeader 자동 포함) |

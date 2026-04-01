@@ -107,14 +107,16 @@ interface UserTableProps {
 
 const UserTable = ({ data, onDelete, onSearch }: UserTableProps) => {
   return (
-    <Table>
+    <Stack gap="sm">
       {data.map(user => (
-        <Row key={user.id}>
-          <Text>{user.name}</Text>
-          <Button variant="danger" onClick={() => onDelete(user.id)}>삭제</Button>
-        </Row>
+        <Card key={user.id}>
+          <Inline justify="between" align="center">
+            <Text>{user.name}</Text>
+            <Button variant="danger" onClick={() => onDelete(user.id)}>삭제</Button>
+          </Inline>
+        </Card>
       ))}
-    </Table>
+    </Stack>
   )
 }
 ```
@@ -128,7 +130,7 @@ const UserTable = ({ data }: { data: User[] }) => {
     router.push('/users')              // 라우팅 금지
   }
 
-  return <Table>...</Table>
+  return <Stack gap="sm">...</Stack>
 }
 ```
 
