@@ -43,7 +43,7 @@ function getBgStyle(variant: ButtonVariant, state: ButtonState) {
   }
   switch (variant) {
     case 'Primary': return { varName: VAR.brandPrimary, fallback: BRAND.primary };
-    case 'Danger':  return { varName: VAR.dangerBg,     fallback: COLOR.dangerDark };
+    case 'Danger':  return { varName: VAR.dangerDefault, fallback: COLOR.dangerDark };
     /* Outline / Ghost: 투명 배경 */
     default:        return null;
   }
