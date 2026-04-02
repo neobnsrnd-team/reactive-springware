@@ -124,16 +124,16 @@ export const CANVAS_GAP = 48;
  */
 export const VAR = {
   /* ── Brand (color/brand/*) ──────────────────── */
-  brandBg:        'color/brand/10',               // #008485 10% — Badge Brand 배경
-  brandText:      'color/brand/text',             // #008485     — Badge Brand 텍스트
+  brandBg:        'color/brand/10',       // #008485 10% — Badge Brand 배경
+  brandText:      'color/brand/text',     // #008485     — Badge Brand 텍스트
 
   /* ── Primary (color/primary/*) ──────────────── */
-  primarySurface: 'color/info/surface',           // #EFF6FF     — Badge Primary 배경
-  primaryText:    'color/info/text',              // #1E40AF     — Badge Primary 텍스트
+  primarySurface: 'color/info/surface',   // #EFF6FF     — Badge Primary 배경
+  primaryText:    'color/info/text',      // #1E40AF     — Badge Primary 텍스트
 
   /* ── Success (color/success/*) ──────────────── */
   successSurface: 'color/success/surface',// #F0FDF4     — Badge Success 배경
-  successText:    'color/success',        // #15803D          — Badge Success 텍스트
+  successText:    'color/success',        // #15803D     — Badge Success 텍스트
 
   /* ── Danger (color/danger/*) ────────────────── */
   dangerSurface:  'color/danger/surface', // #FFF1F2     — Badge Danger 배경
@@ -150,7 +150,7 @@ export const VAR = {
   /* ── Button 전용 ─────────────────────────────── */
   brandPrimary:   'color/brand',          // #008485     — Button Primary 배경
   brandFg:        'color/brand/fg',       // #FFFFFF     — Button Primary 텍스트
-  dangerBg:       'color/danger/darker',  // danger button 배경
+  dangerDefault:  'color/danger/default', // #E11D48     — Button danger 배경
   surface:        'color/surface',        // #FFFFFF     — Disabled 텍스트(어두운 배경 위)
   border:         'color/border',         // #E2E8F0     — Disabled Outline 테두리
   textDisabled:   'color/text/disabled',  // #CBD5E1     — Disabled 배경·텍스트
