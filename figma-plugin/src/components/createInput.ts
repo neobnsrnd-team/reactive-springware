@@ -1,70 +1,401 @@
 /**
  * @file createInput.ts
  * @description Figma Input 컴포넌트 세트 생성.
- * React Input의 size(md|lg) × validationState(default|error|success)를
- * Figma variant로 매핑한다.
+ * React InputProps의 모든 주요 prop을 Figma variant로 표현하기 위해
+ * 아래 5개 ComponentSet을 생성한다.
  *
- * 컴포넌트 이름: "Input"
- * Variant 형식: "Size=Medium, State=Default"
+ * 1. Input           — Size(2) × State(Default|Error|Success|Disabled) = 8
+ * 2. Input/WithLabel — Size(2) × State(Default|Error|Success) = 6  (상단 label)
+ * 3. Input/WithHelper— Size(2) × State(Default|Error|Success) = 6  (하단 helperText)
+ * 4. Input/WithIcon  — Size(2) × Icon(Left|Right|Both) = 6         (아이콘 슬롯)
+ * 5. Input/Format    — Size(2) × Format(Account|Phone) = 4         (포맷 placeholder)
+ * 6. Input/FullWidth — Size(2) × State(Default|Error|Success) = 6  (w-full)
+ *
+ * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없으면 tokens.ts의 RGB fallback 적용.
  */
 
-import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, VAR } from '../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFill, setStroke, addText,
+  setFill, setFillWithVar, setStroke, addText, addRect,
 } from '../helpers';
 
 type InputSize  = 'Medium' | 'Large';
-type InputState = 'Default' | 'Error' | 'Success';
+type InputState = 'Default' | 'Error' | 'Success' | 'Disabled';
+type InputIcon  = 'Left' | 'Right' | 'Both';
+type InputFormat = 'Account' | 'Phone';
 
-const SIZE_CONFIG: Record<InputSize, { height: number; fontSize: number; px: number }> = {
-  Medium: { height: 48, fontSize: FONT_SIZE.sm,   px: SPACING.md       },
-  Large:  { height: 56, fontSize: FONT_SIZE.base,  px: SPACING.standard },
+/** size별 높이 / 가로패딩 / 폰트 크기 */
+const SIZE_CONFIG: Record<InputSize, { height: number; px: number; fontSize: number }> = {
+  Medium: { height: 48, px: SPACING.md,       fontSize: FONT_SIZE.sm   },
+  Large:  { height: 56, px: SPACING.standard, fontSize: FONT_SIZE.base },
 };
 
-/** validationState별 배경/테두리 색상 */
-const STATE_CONFIG: Record<InputState, {
-  bg: Parameters<typeof setFill>[1];
-  border: Parameters<typeof setFill>[1];
+/** validationState별 배경·테두리 변수 및 fallback */
+const STATE_STYLE: Record<InputState, {
+  bgVar: string;      bgFallback: Parameters<typeof setFillWithVar>[2];
+  borderVar: string;  borderFallback: Parameters<typeof setFillWithVar>[2];
 }> = {
-  Default: { bg: COLOR.surface,       border: COLOR.border        },
-  Error:   { bg: COLOR.dangerSurface, border: COLOR.danger         },
-  Success: { bg: COLOR.successSurface,border: COLOR.successBorder  },
+  Default:  {
+    bgVar:     VAR.surface,       bgFallback:     COLOR.surface,
+    borderVar: VAR.border,        borderFallback: COLOR.border,
+  },
+  Error: {
+    bgVar:     VAR.dangerSurface, bgFallback:     COLOR.dangerSurface,
+    borderVar: VAR.dangerDefault, borderFallback: COLOR.danger,
+  },
+  Success: {
+    bgVar:     VAR.successSurface,bgFallback:     COLOR.successSurface,
+    borderVar: VAR.successBorder, borderFallback: COLOR.successBorder,
+  },
+  Disabled: {
+    /* opacity-50 + bg-surface-raised 로 처리 — 테두리는 기본 border */
+    bgVar:     VAR.surfaceRaised, bgFallback:     COLOR.surfaceRaised,
+    borderVar: VAR.border,        borderFallback: COLOR.border,
+  },
 };
 
-function createInputVariant(size: InputSize, state: InputState): ComponentNode {
-  const { height, fontSize, px } = SIZE_CONFIG[size];
-  const { bg, border } = STATE_CONFIG[state];
+/* ── 내부 레이아웃 헬퍼 ────────────────────────────────────────── */
 
-  const comp = createComponent(`Size=${size}, State=${state}`);
+/**
+ * Input 필드 프레임 기본 레이아웃 세팅.
+ * @param fullWidth true이면 너비를 320으로 고정 (w-full 표현)
+ */
+async function buildInputField(
+  comp: ComponentNode,
+  size: InputSize,
+  state: InputState,
+  fullWidth = false,
+): Promise<void> {
+  const { height, px, fontSize } = SIZE_CONFIG[size];
+  const { bgVar, bgFallback, borderVar, borderFallback } = STATE_STYLE[state];
+
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
   setPadding(comp, 0, px);
-  comp.resize(280, height);
-  comp.primaryAxisSizingMode = 'FIXED';
-  comp.counterAxisSizingMode = 'FIXED';
+  comp.resize(fullWidth ? 320 : 280, height);
+  comp.primaryAxisSizingMode  = 'FIXED';
+  comp.counterAxisSizingMode  = 'FIXED';
   comp.cornerRadius = RADIUS.sm;
-  setFill(comp, bg);
-  setStroke(comp, border);
 
-  /* placeholder 텍스트로 입력 영역 표현 */
+  await setFillWithVar(comp, bgVar, bgFallback);
+
+  /* 테두리: setStroke는 RGB만 받으므로 직접 strokes 세팅 */
+  const borderPaint = { type: 'SOLID' as const, color: borderFallback };
+  const boundBorder = await (async () => {
+    try {
+      const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+      const variable = allVars.find(v => v.name === borderVar);
+      if (variable) {
+        return figma.variables.setBoundVariableForPaint(borderPaint, 'color', variable);
+      }
+    } catch (_) { /* fallback */ }
+    return borderPaint;
+  })();
+  comp.strokes = [boundBorder];
+  comp.strokeWeight = 1;
+  comp.strokeAlign  = 'INSIDE';
+
+  /* placeholder 텍스트 */
   const placeholder = addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
   placeholder.layoutGrow = 1;
   placeholder.textAlignVertical = 'CENTER';
+  await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
 
-  return comp;
+  /* Disabled: 투명도로 표현 (opacity 50%) */
+  if (state === 'Disabled') {
+    comp.opacity = 0.5;
+  }
 }
 
+/** 아이콘 플레이스홀더 사각형 추가 */
+function addIconPlaceholder(comp: ComponentNode, size: InputSize): void {
+  const iconSize = size === 'Large' ? 20 : 16;
+  addRect(comp, iconSize, iconSize, COLOR.textMuted, RADIUS.xs);
+}
+
+/* ── ComponentSet 생성 함수 ─────────────────────────────────────── */
+
+/**
+ * 1. Input — Size × State(Default|Error|Success|Disabled) = 8
+ * disabled prop + validationState(error|success) 모두 표현
+ */
 export async function createInput(): Promise<ComponentSetNode> {
   const sizes:  InputSize[]  = ['Medium', 'Large'];
-  const states: InputState[] = ['Default', 'Error', 'Success'];
+  const states: InputState[] = ['Default', 'Error', 'Success', 'Disabled'];
 
   const components: ComponentNode[] = [];
+
   for (const size of sizes) {
     for (const state of states) {
-      components.push(createInputVariant(size, state));
+      const comp = createComponent(`Size=${size}, State=${state}`);
+      await buildInputField(comp, size, state);
+      components.push(comp);
     }
   }
 
-  /* cols=3: 한 행에 state(Default·Error·Success) 3개, 행마다 size 변경 */
-  return combineVariants(components, 'Input', 3);
+  /* cols=4: 한 행에 State 4개, 행마다 Size 변경 */
+  return combineVariants(components, 'Input', 4);
+}
+
+/**
+ * 2. Input/WithLabel — Size × State(Default|Error|Success) = 6
+ * label prop 표현: 상단에 label 텍스트 추가, 세로 Auto Layout으로 묶음
+ */
+export async function createInputWithLabel(): Promise<ComponentSetNode> {
+  const sizes:  InputSize[]  = ['Medium', 'Large'];
+  /* Disabled는 기본 Input에서 커버하므로 3가지만 */
+  const states: ('Default' | 'Error' | 'Success')[] = ['Default', 'Error', 'Success'];
+
+  const components: ComponentNode[] = [];
+
+  for (const size of sizes) {
+    for (const state of states) {
+      const { height, fontSize } = SIZE_CONFIG[size];
+      const comp = createComponent(`Size=${size}, State=${state}`);
+
+      /* 세로 Auto Layout: label + input field */
+      setAutoLayout(comp, 'VERTICAL', SPACING.xs, 'MIN');
+      comp.primaryAxisSizingMode = 'AUTO';
+      comp.counterAxisSizingMode = 'AUTO';
+      comp.fills = [];
+      comp.strokes = [];
+
+      /* label 텍스트 */
+      const label = addText(comp, '레이블', FONT_SIZE.xs, COLOR.textLabel, true);
+      await setFillWithVar(label, VAR.textLabel, COLOR.textLabel);
+
+      /* 입력 필드 프레임 */
+      const field = figma.createFrame();
+      field.name = 'field';
+      setAutoLayout(field, 'HORIZONTAL', SPACING.xs);
+      setPadding(field, 0, SIZE_CONFIG[size].px);
+      field.resize(280, height);
+      field.primaryAxisSizingMode = 'FIXED';
+      field.counterAxisSizingMode = 'FIXED';
+      field.cornerRadius = RADIUS.sm;
+
+      const { bgVar, bgFallback, borderVar, borderFallback } = STATE_STYLE[state];
+      await setFillWithVar(field, bgVar, bgFallback);
+
+      const borderPaint = { type: 'SOLID' as const, color: borderFallback };
+      try {
+        const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+        const variable = allVars.find(v => v.name === borderVar);
+        if (variable) {
+          field.strokes = [figma.variables.setBoundVariableForPaint(borderPaint, 'color', variable)];
+        } else {
+          field.strokes = [borderPaint];
+        }
+      } catch (_) {
+        field.strokes = [borderPaint];
+      }
+      field.strokeWeight = 1;
+      field.strokeAlign  = 'INSIDE';
+
+      const placeholder = addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      placeholder.layoutGrow = 1;
+      placeholder.textAlignVertical = 'CENTER';
+      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+
+      comp.appendChild(field);
+      components.push(comp);
+    }
+  }
+
+  return combineVariants(components, 'Input/WithLabel', 3);
+}
+
+/**
+ * 3. Input/WithHelper — Size × State(Default|Error|Success) = 6
+ * helperText prop 표현: 하단에 보조 텍스트 추가, 색상은 state에 따라 변화
+ */
+export async function createInputWithHelper(): Promise<ComponentSetNode> {
+  const sizes:  InputSize[]  = ['Medium', 'Large'];
+  const states: ('Default' | 'Error' | 'Success')[] = ['Default', 'Error', 'Success'];
+
+  /** state별 helperText 색상 변수·fallback */
+  const helperStyle: Record<'Default' | 'Error' | 'Success', {
+    varName: string; fallback: Parameters<typeof setFillWithVar>[2];
+  }> = {
+    Default: { varName: VAR.textMuted,   fallback: COLOR.textMuted   },
+    Error:   { varName: VAR.dangerText,  fallback: COLOR.dangerText  },
+    Success: { varName: VAR.successText, fallback: COLOR.successText },
+  };
+
+  const components: ComponentNode[] = [];
+
+  for (const size of sizes) {
+    for (const state of states) {
+      const { height, fontSize } = SIZE_CONFIG[size];
+      const comp = createComponent(`Size=${size}, State=${state}`);
+
+      setAutoLayout(comp, 'VERTICAL', SPACING.xs, 'MIN');
+      comp.primaryAxisSizingMode = 'AUTO';
+      comp.counterAxisSizingMode = 'AUTO';
+      comp.fills = [];
+      comp.strokes = [];
+
+      /* 입력 필드 프레임 */
+      const field = figma.createFrame();
+      field.name = 'field';
+      setAutoLayout(field, 'HORIZONTAL', SPACING.xs);
+      setPadding(field, 0, SIZE_CONFIG[size].px);
+      field.resize(280, height);
+      field.primaryAxisSizingMode = 'FIXED';
+      field.counterAxisSizingMode = 'FIXED';
+      field.cornerRadius = RADIUS.sm;
+
+      const { bgVar, bgFallback, borderVar, borderFallback } = STATE_STYLE[state];
+      await setFillWithVar(field, bgVar, bgFallback);
+
+      const borderPaint = { type: 'SOLID' as const, color: borderFallback };
+      try {
+        const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+        const variable = allVars.find(v => v.name === borderVar);
+        if (variable) {
+          field.strokes = [figma.variables.setBoundVariableForPaint(borderPaint, 'color', variable)];
+        } else {
+          field.strokes = [borderPaint];
+        }
+      } catch (_) {
+        field.strokes = [borderPaint];
+      }
+      field.strokeWeight = 1;
+      field.strokeAlign  = 'INSIDE';
+
+      const placeholder = addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      placeholder.layoutGrow = 1;
+      placeholder.textAlignVertical = 'CENTER';
+      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+
+      comp.appendChild(field);
+
+      /* helperText */
+      const { varName, fallback } = helperStyle[state];
+      const helper = addText(comp, '안내 문구입니다', FONT_SIZE.xs, fallback);
+      await setFillWithVar(helper, varName, fallback);
+
+      components.push(comp);
+    }
+  }
+
+  return combineVariants(components, 'Input/WithHelper', 3);
+}
+
+/**
+ * 4. Input/WithIcon — Size × Icon(Left|Right|Both) = 6
+ * leftIcon / rightElement prop 표현: 아이콘 플레이스홀더(rect) 포함
+ */
+export async function createInputWithIcon(): Promise<ComponentSetNode> {
+  const sizes: InputSize[]  = ['Medium', 'Large'];
+  const icons: InputIcon[]  = ['Left', 'Right', 'Both'];
+
+  const components: ComponentNode[] = [];
+
+  for (const size of sizes) {
+    for (const icon of icons) {
+      const { height, px, fontSize } = SIZE_CONFIG[size];
+
+      const comp = createComponent(`Size=${size}, Icon=${icon}`);
+      setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
+      setPadding(comp, 0, px);
+      comp.resize(280, height);
+      comp.primaryAxisSizingMode = 'FIXED';
+      comp.counterAxisSizingMode = 'FIXED';
+      comp.cornerRadius = RADIUS.sm;
+
+      await setFillWithVar(comp, VAR.surface, COLOR.surface);
+      comp.strokes = [{ type: 'SOLID', color: COLOR.border }];
+      comp.strokeWeight = 1;
+      comp.strokeAlign  = 'INSIDE';
+
+      /* 좌측 아이콘 */
+      if (icon === 'Left' || icon === 'Both') {
+        addIconPlaceholder(comp, size);
+      }
+
+      /* placeholder */
+      const placeholder = addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      placeholder.layoutGrow = 1;
+      placeholder.textAlignVertical = 'CENTER';
+      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+
+      /* 우측 아이콘 */
+      if (icon === 'Right' || icon === 'Both') {
+        addIconPlaceholder(comp, size);
+      }
+
+      components.push(comp);
+    }
+  }
+
+  return combineVariants(components, 'Input/WithIcon', 3);
+}
+
+/**
+ * 5. Input/Format — Size × Format(Account|Phone) = 4
+ * formatPattern(계좌번호) / phoneFormat(휴대폰) prop 표현.
+ * placeholder 텍스트로 포맷 패턴을 시각화한다.
+ */
+export async function createInputFormat(): Promise<ComponentSetNode> {
+  const sizes:   InputSize[]   = ['Medium', 'Large'];
+  const formats: InputFormat[] = ['Account', 'Phone'];
+
+  /** 포맷별 placeholder 예시 텍스트 */
+  const FORMAT_PLACEHOLDER: Record<InputFormat, string> = {
+    Account: '012-345678-90123',  // 하나은행 계좌번호 패턴 ###-######-#####
+    Phone:   '010-1234-5678',     // 휴대폰번호 패턴 010-XXXX-XXXX
+  };
+
+  const components: ComponentNode[] = [];
+
+  for (const size of sizes) {
+    for (const format of formats) {
+      const { height, px, fontSize } = SIZE_CONFIG[size];
+
+      const comp = createComponent(`Size=${size}, Format=${format}`);
+      setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
+      setPadding(comp, 0, px);
+      comp.resize(280, height);
+      comp.primaryAxisSizingMode = 'FIXED';
+      comp.counterAxisSizingMode = 'FIXED';
+      comp.cornerRadius = RADIUS.sm;
+
+      await setFillWithVar(comp, VAR.surface, COLOR.surface);
+      comp.strokes = [{ type: 'SOLID', color: COLOR.border }];
+      comp.strokeWeight = 1;
+      comp.strokeAlign  = 'INSIDE';
+
+      /* 포맷 패턴을 placeholder로 표시 */
+      const placeholder = addText(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR.textPlaceholder);
+      placeholder.layoutGrow = 1;
+      placeholder.textAlignVertical = 'CENTER';
+      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+
+      components.push(comp);
+    }
+  }
+
+  return combineVariants(components, 'Input/Format', 2);
+}
+
+/**
+ * 6. Input/FullWidth — Size × State(Default|Error|Success) = 6
+ * fullWidth=true prop 표현: 고정 너비 320px
+ */
+export async function createInputFullWidth(): Promise<ComponentSetNode> {
+  const sizes:  InputSize[]  = ['Medium', 'Large'];
+  const states: ('Default' | 'Error' | 'Success')[] = ['Default', 'Error', 'Success'];
+
+  const components: ComponentNode[] = [];
+
+  for (const size of sizes) {
+    for (const state of states) {
+      const comp = createComponent(`Size=${size}, State=${state}`);
+      await buildInputField(comp, size, state, true);
+      components.push(comp);
+    }
+  }
+
+  return combineVariants(components, 'Input/FullWidth', 3);
 }

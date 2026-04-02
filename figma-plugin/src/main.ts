@@ -4,7 +4,10 @@
  * React component-library의 모든 컴포넌트를 카테고리별 섹션으로 배치한다.
  *
  * 캔버스 레이아웃:
- * ● Core        — Button, Button/WithIcon, Button/IconOnly, Button/FullWidth, Badge, Input, Text, Select
+ * ● Core        — Button, Button/WithIcon, Button/IconOnly, Button/FullWidth,
+ *                 Badge,
+ *                 Input, Input/WithLabel, Input/WithHelper, Input/WithIcon, Input/Format, Input/FullWidth,
+ *                 Typography, Select
  * ● Modules     — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
  *                 DividerWithLabel, SelectableItem, AccountSelectItem,
  *                 ActionLinkItem, NoticeItem, AmountInput, OtpInput,
@@ -25,7 +28,14 @@ import {
   createButtonFullWidth,
 }                                  from './components/createButton';
 import { createBadge }            from './components/createBadge';
-import { createInput }            from './components/createInput';
+import {
+  createInput,
+  createInputWithLabel,
+  createInputWithHelper,
+  createInputWithIcon,
+  createInputFormat,
+  createInputFullWidth,
+}                                  from './components/createInput';
 import { createTypography }             from './components/createTypography';
 import { createSelect }           from './components/createSelect';
 
@@ -131,6 +141,11 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createButtonFullWidth(),
     await createBadge(),
     await createInput(),
+    await createInputWithLabel(),
+    await createInputWithHelper(),
+    await createInputWithIcon(),
+    await createInputFormat(),
+    await createInputFullWidth(),
     await createTypography(),
     await createSelect(),
   ];
@@ -180,7 +195,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
   figma.viewport.scrollAndZoomIntoView([
     ...coreNodes, ...moduleNodes, ...layoutNodes, ...bizNodes,
   ]);
-  figma.closePlugin('✅ React Component Library 생성 완료! (총 33개 컴포넌트)');
+  figma.closePlugin('✅ React Component Library 생성 완료! (총 38개 컴포넌트)');
 })().catch((err) => {
   /* 어떤 createXxx()에서 에러가 났는지 플러그인 알림으로 표시 */
   figma.closePlugin(`❌ 오류: ${err instanceof Error ? err.message : String(err)}`);
