@@ -21,7 +21,7 @@ import { solid } from './helpers';
 import { createButton }           from './components/createButton';
 import { createBadge }            from './components/createBadge';
 import { createInput }            from './components/createInput';
-import { createText }             from './components/createText';
+import { createTypography }             from './components/createTypography';
 import { createSelect }           from './components/createSelect';
 
 /* modules */
@@ -77,7 +77,7 @@ function createSectionLabel(text: string, x: number, y: number): FrameNode {
   dot.fills = [solid(BRAND.primary)];
   frame.appendChild(dot);
 
-  const label = figma.createText();
+  const label = figma.createTypography();
   label.fontName = { family: 'Noto Sans KR', style: 'Bold' };
   label.fontSize = FONT_SIZE.lg;
   label.characters = text;
@@ -123,7 +123,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createButton(),
     await createBadge(),
     await createInput(),
-    await createText(),
+    await createTypography(),
     await createSelect(),
   ];
 
@@ -173,4 +173,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     ...coreNodes, ...moduleNodes, ...layoutNodes, ...bizNodes,
   ]);
   figma.closePlugin('✅ React Component Library 생성 완료! (총 30개 컴포넌트)');
-})();
+})().catch((err) => {
+  /* 어떤 createXxx()에서 에러가 났는지 플러그인 알림으로 표시 */
+  figma.closePlugin(`❌ 오류: ${err instanceof Error ? err.message : String(err)}`);
+});
