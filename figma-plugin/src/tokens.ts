@@ -106,3 +106,44 @@ export const LINE_HEIGHT = {
 
 /** 컴포넌트 캔버스 배치 간격 */
 export const CANVAS_GAP = 48;
+
+/**
+ * Figma 색상 변수 이름 상수.
+ * setFillWithVar()에 전달하는 variableName 값으로 사용한다.
+ * 변수 이름은 Figma Variables 패널의 그룹/이름 경로와 일치해야 한다.
+ */
+/**
+ * Figma 변수 전체 경로 상수.
+ * 실제 경로 형식: semantic/color/{그룹}/{이름}
+ * Figma Variables 패널에서 확인한 전체 경로와 일치해야 바인딩된다.
+ */
+/**
+ * Figma 변수 전체 경로 상수.
+ * 컬렉션명(Semantic)은 경로에 포함되지 않으며, 실제 경로는 color/{그룹}/{이름} 형식이다.
+ * Figma Variables 패널 기준: Semantic 컬렉션 > color 그룹 > 하위 그룹/변수명
+ */
+export const VAR = {
+  /* ── Brand (color/brand/*) ──────────────────── */
+  brandBg:        'color/brand/10',               // #008485 10% — Badge Brand 배경
+  brandText:      'color/brand/text',             // #008485     — Badge Brand 텍스트
+
+  /* ── Primary (color/primary/*) ──────────────── */
+  primarySurface: 'color/info/surface',           // #EFF6FF     — Badge Primary 배경
+  primaryText:    'color/info/text',              // #1E40AF     — Badge Primary 텍스트
+
+  /* ── Success (color/success/*) ──────────────── */
+  successSurface: 'color/success/surface',// #F0FDF4     — Badge Success 배경
+  successText:    'color/success',        // #15803D          — Badge Success 텍스트
+
+  /* ── Danger (color/danger/*) ────────────────── */
+  dangerSurface:  'color/danger/surface', // #FFF1F2     — Badge Danger 배경
+  dangerText:     'color/danger/text',    // #BE123C     — Badge Danger 텍스트
+
+  /* ── Warning (color/warning/*) ──────────────── */
+  warningSurface: 'color/warning/surface',// #FFFBEB     — Badge Warning 배경
+  warningText:    'color/warning/text',   // #B45309     — Badge Warning 텍스트
+
+  /* ── Neutral ─────────────────────────────────── */
+  borderSubtle:   'color/border/subtle',  // #F1F5F9     — Badge Neutral 배경
+  textSecondary:  'color/text/secondary', // #475569     — Badge Neutral 텍스트
+} as const;

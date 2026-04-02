@@ -16,6 +16,43 @@ export function setFill(node: GeometryMixin, color: RGB, opacity = 1): void {
   node.fills = [solid(color, opacity)];
 }
 
+/**
+ * Figma 색상 변수를 fill에 바인딩한다.
+ * 변수명이 파일에 존재하지 않으면 fallback RGB를 직접 적용한다.
+ *
+ * @param node         - fill을 적용할 노드
+ * @param variableName - Figma 변수 전체 경로 (예: 'brand/text', 'success/surface')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 RGB 값
+ */
+/**
+ * Figma 색상 변수를 fill에 비동기로 바인딩한다.
+ * dynamic-page documentAccess 환경에서는 getLocalVariablesAsync()를 사용해야 한다.
+ * 변수를 찾지 못하거나 오류 발생 시 fallback RGB를 직접 적용한다.
+ *
+ * @param node         - fill을 적용할 노드
+ * @param variableName - Figma 변수 전체 경로 (예: 'color/brand/text')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 RGB 값
+ */
+export async function setFillWithVar(
+  node: GeometryMixin,
+  variableName: string,
+  fallback: RGB,
+): Promise<void> {
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+    const variable = allVars.find(v => v.name === variableName);
+
+    if (variable) {
+      const paint: SolidPaint = { type: 'SOLID', color: fallback };
+      node.fills = [figma.variables.setBoundVariableForPaint(paint, 'color', variable)];
+      return;
+    }
+  } catch (err) {
+    /* 변수 API 오류 시 fallback으로 진행 */
+  }
+  node.fills = [solid(fallback)];
+}
+
 /** fill 제거 (투명) */
 export function clearFill(node: GeometryMixin): void {
   node.fills = [];
