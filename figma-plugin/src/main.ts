@@ -4,7 +4,7 @@
  * React component-library의 모든 컴포넌트를 카테고리별 섹션으로 배치한다.
  *
  * 캔버스 레이아웃:
- * ● Core        — Button, Badge, Input, Text, Select
+ * ● Core        — Button, Button/WithIcon, Button/IconOnly, Button/FullWidth, Badge, Input, Text, Select
  * ● Modules     — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
  *                 DividerWithLabel, SelectableItem, AccountSelectItem,
  *                 ActionLinkItem, NoticeItem, AmountInput, OtpInput,
@@ -18,7 +18,12 @@ import { COLOR, BRAND, FONT_SIZE, SPACING } from './tokens';
 import { solid } from './helpers';
 
 /* core */
-import { createButton }           from './components/createButton';
+import {
+  createButton,
+  createButtonWithIcon,
+  createButtonIconOnly,
+  createButtonFullWidth,
+}                                  from './components/createButton';
 import { createBadge }            from './components/createBadge';
 import { createInput }            from './components/createInput';
 import { createTypography }             from './components/createTypography';
@@ -121,6 +126,9 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
   /* 2. 컴포넌트 생성 */
   const coreNodes: SceneNode[] = [
     await createButton(),
+    await createButtonWithIcon(),
+    await createButtonIconOnly(),
+    await createButtonFullWidth(),
     await createBadge(),
     await createInput(),
     await createTypography(),
@@ -172,7 +180,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
   figma.viewport.scrollAndZoomIntoView([
     ...coreNodes, ...moduleNodes, ...layoutNodes, ...bizNodes,
   ]);
-  figma.closePlugin('✅ React Component Library 생성 완료! (총 30개 컴포넌트)');
+  figma.closePlugin('✅ React Component Library 생성 완료! (총 33개 컴포넌트)');
 })().catch((err) => {
   /* 어떤 createXxx()에서 에러가 났는지 플러그인 알림으로 표시 */
   figma.closePlugin(`❌ 오류: ${err instanceof Error ? err.message : String(err)}`);
