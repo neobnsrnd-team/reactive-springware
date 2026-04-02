@@ -146,4 +146,12 @@ export const VAR = {
   /* ── Neutral ─────────────────────────────────── */
   borderSubtle:   'color/border/subtle',  // #F1F5F9     — Badge Neutral 배경
   textSecondary:  'color/text/secondary', // #475569     — Badge Neutral 텍스트
+
+  /* ── Button 전용 ─────────────────────────────── */
+  brandPrimary:   'color/brand',          // #008485     — Button Primary 배경
+  brandFg:        'color/brand/fg',       // #FFFFFF     — Button Primary 텍스트
+  dangerBg:       'color/danger/darker',  // danger button 배경
+  surface:        'color/surface',        // #FFFFFF     — Disabled 텍스트(어두운 배경 위)
+  border:         'color/border',         // #E2E8F0     — Disabled Outline 테두리
+  textDisabled:   'color/text/disabled',  // #CBD5E1     — Disabled 배경·텍스트
 } as const;
