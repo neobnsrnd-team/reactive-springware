@@ -2,62 +2,50 @@
   "brand": {
     "primary": {
       "5": {
-        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
         "$type": "color",
         "$value": "#0046ff0d"
       },
       "10": {
-        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
         "$type": "color",
         "$value": "#0046ff1a"
       },
       "20": {
-        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
         "$type": "color",
         "$value": "#0046ff33"
       },
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#0046ff"
     },
     "alt": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#4d7fff"
     },
+    "fg": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
     "text": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#0033cc"
     },
     "dark": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#0038cc"
     },
     "darker": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#002b99"
     },
     "shadow": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#0046ff40"
     },
     "bg": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
       "$type": "color",
       "$value": "#f4f6ff"
     },
-    "fg": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
-      "$type": "color",
-      "$value": "#ffffff"
-    },
     "name": {
-      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
-      "$type": "text",
+      "$type": "string",
       "$value": "신한은행"
     }
   }

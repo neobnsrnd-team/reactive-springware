@@ -2,44 +2,20 @@
   "domain": {
     "page": {
       "bg": {
-        "$extensions": {
-          "com.figma.scopes": [
-            "ALL_SCOPES"
-          ],
-          "com.figma.hiddenFromPublishing": false
-        },
         "$type": "color",
         "$value": "#f9f7ff"
       }
     },
     "primary": {
-      "$extensions": {
-        "com.figma.scopes": [
-          "ALL_SCOPES"
-        ],
-        "com.figma.hiddenFromPublishing": false
-      },
       "$type": "color",
       "$value": "#5b21b6"
     },
     "alt": {
-      "$extensions": {
-        "com.figma.scopes": [
-          "ALL_SCOPES"
-        ],
-        "com.figma.hiddenFromPublishing": false
-      },
       "$type": "color",
       "$value": "#8b5cf6"
     },
     "name": {
-      "$extensions": {
-        "com.figma.scopes": [
-          "ALL_SCOPES"
-        ],
-        "com.figma.hiddenFromPublishing": false
-      },
-      "$type": "text",
+      "$type": "string",
       "$value": "지로 기본"
     }
   }

@@ -2,44 +2,20 @@
   "domain": {
     "page": {
       "bg": {
-        "$extensions": {
-          "com.figma.scopes": [
-            "ALL_SCOPES"
-          ],
-          "com.figma.hiddenFromPublishing": false
-        },
         "$type": "color",
         "$value": "#f5f8f8"
       }
     },
     "primary": {
-      "$extensions": {
-        "com.figma.scopes": [
-          "ALL_SCOPES"
-        ],
-        "com.figma.hiddenFromPublishing": false
-      },
       "$type": "color",
       "$value": "#ffffff"
     },
     "alt": {
-      "$extensions": {
-        "com.figma.scopes": [
-          "ALL_SCOPES"
-        ],
-        "com.figma.hiddenFromPublishing": false
-      },
       "$type": "color",
       "$value": "#ffffff"
     },
     "name": {
-      "$extensions": {
-        "com.figma.scopes": [
-          "ALL_SCOPES"
-        ],
-        "com.figma.hiddenFromPublishing": false
-      },
-      "$type": "text",
+      "$type": "string",
       "$value": "뱅킹 기본"
     }
   }
