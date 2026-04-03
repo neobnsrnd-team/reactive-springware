@@ -12,7 +12,7 @@ const CARD_WIDTH = 328;
 /* ── AccountSummaryCard ──────────────────────────────────── */
 type AccountType = 'Deposit' | 'Savings' | 'Loan';
 
-function createAccountSummaryVariant(type: AccountType): ComponentNode {
+async function createAccountSummaryVariant(type: AccountType): ComponentNode {
   const isLoan = type === 'Loan';
   const comp = createComponent(`Type=${type}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
@@ -29,25 +29,25 @@ function createAccountSummaryVariant(type: AccountType): ComponentNode {
   header.layoutAlign = 'STRETCH';
   header.fills = [];
   header.primaryAxisAlignItems = 'SPACE_BETWEEN';
-  addText(header, `하나 ${type === 'Loan' ? '신용대출' : type === 'Savings' ? '정기적금' : '급여통장'}`, FONT_SIZE.sm, COLOR.textHeading, true);
+  await addText(header, `하나 ${type === 'Loan' ? '신용대출' : type === 'Savings' ? '정기적금' : '급여통장'}`, FONT_SIZE.sm, COLOR.textHeading, true);
   const badge = figma.createFrame();
   setAutoLayout(badge, 'HORIZONTAL', 0);
   setPadding(badge, 2, SPACING.sm);
   badge.cornerRadius = RADIUS.full;
   setFill(badge, BRAND.bg);
-  addText(badge, '주거래', FONT_SIZE.xs, BRAND.text, true);
+  await addText(badge, '주거래', FONT_SIZE.xs, BRAND.text, true);
   header.appendChild(badge);
   comp.appendChild(header);
 
-  addText(comp, '123-456789-01234', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(comp, '123-456789-01234', FONT_SIZE.xs, COLOR.textMuted);
 
   const balanceRow = figma.createFrame();
   setAutoLayout(balanceRow, 'HORIZONTAL', SPACING.xs);
   balanceRow.layoutAlign = 'STRETCH';
   balanceRow.fills = [];
   balanceRow.primaryAxisAlignItems = 'SPACE_BETWEEN';
-  addText(balanceRow, isLoan ? '대출 잔액' : '잔액', FONT_SIZE.xs, COLOR.textMuted);
-  addText(balanceRow, '1,234,567원', FONT_SIZE.sm, isLoan ? COLOR.danger : COLOR.textHeading, true);
+  await addText(balanceRow, isLoan ? '대출 잔액' : '잔액', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(balanceRow, '1,234,567원', FONT_SIZE.sm, isLoan ? COLOR.danger : COLOR.textHeading, true);
   comp.appendChild(balanceRow);
 
   return comp;
@@ -81,11 +81,11 @@ export async function createAccountSelectorCard(): Promise<ComponentNode> {
   const nameRow = figma.createFrame();
   setAutoLayout(nameRow, 'HORIZONTAL', SPACING.xs);
   nameRow.fills = [];
-  addText(nameRow, '하나 급여통장', FONT_SIZE.sm, COLOR.textHeading, true);
+  await addText(nameRow, '하나 급여통장', FONT_SIZE.sm, COLOR.textHeading, true);
   nameRow.appendChild(createIcon('ChevronDown', 14, COLOR.textMuted));
   left.appendChild(nameRow);
-  addText(left, '123-456789-01234', FONT_SIZE.xs, BRAND.text);
-  addText(left, '잔액 1,234,567원', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(left, '123-456789-01234', FONT_SIZE.xs, BRAND.text);
+  await addText(left, '잔액 1,234,567원', FONT_SIZE.xs, COLOR.textMuted);
   comp.appendChild(left);
 
   /* 우측 원형 버튼 */
@@ -101,7 +101,7 @@ export async function createAccountSelectorCard(): Promise<ComponentNode> {
 /* ── QuickMenuGrid ───────────────────────────────────────── */
 type GridCols = 3 | 4;
 
-function createQuickMenuGridVariant(cols: GridCols): ComponentNode {
+async function createQuickMenuGridVariant(cols: GridCols): ComponentNode {
   const itemSize = cols === 4 ? 72 : 88;
   const totalWidth = cols * itemSize + (cols - 1) * SPACING.sm;
   const comp = createComponent(`Cols=${cols}`);
@@ -126,7 +126,7 @@ function createQuickMenuGridVariant(cols: GridCols): ComponentNode {
       icon.cornerRadius = RADIUS.md;
       setFill(icon, BRAND.bg);
       item.appendChild(icon);
-      addText(item, '메뉴', FONT_SIZE.xs, COLOR.textBase);
+      await addText(item, '메뉴', FONT_SIZE.xs, COLOR.textBase);
 
       item.x = col * (itemSize + SPACING.sm);
       item.y = row * (itemSize + SPACING.sm);
@@ -147,7 +147,7 @@ export async function createQuickMenuGrid(): Promise<ComponentSetNode> {
 /* ── BannerCarousel ──────────────────────────────────────── */
 type BannerVariant = 'Promo' | 'Info' | 'Warning';
 
-function createBannerCarouselVariant(variant: BannerVariant): ComponentNode {
+async function createBannerCarouselVariant(variant: BannerVariant): ComponentNode {
   const BG_CONFIG: Record<BannerVariant, Parameters<typeof setFill>[1]> = {
     Promo:   BRAND.primary,
     Info:    COLOR.surfaceRaised,
@@ -174,8 +174,8 @@ function createBannerCarouselVariant(variant: BannerVariant): ComponentNode {
   setAutoLayout(textArea, 'VERTICAL', 4);
   textArea.layoutGrow = 1;
   textArea.fills = [];
-  addText(textArea, '배너 제목', FONT_SIZE.sm, TEXT_CONFIG[variant], true);
-  addText(textArea, '배너 설명 텍스트입니다.', FONT_SIZE.xs, TEXT_CONFIG[variant]);
+  await addText(textArea, '배너 제목', FONT_SIZE.sm, TEXT_CONFIG[variant], true);
+  await addText(textArea, '배너 설명 텍스트입니다.', FONT_SIZE.xs, TEXT_CONFIG[variant]);
   comp.appendChild(textArea);
 
   return comp;
@@ -209,8 +209,8 @@ export async function createUserProfile(): Promise<ComponentNode> {
   setAutoLayout(textArea, 'VERTICAL', 4);
   textArea.layoutGrow = 1;
   textArea.fills = [];
-  addText(textArea, '홍길동', FONT_SIZE.xl, COLOR.textHeading, true);
-  addText(textArea, '최근 접속: 2024.01.01 12:34', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(textArea, '홍길동', FONT_SIZE.xl, COLOR.textHeading, true);
+  await addText(textArea, '최근 접속: 2024.01.01 12:34', FONT_SIZE.xs, COLOR.textMuted);
   comp.appendChild(textArea);
 
   /* 설정 버튼 — Settings 아이콘 */
@@ -247,8 +247,8 @@ export async function createBrandBanner(): Promise<ComponentNode> {
   setAutoLayout(textArea, 'VERTICAL', 2);
   textArea.layoutGrow = 1;
   textArea.fills = [];
-  addText(textArea, '하나은행 광고 문구', FONT_SIZE.xs, BRAND.fg);
-  addText(textArea, '브랜드 배너 제목', FONT_SIZE.sm, BRAND.fg, true);
+  await addText(textArea, '하나은행 광고 문구', FONT_SIZE.xs, BRAND.fg);
+  await addText(textArea, '브랜드 배너 제목', FONT_SIZE.sm, BRAND.fg, true);
   comp.appendChild(textArea);
 
   /* 아이콘 원형 */

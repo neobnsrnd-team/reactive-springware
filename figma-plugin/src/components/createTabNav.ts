@@ -45,7 +45,7 @@ function createUnderlineTabNav(): ComponentNode {
     clearFill(tab);
 
     const isActive = i === 0;
-    const text = addText(
+    const text = await addText(
       tab, label, FONT_SIZE.sm,
       isActive ? BRAND.text : COLOR.textMuted,
       isActive,
@@ -97,7 +97,7 @@ function createPillTabNav(): ComponentNode {
       clearFill(tab);
     }
 
-    const text = addText(
+    const text = await addText(
       tab, label, FONT_SIZE.sm,
       isActive ? COLOR.textHeading : COLOR.textMuted,
       isActive,

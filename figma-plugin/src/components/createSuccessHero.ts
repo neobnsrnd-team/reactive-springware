@@ -30,15 +30,15 @@ export async function createSuccessHero(): Promise<ComponentNode> {
   comp.appendChild(innerCircle);
 
   /* 금액 */
-  const amount = addText(comp, '1,000,000원', FONT_SIZE['2xl'], COLOR.textHeading, true);
+  const amount = await addText(comp, '1,000,000원', FONT_SIZE['2xl'], COLOR.textHeading, true);
   amount.textAlignHorizontal = 'CENTER';
 
   /* 수신자 */
-  const recipient = addText(comp, '홍길동님에게 이체했어요', FONT_SIZE.base, COLOR.textBase);
+  const recipient = await addText(comp, '홍길동님에게 이체했어요', FONT_SIZE.base, COLOR.textBase);
   recipient.textAlignHorizontal = 'CENTER';
 
   /* 부제목 */
-  const subtitle = addText(comp, '2024.01.01 12:34:56', FONT_SIZE.sm, COLOR.textMuted);
+  const subtitle = await addText(comp, '2024.01.01 12:34:56', FONT_SIZE.sm, COLOR.textMuted);
   subtitle.textAlignHorizontal = 'CENTER';
 
   figma.currentPage.appendChild(comp);

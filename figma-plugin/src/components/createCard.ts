@@ -26,7 +26,7 @@ function createDefaultCard(): ComponentNode {
   setFill(comp, COLOR.surface);
   setStroke(comp, COLOR.borderSubtle);
 
-  addText(comp, '카드 내용', FONT_SIZE.sm, COLOR.textBase);
+  await addText(comp, '카드 내용', FONT_SIZE.sm, COLOR.textBase);
   return comp;
 }
 
@@ -42,7 +42,7 @@ function createInteractiveCard(): ComponentNode {
   /* interactive hover 상태를 테두리 색상으로 표현 */
   setStroke(comp, COLOR.border, 1.5);
 
-  addText(comp, '클릭 가능한 카드', FONT_SIZE.sm, COLOR.textBase);
+  await addText(comp, '클릭 가능한 카드', FONT_SIZE.sm, COLOR.textBase);
   return comp;
 }
 
@@ -67,14 +67,14 @@ function createCardWithHeader(): ComponentNode {
   header.fills = [];
 
   /* 타이틀 */
-  const title = addText(header, '카드 제목', FONT_SIZE.sm, COLOR.textHeading, true);
+  const title = await addText(header, '카드 제목', FONT_SIZE.sm, COLOR.textHeading, true);
   title.layoutGrow = 1;
-  const subtitle = addText(header, '부제목', FONT_SIZE.xs, COLOR.textMuted);
+  const subtitle = await addText(header, '부제목', FONT_SIZE.xs, COLOR.textMuted);
   subtitle.layoutGrow = 0;
 
   comp.appendChild(header);
   addDivider(comp, COLOR.borderSubtle);
-  addText(comp, '카드 내용 영역', FONT_SIZE.sm, COLOR.textBase);
+  await addText(comp, '카드 내용 영역', FONT_SIZE.sm, COLOR.textBase);
 
   return comp;
 }
@@ -107,9 +107,9 @@ function createCardWithRow(): ComponentNode {
     row.fills = [];
     row.paddingTop = row.paddingBottom = SPACING.xs;
 
-    const lbl = addText(row, label, FONT_SIZE.xs, COLOR.textMuted);
+    const lbl = await addText(row, label, FONT_SIZE.xs, COLOR.textMuted);
     lbl.layoutGrow = 0;
-    const val = addText(row, value, FONT_SIZE.sm, COLOR.textHeading, true);
+    const val = await addText(row, value, FONT_SIZE.sm, COLOR.textHeading, true);
     val.layoutGrow = 0;
 
     comp.appendChild(row);

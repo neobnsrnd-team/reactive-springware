@@ -13,7 +13,7 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없을 경우 tokens.ts의 RGB 값으로 fallback한다.
  */
 
-import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, VAR } from '../tokens';
+import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, COLOR_VAR } from '../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFillWithVar, addText,
@@ -30,28 +30,29 @@ const VARIANT_CONFIG: Record<BadgeVariant, {
   textVar: string; textFallback: Parameters<typeof setFillWithVar>[2];
 }> = {
   Primary: {
-    bgVar:        VAR.primarySurface, bgFallback:   COLOR.primarySurface,
-    textVar:      VAR.primaryText,    textFallback: COLOR.primary,
+    /* Badge Primary는 color/info/surface — color/primary/surface와 별개 경로 */
+    bgVar:        COLOR_VAR.infoSurface,    bgFallback:   COLOR.primarySurface,
+    textVar:      COLOR_VAR.primaryText,    textFallback: COLOR.primaryText,
   },
   Brand: {
-    bgVar:        VAR.brandBg,        bgFallback:   BRAND.bg,
-    textVar:      VAR.brandText,      textFallback: BRAND.text,
+    bgVar:        COLOR_VAR.brandBg,        bgFallback:   BRAND.bg,
+    textVar:      COLOR_VAR.brandText,      textFallback: BRAND.text,
   },
   Success: {
-    bgVar:        VAR.successSurface, bgFallback:   COLOR.successSurface,
-    textVar:      VAR.successText,    textFallback: COLOR.successText,
+    bgVar:        COLOR_VAR.successSurface, bgFallback:   COLOR.successSurface,
+    textVar:      COLOR_VAR.successText,    textFallback: COLOR.successText,
   },
   Danger: {
-    bgVar:        VAR.dangerSurface,  bgFallback:   COLOR.dangerSurface,
-    textVar:      VAR.dangerText,     textFallback: COLOR.dangerText,
+    bgVar:        COLOR_VAR.dangerSurface,  bgFallback:   COLOR.dangerSurface,
+    textVar:      COLOR_VAR.dangerText,     textFallback: COLOR.dangerText,
   },
   Warning: {
-    bgVar:        VAR.warningSurface, bgFallback:   COLOR.warningSurface,
-    textVar:      VAR.warningText,    textFallback: COLOR.warningText,
+    bgVar:        COLOR_VAR.warningSurface, bgFallback:   COLOR.warningSurface,
+    textVar:      COLOR_VAR.warningText,    textFallback: COLOR.warningText,
   },
   Neutral: {
-    bgVar:        VAR.borderSubtle,   bgFallback:   COLOR.surfaceRaised,
-    textVar:      VAR.textSecondary,  textFallback: COLOR.textSecondary,
+    bgVar:        COLOR_VAR.borderSubtle,   bgFallback:   COLOR.surfaceRaised,
+    textVar:      COLOR_VAR.textSecondary,  textFallback: COLOR.textSecondary,
   },
 };
 
@@ -83,7 +84,7 @@ async function createBadgeVariant(variant: BadgeVariant, dot: boolean): Promise<
     comp.cornerRadius = RADIUS.full;
     await setFillWithVar(comp, bgVar, bgFallback);
 
-    const label = addText(comp, variant, FONT_SIZE.xs, textFallback, true);
+    const label = await addText(comp, variant, FONT_SIZE.xs, textFallback, true);
     /* 텍스트에도 Figma 변수 바인딩 — addText가 TextNode를 반환하므로 직접 적용 */
     await setFillWithVar(label, textVar, textFallback);
     label.textAlignHorizontal = 'CENTER';

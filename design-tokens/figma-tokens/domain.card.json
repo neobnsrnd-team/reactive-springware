@@ -1,0 +1,22 @@
+{
+  "domain": {
+    "page": {
+      "bg": {
+        "$type": "color",
+        "$value": "#f4f7ff"
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "#1a56db"
+    },
+    "alt": {
+      "$type": "color",
+      "$value": "#4f86f7"
+    },
+    "name": {
+      "$type": "string",
+      "$value": "카드 기본"
+    }
+  }
+}

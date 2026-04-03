@@ -14,7 +14,7 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없으면 tokens.ts의 RGB fallback 적용.
  */
 
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, VAR } from '../tokens';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFill, setFillWithVar, setStroke, addText, addRect,
@@ -37,21 +37,21 @@ const STATE_STYLE: Record<InputState, {
   borderVar: string;  borderFallback: Parameters<typeof setFillWithVar>[2];
 }> = {
   Default:  {
-    bgVar:     VAR.surface,       bgFallback:     COLOR.surface,
-    borderVar: VAR.border,        borderFallback: COLOR.border,
+    bgVar:     COLOR_VAR.surface,       bgFallback:     COLOR.surface,
+    borderVar: COLOR_VAR.border,        borderFallback: COLOR.border,
   },
   Error: {
-    bgVar:     VAR.dangerSurface, bgFallback:     COLOR.dangerSurface,
-    borderVar: VAR.dangerDefault, borderFallback: COLOR.danger,
+    bgVar:     COLOR_VAR.dangerSurface, bgFallback:     COLOR.dangerSurface,
+    borderVar: COLOR_VAR.danger, borderFallback: COLOR.danger,
   },
   Success: {
-    bgVar:     VAR.successSurface,bgFallback:     COLOR.successSurface,
-    borderVar: VAR.successBorder, borderFallback: COLOR.successBorder,
+    bgVar:     COLOR_VAR.successSurface,bgFallback:     COLOR.successSurface,
+    borderVar: COLOR_VAR.successBorder, borderFallback: COLOR.successBorder,
   },
   Disabled: {
     /* opacity-50 + bg-surface-raised 로 처리 — 테두리는 기본 border */
-    bgVar:     VAR.surfaceRaised, bgFallback:     COLOR.surfaceRaised,
-    borderVar: VAR.border,        borderFallback: COLOR.border,
+    bgVar:     COLOR_VAR.surfaceRaised, bgFallback:     COLOR.surfaceRaised,
+    borderVar: COLOR_VAR.border,        borderFallback: COLOR.border,
   },
 };
 
@@ -96,10 +96,10 @@ async function buildInputField(
   comp.strokeAlign  = 'INSIDE';
 
   /* placeholder 텍스트 */
-  const placeholder = addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
+  const placeholder = await addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
   placeholder.layoutGrow = 1;
   placeholder.textAlignVertical = 'CENTER';
-  await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+  await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
   /* Disabled: 투명도로 표현 (opacity 50%) */
   if (state === 'Disabled') {
@@ -161,8 +161,8 @@ export async function createInputWithLabel(): Promise<ComponentSetNode> {
       comp.strokes = [];
 
       /* label 텍스트 */
-      const label = addText(comp, '레이블', FONT_SIZE.xs, COLOR.textLabel, true);
-      await setFillWithVar(label, VAR.textLabel, COLOR.textLabel);
+      const label = await addText(comp, '레이블', FONT_SIZE.xs, COLOR.textLabel, true);
+      await setFillWithVar(label, COLOR_VAR.textLabel, COLOR.textLabel);
 
       /* 입력 필드 프레임 */
       const field = figma.createFrame();
@@ -192,10 +192,10 @@ export async function createInputWithLabel(): Promise<ComponentSetNode> {
       field.strokeWeight = 1;
       field.strokeAlign  = 'INSIDE';
 
-      const placeholder = addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      const placeholder = await addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       comp.appendChild(field);
       components.push(comp);
@@ -217,9 +217,9 @@ export async function createInputWithHelper(): Promise<ComponentSetNode> {
   const helperStyle: Record<'Default' | 'Error' | 'Success', {
     varName: string; fallback: Parameters<typeof setFillWithVar>[2];
   }> = {
-    Default: { varName: VAR.textMuted,   fallback: COLOR.textMuted   },
-    Error:   { varName: VAR.dangerText,  fallback: COLOR.dangerText  },
-    Success: { varName: VAR.successText, fallback: COLOR.successText },
+    Default: { varName: COLOR_VAR.textMuted,   fallback: COLOR.textMuted   },
+    Error:   { varName: COLOR_VAR.dangerText,  fallback: COLOR.dangerText  },
+    Success: { varName: COLOR_VAR.successText, fallback: COLOR.successText },
   };
 
   const components: ComponentNode[] = [];
@@ -263,16 +263,16 @@ export async function createInputWithHelper(): Promise<ComponentSetNode> {
       field.strokeWeight = 1;
       field.strokeAlign  = 'INSIDE';
 
-      const placeholder = addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      const placeholder = await addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       comp.appendChild(field);
 
       /* helperText */
       const { varName, fallback } = helperStyle[state];
-      const helper = addText(comp, '안내 문구입니다', FONT_SIZE.xs, fallback);
+      const helper = await addText(comp, '안내 문구입니다', FONT_SIZE.xs, fallback);
       await setFillWithVar(helper, varName, fallback);
 
       components.push(comp);
@@ -304,7 +304,7 @@ export async function createInputWithIcon(): Promise<ComponentSetNode> {
       comp.counterAxisSizingMode = 'FIXED';
       comp.cornerRadius = RADIUS.sm;
 
-      await setFillWithVar(comp, VAR.surface, COLOR.surface);
+      await setFillWithVar(comp, COLOR_VAR.surface, COLOR.surface);
       comp.strokes = [{ type: 'SOLID', color: COLOR.border }];
       comp.strokeWeight = 1;
       comp.strokeAlign  = 'INSIDE';
@@ -315,10 +315,10 @@ export async function createInputWithIcon(): Promise<ComponentSetNode> {
       }
 
       /* placeholder */
-      const placeholder = addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      const placeholder = await addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       /* 우측 아이콘 */
       if (icon === 'Right' || icon === 'Both') {
@@ -361,16 +361,16 @@ export async function createInputFormat(): Promise<ComponentSetNode> {
       comp.counterAxisSizingMode = 'FIXED';
       comp.cornerRadius = RADIUS.sm;
 
-      await setFillWithVar(comp, VAR.surface, COLOR.surface);
+      await setFillWithVar(comp, COLOR_VAR.surface, COLOR.surface);
       comp.strokes = [{ type: 'SOLID', color: COLOR.border }];
       comp.strokeWeight = 1;
       comp.strokeAlign  = 'INSIDE';
 
       /* 포맷 패턴을 placeholder로 표시 */
-      const placeholder = addText(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR.textPlaceholder);
+      const placeholder = await addText(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, VAR.textPlaceholder, COLOR.textPlaceholder);
+      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       components.push(comp);
     }

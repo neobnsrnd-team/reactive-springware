@@ -19,14 +19,14 @@ const VARIANT_CONFIG: Record<TypographyVariant, { fontSize: number; lineHeight: 
   Caption:    { fontSize: FONT_SIZE.xs,    lineHeight: LINE_HEIGHT.xs     },
 };
 
-function createTypographyVariant(variant: TypographyVariant, weight: TypographyWeight): ComponentNode {
+async function createTypographyVariant(variant: TypographyVariant, weight: TypographyWeight): ComponentNode {
   const { fontSize } = VARIANT_CONFIG[variant];
   const comp = createComponent(`Variant=${variant}, Weight=${weight}`);
   comp.layoutMode = 'HORIZONTAL';
   comp.primaryAxisSizingMode = 'AUTO';
   comp.counterAxisSizingMode = 'AUTO';
   clearFill(comp);
-  addText(comp, `${variant} 텍스트 예시`, fontSize, COLOR.textHeading, weight === 'Bold');
+  await addText(comp, `${variant} 텍스트 예시`, fontSize, COLOR.textHeading, weight === 'Bold');
   return comp;
 }
 

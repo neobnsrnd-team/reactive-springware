@@ -8,7 +8,7 @@ import { COLOR, BRAND, SPACING, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../helpers';
 import { createIcon } from '../icons';
 
-function createAccountSelectVariant(selected: boolean): ComponentNode {
+async function createAccountSelectVariant(selected: boolean): ComponentNode {
   const comp = createComponent(`Selected=${selected ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.md, SPACING.standard);
@@ -29,9 +29,9 @@ function createAccountSelectVariant(selected: boolean): ComponentNode {
   setAutoLayout(textArea, 'VERTICAL', 2);
   textArea.layoutGrow = 1;
   textArea.fills = [];
-  addText(textArea, '하나 급여통장', FONT_SIZE.sm, COLOR.textHeading, true);
-  addText(textArea, '123-456789-01234', FONT_SIZE.xs, COLOR.textMuted);
-  addText(textArea, '1,234,567원', FONT_SIZE.xs, COLOR.textSecondary);
+  await addText(textArea, '하나 급여통장', FONT_SIZE.sm, COLOR.textHeading, true);
+  await addText(textArea, '123-456789-01234', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(textArea, '1,234,567원', FONT_SIZE.xs, COLOR.textSecondary);
   comp.appendChild(textArea);
 
   /* 선택 체크 아이콘 */

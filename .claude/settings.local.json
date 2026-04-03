@@ -6,7 +6,14 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm run:*)",
+      "Bash(node:*)",
+      "Bash(git rm:*)",
+      "Bash(git fetch:*)",
+      "Bash(gh issue:*)",
+      "Bash(python3 -c \"import json,sys; labels=json.load\\(sys.stdin\\); [print\\(l['name']\\) for l in labels]\")",
+      "Bash(gh pr:*)"
     ]
   }
 }

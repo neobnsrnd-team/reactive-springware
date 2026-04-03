@@ -38,8 +38,8 @@ export async function createNoticeItem(): Promise<ComponentNode> {
   textArea.primaryAxisSizingMode = 'AUTO';
   textArea.counterAxisSizingMode = 'FIXED';
   textArea.fills = [];
-  addText(textArea, '공지 제목', FONT_SIZE.sm, COLOR.textHeading, true);
-  addText(textArea, '공지 설명 텍스트입니다.', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(textArea, '공지 제목', FONT_SIZE.sm, COLOR.textHeading, true);
+  await addText(textArea, '공지 설명 텍스트입니다.', FONT_SIZE.xs, COLOR.textMuted);
   comp.appendChild(textArea);
 
   /* ChevronRight 아이콘 */

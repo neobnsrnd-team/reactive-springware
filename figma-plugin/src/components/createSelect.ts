@@ -13,7 +13,7 @@ const SELECT_WIDTH = 280;
 /** 옵션 항목 높이 — 터치 최소 권장 크기 44px */
 const OPTION_HEIGHT = 44;
 
-function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
+async function createSelectVariant(state: 'Closed' | 'Open'): Promise<ComponentNode> {
   const comp = createComponent(`State=${state}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
   setPadding(comp, 0, SPACING.md);
@@ -31,7 +31,7 @@ function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
     setStroke(comp, COLOR.border);
   }
 
-  const label = addText(comp, '옵션 선택', FONT_SIZE.sm, state === 'Open' ? BRAND.text : COLOR.textPlaceholder);
+  const label = await addText(comp, '옵션 선택', FONT_SIZE.sm, state === 'Open' ? BRAND.text : COLOR.textPlaceholder);
   label.layoutGrow = 1;
 
   /* ChevronDown 아이콘 */
@@ -135,10 +135,10 @@ function createOpenWithOptionsVariant(): ComponentNode {
 }
 
 export async function createSelect(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createSelectVariant('Closed'), createSelectVariant('Open'), createOpenWithOptionsVariant()],
-    'Select',
-    /* variant가 3개이므로 3열로 배치 */
-    3,
-  );
+  const [closed, open] = await Promise.all([
+    createSelectVariant('Closed'),
+    createSelectVariant('Open'),
+  ]);
+  /* variant가 3개이므로 3열로 배치 */
+  return combineVariants([closed, open, createOpenWithOptionsVariant()], 'Select', 3);
 }

@@ -9,7 +9,12 @@ storybook-static/
 .env
 .env.local
 .env.*.local
+design-tokens/.env.example
 
 # 에디터
 .DS_Store
 *.log
+.idea/*
+
+#local
+.claude/settings.local.json

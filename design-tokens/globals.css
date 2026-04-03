@@ -147,9 +147,9 @@
   --brand-dark: #e6aa00;
   --brand-darker: #cc9600;
   --brand-5: rgba(255, 188, 0, 0.05);
-  --brand-10: rgba(255, 188, 0, 0.12);
-  --brand-20: rgba(255, 188, 0, 0.22);
-  --brand-shadow: rgba(255, 188, 0, 0.35);
+  --brand-10: rgba(255, 188, 0, 0.1);
+  --brand-20: rgba(255, 188, 0, 0.2);
+  --brand-shadow: rgba(255, 188, 0, 0.25);
   --brand-bg: #fffdf0;
   --brand-name: 'KB국민은행';
   --shadow-primary: 0px 8px 20px -4px var(--brand-shadow);
@@ -265,7 +265,7 @@
   /* ── Surface ── */
   --color-surface: #ffffff;
   --color-surface-subtle: #f8fafc;
-  --color-surface-page: var(--brand-bg, var(--domain-page-bg, #f8fafc));
+  --color-surface-page: var(--brand-bg, var(--domain-page-bg, #f5f8f8));
   --color-surface-raised: #f1f5f9;
 
   /* ── Border ── */

@@ -28,7 +28,7 @@ const INTENT_CONFIG: Record<AlertIntent, {
   Info:    { bg: COLOR.primarySurface, border: COLOR.border,        text: COLOR.primaryText },
 };
 
-function createAlertVariant(intent: AlertIntent): ComponentNode {
+async function createAlertVariant(intent: AlertIntent): ComponentNode {
   const { bg, border, text } = INTENT_CONFIG[intent];
   const comp = createComponent(`Intent=${intent}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
@@ -43,7 +43,7 @@ function createAlertVariant(intent: AlertIntent): ComponentNode {
 
   comp.appendChild(createIcon(INTENT_ICON[intent], 18, text));
 
-  const msg = addText(comp, `${intent} 알림 메시지입니다.`, FONT_SIZE.sm, text);
+  const msg = await addText(comp, `${intent} 알림 메시지입니다.`, FONT_SIZE.sm, text);
   msg.layoutGrow = 1;
 
   return comp;
