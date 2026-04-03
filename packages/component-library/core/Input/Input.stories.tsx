@@ -83,6 +83,39 @@ export const PhoneNumberFormat: Story = {
   },
 };
 
+/** size prop 비교 — md(기본 높이 48px) vs lg(높이 56px) */
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 320 }}>
+      <Input label="Medium (기본)" placeholder="md 사이즈" size="md" fullWidth />
+      <Input label="Large" placeholder="lg 사이즈" size="lg" fullWidth />
+    </div>
+  ),
+};
+
+/** leftIcon + rightElement 동시 사용 — Figma Input/WithIcon Icon=Both에 해당 */
+export const WithBothIcons: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 320 }}>
+      <Input
+        label="검색 + 단위"
+        placeholder="금액을 입력하세요"
+        leftIcon={<Search size={16} />}
+        rightElement={<span style={{ fontSize: 14, color: 'var(--color-text-muted)' }}>원</span>}
+        fullWidth
+      />
+      <Input
+        label="Large / 검색 + 단위"
+        placeholder="금액을 입력하세요"
+        size="lg"
+        leftIcon={<Search size={16} />}
+        rightElement={<span style={{ fontSize: 14, color: 'var(--color-text-muted)' }}>원</span>}
+        fullWidth
+      />
+    </div>
+  ),
+};
+
 /** 은행별 계좌번호 포맷 — 숫자 입력 시 구분자('-')가 자동 삽입된다 */
 export const AccountNumberFormat: Story = {
   render: () => {
