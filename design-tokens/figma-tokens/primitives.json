@@ -262,5 +262,19 @@
       "$type": "number",
       "$value": 100
     }
+  },
+  "font": {
+    "sans": {
+      "$type": "text",
+      "$value": "Noto Sans KR"
+    },
+    "numeric": {
+      "$type": "text",
+      "$value": "Manrope"
+    },
+    "icon": {
+      "$type": "text",
+      "$value": "Material Symbols Outlined"
+    }
   }
 }
