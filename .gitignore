@@ -15,3 +15,6 @@ design-tokens/.env.example
 .DS_Store
 *.log
 .idea/*
+
+#local
+.claude/settings.local.json
