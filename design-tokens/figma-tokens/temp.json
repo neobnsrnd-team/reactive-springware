@@ -4424,8 +4424,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "{brand.primary}",
         "alt": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4485,7 +4483,9 @@
           },
           "$type": "color",
           "$value": "{brand.shadow}"
-        }
+        },
+        "$type": "color",
+        "$value": "{brand.primary}"
       },
       "danger": {
         "$extensions": {
@@ -4494,8 +4494,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#e11d48",
         "dark": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4555,7 +4553,9 @@
           },
           "$type": "color",
           "$value": "#ef4444"
-        }
+        },
+        "$type": "color",
+        "$value": "#e11d48"
       },
       "text": {
         "$extensions": {
@@ -4564,8 +4564,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#ffffff",
         "heading": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4635,7 +4633,9 @@
           },
           "$type": "color",
           "$value": "#cbd5e1"
-        }
+        },
+        "$type": "color",
+        "$value": "#ffffff"
       },
       "border": {
         "$extensions": {
@@ -4644,8 +4644,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#e2e8f0",
         "subtle": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4665,7 +4663,9 @@
           },
           "$type": "color",
           "$value": "{brand.primary}"
-        }
+        },
+        "$type": "color",
+        "$value": "#e2e8f0"
       },
       "surface": {
         "$extensions": {
@@ -4674,8 +4674,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#ffffff",
         "subtle": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4705,7 +4703,9 @@
           },
           "$type": "color",
           "$value": "#f1f5f9"
-        }
+        },
+        "$type": "color",
+        "$value": "#ffffff"
       },
       "success": {
         "$extensions": {
@@ -4714,8 +4714,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#16a34a",
         "surface": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4745,7 +4743,9 @@
           },
           "$type": "color",
           "$value": "#15803d"
-        }
+        },
+        "$type": "color",
+        "$value": "#16a34a"
       },
       "warning": {
         "$extensions": {
@@ -4754,8 +4754,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#d97706",
         "surface": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4785,7 +4783,9 @@
           },
           "$type": "color",
           "$value": "#b45309"
-        }
+        },
+        "$type": "color",
+        "$value": "#d97706"
       },
       "primary": {
         "$extensions": {
@@ -4794,8 +4794,6 @@
           ],
           "com.figma.hiddenFromPublishing": false
         },
-        "$type": "color",
-        "$value": "#2563eb",
         "surface": {
           "$extensions": {
             "com.figma.scopes": [
@@ -4835,7 +4833,9 @@
           },
           "$type": "color",
           "$value": "#1d4ed8"
-        }
+        },
+        "$type": "color",
+        "$value": "#2563eb"
       },
       "info": {
         "surface": {
@@ -5227,7 +5227,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "number",
-        "$value": 9999
+        "$value": 999
       }
     },
     "text": {
@@ -5652,6 +5652,38 @@
         },
         "$type": "number",
         "$value": 100
+      }
+    },
+    "font": {
+      "sans": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "Noto Sans KR"
+      },
+      "numeric": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "Manrope"
+      },
+      "icon": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "Material Symbols Outlined"
       }
     }
   },
