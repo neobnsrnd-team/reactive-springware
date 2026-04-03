@@ -10,7 +10,7 @@ import { createIcon } from '../icons';
 
 const SELECT_WIDTH = 280;
 
-async function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
+async function createSelectVariant(state: 'Closed' | 'Open'): Promise<ComponentNode> {
   const comp = createComponent(`State=${state}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
   setPadding(comp, 0, SPACING.md);
@@ -38,8 +38,9 @@ async function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
 }
 
 export async function createSelect(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createSelectVariant('Closed'), createSelectVariant('Open')],
-    'Select', 2,
-  );
+  const variants = await Promise.all([
+    createSelectVariant('Closed'),
+    createSelectVariant('Open'),
+  ]);
+  return combineVariants(variants, 'Select', 2);
 }

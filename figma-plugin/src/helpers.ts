@@ -131,6 +131,7 @@ export async function setStringVar(
     }
   } catch {
     /* 변수 API 오류 시 fontName 값 유지 */
+    figma.notify(`⚠️ '${variableName}' 변수 API 오류로 fontName 값 유지합니다.`, { error: true });
   }
 }
 

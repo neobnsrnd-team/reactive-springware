@@ -242,24 +242,48 @@ async function upsertVariable(
  * @returns 등록 완료 메시지 (성공한 변수 수 포함)
  */
 export async function createVariables(): Promise<string> {
+  const errors: string[] = [];
+
   /* 1. Primitives 컬렉션 — 숫자·폰트 변수 등록 */
   const primitives = await upsertCollection('Primitives');
 
   for (const def of FLOAT_DEFINITIONS) {
-    await upsertVariable(primitives, def.path, 'FLOAT', def.value);
+    try {
+      await upsertVariable(primitives, def.path, 'FLOAT', def.value);
+    } catch (err) {
+      errors.push(def.path);
+      figma.notify(`❌ '${def.path}' 변수 생성 오류: ${err instanceof Error ? err.message : String(err)}`, { error: true });
+    }
   }
   for (const def of STRING_DEFINITIONS) {
-    await upsertVariable(primitives, def.path, 'STRING', def.value);
+    try {
+      await upsertVariable(primitives, def.path, 'STRING', def.value);
+    } catch (err) {
+      errors.push(def.path);
+      figma.notify(`❌ '${def.path}' 변수 생성 오류: ${err instanceof Error ? err.message : String(err)}`, { error: true });
+    }
   }
 
-  const primitivesCount = FLOAT_DEFINITIONS.length + STRING_DEFINITIONS.length;
+  const primitivesCount = FLOAT_DEFINITIONS.length + STRING_DEFINITIONS.length - errors.length;
 
   /* 2. Semantic 컬렉션 — 색상 변수 등록 */
   const semantic = await upsertCollection('Semantic');
 
   for (const def of COLOR_DEFINITIONS) {
-    await upsertVariable(semantic, def.path, 'COLOR', def.value);
+    try {
+      await upsertVariable(semantic, def.path, 'COLOR', def.value);
+    } catch (err) {
+      errors.push(def.path);
+      figma.notify(`❌ '${def.path}' 변수 생성 오류: ${err instanceof Error ? err.message : String(err)}`, { error: true });
+    }
   }
 
-  return `✅ 변수 등록 완료 — Primitives: ${primitivesCount}개, Semantic: ${COLOR_DEFINITIONS.length}개`;
+  const semanticCount = COLOR_DEFINITIONS.length - errors.filter(p =>
+    COLOR_DEFINITIONS.some(d => d.path === p),
+  ).length;
+
+  if (errors.length > 0) {
+    return `⚠️ 변수 등록 완료 (일부 실패) — Primitives: ${primitivesCount}개, Semantic: ${semanticCount}개 / 실패: ${errors.length}개`;
+  }
+  return `✅ 변수 등록 완료 — Primitives: ${primitivesCount}개, Semantic: ${semanticCount}개`;
 }
