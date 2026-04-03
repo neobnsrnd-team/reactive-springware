@@ -133,7 +133,7 @@ export const VAR = {
 
   /* ── Success (color/success/*) ──────────────── */
   successSurface: 'color/success/surface',// #F0FDF4     — Badge Success 배경
-  successText:    'color/success',        // #15803D     — Badge Success 텍스트
+  successText:    'color/success/text',   // #15803D     — Badge Success 텍스트
 
   /* ── Danger (color/danger/*) ────────────────── */
   dangerSurface:  'color/danger/surface', // #FFF1F2     — Badge Danger 배경
@@ -154,4 +154,12 @@ export const VAR = {
   surface:        'color/surface',        // #FFFFFF     — Disabled 텍스트(어두운 배경 위)
   border:         'color/border',         // #E2E8F0     — Disabled Outline 테두리
   textDisabled:   'color/text/disabled',  // #CBD5E1     — Disabled 배경·텍스트
+
+  /* ── Input 전용 ──────────────────────────────── */
+  textLabel:       'color/text/label',       // #334155     — Input label 텍스트
+  textPlaceholder: 'color/text/placeholder', // #94A3B8     — Input placeholder 텍스트
+  textBase:        'color/text/base',        // #1E293B     — Input 입력값 텍스트
+  textMuted:       'color/text/muted',       // #64748B     — helperText 기본 색상
+  successBorder:   'color/success/border',   // #86EFAC     — success 상태 테두리
+  surfaceRaised:   'color/surface/raised',   // #F1F5F9     — disabled 상태 배경
 } as const;
