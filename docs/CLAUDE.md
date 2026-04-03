@@ -1,4 +1,4 @@
-# Claude Code 프로젝트 지침
+# Claude Code 프로젝트 지침_real version
 
 ## 코드 작성 규칙
 

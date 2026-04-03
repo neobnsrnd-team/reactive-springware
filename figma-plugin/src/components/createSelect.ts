@@ -10,7 +10,7 @@ import { createIcon } from '../icons';
 
 const SELECT_WIDTH = 280;
 
-function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
+async function createSelectVariant(state: 'Closed' | 'Open'): Promise<ComponentNode> {
   const comp = createComponent(`State=${state}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
   setPadding(comp, 0, SPACING.md);
@@ -28,7 +28,7 @@ function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
     setStroke(comp, COLOR.border);
   }
 
-  const label = addText(comp, '옵션 선택', FONT_SIZE.sm, state === 'Open' ? BRAND.text : COLOR.textPlaceholder);
+  const label = await addText(comp, '옵션 선택', FONT_SIZE.sm, state === 'Open' ? BRAND.text : COLOR.textPlaceholder);
   label.layoutGrow = 1;
 
   /* ChevronDown 아이콘 */
@@ -38,8 +38,9 @@ function createSelectVariant(state: 'Closed' | 'Open'): ComponentNode {
 }
 
 export async function createSelect(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createSelectVariant('Closed'), createSelectVariant('Open')],
-    'Select', 2,
-  );
+  const variants = await Promise.all([
+    createSelectVariant('Closed'),
+    createSelectVariant('Open'),
+  ]);
+  return combineVariants(variants, 'Select', 2);
 }

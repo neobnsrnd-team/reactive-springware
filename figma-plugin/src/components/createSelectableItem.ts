@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, setStroke, clearFill, clearStroke, addText } from '../helpers';
 
-function createSelectableVariant(selected: boolean): ComponentNode {
+async function createSelectableVariant(selected: boolean): ComponentNode {
   const comp = createComponent(`Selected=${selected ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.xs);
   setPadding(comp, SPACING.md, SPACING.md);
@@ -32,7 +32,7 @@ function createSelectableVariant(selected: boolean): ComponentNode {
   setFill(iconCircle, selected ? BRAND.primary : COLOR.surfaceRaised);
   comp.appendChild(iconCircle);
 
-  addText(comp, '항목', FONT_SIZE.xs, selected ? BRAND.text : COLOR.textBase, selected);
+  await addText(comp, '항목', FONT_SIZE.xs, selected ? BRAND.text : COLOR.textBase, selected);
   return comp;
 }
 

@@ -15,7 +15,7 @@ const SIZE_CONFIG: Record<ActionSize, { py: number; fontSize: number }> = {
   Small:  { py: SPACING.sm,  fontSize: FONT_SIZE.xs },
 };
 
-function createActionLinkVariant(size: ActionSize, showBorder: boolean): ComponentNode {
+async function createActionLinkVariant(size: ActionSize, showBorder: boolean): ComponentNode {
   const { py, fontSize } = SIZE_CONFIG[size];
   const comp = createComponent(`Size=${size}, ShowBorder=${showBorder ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
@@ -45,7 +45,7 @@ function createActionLinkVariant(size: ActionSize, showBorder: boolean): Compone
   iconWrap.appendChild(createIcon('Settings', 20, BRAND.primary));
   comp.appendChild(iconWrap);
 
-  const label = addText(comp, '메뉴 항목', fontSize, COLOR.textSecondary);
+  const label = await addText(comp, '메뉴 항목', fontSize, COLOR.textSecondary);
   label.layoutGrow = 1;
 
   comp.appendChild(createIcon('ChevronRight', 14, COLOR.textMuted));

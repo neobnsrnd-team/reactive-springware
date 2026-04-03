@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, clearFill, setFill, setStroke, addText } from '../helpers';
 
-function createOtpVariant(length: 4 | 6, state: 'Default' | 'Error'): ComponentNode {
+async function createOtpVariant(length: 4 | 6, state: 'Default' | 'Error'): ComponentNode {
   const cellSize = 44;
   const totalWidth = length * cellSize + (length - 1) * SPACING.sm;
 
@@ -40,7 +40,7 @@ function createOtpVariant(length: 4 | 6, state: 'Default' | 'Error'): ComponentN
       setStroke(cell, COLOR.border);
     }
 
-    addText(cell, i === 0 ? '●' : '', FONT_SIZE.base, state === 'Error' ? COLOR.danger : COLOR.textHeading, true);
+    await addText(cell, i === 0 ? '●' : '', FONT_SIZE.base, state === 'Error' ? COLOR.danger : COLOR.textHeading, true);
     comp.appendChild(cell);
   }
 

@@ -15,7 +15,7 @@ const MODAL_SIZE_CONFIG: Record<ModalSize, { w: number; h: number }> = {
   Large:  { w: 390, h: 360 },
 };
 
-function createModalVariant(size: ModalSize): ComponentNode {
+async function createModalVariant(size: ModalSize): ComponentNode {
   const { w, h } = MODAL_SIZE_CONFIG[size];
   const comp = createComponent(`Size=${size}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
@@ -33,12 +33,12 @@ function createModalVariant(size: ModalSize): ComponentNode {
   modalHeader.primaryAxisAlignItems = 'SPACE_BETWEEN';
   modalHeader.counterAxisAlignItems = 'CENTER';
   modalHeader.fills = [];
-  const title = addText(modalHeader, '모달 제목', FONT_SIZE.base, COLOR.textHeading, true);
+  const title = await addText(modalHeader, '모달 제목', FONT_SIZE.base, COLOR.textHeading, true);
   title.layoutGrow = 1;
   modalHeader.appendChild(createIcon('X', 20, COLOR.textMuted));
   comp.appendChild(modalHeader);
 
-  const content = addText(comp, '모달 내용 영역입니다.\n확인이 필요한 정보를 표시합니다.', FONT_SIZE.sm, COLOR.textBase);
+  const content = await addText(comp, '모달 내용 영역입니다.\n확인이 필요한 정보를 표시합니다.', FONT_SIZE.sm, COLOR.textBase);
   content.layoutAlign = 'STRETCH';
   content.layoutGrow = 1;
 
@@ -48,7 +48,7 @@ function createModalVariant(size: ModalSize): ComponentNode {
   footer.layoutAlign = 'STRETCH';
   footer.fills = [];
 
-  ['취소', '확인'].forEach((label, i) => {
+  ['취소', '확인'].forEach(async (label, i) => {
     const btn = figma.createFrame();
     setAutoLayout(btn, 'HORIZONTAL', 0);
     btn.primaryAxisAlignItems = 'CENTER';
@@ -57,7 +57,7 @@ function createModalVariant(size: ModalSize): ComponentNode {
     btn.resize(120, 44);
     btn.cornerRadius = RADIUS.md;
     setFill(btn, i === 1 ? BRAND.primary : COLOR.surfaceRaised);
-    addText(btn, label, FONT_SIZE.sm, i === 1 ? BRAND.fg : COLOR.textBase, true);
+    await addText(btn, label, FONT_SIZE.sm, i === 1 ? BRAND.fg : COLOR.textBase, true);
     footer.appendChild(btn);
   });
   comp.appendChild(footer);
@@ -76,7 +76,7 @@ export async function createModal(): Promise<ComponentSetNode> {
 type SnapMode = 'Auto' | 'Half' | 'Full';
 const SNAP_HEIGHT: Record<SnapMode, number> = { Auto: 300, Half: 420, Full: 680 };
 
-function createBottomSheetVariant(snap: SnapMode): ComponentNode {
+async function createBottomSheetVariant(snap: SnapMode): ComponentNode {
   const comp = createComponent(`Snap=${snap}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING.md, SPACING.xl, SPACING.xl, SPACING.xl);
@@ -97,7 +97,7 @@ function createBottomSheetVariant(snap: SnapMode): ComponentNode {
   handle.layoutAlign = 'CENTER';
   comp.appendChild(handle);
 
-  const title = addText(comp, '바텀시트 제목', FONT_SIZE.base, COLOR.textHeading, true);
+  const title = await addText(comp, '바텀시트 제목', FONT_SIZE.base, COLOR.textHeading, true);
   title.layoutAlign = 'STRETCH';
 
   const content = figma.createFrame();

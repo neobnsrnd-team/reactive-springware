@@ -32,7 +32,7 @@ export async function createBottomNav(): Promise<ComponentNode> {
   comp.counterAxisAlignItems = 'CENTER';
   setFill(comp, COLOR.surface);
 
-  TAB_ITEMS.forEach(({ label, icon }, i) => {
+  TAB_ITEMS.forEach(async ({ label, icon }, i) => {
     const isActive = i === 2; // 홈(중앙)이 기본 활성
 
     const tab = figma.createFrame();
@@ -49,7 +49,7 @@ export async function createBottomNav(): Promise<ComponentNode> {
     const iconSize = isActive ? 24 : 20;
     tab.appendChild(createIcon(icon, iconSize, isActive ? BRAND.primary : COLOR.textMuted));
 
-    addText(tab, label, FONT_SIZE.xs, isActive ? BRAND.text : COLOR.textMuted, isActive);
+    await addText(tab, label, FONT_SIZE.xs, isActive ? BRAND.text : COLOR.textMuted, isActive);
 
     /* 활성 탭 하단 인디케이터 점 */
     if (isActive) {

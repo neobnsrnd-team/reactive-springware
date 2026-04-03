@@ -25,7 +25,7 @@ export async function createDividerWithLabel(): Promise<ComponentNode> {
   };
 
   comp.appendChild(makeLine());
-  const label = addText(comp, 'OR', FONT_SIZE.xs, COLOR.textMuted);
+  const label = await addText(comp, 'OR', FONT_SIZE.xs, COLOR.textMuted);
   label.textAlignHorizontal = 'CENTER';
   comp.appendChild(makeLine());
 

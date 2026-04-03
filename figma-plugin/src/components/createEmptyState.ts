@@ -7,7 +7,7 @@
 import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, setFill, addText } from '../helpers';
 
-function createEmptyStateVariant(hasAction: boolean): ComponentNode {
+async function createEmptyStateVariant(hasAction: boolean): ComponentNode {
   const comp = createComponent(`HasAction=${hasAction ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING['3xl'], SPACING.xl);
@@ -24,10 +24,10 @@ function createEmptyStateVariant(hasAction: boolean): ComponentNode {
   setFill(icon, COLOR.surfaceRaised);
   comp.appendChild(icon);
 
-  const title = addText(comp, '데이터가 없습니다', FONT_SIZE.base, COLOR.textHeading, true);
+  const title = await addText(comp, '데이터가 없습니다', FONT_SIZE.base, COLOR.textHeading, true);
   title.textAlignHorizontal = 'CENTER';
 
-  const desc = addText(comp, '조건을 변경하거나 나중에 다시 확인해주세요.', FONT_SIZE.sm, COLOR.textMuted);
+  const desc = await addText(comp, '조건을 변경하거나 나중에 다시 확인해주세요.', FONT_SIZE.sm, COLOR.textMuted);
   desc.textAlignHorizontal = 'CENTER';
 
   if (hasAction) {
@@ -40,7 +40,7 @@ function createEmptyStateVariant(hasAction: boolean): ComponentNode {
     btn.primaryAxisAlignItems = 'CENTER';
     btn.cornerRadius = RADIUS.md;
     setFill(btn, COLOR.surfaceRaised);
-    addText(btn, '다시 시도', FONT_SIZE.sm, COLOR.textBase, true);
+    await addText(btn, '다시 시도', FONT_SIZE.sm, COLOR.textBase, true);
     comp.appendChild(btn);
   }
 

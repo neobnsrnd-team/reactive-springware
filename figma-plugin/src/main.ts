@@ -17,8 +17,9 @@
  *                 BannerCarousel, UserProfile, BrandBanner
  */
 
-import { COLOR, BRAND, FONT_SIZE, SPACING } from './tokens';
+import { COLOR, BRAND, FONT_SIZE, SPACING, FONT_FAMILY, FONT_VAR } from './tokens';
 import { solid } from './helpers';
+import { createVariables } from './createVariables';
 
 /* core */
 import {
@@ -93,7 +94,7 @@ function createSectionLabel(text: string, x: number, y: number): FrameNode {
   frame.appendChild(dot);
 
   const label = figma.createTypography();
-  label.fontName = { family: 'Noto Sans KR', style: 'Bold' };
+  label.fontName = { family: FONT_FAMILY.sans, style: 'Bold' };
   label.fontSize = FONT_SIZE.lg;
   label.characters = text;
   label.fills = [solid(COLOR.textHeading)];
@@ -129,9 +130,20 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
 
 /* ── 메인 ──────────────────────────────────────────────────── */
 (async () => {
+  /* ── 커맨드 분기 ──────────────────────────────────────────
+   * manifest.json menu 항목에 따라 실행 흐름을 분기한다.
+   * 'createVariables' : Primitives + Semantic 변수 일괄 등록
+   * 'createComponents': 기존 컴포넌트 생성 로직
+   * ────────────────────────────────────────────────────── */
+  if (figma.command === 'createVariables') {
+    const message = await createVariables();
+    figma.closePlugin(message);
+    return;
+  }
+
   /* 1. 폰트 사전 로드 */
-  await figma.loadFontAsync({ family: 'Noto Sans KR', style: 'Regular' });
-  await figma.loadFontAsync({ family: 'Noto Sans KR', style: 'Bold' });
+  await figma.loadFontAsync({ family: FONT_FAMILY.sans, style: 'Regular' });
+  await figma.loadFontAsync({ family: FONT_FAMILY.sans, style: 'Bold' });
 
   /* 2. 컴포넌트 생성 */
   const coreNodes: SceneNode[] = [

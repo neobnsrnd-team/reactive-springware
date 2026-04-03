@@ -11,7 +11,7 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없으면 tokens.ts의 RGB fallback 적용.
  */
 
-import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, VAR } from '../tokens';
+import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFill, setFillWithVar, setStroke, clearStroke, addText, addRect,
@@ -39,11 +39,11 @@ function getBgStyle(variant: ButtonVariant, state: ButtonState) {
   if (state === 'Disabled') {
     /* Outline / Ghost disabled: 투명 배경 유지 */
     if (variant === 'Outline' || variant === 'Ghost') return null;
-    return { varName: VAR.textDisabled, fallback: COLOR.textDisabled };
+    return { varName: COLOR_VAR.textDisabled, fallback: COLOR.textDisabled };
   }
   switch (variant) {
-    case 'Primary': return { varName: VAR.brandPrimary, fallback: BRAND.primary };
-    case 'Danger':  return { varName: VAR.dangerDefault, fallback: COLOR.dangerDark };
+    case 'Primary': return { varName: COLOR_VAR.brandPrimary, fallback: BRAND.primary };
+    case 'Danger':  return { varName: COLOR_VAR.danger, fallback: COLOR.dangerDark };
     /* Outline / Ghost: 투명 배경 */
     default:        return null;
   }
@@ -54,14 +54,14 @@ function getTextStyle(variant: ButtonVariant, state: ButtonState) {
   if (state === 'Disabled') {
     /* Primary / Danger disabled: surface(흰색) 텍스트 */
     if (variant === 'Primary' || variant === 'Danger') {
-      return { varName: VAR.surface, fallback: COLOR.surface };
+      return { varName: COLOR_VAR.surface, fallback: COLOR.surface };
     }
-    return { varName: VAR.textDisabled, fallback: COLOR.textDisabled };
+    return { varName: COLOR_VAR.textDisabled, fallback: COLOR.textDisabled };
   }
   switch (variant) {
-    case 'Primary': return { varName: VAR.brandFg,   fallback: BRAND.fg   };
-    case 'Danger':  return { varName: VAR.surface,   fallback: COLOR.surface };
-    default:        return { varName: VAR.brandText, fallback: BRAND.text  };
+    case 'Primary': return { varName: COLOR_VAR.brandFg,   fallback: BRAND.fg   };
+    case 'Danger':  return { varName: COLOR_VAR.surface,   fallback: COLOR.surface };
+    default:        return { varName: COLOR_VAR.brandText, fallback: BRAND.text  };
   }
 }
 
@@ -147,7 +147,7 @@ export async function createButton(): Promise<ComponentSetNode> {
             await setFillWithVar(
               /* setStroke는 RGB만 받으므로 직접 strokes 세팅 */
               comp as unknown as Parameters<typeof setFillWithVar>[0],
-              VAR.border,
+              COLOR_VAR.border,
               COLOR.border,
             );
             comp.strokes = comp.fills as unknown as Paint[];
@@ -163,7 +163,7 @@ export async function createButton(): Promise<ComponentSetNode> {
 
         /* 텍스트 레이블 */
         if (text) {
-          const label = addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
+          const label = await addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
           label.textAlignHorizontal = 'CENTER';
           if (state !== 'Loading') {
             await setFillWithVar(label, text.varName, text.fallback);
@@ -224,7 +224,7 @@ export async function createButtonWithIcon(): Promise<ComponentSetNode> {
         if (icon === 'Left') addIconPlaceholder(comp, size);
 
         if (text) {
-          const label = addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
+          const label = await addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
           label.textAlignHorizontal = 'CENTER';
           await setFillWithVar(label, text.varName, text.fallback);
         }
@@ -332,7 +332,7 @@ export async function createButtonFullWidth(): Promise<ComponentSetNode> {
       }
 
       if (text) {
-        const label = addText(comp, '버튼', FONT_SIZE.sm, text.fallback, true);
+        const label = await addText(comp, '버튼', FONT_SIZE.sm, text.fallback, true);
         label.textAlignHorizontal = justify === 'Center' ? 'CENTER' : 'LEFT';
         await setFillWithVar(label, text.varName, text.fallback);
       }
