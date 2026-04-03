@@ -27,9 +27,10 @@ type ButtonJustify = 'Center' | 'Between';
 const SIZE_CONFIG: Record<ButtonSize, {
   height: number; px: number; fontSize: number; radius: number; iconSize: number;
 }> = {
-  Small:  { height: 32, px: SPACING.md,       fontSize: FONT_SIZE.xs, radius: RADIUS.sm, iconSize: 12 },
-  Medium: { height: 40, px: SPACING.standard,  fontSize: FONT_SIZE.sm, radius: RADIUS.md, iconSize: 14 },
-  Large:  { height: 56, px: SPACING.xl,        fontSize: FONT_SIZE.lg, radius: RADIUS.md, iconSize: 16 },
+  /* radius=100: Storybook Button과 동일한 pill 형태 (RADIUS.full=999은 Figma에서 시각적으로 과도하게 표현됨) */
+  Small:  { height: 32, px: SPACING.md,       fontSize: FONT_SIZE.xs, radius: 100, iconSize: 12 },
+  Medium: { height: 40, px: SPACING.standard,  fontSize: FONT_SIZE.sm, radius: 100, iconSize: 14 },
+  Large:  { height: 56, px: SPACING.xl,        fontSize: FONT_SIZE.lg, radius: 100, iconSize: 16 },
 };
 
 /* ── 색상 헬퍼 ─────────────────────────────────────────────── */
@@ -82,24 +83,24 @@ function applyBaseLayout(
   comp.cornerRadius = radius;
 }
 
-/** 스피너 원형 오버레이 (Loading 상태 표현) */
-function addSpinnerOverlay(comp: ComponentNode, size: ButtonSize) {
-  const { height, iconSize } = SIZE_CONFIG[size];
-  /* 반투명 배경 오버레이 — 버튼 전체 너비를 덮어 텍스트를 가림 */
-  const overlay = figma.createFrame();
-  overlay.resize(comp.width || 120, height);
-  overlay.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 }, opacity: 0.15 }];
-  overlay.layoutAlign = 'STRETCH';
-  overlay.cornerRadius = comp.cornerRadius as number;
-  comp.appendChild(overlay);
+/**
+ * 스피너 엘립스를 버튼 중앙에 추가한다 (Loading 상태).
+ * Frame overlay를 사용하지 않고 스피너 엘립스만 직접 추가한다.
+ * 텍스트는 호출 전에 이미 스킵되므로 스피너만 남아 중앙 정렬된다.
+ */
+function addSpinnerOverlay(comp: ComponentNode, size: ButtonSize, spinnerColor: { r: number; g: number; b: number }) {
+  const { iconSize } = SIZE_CONFIG[size];
 
-  /* 스피너 원형 — 중앙에 배치 */
+  /* 텍스트가 없으므로 FIXED + CENTER로 스피너를 중앙 정렬 */
+  comp.primaryAxisSizingMode = 'FIXED';
+  comp.primaryAxisAlignItems = 'CENTER';
+
   const spinner = figma.createEllipse();
   spinner.resize(iconSize, iconSize);
   spinner.fills = [];
-  spinner.strokes = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 }, opacity: 0.8 }];
+  spinner.strokes = [{ type: 'SOLID', color: spinnerColor, opacity: 0.9 }];
   spinner.strokeWeight = 2;
-  /* 타원 호 설정: 3/4 원형으로 스피너 표현 */
+  /* 3/4 원호: 스피너 아이콘 표현 */
   spinner.arcData = { startingAngle: 0, endingAngle: Math.PI * 1.5, innerRadius: 0 };
   comp.appendChild(spinner);
 }
@@ -161,21 +162,17 @@ export async function createButton(): Promise<ComponentSetNode> {
           clearStroke(comp);
         }
 
-        /* 텍스트 레이블 */
-        if (text) {
+        /* 텍스트 레이블 — Loading 상태에서는 텍스트 없이 스피너만 표시 */
+        if (text && state !== 'Loading') {
           const label = addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
           label.textAlignHorizontal = 'CENTER';
-          if (state !== 'Loading') {
-            await setFillWithVar(label, text.varName, text.fallback);
-          } else {
-            /* Loading: 텍스트는 보이지 않으므로 투명 처리 */
-            label.fills = [{ type: 'SOLID', color: text.fallback, opacity: 0 }];
-          }
+          await setFillWithVar(label, text.varName, text.fallback);
         }
 
-        /* Loading 스피너 오버레이 */
+        /* Loading 스피너 — 스피너 색상은 텍스트 색과 동일 */
         if (state === 'Loading') {
-          addSpinnerOverlay(comp, size);
+          const spinnerColor = text?.fallback ?? { r: 1, g: 1, b: 1 };
+          addSpinnerOverlay(comp, size, spinnerColor);
         }
 
         components.push(comp);
