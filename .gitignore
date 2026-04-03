@@ -13,3 +13,4 @@ storybook-static/
 # 에디터
 .DS_Store
 *.log
+.idea/*
