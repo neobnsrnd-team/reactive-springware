@@ -1,0 +1,5677 @@
+{
+  "global": {
+    "$themes": {
+      "0": {
+        "id": {
+          "$type": "other",
+          "$value": "hana"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "하나은행"
+        },
+        "selectedTokenSets": {
+          "brand/hana": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/banking": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "1": {
+        "id": {
+          "$type": "other",
+          "$value": "ibk"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "IBK기업은행"
+        },
+        "selectedTokenSets": {
+          "brand/ibk": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/banking": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "2": {
+        "id": {
+          "$type": "other",
+          "$value": "kb"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "KB국민은행"
+        },
+        "selectedTokenSets": {
+          "brand/kb": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/banking": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "3": {
+        "id": {
+          "$type": "other",
+          "$value": "nh"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "NH농협은행"
+        },
+        "selectedTokenSets": {
+          "brand/nh": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/banking": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "4": {
+        "id": {
+          "$type": "other",
+          "$value": "shinhan"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "신한은행"
+        },
+        "selectedTokenSets": {
+          "brand/shinhan": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/banking": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "5": {
+        "id": {
+          "$type": "other",
+          "$value": "woori"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "우리은행"
+        },
+        "selectedTokenSets": {
+          "brand/woori": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/banking": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "6": {
+        "id": {
+          "$type": "other",
+          "$value": "card"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "카드"
+        },
+        "selectedTokenSets": {
+          "brand/card": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/card": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "7": {
+        "id": {
+          "$type": "other",
+          "$value": "giro"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "지로"
+        },
+        "selectedTokenSets": {
+          "brand/giro": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/giro": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      },
+      "8": {
+        "id": {
+          "$type": "other",
+          "$value": "insurance"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "보험"
+        },
+        "selectedTokenSets": {
+          "brand/insurance": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "domain/insurance": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "semantic": {
+            "$type": "other",
+            "$value": "source"
+          },
+          "primitive/color": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/spacing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/typography": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/radius": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/shadow": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/sizing": {
+            "$type": "other",
+            "$value": "enabled"
+          },
+          "primitive/zIndex": {
+            "$type": "other",
+            "$value": "enabled"
+          }
+        }
+      }
+    },
+    "$metadata": {
+      "tokenSetOrder": {
+        "0": {
+          "$type": "other",
+          "$value": "brand/hana"
+        },
+        "1": {
+          "$type": "other",
+          "$value": "brand/ibk"
+        },
+        "2": {
+          "$type": "other",
+          "$value": "brand/kb"
+        },
+        "3": {
+          "$type": "other",
+          "$value": "brand/nh"
+        },
+        "4": {
+          "$type": "other",
+          "$value": "brand/shinhan"
+        },
+        "5": {
+          "$type": "other",
+          "$value": "brand/woori"
+        },
+        "6": {
+          "$type": "other",
+          "$value": "brand/card"
+        },
+        "7": {
+          "$type": "other",
+          "$value": "brand/giro"
+        },
+        "8": {
+          "$type": "other",
+          "$value": "brand/insurance"
+        },
+        "9": {
+          "$type": "other",
+          "$value": "domain/banking"
+        },
+        "10": {
+          "$type": "other",
+          "$value": "domain/card"
+        },
+        "11": {
+          "$type": "other",
+          "$value": "domain/giro"
+        },
+        "12": {
+          "$type": "other",
+          "$value": "domain/insurance"
+        },
+        "13": {
+          "$type": "other",
+          "$value": "semantic"
+        },
+        "14": {
+          "$type": "other",
+          "$value": "primitive/color"
+        },
+        "15": {
+          "$type": "other",
+          "$value": "primitive/spacing"
+        },
+        "16": {
+          "$type": "other",
+          "$value": "primitive/typography"
+        },
+        "17": {
+          "$type": "other",
+          "$value": "primitive/radius"
+        },
+        "18": {
+          "$type": "other",
+          "$value": "primitive/shadow"
+        },
+        "19": {
+          "$type": "other",
+          "$value": "primitive/sizing"
+        },
+        "20": {
+          "$type": "other",
+          "$value": "primitive/zIndex"
+        }
+      }
+    },
+    "brand/hana": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#008485",
+          "$description": "하나은행 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#14b8a6",
+          "$description": "하나은행 보조 브랜드 색상"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#008485",
+          "$description": "브랜드 강조 텍스트 색상"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#006e6f",
+          "$description": "브랜드 어두운 변형"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "#005859",
+          "$description": "브랜드 더 어두운 변형"
+        },
+        "opacity5": {
+          "$type": "color",
+          "$value": "rgba(0, 132, 133, 0.05)",
+          "$description": "브랜드 색상 5% 투명도"
+        },
+        "opacity10": {
+          "$type": "color",
+          "$value": "rgba(0, 132, 133, 0.10)",
+          "$description": "브랜드 색상 10% 투명도"
+        },
+        "opacity20": {
+          "$type": "color",
+          "$value": "rgba(0, 132, 133, 0.20)",
+          "$description": "브랜드 색상 20% 투명도"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(0, 132, 133, 0.25)",
+          "$description": "브랜드 그림자 색상 (25% 투명도)"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f5f8f8",
+          "$description": "브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "하나은행",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/ibk": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#0068B7",
+          "$description": "IBK기업은행 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#3B9AD9",
+          "$description": "IBK기업은행 보조 브랜드 색상"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#0057a0",
+          "$description": "브랜드 강조 텍스트 색상"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#0057a0",
+          "$description": "브랜드 어두운 변형"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "#004580",
+          "$description": "브랜드 더 어두운 변형"
+        },
+        "opacity5": {
+          "$type": "color",
+          "$value": "rgba(0, 104, 183, 0.05)",
+          "$description": "브랜드 색상 5% 투명도"
+        },
+        "opacity10": {
+          "$type": "color",
+          "$value": "rgba(0, 104, 183, 0.10)",
+          "$description": "브랜드 색상 10% 투명도"
+        },
+        "opacity20": {
+          "$type": "color",
+          "$value": "rgba(0, 104, 183, 0.20)",
+          "$description": "브랜드 색상 20% 투명도"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(0, 104, 183, 0.25)",
+          "$description": "브랜드 그림자 색상 (25% 투명도)"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f4f7fb",
+          "$description": "브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "IBK기업은행",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/kb": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#FFBC00",
+          "$description": "KB국민은행 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#FFD740",
+          "$description": "KB국민은행 보조 브랜드 색상"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "#1a1200",
+          "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#7a4400",
+          "$description": "브랜드 강조 텍스트 색상"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#E6AA00",
+          "$description": "브랜드 어두운 변형"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "#CC9600",
+          "$description": "브랜드 더 어두운 변형"
+        },
+        "opacity5": {
+          "$type": "color",
+          "$value": "rgba(255, 188, 0, 0.05)",
+          "$description": "브랜드 색상 5% 투명도"
+        },
+        "opacity10": {
+          "$type": "color",
+          "$value": "rgba(255, 188, 0, 0.12)",
+          "$description": "브랜드 색상 12% 투명도"
+        },
+        "opacity20": {
+          "$type": "color",
+          "$value": "rgba(255, 188, 0, 0.22)",
+          "$description": "브랜드 색상 22% 투명도"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(255, 188, 0, 0.35)",
+          "$description": "브랜드 그림자 색상 (35% 투명도)"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#fffdf0",
+          "$description": "브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "KB국민은행",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/nh": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#00A859",
+          "$description": "NH농협은행 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#EEF300",
+          "$description": "NH농협은행 보조 브랜드 색상"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#007A40",
+          "$description": "브랜드 강조 텍스트 색상"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#008A49",
+          "$description": "브랜드 어두운 변형"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "#006B38",
+          "$description": "브랜드 더 어두운 변형"
+        },
+        "opacity5": {
+          "$type": "color",
+          "$value": "rgba(0, 168, 89, 0.05)",
+          "$description": "브랜드 색상 5% 투명도"
+        },
+        "opacity10": {
+          "$type": "color",
+          "$value": "rgba(0, 168, 89, 0.10)",
+          "$description": "브랜드 색상 10% 투명도"
+        },
+        "opacity20": {
+          "$type": "color",
+          "$value": "rgba(0, 168, 89, 0.20)",
+          "$description": "브랜드 색상 20% 투명도"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(0, 168, 89, 0.25)",
+          "$description": "브랜드 그림자 색상 (25% 투명도)"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f4fbf7",
+          "$description": "브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "NH농협은행",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/shinhan": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#0046FF",
+          "$description": "신한은행 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#4D7FFF",
+          "$description": "신한은행 보조 브랜드 색상"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#0033CC",
+          "$description": "브랜드 강조 텍스트 색상"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#0038CC",
+          "$description": "브랜드 어두운 변형"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "#002B99",
+          "$description": "브랜드 더 어두운 변형"
+        },
+        "opacity5": {
+          "$type": "color",
+          "$value": "rgba(0, 70, 255, 0.05)",
+          "$description": "브랜드 색상 5% 투명도"
+        },
+        "opacity10": {
+          "$type": "color",
+          "$value": "rgba(0, 70, 255, 0.10)",
+          "$description": "브랜드 색상 10% 투명도"
+        },
+        "opacity20": {
+          "$type": "color",
+          "$value": "rgba(0, 70, 255, 0.20)",
+          "$description": "브랜드 색상 20% 투명도"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(0, 70, 255, 0.25)",
+          "$description": "브랜드 그림자 색상 (25% 투명도)"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f4f6ff",
+          "$description": "브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "신한은행",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/woori": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#0067AC",
+          "$description": "우리은행 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#3395D4",
+          "$description": "우리은행 보조 브랜드 색상"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#005490",
+          "$description": "브랜드 강조 텍스트 색상"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#005490",
+          "$description": "브랜드 어두운 변형"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "#00416e",
+          "$description": "브랜드 더 어두운 변형"
+        },
+        "opacity5": {
+          "$type": "color",
+          "$value": "rgba(0, 103, 172, 0.05)",
+          "$description": "브랜드 색상 5% 투명도"
+        },
+        "opacity10": {
+          "$type": "color",
+          "$value": "rgba(0, 103, 172, 0.10)",
+          "$description": "브랜드 색상 10% 투명도"
+        },
+        "opacity20": {
+          "$type": "color",
+          "$value": "rgba(0, 103, 172, 0.20)",
+          "$description": "브랜드 색상 20% 투명도"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(0, 103, 172, 0.25)",
+          "$description": "브랜드 그림자 색상 (25% 투명도)"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f4f8fc",
+          "$description": "브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "우리은행",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/card": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#1A56DB",
+          "$description": "카드 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#4F86F7",
+          "$description": "카드 보조 브랜드 색상"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f4f7ff",
+          "$description": "카드 브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "카드 기본",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/giro": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#5B21B6",
+          "$description": "지로 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#8B5CF6",
+          "$description": "지로 보조 브랜드 색상"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#f9f7ff",
+          "$description": "지로 브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "지로 기본",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "brand/insurance": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#E03A1E",
+          "$description": "보험 메인 브랜드 색상"
+        },
+        "alt": {
+          "$type": "color",
+          "$value": "#F97F6A",
+          "$description": "보험 보조 브랜드 색상"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "#fff8f7",
+          "$description": "보험 브랜드 배경 색상"
+        },
+        "name": {
+          "$type": "other",
+          "$value": "보험 기본",
+          "$description": "브랜드 이름"
+        }
+      }
+    },
+    "domain/banking": {
+      "domain": {
+        "pageBg": {
+          "$type": "color",
+          "$value": "#f5f8f8",
+          "$description": "뱅킹 도메인 페이지 기본 배경색"
+        }
+      }
+    },
+    "domain/card": {
+      "domain": {
+        "pageBg": {
+          "$type": "color",
+          "$value": "#f4f7ff",
+          "$description": "카드 도메인 페이지 기본 배경색"
+        }
+      }
+    },
+    "domain/giro": {
+      "domain": {
+        "pageBg": {
+          "$type": "color",
+          "$value": "#f9f7ff",
+          "$description": "지로 도메인 페이지 기본 배경색"
+        }
+      }
+    },
+    "domain/insurance": {
+      "domain": {
+        "pageBg": {
+          "$type": "color",
+          "$value": "#fff8f7",
+          "$description": "보험 도메인 페이지 기본 배경색"
+        }
+      }
+    },
+    "semantic": {
+      "color": {
+        "brand": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "{brand.primary}",
+            "$description": "브랜드 메인 색상 alias — brand 토큰을 Tailwind에 연결"
+          },
+          "alt": {
+            "$type": "color",
+            "$value": "{brand.alt}",
+            "$description": "브랜드 보조 색상 alias"
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{brand.fg}",
+            "$description": "브랜드 전경 색상 alias"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{brand.text}",
+            "$description": "브랜드 텍스트 색상 alias"
+          },
+          "dark": {
+            "$type": "color",
+            "$value": "{brand.dark}",
+            "$description": "브랜드 어두운 변형 alias"
+          },
+          "darker": {
+            "$type": "color",
+            "$value": "{brand.darker}",
+            "$description": "브랜드 더 어두운 변형 alias"
+          },
+          "opacity5": {
+            "$type": "color",
+            "$value": "{brand.opacity5}",
+            "$description": "브랜드 5% 투명도 alias"
+          },
+          "opacity10": {
+            "$type": "color",
+            "$value": "{brand.opacity10}",
+            "$description": "브랜드 10% 투명도 alias"
+          },
+          "opacity20": {
+            "$type": "color",
+            "$value": "{brand.opacity20}",
+            "$description": "브랜드 20% 투명도 alias"
+          },
+          "shadow": {
+            "$type": "color",
+            "$value": "{brand.shadow}",
+            "$description": "브랜드 그림자 색상 alias"
+          }
+        },
+        "surface": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "기본 카드/패널 배경"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "#f8fafc",
+            "$description": "약간 구분되는 배경 (테이블 홀수행 등)"
+          },
+          "page": {
+            "$type": "color",
+            "$value": "{brand.bg}",
+            "$description": "페이지 전체 배경 — 브랜드 bg 참조"
+          },
+          "raised": {
+            "$type": "color",
+            "$value": "#f1f5f9",
+            "$description": "살짝 떠오른 느낌의 배경 (툴팁, 드롭다운 등)"
+          }
+        },
+        "border": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#e2e8f0",
+            "$description": "기본 구분선 색상"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "#f1f5f9",
+            "$description": "미세한 구분선 색상"
+          },
+          "focus": {
+            "$type": "color",
+            "$value": "{brand.primary}",
+            "$description": "포커스 링 색상 — 브랜드 primary 참조"
+          }
+        },
+        "text": {
+          "heading": {
+            "$type": "color",
+            "$value": "#0f172a",
+            "$description": "페이지 제목 등 최상위 텍스트"
+          },
+          "base": {
+            "$type": "color",
+            "$value": "#1e293b",
+            "$description": "본문 기본 텍스트"
+          },
+          "label": {
+            "$type": "color",
+            "$value": "#334155",
+            "$description": "폼 레이블, 중요 보조 텍스트"
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#475569",
+            "$description": "보조 정보 텍스트"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#64748b",
+            "$description": "흐린 텍스트 (날짜, 메타 정보)"
+          },
+          "placeholder": {
+            "$type": "color",
+            "$value": "#94a3b8",
+            "$description": "입력 필드 플레이스홀더"
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "#cbd5e1",
+            "$description": "비활성 텍스트"
+          }
+        },
+        "primary": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#2563eb",
+            "$description": "시스템 공통 표준 강조색 (브랜드 무관, 고정 파란색)"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#eff6ff",
+            "$description": "primary 배경색"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#bfdbfe",
+            "$description": "primary 테두리색"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#1e40af",
+            "$description": "primary 텍스트색"
+          },
+          "dark": {
+            "$type": "color",
+            "$value": "#1d4ed8",
+            "$description": "primary 어두운 변형 (hover 등)"
+          }
+        },
+        "danger": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#e11d48",
+            "$description": "위험/에러 상태 기본색"
+          },
+          "dark": {
+            "$type": "color",
+            "$value": "#c01742",
+            "$description": "위험 어두운 변형"
+          },
+          "darker": {
+            "$type": "color",
+            "$value": "#a8103a",
+            "$description": "위험 더 어두운 변형"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#fff1f2",
+            "$description": "위험 배경색"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#fda4af",
+            "$description": "위험 테두리색"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#be123c",
+            "$description": "위험 텍스트색"
+          },
+          "badge": {
+            "$type": "color",
+            "$value": "#ef4444",
+            "$description": "위험 뱃지/알림 표시색"
+          }
+        },
+        "success": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#16a34a",
+            "$description": "성공 상태 기본색"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#f0fdf4",
+            "$description": "성공 배경색"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#86efac",
+            "$description": "성공 테두리색"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#15803d",
+            "$description": "성공 텍스트색"
+          }
+        },
+        "warning": {
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#d97706",
+            "$description": "경고 상태 기본색"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#fffbeb",
+            "$description": "경고 배경색"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#fcd34d",
+            "$description": "경고 테두리색"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#b45309",
+            "$description": "경고 텍스트색"
+          }
+        },
+        "info": {
+          "surface": {
+            "$type": "color",
+            "$value": "#eff6ff",
+            "$description": "정보 배경색"
+          }
+        }
+      }
+    },
+    "primitive/color": {
+      "color": {
+        "white": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "black": {
+          "$type": "color",
+          "$value": "#000000"
+        }
+      }
+    },
+    "primitive/spacing": {
+      "spacing": {
+        "0": {
+          "$type": "spacing",
+          "$value": "0"
+        },
+        "px": {
+          "$type": "spacing",
+          "$value": "1",
+          "$description": "1px — 가장 작은 단위, 구분선 두께 등"
+        },
+        "xs": {
+          "$type": "spacing",
+          "$value": "4",
+          "$description": "4px — 아이콘·텍스트 간 미세 간격"
+        },
+        "sm": {
+          "$type": "spacing",
+          "$value": "8",
+          "$description": "8px — 컴포넌트 내부 소형 패딩"
+        },
+        "md": {
+          "$type": "spacing",
+          "$value": "12",
+          "$description": "12px — 컴포넌트 내부 중형 패딩"
+        },
+        "standard": {
+          "$type": "spacing",
+          "$value": "16",
+          "$description": "16px — 가장 기본적인 패딩/간격 (4px grid 기준)"
+        },
+        "lg": {
+          "$type": "spacing",
+          "$value": "20",
+          "$description": "20px — 섹션 내부 여백"
+        },
+        "xl": {
+          "$type": "spacing",
+          "$value": "24",
+          "$description": "24px — 카드·섹션 패딩"
+        },
+        "2xl": {
+          "$type": "spacing",
+          "$value": "32",
+          "$description": "32px — 섹션 간 여백"
+        },
+        "3xl": {
+          "$type": "spacing",
+          "$value": "40",
+          "$description": "40px — 페이지 레벨 여백"
+        },
+        "4xl": {
+          "$type": "spacing",
+          "$value": "48",
+          "$description": "48px — 대형 섹션 여백"
+        },
+        "nav": {
+          "$type": "spacing",
+          "$value": "80",
+          "$description": "80px — 하단 내비게이션 여유 공간"
+        }
+      }
+    },
+    "primitive/typography": {
+      "fontFamilies": {
+        "sans": {
+          "$type": "fontFamilies",
+          "$value": "Noto Sans KR",
+          "$description": "기본 UI 폰트"
+        },
+        "numeric": {
+          "$type": "fontFamilies",
+          "$value": "Manrope",
+          "$description": "숫자 전용 폰트 (금액·수치 표시)"
+        },
+        "icon": {
+          "$type": "fontFamilies",
+          "$value": "Material Symbols Outlined",
+          "$description": "Material 아이콘 폰트"
+        }
+      },
+      "fontSize": {
+        "xs": {
+          "$type": "fontSizes",
+          "$value": "12",
+          "$description": "최소 크기 — 뱃지, 캡션"
+        },
+        "sm": {
+          "$type": "fontSizes",
+          "$value": "14",
+          "$description": "보조 텍스트, 레이블"
+        },
+        "base": {
+          "$type": "fontSizes",
+          "$value": "16",
+          "$description": "본문 기본 크기"
+        },
+        "lg": {
+          "$type": "fontSizes",
+          "$value": "18",
+          "$description": "소제목"
+        },
+        "xl": {
+          "$type": "fontSizes",
+          "$value": "20",
+          "$description": "중형 제목"
+        },
+        "2xl": {
+          "$type": "fontSizes",
+          "$value": "24",
+          "$description": "대형 제목"
+        },
+        "3xl": {
+          "$type": "fontSizes",
+          "$value": "30",
+          "$description": "섹션 헤더"
+        },
+        "4xl": {
+          "$type": "fontSizes",
+          "$value": "36",
+          "$description": "페이지 히어로 제목"
+        }
+      },
+      "lineHeights": {
+        "xs": {
+          "$type": "lineHeights",
+          "$value": "16"
+        },
+        "sm": {
+          "$type": "lineHeights",
+          "$value": "20"
+        },
+        "base": {
+          "$type": "lineHeights",
+          "$value": "24"
+        },
+        "lg": {
+          "$type": "lineHeights",
+          "$value": "28"
+        },
+        "xl": {
+          "$type": "lineHeights",
+          "$value": "28"
+        },
+        "2xl": {
+          "$type": "lineHeights",
+          "$value": "32"
+        },
+        "3xl": {
+          "$type": "lineHeights",
+          "$value": "40"
+        },
+        "4xl": {
+          "$type": "lineHeights",
+          "$value": "44"
+        }
+      },
+      "letterSpacing": {
+        "xs": {
+          "$type": "letterSpacing",
+          "$value": "0"
+        },
+        "sm": {
+          "$type": "letterSpacing",
+          "$value": "0"
+        },
+        "base": {
+          "$type": "letterSpacing",
+          "$value": "0"
+        },
+        "lg": {
+          "$type": "letterSpacing",
+          "$value": "-0.45"
+        },
+        "xl": {
+          "$type": "letterSpacing",
+          "$value": "-0.5"
+        },
+        "2xl": {
+          "$type": "letterSpacing",
+          "$value": "-0.3"
+        },
+        "3xl": {
+          "$type": "letterSpacing",
+          "$value": "-0.75"
+        },
+        "4xl": {
+          "$type": "letterSpacing",
+          "$value": "-0.9"
+        }
+      }
+    },
+    "primitive/radius": {
+      "radius": {
+        "none": {
+          "$type": "borderRadius",
+          "$value": "0"
+        },
+        "xs": {
+          "$type": "borderRadius",
+          "$value": "4",
+          "$description": "미세한 모서리 — 뱃지, 태그"
+        },
+        "sm": {
+          "$type": "borderRadius",
+          "$value": "8",
+          "$description": "소형 — 버튼, 입력 필드"
+        },
+        "md": {
+          "$type": "borderRadius",
+          "$value": "12",
+          "$description": "중형 — 작은 카드"
+        },
+        "lg": {
+          "$type": "borderRadius",
+          "$value": "16",
+          "$description": "대형 — 카드, 모달"
+        },
+        "xl": {
+          "$type": "borderRadius",
+          "$value": "24",
+          "$description": "특대형 — 바텀시트, 풀카드"
+        },
+        "full": {
+          "$type": "borderRadius",
+          "$value": "9999",
+          "$description": "완전한 원형 — 칩, 아바타"
+        }
+      }
+    },
+    "primitive/shadow": {
+      "shadow": {
+        "xs": {
+          "$type": "boxShadow",
+          "$value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          "$description": "가장 미세한 그림자 — 카드 기본"
+        },
+        "sm": {
+          "$type": "boxShadow",
+          "$value": "0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10)",
+          "$description": "소형 그림자"
+        },
+        "md": {
+          "$type": "boxShadow",
+          "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -2px rgba(0, 0, 0, 0.10)",
+          "$description": "중형 그림자 — 드롭다운, 팝오버"
+        },
+        "lg": {
+          "$type": "boxShadow",
+          "$value": "0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10)",
+          "$description": "대형 그림자 — 모달"
+        },
+        "xl": {
+          "$type": "boxShadow",
+          "$value": "0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.10)",
+          "$description": "특대형 그림자 — 최상위 레이어"
+        },
+        "2xl": {
+          "$type": "boxShadow",
+          "$value": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+          "$description": "최대형 그림자"
+        }
+      }
+    },
+    "primitive/sizing": {
+      "sizing": {
+        "navTopHeight": {
+          "$type": "sizing",
+          "$value": "56",
+          "$description": "상단 네비게이션 바 높이"
+        },
+        "navBottomHeight": {
+          "$type": "sizing",
+          "$value": "60",
+          "$description": "하단 네비게이션 바 높이"
+        }
+      },
+      "breakpoint": {
+        "mobile": {
+          "$type": "other",
+          "$value": "390",
+          "$description": "모바일 브레이크포인트"
+        },
+        "tablet": {
+          "$type": "other",
+          "$value": "768",
+          "$description": "태블릿 브레이크포인트 (md 와 동일)"
+        },
+        "desktop": {
+          "$type": "other",
+          "$value": "1280",
+          "$description": "데스크톱 브레이크포인트 (xl 과 동일)"
+        }
+      }
+    },
+    "primitive/zIndex": {
+      "zIndex": {
+        "base": {
+          "$type": "other",
+          "$value": "0",
+          "$description": "기본 레이어"
+        },
+        "raised": {
+          "$type": "other",
+          "$value": "1",
+          "$description": "살짝 올라온 요소 (카드 hover 등)"
+        },
+        "overlay": {
+          "$type": "other",
+          "$value": "10",
+          "$description": "오버레이 (드롭다운, 팝오버)"
+        },
+        "sticky": {
+          "$type": "other",
+          "$value": "20",
+          "$description": "sticky 헤더/네비게이션"
+        },
+        "modal": {
+          "$type": "other",
+          "$value": "50",
+          "$description": "모달 다이얼로그"
+        },
+        "toast": {
+          "$type": "other",
+          "$value": "100",
+          "$description": "토스트 알림 — 항상 최상위"
+        }
+      }
+    }
+  },
+  "global/global": {
+    "brand": {
+      "hana": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#008485",
+            "$description": "하나은행 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#14b8a6",
+            "$description": "하나은행 보조 브랜드 색상"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#008485",
+            "$description": "브랜드 강조 텍스트 색상"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#006e6f",
+            "$description": "브랜드 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#005859",
+            "$description": "브랜드 더 어두운 변형"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0084850d",
+            "$description": "브랜드 색상 5% 투명도"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0084851a",
+            "$description": "브랜드 색상 10% 투명도"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00848533",
+            "$description": "브랜드 색상 20% 투명도"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00848540",
+            "$description": "브랜드 그림자 색상 (25% 투명도)"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f5f8f8",
+            "$description": "브랜드 배경 색상"
+          }
+        }
+      },
+      "ibk": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0068b7",
+            "$description": "IBK기업은행 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#3b9ad9",
+            "$description": "IBK기업은행 보조 브랜드 색상"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0057a0",
+            "$description": "브랜드 강조 텍스트 색상"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0057a0",
+            "$description": "브랜드 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#004580",
+            "$description": "브랜드 더 어두운 변형"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0068b70d",
+            "$description": "브랜드 색상 5% 투명도"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0068b71a",
+            "$description": "브랜드 색상 10% 투명도"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0068b733",
+            "$description": "브랜드 색상 20% 투명도"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0068b740",
+            "$description": "브랜드 그림자 색상 (25% 투명도)"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f4f7fb",
+            "$description": "브랜드 배경 색상"
+          }
+        }
+      },
+      "kb": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffbc00",
+            "$description": "KB국민은행 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffd740",
+            "$description": "KB국민은행 보조 브랜드 색상"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#1a1200",
+            "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#7a4400",
+            "$description": "브랜드 강조 텍스트 색상"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#e6aa00",
+            "$description": "브랜드 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#cc9600",
+            "$description": "브랜드 더 어두운 변형"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffbc000d",
+            "$description": "브랜드 색상 5% 투명도"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffbc001f",
+            "$description": "브랜드 색상 12% 투명도"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffbc0038",
+            "$description": "브랜드 색상 22% 투명도"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffbc0059",
+            "$description": "브랜드 그림자 색상 (35% 투명도)"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fffdf0",
+            "$description": "브랜드 배경 색상"
+          }
+        }
+      },
+      "nh": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00a859",
+            "$description": "NH농협은행 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#eef300",
+            "$description": "NH농협은행 보조 브랜드 색상"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#007a40",
+            "$description": "브랜드 강조 텍스트 색상"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#008a49",
+            "$description": "브랜드 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#006b38",
+            "$description": "브랜드 더 어두운 변형"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00a8590d",
+            "$description": "브랜드 색상 5% 투명도"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00a8591a",
+            "$description": "브랜드 색상 10% 투명도"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00a85933",
+            "$description": "브랜드 색상 20% 투명도"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00a85940",
+            "$description": "브랜드 그림자 색상 (25% 투명도)"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f4fbf7",
+            "$description": "브랜드 배경 색상"
+          }
+        }
+      },
+      "shinhan": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0046ff",
+            "$description": "신한은행 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#4d7fff",
+            "$description": "신한은행 보조 브랜드 색상"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0033cc",
+            "$description": "브랜드 강조 텍스트 색상"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0038cc",
+            "$description": "브랜드 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#002b99",
+            "$description": "브랜드 더 어두운 변형"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0046ff0d",
+            "$description": "브랜드 색상 5% 투명도"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0046ff1a",
+            "$description": "브랜드 색상 10% 투명도"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0046ff33",
+            "$description": "브랜드 색상 20% 투명도"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0046ff40",
+            "$description": "브랜드 그림자 색상 (25% 투명도)"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f4f6ff",
+            "$description": "브랜드 배경 색상"
+          }
+        }
+      },
+      "woori": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0067ac",
+            "$description": "우리은행 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#3395d4",
+            "$description": "우리은행 보조 브랜드 색상"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 배경 위 전경(텍스트/아이콘) 색상"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#005490",
+            "$description": "브랜드 강조 텍스트 색상"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#005490",
+            "$description": "브랜드 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#00416e",
+            "$description": "브랜드 더 어두운 변형"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0067ac0d",
+            "$description": "브랜드 색상 5% 투명도"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0067ac1a",
+            "$description": "브랜드 색상 10% 투명도"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0067ac33",
+            "$description": "브랜드 색상 20% 투명도"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0067ac40",
+            "$description": "브랜드 그림자 색상 (25% 투명도)"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f4f8fc",
+            "$description": "브랜드 배경 색상"
+          }
+        }
+      },
+      "card": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#1a56db",
+            "$description": "카드 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#4f86f7",
+            "$description": "카드 보조 브랜드 색상"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f4f7ff",
+            "$description": "카드 브랜드 배경 색상"
+          }
+        }
+      },
+      "giro": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#5b21b6",
+            "$description": "지로 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#8b5cf6",
+            "$description": "지로 보조 브랜드 색상"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f9f7ff",
+            "$description": "지로 브랜드 배경 색상"
+          }
+        }
+      },
+      "insurance": {
+        "brand": {
+          "primary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#e03a1e",
+            "$description": "보험 메인 브랜드 색상"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f97f6a",
+            "$description": "보험 보조 브랜드 색상"
+          },
+          "bg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fff8f7",
+            "$description": "보험 브랜드 배경 색상"
+          }
+        }
+      }
+    },
+    "domain": {
+      "banking": {
+        "domain": {
+          "pageBg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f5f8f8",
+            "$description": "뱅킹 도메인 페이지 기본 배경색"
+          }
+        }
+      },
+      "card": {
+        "domain": {
+          "pageBg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f4f7ff",
+            "$description": "카드 도메인 페이지 기본 배경색"
+          }
+        }
+      },
+      "giro": {
+        "domain": {
+          "pageBg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f9f7ff",
+            "$description": "지로 도메인 페이지 기본 배경색"
+          }
+        }
+      },
+      "insurance": {
+        "domain": {
+          "pageBg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fff8f7",
+            "$description": "보험 도메인 페이지 기본 배경색"
+          }
+        }
+      }
+    },
+    "semantic": {
+      "color": {
+        "brand": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.primary}",
+            "$description": "브랜드 메인 색상 alias — brand 토큰을 Tailwind에 연결"
+          },
+          "alt": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.alt}",
+            "$description": "브랜드 보조 색상 alias"
+          },
+          "fg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.fg}",
+            "$description": "브랜드 전경 색상 alias"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.text}",
+            "$description": "브랜드 텍스트 색상 alias"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.dark}",
+            "$description": "브랜드 어두운 변형 alias"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.darker}",
+            "$description": "브랜드 더 어두운 변형 alias"
+          },
+          "opacity5": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 5% 투명도 alias"
+          },
+          "opacity10": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 10% 투명도 alias"
+          },
+          "opacity20": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "브랜드 20% 투명도 alias"
+          },
+          "shadow": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.shadow}",
+            "$description": "브랜드 그림자 색상 alias"
+          }
+        },
+        "surface": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "기본 카드/패널 배경"
+          },
+          "subtle": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f8fafc",
+            "$description": "약간 구분되는 배경 (테이블 홀수행 등)"
+          },
+          "page": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.bg}",
+            "$description": "페이지 전체 배경 — 브랜드 bg 참조"
+          },
+          "raised": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f1f5f9",
+            "$description": "살짝 떠오른 느낌의 배경 (툴팁, 드롭다운 등)"
+          }
+        },
+        "border": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#e2e8f0",
+            "$description": "기본 구분선 색상"
+          },
+          "subtle": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f1f5f9",
+            "$description": "미세한 구분선 색상"
+          },
+          "focus": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "{brand.primary}",
+            "$description": "포커스 링 색상 — 브랜드 primary 참조"
+          }
+        },
+        "text": {
+          "heading": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#0f172a",
+            "$description": "페이지 제목 등 최상위 텍스트"
+          },
+          "base": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#1e293b",
+            "$description": "본문 기본 텍스트"
+          },
+          "label": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#334155",
+            "$description": "폼 레이블, 중요 보조 텍스트"
+          },
+          "secondary": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#475569",
+            "$description": "보조 정보 텍스트"
+          },
+          "muted": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#64748b",
+            "$description": "흐린 텍스트 (날짜, 메타 정보)"
+          },
+          "placeholder": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#94a3b8",
+            "$description": "입력 필드 플레이스홀더"
+          },
+          "disabled": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#cbd5e1",
+            "$description": "비활성 텍스트"
+          }
+        },
+        "primary": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#2563eb",
+            "$description": "시스템 공통 표준 강조색 (브랜드 무관, 고정 파란색)"
+          },
+          "surface": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#eff6ff",
+            "$description": "primary 배경색"
+          },
+          "border": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#bfdbfe",
+            "$description": "primary 테두리색"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#1e40af",
+            "$description": "primary 텍스트색"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#1d4ed8",
+            "$description": "primary 어두운 변형 (hover 등)"
+          }
+        },
+        "danger": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#e11d48",
+            "$description": "위험/에러 상태 기본색"
+          },
+          "dark": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#c01742",
+            "$description": "위험 어두운 변형"
+          },
+          "darker": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#a8103a",
+            "$description": "위험 더 어두운 변형"
+          },
+          "surface": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fff1f2",
+            "$description": "위험 배경색"
+          },
+          "border": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fda4af",
+            "$description": "위험 테두리색"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#be123c",
+            "$description": "위험 텍스트색"
+          },
+          "badge": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ef4444",
+            "$description": "위험 뱃지/알림 표시색"
+          }
+        },
+        "success": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#16a34a",
+            "$description": "성공 상태 기본색"
+          },
+          "surface": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#f0fdf4",
+            "$description": "성공 배경색"
+          },
+          "border": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#86efac",
+            "$description": "성공 테두리색"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#15803d",
+            "$description": "성공 텍스트색"
+          }
+        },
+        "warning": {
+          "DEFAULT": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#d97706",
+            "$description": "경고 상태 기본색"
+          },
+          "surface": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fffbeb",
+            "$description": "경고 배경색"
+          },
+          "border": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#fcd34d",
+            "$description": "경고 테두리색"
+          },
+          "text": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#b45309",
+            "$description": "경고 텍스트색"
+          }
+        },
+        "info": {
+          "surface": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#eff6ff",
+            "$description": "정보 배경색"
+          }
+        }
+      }
+    },
+    "primitive": {
+      "color": {
+        "color": {
+          "white": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#ffffff"
+          },
+          "black": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "color",
+            "$value": "#000000"
+          }
+        }
+      },
+      "typography": {
+        "fontFamilies": {
+          "sans": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "text",
+            "$value": "Noto Sans KR",
+            "$description": "기본 UI 폰트"
+          },
+          "numeric": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "text",
+            "$value": "Manrope",
+            "$description": "숫자 전용 폰트 (금액·수치 표시)"
+          },
+          "icon": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "text",
+            "$value": "Material Symbols Outlined",
+            "$description": "Material 아이콘 폰트"
+          }
+        },
+        "fontSize": {
+          "xs": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 12,
+            "$description": "최소 크기 — 뱃지, 캡션"
+          },
+          "sm": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 14,
+            "$description": "보조 텍스트, 레이블"
+          },
+          "base": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 16,
+            "$description": "본문 기본 크기"
+          },
+          "lg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 18,
+            "$description": "소제목"
+          },
+          "xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 20,
+            "$description": "중형 제목"
+          },
+          "2xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 24,
+            "$description": "대형 제목"
+          },
+          "3xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 30,
+            "$description": "섹션 헤더"
+          },
+          "4xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 36,
+            "$description": "페이지 히어로 제목"
+          }
+        },
+        "lineHeights": {
+          "xs": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 16
+          },
+          "sm": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 20
+          },
+          "base": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 24
+          },
+          "lg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 28
+          },
+          "xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 28
+          },
+          "2xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 32
+          },
+          "3xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 40
+          },
+          "4xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 44
+          }
+        },
+        "letterSpacing": {
+          "xs": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 0
+          },
+          "sm": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 0
+          },
+          "base": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 0
+          },
+          "lg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": -0.45
+          },
+          "xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": -0.5
+          },
+          "2xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": -0.3
+          },
+          "3xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": -0.75
+          },
+          "4xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": -0.9
+          }
+        }
+      },
+      "spacing": {
+        "spacing": {
+          "0": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 0
+          },
+          "px": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 1,
+            "$description": "1px — 가장 작은 단위, 구분선 두께 등"
+          },
+          "xs": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 4,
+            "$description": "4px — 아이콘·텍스트 간 미세 간격"
+          },
+          "sm": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 8,
+            "$description": "8px — 컴포넌트 내부 소형 패딩"
+          },
+          "md": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 12,
+            "$description": "12px — 컴포넌트 내부 중형 패딩"
+          },
+          "standard": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 16,
+            "$description": "16px — 가장 기본적인 패딩/간격 (4px grid 기준)"
+          },
+          "lg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 20,
+            "$description": "20px — 섹션 내부 여백"
+          },
+          "xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 24,
+            "$description": "24px — 카드·섹션 패딩"
+          },
+          "2xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 32,
+            "$description": "32px — 섹션 간 여백"
+          },
+          "3xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 40,
+            "$description": "40px — 페이지 레벨 여백"
+          },
+          "4xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 48,
+            "$description": "48px — 대형 섹션 여백"
+          },
+          "nav": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 80,
+            "$description": "80px — 하단 내비게이션 여유 공간"
+          }
+        }
+      },
+      "radius": {
+        "radius": {
+          "none": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 0
+          },
+          "xs": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 4,
+            "$description": "미세한 모서리 — 뱃지, 태그"
+          },
+          "sm": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 8,
+            "$description": "소형 — 버튼, 입력 필드"
+          },
+          "md": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 12,
+            "$description": "중형 — 작은 카드"
+          },
+          "lg": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 16,
+            "$description": "대형 — 카드, 모달"
+          },
+          "xl": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 24,
+            "$description": "특대형 — 바텀시트, 풀카드"
+          },
+          "full": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 9999,
+            "$description": "완전한 원형 — 칩, 아바타"
+          }
+        }
+      },
+      "sizing": {
+        "sizing": {
+          "navTopHeight": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 56,
+            "$description": "상단 네비게이션 바 높이"
+          },
+          "navBottomHeight": {
+            "$extensions": {
+              "com.figma.scopes": [
+                "ALL_SCOPES"
+              ],
+              "com.figma.hiddenFromPublishing": false
+            },
+            "$type": "number",
+            "$value": 60,
+            "$description": "하단 네비게이션 바 높이"
+          }
+        }
+      }
+    }
+  },
+  "Brand/Hana": {
+    "brand": {
+      "primary": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0084850d"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0084851a"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#00848533"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#008485"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#14b8a6"
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#008485"
+      },
+      "dark": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#006e6f"
+      },
+      "bg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#f5f8f8"
+      },
+      "shadow": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#00848540"
+      },
+      "darker": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#005859"
+      },
+      "fg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "하나은행"
+      }
+    }
+  },
+  "Brand/IBK": {
+    "brand": {
+      "primary": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0068b70d"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0068b71a"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0068b733"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0068b7"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#3b9ad9"
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0057a0"
+      },
+      "dark": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0057a0"
+      },
+      "bg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#f4f7fb"
+      },
+      "shadow": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0068b740"
+      },
+      "darker": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#004580"
+      },
+      "fg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "IBK기업은행"
+      }
+    }
+  },
+  "Brand/KB": {
+    "brand": {
+      "primary": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#ffbc000d"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#ffbc001a"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#ffbc0033"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffbc00"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffd740"
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#7a4400"
+      },
+      "dark": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#e6aa00"
+      },
+      "bg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#fffdf0"
+      },
+      "shadow": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffbc0040"
+      },
+      "darker": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#cc9600"
+      },
+      "fg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#1a1200"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "KB국민은행"
+      }
+    }
+  },
+  "Brand/NH": {
+    "brand": {
+      "primary": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#00a8590d"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#00a8591a"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#00a85933"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#00a859"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#eef300"
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#007a40"
+      },
+      "dark": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#008a49"
+      },
+      "bg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#f4fbf7"
+      },
+      "shadow": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#00a85940"
+      },
+      "darker": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#006b38"
+      },
+      "fg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "NH농협은행"
+      }
+    }
+  },
+  "Brand/Shinhan": {
+    "brand": {
+      "primary": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0046ff0d"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0046ff1a"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0046ff33"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0046ff"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#4d7fff"
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0033cc"
+      },
+      "dark": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0038cc"
+      },
+      "bg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#f4f6ff"
+      },
+      "shadow": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0046ff40"
+      },
+      "darker": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#002b99"
+      },
+      "fg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "신한은행"
+      }
+    }
+  },
+  "Brand/Woori": {
+    "brand": {
+      "primary": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0067ac0d"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0067ac1a"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0067ac33"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0067ac"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#3395d4"
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#005490"
+      },
+      "dark": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#005490"
+      },
+      "bg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#f4f8fc"
+      },
+      "shadow": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#0067ac40"
+      },
+      "darker": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#00416e"
+      },
+      "fg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "우리은행"
+      }
+    }
+  },
+  "Semantic/Mode 1": {
+    "color": {
+      "brand": {
+        "5": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.primary.5}"
+        },
+        "10": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.primary.10}"
+        },
+        "20": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.primary.20}"
+        },
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "{brand.primary}",
+        "alt": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.alt}"
+        },
+        "fg": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.fg}"
+        },
+        "text": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.text}"
+        },
+        "dark": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.dark}"
+        },
+        "darker": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.darker}"
+        },
+        "shadow": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.shadow}"
+        }
+      },
+      "danger": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#e11d48",
+        "dark": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#c01742"
+        },
+        "darker": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#a8103a"
+        },
+        "surface": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#fff1f2"
+        },
+        "border": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#fda4af"
+        },
+        "text": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#be123c"
+        },
+        "badge": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#ef4444"
+        }
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff",
+        "heading": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#0f172a"
+        },
+        "base": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#1e293b"
+        },
+        "label": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#334155"
+        },
+        "secondary": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#475569"
+        },
+        "muted": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#64748b"
+        },
+        "placeholder": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#94a3b8"
+        },
+        "disabled": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#cbd5e1"
+        }
+      },
+      "border": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#e2e8f0",
+        "subtle": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f1f5f9"
+        },
+        "focus": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{brand.primary}"
+        }
+      },
+      "surface": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff",
+        "subtle": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f8fafc"
+        },
+        "page": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "{domain.page.bg}"
+        },
+        "raised": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f1f5f9"
+        }
+      },
+      "success": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#16a34a",
+        "surface": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f0fdf4"
+        },
+        "border": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#86efac"
+        },
+        "text": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#15803d"
+        }
+      },
+      "warning": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#d97706",
+        "surface": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#fffbeb"
+        },
+        "border": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#fcd34d"
+        },
+        "text": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#b45309"
+        }
+      },
+      "primary": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#2563eb",
+        "surface": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#eff6ff"
+        },
+        "border": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#bfdbfe"
+        },
+        "text": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#1e40af"
+        },
+        "dark": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#1d4ed8"
+        }
+      },
+      "info": {
+        "surface": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#eff6ff"
+        }
+      }
+    }
+  },
+  "Domain/banking": {
+    "domain": {
+      "page": {
+        "bg": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f5f8f8"
+        }
+      },
+      "primary": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "뱅킹 기본"
+      }
+    }
+  },
+  "Domain/card": {
+    "domain": {
+      "page": {
+        "bg": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f4f7ff"
+        }
+      },
+      "primary": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#1a56db"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#4f86f7"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "카드 기본"
+      }
+    }
+  },
+  "Domain/giro": {
+    "domain": {
+      "page": {
+        "bg": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#f9f7ff"
+        }
+      },
+      "primary": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#5b21b6"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#8b5cf6"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "지로 기본"
+      }
+    }
+  },
+  "Domain/insurance": {
+    "domain": {
+      "page": {
+        "bg": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "color",
+          "$value": "#fff8f7"
+        }
+      },
+      "primary": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#e03a1e"
+      },
+      "alt": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "color",
+        "$value": "#f97f6a"
+      },
+      "name": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "text",
+        "$value": "보험 기본"
+      }
+    }
+  },
+  "Primitives/Primitives": {
+    "spacing": {
+      "0": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 0
+      },
+      "xs": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 4
+      },
+      "sm": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 8
+      },
+      "md": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 12
+      },
+      "standard": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 16
+      },
+      "lg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 20
+      },
+      "xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 24
+      },
+      "px": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 1
+      },
+      "2xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 32
+      },
+      "3xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 40
+      },
+      "4xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 48
+      },
+      "nav": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 80
+      }
+    },
+    "radius": {
+      "xs": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 4
+      },
+      "sm": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 8
+      },
+      "md": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 12
+      },
+      "lg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 16
+      },
+      "xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 24
+      },
+      "none": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 0
+      },
+      "full": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 9999
+      }
+    },
+    "text": {
+      "xs": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 12
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 16
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 0
+        }
+      },
+      "sm": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 14
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 20
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 0
+        }
+      },
+      "base": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 16
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 24
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 0
+        }
+      },
+      "lg": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 18
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 28
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": -0.45
+        }
+      },
+      "xl": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 20
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 28
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": -0.5
+        }
+      },
+      "2xl": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 24
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 32
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": -0.3
+        }
+      },
+      "3xl": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 30
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 40
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": -0.75
+        }
+      },
+      "4xl": {
+        "fontSize": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 36
+        },
+        "lineHeight": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": 44
+        },
+        "letterSpacing": {
+          "$extensions": {
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.hiddenFromPublishing": false
+          },
+          "$type": "number",
+          "$value": -0.9
+        }
+      }
+    },
+    "breakpoint": {
+      "sm": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 640
+      },
+      "md": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 768
+      },
+      "lg": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 1024
+      },
+      "xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 1280
+      },
+      "2xl": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 1536
+      },
+      "mobile": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 390
+      },
+      "tablet": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 768
+      },
+      "desktop": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 1280
+      }
+    },
+    "nav": {
+      "topHeight": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 56
+      },
+      "bottomHeight": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 60
+      }
+    },
+    "z": {
+      "base": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 0
+      },
+      "raised": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 1
+      },
+      "overlay": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 10
+      },
+      "sticky": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 20
+      },
+      "modal": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 50
+      },
+      "toast": {
+        "$extensions": {
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.hiddenFromPublishing": false
+        },
+        "$type": "number",
+        "$value": 100
+      }
+    }
+  },
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": [
+      "global",
+      "global/global",
+      "Brand/Hana",
+      "Brand/IBK",
+      "Brand/KB",
+      "Brand/NH",
+      "Brand/Shinhan",
+      "Brand/Woori",
+      "Semantic/Mode 1",
+      "Domain/banking",
+      "Domain/card",
+      "Domain/giro",
+      "Domain/insurance",
+      "Primitives/Primitives"
+    ]
+  }
+}
