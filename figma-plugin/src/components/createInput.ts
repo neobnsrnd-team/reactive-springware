@@ -343,7 +343,7 @@ export async function createInputFormat(): Promise<ComponentSetNode> {
 
   /** 포맷별 placeholder 예시 텍스트 */
   const FORMAT_PLACEHOLDER: Record<InputFormat, string> = {
-    Account: '012-345678-90123',  // 하나은행 계좌번호 패턴 ###-######-#####
+    Account: '000-000000-00000',  // 하나은행 계좌번호 패턴 ###-######-#####
     Phone:   '010-1234-5678',     // 휴대폰번호 패턴 010-XXXX-XXXX
   };
 
