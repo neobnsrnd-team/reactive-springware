@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "primary": {
+      "5": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+        "$type": "color",
+        "$value": "#00a8590d"
+      },
+      "10": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+        "$type": "color",
+        "$value": "#00a8591a"
+      },
+      "20": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+        "$type": "color",
+        "$value": "#00a85933"
+      },
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#00a859"
+    },
+    "alt": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#eef300"
+    },
+    "text": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#007a40"
+    },
+    "dark": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#008a49"
+    },
+    "darker": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#006b38"
+    },
+    "shadow": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#00a85940"
+    },
+    "bg": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#f4fbf7"
+    },
+    "fg": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "name": {
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"], "com.figma.hiddenFromPublishing": false },
+      "$type": "text",
+      "$value": "NH농협은행"
+    }
+  }
+}
