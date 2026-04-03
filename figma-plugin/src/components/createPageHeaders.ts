@@ -14,7 +14,7 @@ import { createIcon } from '../icons';
 const HEADER_WIDTH  = 390;
 const HEADER_HEIGHT = 56;
 
-export function createPageHeader(): ComponentNode {
+export async function createPageHeader(): ComponentNode {
   const comp = createComponent('PageHeader');
   setAutoLayout(comp, 'HORIZONTAL', 0);
   setPadding(comp, 0, SPACING.standard);
@@ -37,7 +37,7 @@ export function createPageHeader(): ComponentNode {
   backBtn.appendChild(createIcon('ChevronLeft', 20, COLOR.textMuted));
   comp.appendChild(backBtn);
 
-  const title = addText(comp, '페이지 제목', FONT_SIZE.base, COLOR.textHeading, true);
+  const title = await addText(comp, '페이지 제목', FONT_SIZE.base, COLOR.textHeading, true);
   title.textAlignHorizontal = 'CENTER';
   title.layoutGrow = 1;
 
@@ -52,7 +52,7 @@ export function createPageHeader(): ComponentNode {
   return comp;
 }
 
-export function createHomeHeader(): ComponentNode {
+export async function createHomeHeader(): ComponentNode {
   const comp = createComponent('HomeHeader');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);
@@ -74,7 +74,7 @@ export function createHomeHeader(): ComponentNode {
   left.counterAxisAlignItems = 'CENTER';
   clearFill(left);
   /* 타이틀: text-xl + text-brand (teal) */
-  addText(left, '하나은행', FONT_SIZE.xl, BRAND.primary, true);
+  await addText(left, '하나은행', FONT_SIZE.xl, BRAND.primary, true);
   comp.appendChild(left);
 
   /* 우측: 프로필·벨·메뉴 3버튼 — Figma node 1:227 기준 */

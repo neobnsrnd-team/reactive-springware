@@ -9,7 +9,7 @@ import { COLOR, SPACING, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, addText, setStroke } from '../helpers';
 
 /* ── InfoRow ──────────────────────────────────────────────── */
-function createInfoRowVariant(showBorder: boolean): ComponentNode {
+async function createInfoRowVariant(showBorder: boolean): ComponentNode {
   const comp = createComponent(`ShowBorder=${showBorder ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.sm, SPACING.standard);
@@ -20,9 +20,9 @@ function createInfoRowVariant(showBorder: boolean): ComponentNode {
   clearFill(comp);
   if (showBorder) setStroke(comp, COLOR.borderSubtle);
 
-  const lbl = addText(comp, '레이블', FONT_SIZE.sm, COLOR.textSecondary);
+  const lbl = await addText(comp, '레이블', FONT_SIZE.sm, COLOR.textSecondary);
   lbl.layoutGrow = 0;
-  const val = addText(comp, '값', FONT_SIZE.sm, COLOR.textHeading, true);
+  const val = await addText(comp, '값', FONT_SIZE.sm, COLOR.textHeading, true);
   val.layoutGrow = 0;
   return comp;
 }
@@ -35,7 +35,7 @@ export async function createInfoRow(): Promise<ComponentSetNode> {
 }
 
 /* ── LabelValueRow ────────────────────────────────────────── */
-function createLabelValueRowNode(): ComponentNode {
+async function createLabelValueRowNode(): ComponentNode {
   const comp = createComponent('LabelValueRow');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.xs, SPACING.standard);
@@ -45,8 +45,8 @@ function createLabelValueRowNode(): ComponentNode {
   comp.primaryAxisAlignItems = 'SPACE_BETWEEN';
   clearFill(comp);
 
-  addText(comp, '레이블', FONT_SIZE.xs, COLOR.textMuted);
-  addText(comp, '값', FONT_SIZE.sm, COLOR.textHeading, true);
+  await addText(comp, '레이블', FONT_SIZE.xs, COLOR.textMuted);
+  await addText(comp, '값', FONT_SIZE.sm, COLOR.textHeading, true);
   return comp;
 }
 

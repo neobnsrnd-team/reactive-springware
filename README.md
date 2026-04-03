@@ -83,3 +83,76 @@ npm uninstall @reactive-springware/component-lib
 - rs-init이 하는 모든 작업 상세 설명
 - 코드 생성 흐름 및 규칙 파일 구조
 - Figma MCP 연동 및 트러블슈팅
+
+---
+
+## 디자인 토큰 동기화 가이드
+
+> 이 섹션은 **패키지 기여자·내부 개발자**를 위한 내용입니다.
+> `design-tokens/globals.css`에 새 속성을 추가할 때 반드시 아래 세 곳을 함께 업데이트해야 합니다.
+
+### 세 계층의 역할
+
+```
+design-tokens/globals.css          figma-plugin/src/tokens.ts          Figma Variables 패널
+─────────────────────────          ───────────────────────────          ───────────────────
+CSS 변수 (단일 진실 공급원)    →   플러그인용 상수 (두 가지 형태)   →   컴포넌트 자동 바인딩
+```
+
+| 계층 | 역할 | 예시 |
+|------|------|------|
+| `globals.css` | 디자인 시스템의 단일 진실 공급원. 색상·간격·타이포그래피를 CSS 변수로 정의 | `--spacing-md: 12px` |
+| `tokens.ts` 값 상수 | CSS 값을 Figma Plugin API 형식으로 변환한 런타임 값. 변수 바인딩 실패 시 fallback으로도 사용 | `SPACING.md = 12` |
+| `tokens.ts` 경로 상수 | Figma Variables 패널의 변수 경로 문자열. 플러그인이 컴포넌트 생성 시 이 경로로 변수를 찾아 바인딩 | `SIZE_VAR.spacingMd = 'spacing/md'` |
+| Figma Variables | Figma 캔버스에 등록된 실제 변수. 값이 바뀌면 바인딩된 모든 컴포넌트에 자동 반영 | Primitives 컬렉션 > `spacing/md = 12` |
+
+### 경로 명명 규칙
+
+CSS 변수 이름에서 `--` 제거 후 `-`를 `/`로 치환하면 Figma 변수 경로가 됩니다.
+
+```
+CSS 변수                    tokens.ts 상수                Figma 변수 경로
+──────────────────────────  ────────────────────────────  ─────────────────────────
+--spacing-md                SPACING.md = 12               spacing/md
+--radius-xl                 RADIUS.xl = 24                radius/xl
+--text-sm (fontSize)        FONT_SIZE.sm = 14             text/sm/fontSize
+--text-sm--line-height      LINE_HEIGHT.sm = 20           text/sm/lineHeight
+--color-surface             COLOR.surface = #FFFFFF       color/surface
+--brand-primary             BRAND.primary = #008485       color/brand
+--font-sans                 FONT_FAMILY.sans              font/sans
+```
+
+### 새 CSS 변수 추가 시 체크리스트
+
+`globals.css`에 새 변수를 추가했다면 아래 순서로 업데이트하세요.
+
+```
+1. design-tokens/globals.css
+   └─ CSS 변수 추가 (예: --color-surface-overlay: rgba(0,0,0,0.4))
+
+2. figma-plugin/src/tokens.ts
+   ├─ 값 상수 추가
+   │   └─ 색상이면 COLOR / BRAND에 hex() 값 추가
+   │      숫자면 SPACING / RADIUS / FONT_SIZE 등에 숫자 추가
+   │      폰트면 FONT_FAMILY에 문자열 추가
+   └─ 경로 상수 추가
+       └─ 색상이면 COLOR_VAR에 Figma 경로 추가
+          숫자면 SIZE_VAR에 Figma 경로 추가
+          폰트면 FONT_VAR에 Figma 경로 추가
+
+3. Figma Variables 패널
+   └─ 해당 컬렉션(Primitives 또는 Semantic)에 동일한 경로로 변수 등록
+      경로는 tokens.ts의 경로 상수 값과 반드시 일치해야 합니다.
+```
+
+### 상수별 파일 위치 요약
+
+| 상수 | 역할 | 파일 |
+|------|------|------|
+| `BRAND`, `COLOR` | 색상 RGB fallback | `figma-plugin/src/tokens.ts` |
+| `SPACING`, `RADIUS`, `FONT_SIZE`, `LINE_HEIGHT`, `LETTER_SPACING` | 숫자 fallback | `figma-plugin/src/tokens.ts` |
+| `FONT_FAMILY` | 폰트 패밀리 문자열 fallback | `figma-plugin/src/tokens.ts` |
+| `COLOR_VAR` | 색상 Figma 변수 경로 | `figma-plugin/src/tokens.ts` |
+| `SIZE_VAR` | 숫자 Figma 변수 경로 | `figma-plugin/src/tokens.ts` |
+| `FONT_VAR` | 폰트 Figma 변수 경로 | `figma-plugin/src/tokens.ts` |
+

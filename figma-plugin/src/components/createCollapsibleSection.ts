@@ -8,7 +8,7 @@ import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../helpers';
 import { createIcon } from '../icons';
 
-function createCollapsibleVariant(expanded: boolean): ComponentNode {
+async function createCollapsibleVariant(expanded: boolean): ComponentNode {
   const comp = createComponent(`Expanded=${expanded ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', 0);
   setPadding(comp, SPACING.md, SPACING.md);
@@ -27,7 +27,7 @@ function createCollapsibleVariant(expanded: boolean): ComponentNode {
   header.primaryAxisAlignItems = 'SPACE_BETWEEN';
   header.fills = [];
 
-  addText(header, '섹션 제목', FONT_SIZE.sm, COLOR.textHeading, true);
+  await addText(header, '섹션 제목', FONT_SIZE.sm, COLOR.textHeading, true);
   /* 펼침/닫힘 상태를 아이콘으로 표현 */
   header.appendChild(createIcon(expanded ? 'ChevronUp' : 'ChevronDown', 16, COLOR.textMuted));
   comp.appendChild(header);
@@ -45,7 +45,7 @@ function createCollapsibleVariant(expanded: boolean): ComponentNode {
     content.layoutAlign = 'STRETCH';
     content.paddingTop = SPACING.sm;
     content.fills = [];
-    addText(content, '펼쳐진 내용이 여기에 표시됩니다.', FONT_SIZE.sm, COLOR.textBase);
+    await addText(content, '펼쳐진 내용이 여기에 표시됩니다.', FONT_SIZE.sm, COLOR.textBase);
     comp.appendChild(content);
   }
 

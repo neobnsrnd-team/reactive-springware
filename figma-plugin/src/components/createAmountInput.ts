@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, setStroke, clearFill, addText } from '../helpers';
 
-function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
+async function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
   const comp = createComponent(`State=${state}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);
@@ -17,7 +17,7 @@ function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
   clearFill(comp);
 
   /* 레이블 */
-  addText(comp, '이체 금액', FONT_SIZE.xs, COLOR.textLabel, true);
+  await addText(comp, '이체 금액', FONT_SIZE.xs, COLOR.textLabel, true);
 
   /* 입력 필드 */
   const field = figma.createFrame();
@@ -39,9 +39,9 @@ function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
     setStroke(field, COLOR.border);
   }
 
-  const amount = addText(field, '0', FONT_SIZE.xl, state === 'Error' ? COLOR.danger : COLOR.textHeading, true);
+  const amount = await addText(field, '0', FONT_SIZE.xl, state === 'Error' ? COLOR.danger : COLOR.textHeading, true);
   amount.layoutGrow = 1;
-  addText(field, '원', FONT_SIZE.base, COLOR.textSecondary);
+  await addText(field, '원', FONT_SIZE.base, COLOR.textSecondary);
   comp.appendChild(field);
 
   /* 빠른 금액 버튼 행 */
@@ -49,7 +49,7 @@ function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
   setAutoLayout(quickRow, 'HORIZONTAL', SPACING.xs);
   quickRow.layoutAlign = 'STRETCH';
   quickRow.fills = [];
-  ['+ 1만', '+ 10만', '+ 100만', '전액'].forEach((label) => {
+  ['+ 1만', '+ 10만', '+ 100만', '전액'].forEach(async (label) => {
     const btn = figma.createFrame();
     setAutoLayout(btn, 'HORIZONTAL', 0);
     btn.primaryAxisAlignItems = 'CENTER';
@@ -58,13 +58,13 @@ function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
     btn.resize(80, 32);
     btn.cornerRadius = RADIUS.sm;
     setFill(btn, COLOR.surfaceRaised);
-    addText(btn, label, FONT_SIZE.xs, COLOR.textSecondary);
+    await addText(btn, label, FONT_SIZE.xs, COLOR.textSecondary);
     quickRow.appendChild(btn);
   });
   comp.appendChild(quickRow);
 
   if (state === 'Error') {
-    addText(comp, '이체 한도를 초과했습니다.', FONT_SIZE.xs, COLOR.dangerText);
+    await addText(comp, '이체 한도를 초과했습니다.', FONT_SIZE.xs, COLOR.dangerText);
   }
 
   return comp;

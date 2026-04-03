@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, FONT_SIZE, RADIUS } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
 
-function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
+async function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
   const comp = createComponent(`HasAction=${hasAction ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);
@@ -25,7 +25,7 @@ function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
   left.counterAxisSizingMode = 'AUTO';
   left.counterAxisAlignItems = 'CENTER';
   left.fills = [];
-  addText(left, '섹션 제목', FONT_SIZE.xl, COLOR.textHeading, true);
+  await addText(left, '섹션 제목', FONT_SIZE.xl, COLOR.textHeading, true);
 
   /* 배지 */
   const badge = figma.createFrame();
@@ -35,13 +35,13 @@ function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
   badge.counterAxisSizingMode = 'AUTO';
   badge.cornerRadius = RADIUS.full;
   setFill(badge, BRAND.bg);
-  addText(badge, '3', FONT_SIZE.xs, BRAND.text, true);
+  await addText(badge, '3', FONT_SIZE.xs, BRAND.text, true);
   left.appendChild(badge);
   comp.appendChild(left);
 
   /* 우측 액션 */
   if (hasAction) {
-    addText(comp, '전체보기', FONT_SIZE.sm, BRAND.text);
+    await addText(comp, '전체보기', FONT_SIZE.sm, BRAND.text);
   }
 
   return comp;

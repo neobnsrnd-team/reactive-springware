@@ -5,6 +5,7 @@
  */
 
 import type { RGB } from './tokens';
+import { FONT_FAMILY, FONT_VAR } from './tokens';
 
 /** SolidPaint 생성 */
 export function solid(color: RGB, opacity = 1): SolidPaint {
@@ -110,32 +111,58 @@ export function setPadding(
 }
 
 /**
- * TextNode 폰트·크기·색상 일괄 설정.
+ * Figma STRING 변수를 TextNode의 특정 필드에 비동기로 바인딩한다.
+ * 변수를 찾지 못하거나 오류 발생 시 기존 값을 유지한다.
+ *
+ * @param node         - 바인딩할 TextNode
+ * @param field        - 바인딩 대상 필드 (예: 'fontFamily')
+ * @param variableName - Figma 변수 전체 경로 (예: 'font/sans')
+ */
+export async function setStringVar(
+  node: TextNode,
+  field: VariableBindableTextField,
+  variableName: string,
+): Promise<void> {
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('STRING');
+    const variable = allVars.find(v => v.name === variableName);
+    if (variable) {
+      node.setBoundVariable(field, variable);
+    }
+  } catch {
+    /* 변수 API 오류 시 fontName 값 유지 */
+  }
+}
+
+/**
+ * TextNode 폰트·크기·색상 일괄 설정 후 fontFamily를 Figma 변수에 바인딩한다.
  * loadFontAsync 호출 후 사용해야 한다.
  */
-export function applyText(
+export async function applyText(
   text: TextNode,
   characters: string,
   fontSize: number,
   color: RGB,
   bold = false,
-): void {
-  text.fontName = { family: 'Noto Sans KR', style: bold ? 'Bold' : 'Regular' };
+): Promise<void> {
+  text.fontName = { family: FONT_FAMILY.sans, style: bold ? 'Bold' : 'Regular' };
   text.fontSize = fontSize;
   text.characters = characters;
   setFill(text, color);
+  /* fontFamily를 Figma font/sans 변수에 바인딩 — 변수 미존재 시 fontName 값 유지 */
+  await setStringVar(text, 'fontFamily', FONT_VAR.sans);
 }
 
 /** TextNode를 생성하고 부모에 추가한 뒤 반환 */
-export function addText(
+export async function addText(
   parent: FrameNode | ComponentNode,
   characters: string,
   fontSize: number,
   color: RGB,
   bold = false,
-): TextNode {
+): Promise<TextNode> {
   const text = figma.createText();
-  applyText(text, characters, fontSize, color, bold);
+  await applyText(text, characters, fontSize, color, bold);
   parent.appendChild(text);
   return text;
 }

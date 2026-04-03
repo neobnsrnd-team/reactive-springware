@@ -265,7 +265,7 @@
   /* ── Surface ── */
   --color-surface: #ffffff;
   --color-surface-subtle: #f8fafc;
-  --color-surface-page: var(--brand-bg, var(--domain-page-bg, #f8fafc));
+  --color-surface-page: var(--brand-bg, var(--domain-page-bg, #f5f8f8));
   --color-surface-raised: #f1f5f9;
 
   /* ── Border ── */
