@@ -41,7 +41,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext ts,tsx",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "npm run build && npm publish"
   },
   "dependencies": {
     "@storybook/react-vite": "^10.3.3",
@@ -56,6 +57,7 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.30.0",
     "@tokens-studio/sd-transforms": "^2.0.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
