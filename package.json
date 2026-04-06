@@ -1,7 +1,6 @@
 {
-  "name": "@reactive-springware/component-lib",
+  "name": "@neobnsrnd-team/reactive-springware",
   "version": "0.3.3",
-  "private": true,
   "type": "module",
   "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Bank App 기반)",
   "main": "./dist/index.js",
@@ -71,5 +70,8 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
