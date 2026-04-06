@@ -43,7 +43,7 @@ import {
   Card,
   SectionHeader,
   NoticeItem,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 
 /** KB국민은행 로고 자리표시자 — 실제 배포 시 SVG 에셋으로 교체 */
 function KbLogo() {

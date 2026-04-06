@@ -15,8 +15,8 @@
  * @returns handleLoadMore - 더보기 버튼 클릭 핸들러
  */
 import { useState } from 'react';
-import type { TransactionItem } from '@reactive-springware/component-library';
-import type { TransactionSearchParams } from '@reactive-springware/component-library';
+import type { TransactionItem } from '@neobnsrnd-team/reactive-springware';
+import type { TransactionSearchParams } from '@neobnsrnd-team/reactive-springware';
 
 /**
  * 오늘 기준 1개월 기본 조회 조건.

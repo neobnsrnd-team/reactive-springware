@@ -39,7 +39,7 @@ import {
   Stack,
   TabNav,
   Text,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { CalendarDays, ChevronDown, ChevronUp } from 'lucide-react';
 import { useTransactionHistory } from './hook';
 import type { Transaction } from './types';

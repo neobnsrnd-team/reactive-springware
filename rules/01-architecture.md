@@ -6,7 +6,7 @@ Claude가 Figma 기반 React 코드를 생성할 때
 일관된 프로젝트 구조와 레이어 분리 원칙을 유지하기 위한 규칙 정의
 
 본 프로젝트는 **Figma UI → Claude → React 코드 생성** 구조를 기반으로 한다.
-공통 UI는 **`@reactive-springware/component-library`** 패키지를 사용한다.
+공통 UI는 **`@neobnsrnd-team/reactive-springware`** 패키지를 사용한다.
 패키지에 없는 공통 컴포넌트를 별도로 만들지 않는다.
 
 ---
@@ -159,10 +159,10 @@ Repository는 데이터 호출을 담당한다.
 
 # 3. Component Library 사용 원칙
 
-공통 UI는 반드시 `@reactive-springware/component-library`를 사용한다.
+공통 UI는 반드시 `@neobnsrnd-team/reactive-springware`를 사용한다.
 
 ```ts
-import { Button, Stack, Input } from '@reactive-springware/component-library';
+import { Button, Stack, Input } from '@neobnsrnd-team/reactive-springware';
 ```
 
 component-library가 유일한 UI 소스다.

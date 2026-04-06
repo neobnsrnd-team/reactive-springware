@@ -22,7 +22,7 @@ import {
   Stack,
   Button,
   EmptyState,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useAccountList } from '../hooks/useAccountList';
 import { AccountGroupSection } from '../components/AccountGroupSection';
 

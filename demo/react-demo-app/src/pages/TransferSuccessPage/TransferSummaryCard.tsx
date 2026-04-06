@@ -15,7 +15,7 @@ import {
   CardRowPlain,
   CardHighlight,
   Stack,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 
 interface TransferSummaryCardProps {
   targetAccount:         string;

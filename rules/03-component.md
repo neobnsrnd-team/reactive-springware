@@ -2,7 +2,7 @@
 
 ## 목적
 
-Claude가 UI 생성 시 반드시 @reactive-springware/component-library만 사용하도록 강제하고,
+Claude가 UI 생성 시 반드시 @neobnsrnd-team/reactive-springware만 사용하도록 강제하고,
 Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변환하는 규칙을 정의한다.
 
 이 규칙이 없으면 HTML 태그가 남발되거나 레이아웃이 깨진다.
@@ -23,7 +23,7 @@ Figma 레이아웃 구조를 React 레이아웃 컴포넌트로 올바르게 변
 
 # 2. 허용 UI 컴포넌트 목록
 
-`@reactive-springware/component-library`에서 제공하는 컴포넌트만 사용한다.
+`@neobnsrnd-team/reactive-springware`에서 제공하는 컴포넌트만 사용한다.
 아래 목록에 없는 컴포넌트는 `11-component-props.md`를 확인한 후 사용한다.
 
 **레이아웃**
@@ -77,8 +77,8 @@ LabelValueRow       ← 라벨+값 (JSX 허용)
 # 3. 컴포넌트 선택 우선순위
 
 ```
-1순위: @reactive-springware/component-library 컴포넌트
-2순위: @reactive-springware/component-library 컴포넌트 + props 조합
+1순위: @neobnsrnd-team/reactive-springware 컴포넌트
+2순위: @neobnsrnd-team/reactive-springware 컴포넌트 + props 조합
 3순위: docs/component-map.md에서 가장 유사한 컴포넌트 선택
 ```
 
@@ -88,7 +88,7 @@ LabelValueRow       ← 라벨+값 (JSX 허용)
 
 # 4. Layout Component 사용 규칙
 
-layout은 반드시 @reactive-springware/component-library의 layout 컴포넌트를 사용한다.
+layout은 반드시 @neobnsrnd-team/reactive-springware의 layout 컴포넌트를 사용한다.
 `div`로 layout을 구성하지 않는다.
 Page → Layout → Section → Component 계층을 유지한다.
 
@@ -312,13 +312,11 @@ Component props (variant, size, gap 등)
 모든 UI 컴포넌트는 Component Library에서 import
 
 ```ts
-import { Button, Input, Select } from '@reactive-springware/component-library';
-import { Stack, Inline, Grid, Card } from '@reactive-springware/component-library';
-import { Text } from '@reactive-springware/component-library';
+import { Button, Input, Select } from '@neobnsrnd-team/reactive-springware';
+import { Stack, Inline, Grid, Card } from '@neobnsrnd-team/reactive-springware';
+import { Text } from '@neobnsrnd-team/reactive-springware';
 import { Search, X, ChevronDown } from 'lucide-react'; // 아이콘은 lucide-react에서 직접 import
 ```
-
-> ❌ `"@reactive-springware/component-lib"` — 패키지명 오류. **`component-library`** 사용
 
 파일 내 import 순서:
 

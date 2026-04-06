@@ -183,7 +183,7 @@ console.log('\n[rs-init] 📖 상세 내용은 rs-docs/setup-guide.md 를 확인
  * 고객사 프로젝트의 진입 파일을 찾아 컴포넌트 라이브러리 CSS import를 주입한다.
  *
  * 주입 대상 import:
- *   import '@reactive-springware/component-lib/dist/index.css';
+ *   import '@neobnsrnd-team/reactive-springware/dist/index.css';
  *
  * dist/index.css 안에 Tailwind 유틸리티 · 디자인 토큰 · 브랜드 변수가 모두 번들링되어 있으므로
  * 고객사 프로젝트에 Tailwind를 별도 설치·설정할 필요 없이 이 한 줄만으로 스타일이 적용된다.
@@ -202,11 +202,11 @@ function injectCssImports() {
   if (!entryFile) {
     console.warn('[rs-init] ⚠ 진입 파일(src/main.* 또는 src/index.*)을 찾지 못했습니다.');
     console.warn('[rs-init]   아래 한 줄을 진입 파일 상단에 직접 추가하세요:');
-    console.warn("            import '@reactive-springware/component-lib/dist/index.css';");
+    console.warn("            import '@neobnsrnd-team/reactive-springware/dist/index.css';");
     return;
   }
 
-  const PKG = '@reactive-springware/component-lib';
+  const PKG = '@neobnsrnd-team/reactive-springware';
   const CSS_IMPORT = `import '${PKG}/dist/index.css';`;
 
   let content = readFileSync(entryFile, 'utf8');
@@ -391,7 +391,7 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 // 패키지 루트 — stories 경로 및 @lib alias 해석에 사용
-const pkgDir = path.dirname(require.resolve('@reactive-springware/component-lib/package.json'));
+const pkgDir = path.dirname(require.resolve('@neobnsrnd-team/reactive-springware/package.json'));
 
 const config: StorybookConfig = {
   stories: [
@@ -453,7 +453,7 @@ export default config;
  *   parameters: { brand: 'kb', domain: 'banking' },
  * } satisfies Meta;
  */
-import '@reactive-springware/component-lib/dist/index.css';
+import '@neobnsrnd-team/reactive-springware/dist/index.css';
 import type { Preview } from '@storybook/react';
 
 const preview: Preview = {
