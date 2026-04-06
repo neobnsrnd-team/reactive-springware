@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, setStroke, clearFill, addText } from '../helpers';
 
-async function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNode {
+async function createAmountInputVariant(state: 'Default' | 'Error'): Promise<ComponentNode> {
   const comp = createComponent(`State=${state}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);
@@ -49,7 +49,7 @@ async function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNo
   setAutoLayout(quickRow, 'HORIZONTAL', SPACING.xs);
   quickRow.layoutAlign = 'STRETCH';
   quickRow.fills = [];
-  ['+ 1만', '+ 10만', '+ 100만', '전액'].forEach(async (label) => {
+  for (const label of ['+ 1만', '+ 10만', '+ 100만', '전액']) {
     const btn = figma.createFrame();
     setAutoLayout(btn, 'HORIZONTAL', 0);
     btn.primaryAxisAlignItems = 'CENTER';
@@ -60,7 +60,7 @@ async function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNo
     setFill(btn, COLOR.surfaceRaised);
     await addText(btn, label, FONT_SIZE.xs, COLOR.textSecondary);
     quickRow.appendChild(btn);
-  });
+  }
   comp.appendChild(quickRow);
 
   if (state === 'Error') {
@@ -71,8 +71,9 @@ async function createAmountInputVariant(state: 'Default' | 'Error'): ComponentNo
 }
 
 export async function createAmountInput(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createAmountInputVariant('Default'), createAmountInputVariant('Error')],
-    'AmountInput', 2,
-  );
+  const components: ComponentNode[] = [
+    await createAmountInputVariant('Default'),
+    await createAmountInputVariant('Error'),
+  ];
+  return combineVariants(components, 'AmountInput', 2);
 }

@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, setStroke, clearFill, clearStroke, addText } from '../helpers';
 
-async function createSelectableVariant(selected: boolean): ComponentNode {
+async function createSelectableVariant(selected: boolean): Promise<ComponentNode> {
   const comp = createComponent(`Selected=${selected ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.xs);
   setPadding(comp, SPACING.md, SPACING.md);
@@ -37,8 +37,9 @@ async function createSelectableVariant(selected: boolean): ComponentNode {
 }
 
 export async function createSelectableItem(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createSelectableVariant(false), createSelectableVariant(true)],
-    'SelectableItem', 2,
-  );
+  const components: ComponentNode[] = [
+    await createSelectableVariant(false),
+    await createSelectableVariant(true),
+  ];
+  return combineVariants(components, 'SelectableItem', 2);
 }

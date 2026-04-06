@@ -15,7 +15,9 @@ import {
 
 const CARD_WIDTH = 328; // 390px 화면 기준 양쪽 standard(16px) 패딩 제외
 
-function createDefaultCard(): ComponentNode {
+/* addText()가 async이므로 이 함수들도 반드시 async로 선언해야 한다.
+ * sync 함수 안에서 await를 사용하면 TypeScript 컴파일 오류가 발생한다. */
+async function createDefaultCard(): Promise<ComponentNode> {
   const comp = createComponent('Type=Default');
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -30,7 +32,7 @@ function createDefaultCard(): ComponentNode {
   return comp;
 }
 
-function createInteractiveCard(): ComponentNode {
+async function createInteractiveCard(): Promise<ComponentNode> {
   const comp = createComponent('Type=Interactive');
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -46,7 +48,7 @@ function createInteractiveCard(): ComponentNode {
   return comp;
 }
 
-function createCardWithHeader(): ComponentNode {
+async function createCardWithHeader(): Promise<ComponentNode> {
   const comp = createComponent('Type=WithHeader');
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -79,7 +81,7 @@ function createCardWithHeader(): ComponentNode {
   return comp;
 }
 
-function createCardWithRow(): ComponentNode {
+async function createCardWithRow(): Promise<ComponentNode> {
   const comp = createComponent('Type=WithRow');
   setAutoLayout(comp, 'VERTICAL', 0);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -96,7 +98,9 @@ function createCardWithRow(): ComponentNode {
     { label: '잔액', value: '1,234,567원' },
   ];
 
-  rows.forEach(({ label, value }, i) => {
+  /* forEach(async ...) 는 await를 추적하지 않으므로 for...of로 순차 처리 */
+  for (let i = 0; i < rows.length; i++) {
+    const { label, value } = rows[i];
     const row = figma.createFrame();
     row.name = 'CardRow';
     setAutoLayout(row, 'HORIZONTAL', SPACING.md);
@@ -115,17 +119,17 @@ function createCardWithRow(): ComponentNode {
     comp.appendChild(row);
     /* 마지막 행 제외 구분선 */
     if (i < rows.length - 1) addDivider(comp, COLOR.borderSubtle);
-  });
+  }
 
   return comp;
 }
 
 export async function createCard(): Promise<ComponentSetNode> {
-  const components = [
-    createDefaultCard(),
-    createInteractiveCard(),
-    createCardWithHeader(),
-    createCardWithRow(),
+  const components: ComponentNode[] = [
+    await createDefaultCard(),
+    await createInteractiveCard(),
+    await createCardWithHeader(),
+    await createCardWithRow(),
   ];
   /* cols=2: 4개 variant를 2행 2열로 배치 */
   return combineVariants(components, 'Card', 2);

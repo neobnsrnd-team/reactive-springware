@@ -12,7 +12,7 @@ const CARD_WIDTH = 328;
 /* ── AccountSummaryCard ──────────────────────────────────── */
 type AccountType = 'Deposit' | 'Savings' | 'Loan';
 
-async function createAccountSummaryVariant(type: AccountType): ComponentNode {
+async function createAccountSummaryVariant(type: AccountType): Promise<ComponentNode> {
   const isLoan = type === 'Loan';
   const comp = createComponent(`Type=${type}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
@@ -54,10 +54,11 @@ async function createAccountSummaryVariant(type: AccountType): ComponentNode {
 }
 
 export async function createAccountSummaryCard(): Promise<ComponentSetNode> {
-  return combineVariants(
-    ['Deposit', 'Savings', 'Loan'].map((t) => createAccountSummaryVariant(t as AccountType)),
-    'AccountSummaryCard', 3,
-  );
+  const components: ComponentNode[] = [];
+  for (const t of ['Deposit', 'Savings', 'Loan'] as AccountType[]) {
+    components.push(await createAccountSummaryVariant(t));
+  }
+  return combineVariants(components, 'AccountSummaryCard', 3);
 }
 
 /* ── AccountSelectorCard ─────────────────────────────────── */
@@ -101,7 +102,7 @@ export async function createAccountSelectorCard(): Promise<ComponentNode> {
 /* ── QuickMenuGrid ───────────────────────────────────────── */
 type GridCols = 3 | 4;
 
-async function createQuickMenuGridVariant(cols: GridCols): ComponentNode {
+async function createQuickMenuGridVariant(cols: GridCols): Promise<ComponentNode> {
   const itemSize = cols === 4 ? 72 : 88;
   const totalWidth = cols * itemSize + (cols - 1) * SPACING.sm;
   const comp = createComponent(`Cols=${cols}`);
@@ -138,16 +139,17 @@ async function createQuickMenuGridVariant(cols: GridCols): ComponentNode {
 }
 
 export async function createQuickMenuGrid(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createQuickMenuGridVariant(3), createQuickMenuGridVariant(4)],
-    'QuickMenuGrid', 2,
-  );
+  const components: ComponentNode[] = [
+    await createQuickMenuGridVariant(3),
+    await createQuickMenuGridVariant(4),
+  ];
+  return combineVariants(components, 'QuickMenuGrid', 2);
 }
 
 /* ── BannerCarousel ──────────────────────────────────────── */
 type BannerVariant = 'Promo' | 'Info' | 'Warning';
 
-async function createBannerCarouselVariant(variant: BannerVariant): ComponentNode {
+async function createBannerCarouselVariant(variant: BannerVariant): Promise<ComponentNode> {
   const BG_CONFIG: Record<BannerVariant, Parameters<typeof setFill>[1]> = {
     Promo:   BRAND.primary,
     Info:    COLOR.surfaceRaised,
@@ -182,10 +184,11 @@ async function createBannerCarouselVariant(variant: BannerVariant): ComponentNod
 }
 
 export async function createBannerCarousel(): Promise<ComponentSetNode> {
-  return combineVariants(
-    ['Promo', 'Info', 'Warning'].map((v) => createBannerCarouselVariant(v as BannerVariant)),
-    'BannerCarousel', 3,
-  );
+  const components: ComponentNode[] = [];
+  for (const v of ['Promo', 'Info', 'Warning'] as BannerVariant[]) {
+    components.push(await createBannerCarouselVariant(v));
+  }
+  return combineVariants(components, 'BannerCarousel', 3);
 }
 
 /* ── UserProfile ─────────────────────────────────────────── */

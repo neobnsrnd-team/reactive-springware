@@ -32,7 +32,9 @@ export async function createBottomNav(): Promise<ComponentNode> {
   comp.counterAxisAlignItems = 'CENTER';
   setFill(comp, COLOR.surface);
 
-  TAB_ITEMS.forEach(async ({ label, icon }, i) => {
+  /* forEach(async ...) 는 Promise를 추적하지 않으므로 for...of로 순차 처리 */
+  for (let i = 0; i < TAB_ITEMS.length; i++) {
+    const { label, icon } = TAB_ITEMS[i];
     const isActive = i === 2; // 홈(중앙)이 기본 활성
 
     const tab = figma.createFrame();
@@ -60,7 +62,7 @@ export async function createBottomNav(): Promise<ComponentNode> {
     }
 
     comp.appendChild(tab);
-  });
+  }
 
   figma.currentPage.appendChild(comp);
   return comp;

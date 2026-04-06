@@ -16,7 +16,9 @@ import {
 const TAB_LABELS = ['탭 1', '탭 2', '탭 3'];
 const TAB_WIDTH = 390;
 
-function createUnderlineTabNav(): ComponentNode {
+/* addText()가 async이므로 이 함수들도 반드시 async로 선언해야 한다.
+ * forEach(async ...) 는 Promise를 추적하지 않으므로 for...of로 순차 처리한다. */
+async function createUnderlineTabNav(): Promise<ComponentNode> {
   const comp = createComponent('Variant=Underline');
   setAutoLayout(comp, 'HORIZONTAL', 0);
   comp.resize(TAB_WIDTH, 44);
@@ -32,7 +34,8 @@ function createUnderlineTabNav(): ComponentNode {
   comp.strokeLeftWeight = 0;
   comp.strokeRightWeight = 0;
 
-  TAB_LABELS.forEach((label, i) => {
+  for (let i = 0; i < TAB_LABELS.length; i++) {
+    const label = TAB_LABELS[i];
     const tab = figma.createFrame();
     tab.name = i === 0 ? 'Tab (Active)' : `Tab`;
     setAutoLayout(tab, 'HORIZONTAL', 0);
@@ -63,12 +66,12 @@ function createUnderlineTabNav(): ComponentNode {
     }
 
     comp.appendChild(tab);
-  });
+  }
 
   return comp;
 }
 
-function createPillTabNav(): ComponentNode {
+async function createPillTabNav(): Promise<ComponentNode> {
   const comp = createComponent('Variant=Pill');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
   setPadding(comp, SPACING.xs, SPACING.xs);
@@ -78,7 +81,8 @@ function createPillTabNav(): ComponentNode {
   comp.cornerRadius = RADIUS.full;
   setFill(comp, COLOR.surfaceRaised);
 
-  TAB_LABELS.forEach((label, i) => {
+  for (let i = 0; i < TAB_LABELS.length; i++) {
+    const label = TAB_LABELS[i];
     const isActive = i === 0;
     const tab = figma.createFrame();
     tab.name = isActive ? 'Tab (Active)' : 'Tab';
@@ -106,13 +110,16 @@ function createPillTabNav(): ComponentNode {
     text.layoutGrow = 1;
 
     comp.appendChild(tab);
-  });
+  }
 
   return comp;
 }
 
 export async function createTabNav(): Promise<ComponentSetNode> {
-  const components = [createUnderlineTabNav(), createPillTabNav()];
+  const components: ComponentNode[] = [
+    await createUnderlineTabNav(),
+    await createPillTabNav(),
+  ];
   /* cols=1: Underline / Pill을 세로로 나열 */
   return combineVariants(components, 'TabNav', 1);
 }

@@ -8,7 +8,7 @@ import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../helpers';
 import { createIcon } from '../icons';
 
-async function createCollapsibleVariant(expanded: boolean): ComponentNode {
+async function createCollapsibleVariant(expanded: boolean): Promise<ComponentNode> {
   const comp = createComponent(`Expanded=${expanded ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', 0);
   setPadding(comp, SPACING.md, SPACING.md);
@@ -53,8 +53,9 @@ async function createCollapsibleVariant(expanded: boolean): ComponentNode {
 }
 
 export async function createCollapsibleSection(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createCollapsibleVariant(false), createCollapsibleVariant(true)],
-    'CollapsibleSection', 2,
-  );
+  const components: ComponentNode[] = [
+    await createCollapsibleVariant(false),
+    await createCollapsibleVariant(true),
+  ];
+  return combineVariants(components, 'CollapsibleSection', 2);
 }

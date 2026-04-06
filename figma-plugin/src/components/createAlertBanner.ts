@@ -28,7 +28,7 @@ const INTENT_CONFIG: Record<AlertIntent, {
   Info:    { bg: COLOR.primarySurface, border: COLOR.border,        text: COLOR.primaryText },
 };
 
-async function createAlertVariant(intent: AlertIntent): ComponentNode {
+async function createAlertVariant(intent: AlertIntent): Promise<ComponentNode> {
   const { bg, border, text } = INTENT_CONFIG[intent];
   const comp = createComponent(`Intent=${intent}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
@@ -51,5 +51,9 @@ async function createAlertVariant(intent: AlertIntent): ComponentNode {
 
 export async function createAlertBanner(): Promise<ComponentSetNode> {
   const intents: AlertIntent[] = ['Warning', 'Danger', 'Success', 'Info'];
-  return combineVariants(intents.map(createAlertVariant), 'AlertBanner', 1);
+  const components: ComponentNode[] = [];
+  for (const intent of intents) {
+    components.push(await createAlertVariant(intent));
+  }
+  return combineVariants(components, 'AlertBanner', 1);
 }

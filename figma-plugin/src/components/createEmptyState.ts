@@ -7,7 +7,7 @@
 import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, setFill, addText } from '../helpers';
 
-async function createEmptyStateVariant(hasAction: boolean): ComponentNode {
+async function createEmptyStateVariant(hasAction: boolean): Promise<ComponentNode> {
   const comp = createComponent(`HasAction=${hasAction ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING['3xl'], SPACING.xl);
@@ -48,8 +48,9 @@ async function createEmptyStateVariant(hasAction: boolean): ComponentNode {
 }
 
 export async function createEmptyState(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createEmptyStateVariant(false), createEmptyStateVariant(true)],
-    'EmptyState', 2,
-  );
+  const components: ComponentNode[] = [
+    await createEmptyStateVariant(false),
+    await createEmptyStateVariant(true),
+  ];
+  return combineVariants(components, 'EmptyState', 2);
 }

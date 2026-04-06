@@ -8,7 +8,7 @@ import { COLOR, BRAND, SPACING, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../helpers';
 import { createIcon } from '../icons';
 
-async function createAccountSelectVariant(selected: boolean): ComponentNode {
+async function createAccountSelectVariant(selected: boolean): Promise<ComponentNode> {
   const comp = createComponent(`Selected=${selected ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.md, SPACING.standard);
@@ -43,8 +43,9 @@ async function createAccountSelectVariant(selected: boolean): ComponentNode {
 }
 
 export async function createAccountSelectItem(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createAccountSelectVariant(false), createAccountSelectVariant(true)],
-    'AccountSelectItem', 1,
-  );
+  const components: ComponentNode[] = [
+    await createAccountSelectVariant(false),
+    await createAccountSelectVariant(true),
+  ];
+  return combineVariants(components, 'AccountSelectItem', 1);
 }

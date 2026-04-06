@@ -9,7 +9,7 @@ import { COLOR, SPACING, FONT_SIZE } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, addText, setStroke } from '../helpers';
 
 /* ── InfoRow ──────────────────────────────────────────────── */
-async function createInfoRowVariant(showBorder: boolean): ComponentNode {
+async function createInfoRowVariant(showBorder: boolean): Promise<ComponentNode> {
   const comp = createComponent(`ShowBorder=${showBorder ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.sm, SPACING.standard);
@@ -28,14 +28,15 @@ async function createInfoRowVariant(showBorder: boolean): ComponentNode {
 }
 
 export async function createInfoRow(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createInfoRowVariant(false), createInfoRowVariant(true)],
-    'InfoRow', 2,
-  );
+  const components: ComponentNode[] = [
+    await createInfoRowVariant(false),
+    await createInfoRowVariant(true),
+  ];
+  return combineVariants(components, 'InfoRow', 2);
 }
 
 /* ── LabelValueRow ────────────────────────────────────────── */
-async function createLabelValueRowNode(): ComponentNode {
+async function createLabelValueRowNode(): Promise<ComponentNode> {
   const comp = createComponent('LabelValueRow');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.xs, SPACING.standard);
@@ -51,7 +52,7 @@ async function createLabelValueRowNode(): ComponentNode {
 }
 
 export async function createLabelValueRow(): Promise<ComponentNode> {
-  const comp = createLabelValueRowNode();
+  const comp = await createLabelValueRowNode();
   figma.currentPage.appendChild(comp);
   return comp;
 }

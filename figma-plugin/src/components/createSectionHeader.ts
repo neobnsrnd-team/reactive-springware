@@ -7,7 +7,7 @@
 import { COLOR, BRAND, SPACING, FONT_SIZE, RADIUS } from '../tokens';
 import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
 
-async function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
+async function createSectionHeaderVariant(hasAction: boolean): Promise<ComponentNode> {
   const comp = createComponent(`HasAction=${hasAction ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);
@@ -48,8 +48,9 @@ async function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
 }
 
 export async function createSectionHeader(): Promise<ComponentSetNode> {
-  return combineVariants(
-    [createSectionHeaderVariant(false), createSectionHeaderVariant(true)],
-    'SectionHeader', 1,
-  );
+  const components: ComponentNode[] = [
+    await createSectionHeaderVariant(false),
+    await createSectionHeaderVariant(true),
+  ];
+  return combineVariants(components, 'SectionHeader', 1);
 }

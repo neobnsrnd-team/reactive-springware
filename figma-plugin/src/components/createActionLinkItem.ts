@@ -15,7 +15,7 @@ const SIZE_CONFIG: Record<ActionSize, { py: number; fontSize: number }> = {
   Small:  { py: SPACING.sm,  fontSize: FONT_SIZE.xs },
 };
 
-async function createActionLinkVariant(size: ActionSize, showBorder: boolean): ComponentNode {
+async function createActionLinkVariant(size: ActionSize, showBorder: boolean): Promise<ComponentNode> {
   const { py, fontSize } = SIZE_CONFIG[size];
   const comp = createComponent(`Size=${size}, ShowBorder=${showBorder ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
@@ -57,7 +57,7 @@ export async function createActionLinkItem(): Promise<ComponentSetNode> {
   const components: ComponentNode[] = [];
   for (const size of ['Medium', 'Small'] as ActionSize[]) {
     for (const border of [false, true]) {
-      components.push(createActionLinkVariant(size, border));
+      components.push(await createActionLinkVariant(size, border));
     }
   }
   return combineVariants(components, 'ActionLinkItem', 2);
