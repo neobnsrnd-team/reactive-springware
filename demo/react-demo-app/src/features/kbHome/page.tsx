@@ -46,7 +46,7 @@ import {
   SectionHeader,
   NoticeItem,
   AlertBanner,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useKbHome } from './hook';
 import type { KbHomeNoticeCategory } from './types';
 

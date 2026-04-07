@@ -1,9 +1,9 @@
 /**
  * @file index.ts
- * @description @reactive-springware/component-library 패키지 진입점.
+ * @description @neobnsrnd-team/reactive-springware 패키지 진입점.
  *
  * 카테고리별 모든 컴포넌트와 타입을 re-export합니다.
- * 외부에서 `import { Button } from '@reactive-springware/component-library'` 형태로 사용.
+ * 외부에서 `import { Button } from '@neobnsrnd-team/reactive-springware'` 형태로 사용.
  */
 
 // 디자인 토큰 + Tailwind 유틸리티 CSS를 빌드에 포함시킨다.

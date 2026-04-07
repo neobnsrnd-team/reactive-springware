@@ -27,7 +27,7 @@ import {
   LabelValueRow,
   CollapsibleSection,
   AccountSummaryCard,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import type { AccountGroup } from '../types/accountListTypes';
 
 interface AccountGroupSectionProps {

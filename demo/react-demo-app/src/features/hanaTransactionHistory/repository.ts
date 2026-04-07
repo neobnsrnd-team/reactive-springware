@@ -10,8 +10,8 @@
  * // { items: TransactionItem[], hasMore: boolean, nextPage: number }
  */
 import axios from 'axios';
-import type { TransactionItem } from '@reactive-springware/component-library';
-import type { TransactionSearchParams } from '@reactive-springware/component-library';
+import type { TransactionItem } from '@neobnsrnd-team/reactive-springware';
+import type { TransactionSearchParams } from '@neobnsrnd-team/reactive-springware';
 import type { TransactionApiItem, TransactionPageResponse } from './types';
 
 /**
