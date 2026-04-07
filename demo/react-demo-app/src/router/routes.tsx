@@ -10,6 +10,7 @@
 import { HomeDashboardPage } from '@/features/homeDashboard/page';
 import { AccountListPage } from '@/features/accountList/page';
 import { AccountDetailPage } from '@/features/accountDetail/page';
+import { TransferPage } from '@/features/transfer/page';
 import { TransferSuccessPage } from '@/features/transferSuccess/page';
 import { KbHomePage } from '@/features/kbHome/page';
 import { KbTransactionHistoryListPage } from '@/features/kbTransactionHistory/page';
@@ -29,6 +30,10 @@ const routes = [
   {
     path: '/accounts/:id',
     element: <AccountDetailPage />,
+  },
+  {
+    path: '/transfer',
+    element: <TransferPage />,
   },
   {
     path: '/transfer/success',
