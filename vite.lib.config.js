@@ -22,6 +22,8 @@ export default defineConfig({
     react(),
     dts({
       include: ['packages/component-library', 'lib'],
+      // Storybook 파일은 배포 결과물에 불필요하므로 타입 선언 생성에서 제외
+      exclude: ['**/*.stories.tsx', '**/*.stories.ts'],
       outDir: 'dist',
       // IDE/typecheck용 tsconfig.json(noEmit:true)와 분리된 빌드 전용 설정 사용
       tsconfigPath: './tsconfig.build.json',
