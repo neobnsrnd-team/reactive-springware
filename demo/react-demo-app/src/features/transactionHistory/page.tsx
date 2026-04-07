@@ -25,7 +25,7 @@ import {
   PageLayout,
   Stack,
   Text,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { CalendarDays, ChevronDown } from 'lucide-react';
 import { useTransactionHistory } from './hook';
 import type { Transaction } from './types';

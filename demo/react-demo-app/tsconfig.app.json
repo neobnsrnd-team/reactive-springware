@@ -25,7 +25,7 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@reactive-springware/component-library": ["../../packages/component-library/index.ts"],
+      "@neobnsrnd-team/reactive-springware": ["../../packages/component-library/index.ts"],
       "@lib/*": ["../../lib/*"]
     }
   },

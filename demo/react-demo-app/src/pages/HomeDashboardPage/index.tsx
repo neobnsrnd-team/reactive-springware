@@ -38,7 +38,7 @@ import {
   SectionHeader,
   Card,
   Stack,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useHomeDashboard } from './useHomeDashboard';
 
 /** 하나은행 로고 자리표시자 — 실제 배포 시 SVG 에셋으로 교체 */

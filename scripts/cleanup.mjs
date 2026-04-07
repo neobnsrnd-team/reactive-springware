@@ -19,7 +19,7 @@
  *
  * @example
  * npx rs-cleanup
- * npm uninstall @reactive-springware/component-lib
+ * npm uninstall @neobnsrnd-team/reactive-springware
  */
 import { existsSync, rmSync, unlinkSync, readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';

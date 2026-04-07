@@ -21,7 +21,7 @@ import {
   SuccessHero,
   ActionLinkItem,
   Button,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useTransferSuccess } from './useTransferSuccess';
 import { TransferSummaryCard } from './TransferSummaryCard';
 

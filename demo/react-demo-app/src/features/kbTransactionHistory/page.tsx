@@ -23,7 +23,7 @@ import {
   Button,
   Stack,
   Inline,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useTransactionHistoryList } from './hook';
 
 export function KbTransactionHistoryListPage() {

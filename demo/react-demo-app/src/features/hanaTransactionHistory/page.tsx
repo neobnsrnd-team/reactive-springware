@@ -23,7 +23,7 @@ import {
   Button,
   Stack,
   Inline,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useHanaTransactionHistoryList } from './hook';
 
 export function HanaTransactionHistoryListPage() {

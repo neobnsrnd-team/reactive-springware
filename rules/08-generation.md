@@ -12,7 +12,7 @@ Claude가 페이지 생성 시 누락 없이 필요한 파일을 생성하고,
 페이지·컴포넌트 생성 전, 아래 import가 진입 파일(`src/main.tsx` 또는 `src/main.jsx` 등)에 **이미 존재하는지** 확인한다.
 
 ```ts
-import '@reactive-springware/component-library/dist/index.css';
+import '@neobnsrnd-team/reactive-springware/dist/index.css';
 ```
 
 - 없으면 진입 파일 **최상단**에 추가한다.
