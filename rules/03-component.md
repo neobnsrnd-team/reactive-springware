@@ -357,6 +357,37 @@ BAD
 
 ---
 
+# 14. 애니메이션 처리 원칙
+
+Claude는 애니메이션을 임의로 추가하지 않는다.
+외부 애니메이션 라이브러리 추가는 설계 의도·번들 크기·디자인 시스템 일관성을 훼손한다.
+
+## 허용
+
+```tsx
+// design-tokens에 정의된 transition 토큰 기반 Tailwind 유틸리티
+className="transition-colors duration-150"
+className="transition-opacity duration-200"
+className="transition-transform duration-150"
+```
+
+## 금지
+
+```
+framer-motion, react-spring, react-transition-group 등 외부 라이브러리 추가
+@keyframes 직접 작성
+JavaScript 기반 애니메이션 로직을 Page/Component에 작성
+style={{ transition: '...' }} — inline style 전면 금지
+```
+
+## Figma Smart Animate 처리
+
+Figma 디자인에 Smart Animate (전환 효과) 가 있는 경우:
+
+→ 임의로 구현하지 말고 **개발자에게 확인 후 진행** (rules/09-confirmation.md)
+
+---
+
 # 핵심 체크리스트
 
 ✔ HTML 직접 사용 금지

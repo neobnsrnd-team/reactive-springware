@@ -71,7 +71,10 @@ export function HomePageLayout({
                   <Bell className="size-4" aria-hidden="true" />
                   {hasNotification && (
                     /* 알림 뱃지: Figma node 1:234 — 빨간 원, 흰 테두리 */
-                    <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-danger-badge border-2 border-white" aria-hidden="true" />
+                    <span
+                      className="absolute top-1.5 right-1.5 size-2 rounded-full bg-danger-badge border-2 border-white"
+                      aria-hidden="true"
+                    />
                   )}
                 </button>
 
@@ -90,7 +93,7 @@ export function HomePageLayout({
         className={cn(
           'flex-1 overflow-y-auto',
           /* 좌우 기본 여백 + 상하 여백 — 콘텐츠가 화면 끝에 붙지 않도록 */
-          'px-standard py-md',
+          'py-md',
           /* 하단 탭바(80px) 높이만큼 여백 확보 — 탭바가 콘텐츠를 가리지 않도록 */
           withBottomNav && 'pb-nav',
         )}
