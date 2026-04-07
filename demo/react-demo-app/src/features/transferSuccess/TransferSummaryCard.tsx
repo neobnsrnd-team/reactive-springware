@@ -10,19 +10,14 @@
  * @param recipientMemo     - 받는 분 통장 표시 메모 (예: "김하나")
  * @param balanceAfterTransfer - 이체 후 잔액 포맷 문자열 (예: "2,900,000원")
  */
-import {
-  Card,
-  CardRowPlain,
-  CardHighlight,
-  Stack,
-} from '@reactive-springware/component-library';
+import { Card, CardRowPlain, CardHighlight, Stack } from '@neobnsrnd-team/reactive-springware';
 
 interface TransferSummaryCardProps {
-  targetAccount:         string;
-  myMemo:                string;
-  recipientMemo:         string;
+  targetAccount: string;
+  myMemo: string;
+  recipientMemo: string;
   /** 이체 후 잔액 — 이미 포맷된 문자열 (예: "2,900,000원") */
-  balanceAfterTransfer:  string;
+  balanceAfterTransfer: string;
 }
 
 /**
@@ -42,8 +37,8 @@ export function TransferSummaryCard({
       {/* 이체 정보 행 목록 — p-standard로 내부 padding 직접 부여
           CardRowPlain: 행 간 구분선 없이 여백만으로 구분 */}
       <Stack gap="md" className="p-standard">
-        <CardRowPlain label="받는 계좌"         value={targetAccount} />
-        <CardRowPlain label="내 통장 표시"      value={myMemo} />
+        <CardRowPlain label="받는 계좌" value={targetAccount} />
+        <CardRowPlain label="내 통장 표시" value={myMemo} />
         <CardRowPlain label="받는 분 통장 표시" value={recipientMemo} />
       </Stack>
 

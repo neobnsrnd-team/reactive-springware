@@ -29,7 +29,7 @@ import {
   Button,
   EmptyState,
   ErrorState,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useAccountDetail } from './hook';
 
 export function AccountDetailPage() {
@@ -60,10 +60,7 @@ export function AccountDetailPage() {
   if (isError) {
     return (
       <PageLayout title="계좌 상세" onBack={handleBack}>
-        <ErrorState
-          description="계좌 정보를 불러오지 못했습니다."
-          onRetry={() => void refetch()}
-        />
+        <ErrorState description="계좌 정보를 불러오지 못했습니다." onRetry={() => void refetch()} />
       </PageLayout>
     );
   }
@@ -91,7 +88,6 @@ export function AccountDetailPage() {
     <div data-domain="banking">
       <PageLayout title={data.name} onBack={handleBack}>
         <Stack gap="md" className="pb-standard">
-
           {/* ── 계좌 요약 카드 ─────────────────────────────────────────── */}
           <Stack className="px-standard">
             <AccountSummaryCard
@@ -117,7 +113,7 @@ export function AccountDetailPage() {
           <Section title="계좌 정보" className="px-standard">
             <Stack gap="sm">
               <LabelValueRow label="계좌번호" value={data.accountNumber} />
-              <LabelValueRow label="개설일"   value={data.openedDateDisplay} />
+              <LabelValueRow label="개설일" value={data.openedDateDisplay} />
               {/* 이자율은 청약저축·외화예금 등 해당 상품에만 표시 */}
               {data.interestRateDisplay && (
                 <LabelValueRow label="이자율" value={data.interestRateDisplay} />
@@ -146,7 +142,6 @@ export function AccountDetailPage() {
               </Stack>
             )}
           </Section>
-
         </Stack>
       </PageLayout>
     </div>

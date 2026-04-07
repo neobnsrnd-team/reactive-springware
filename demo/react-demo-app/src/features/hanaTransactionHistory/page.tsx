@@ -27,15 +27,8 @@ import {
 import { useHanaTransactionHistoryList } from './hook';
 
 export function HanaTransactionHistoryListPage() {
-  const {
-    transactions,
-    isLoading,
-    isError,
-    hasMore,
-    filter,
-    handleSearch,
-    handleLoadMore,
-  } = useHanaTransactionHistoryList();
+  const { transactions, isLoading, isError, hasMore, filter, handleSearch, handleLoadMore } =
+    useHanaTransactionHistoryList();
 
   return (
     /* data-brand="hana": 하나은행 브랜드 토큰 적용 (청록/초록 계열)
@@ -51,23 +44,22 @@ export function HanaTransactionHistoryListPage() {
           </Button>
         }
       >
-        <Stack gap="md" className="px-standard pb-standard">
+        <Stack gap="md" className="pb-standard">
           {/* ── 계좌 선택 카드 ──────────────────────────
            * onAccountChange: 계좌 변경 드롭다운 열기 (실제 연동 시 BottomSheet로 교체) */}
-          <AccountSelectorCard
-            accountName="하나 주거래 통장"
-            accountNumber="123-456-789012"
-            onAccountChange={() => {}}
-          />
+
+          <div className="mx-standard">
+            <AccountSelectorCard
+              accountName="하나 주거래 통장"
+              accountNumber="123-456-789012"
+              onAccountChange={() => {}}
+            />
+          </div>
 
           {/* ── 조회 조건 설정 ──────────────────────────
            * defaultExpanded=false: 기본 접힌 상태로 시작.
            * 헤더 터치 시 기간 탭·날짜 입력·정렬·유형 드롭다운이 펼쳐진다. */}
-          <TransactionSearchFilter
-            value={filter}
-            onSearch={handleSearch}
-            defaultExpanded={false}
-          />
+          <TransactionSearchFilter value={filter} onSearch={handleSearch} defaultExpanded={false} />
 
           {/* ── 조회 실패 안내 ──────────────────────────
            * isError일 때만 노출. TransactionList는 로딩·빈 상태를 내부에서 처리한다. */}

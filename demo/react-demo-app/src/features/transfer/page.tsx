@@ -24,14 +24,14 @@ import {
   Button,
   AccountSelectorCard,
   LabelValueRow,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useTransferForm } from './useTransferForm';
 
 export function TransferPage() {
-  const navigate           = useNavigate();
+  const navigate = useNavigate();
   // URL QueryParam에서 출금 계좌 ID 추출 — page는 파싱만, 나머지는 hook에 위임
-  const [searchParams]     = useSearchParams();
-  const fromAccountId      = searchParams.get('fromAccountId') ?? '';
+  const [searchParams] = useSearchParams();
+  const fromAccountId = searchParams.get('fromAccountId') ?? '';
 
   const {
     values,
@@ -64,7 +64,6 @@ export function TransferPage() {
       }
     >
       <Stack gap="lg" className="px-standard pb-standard">
-
         {/* ── 출금 계좌 ──────────────────────────────────────────────── */}
         <Section title="출금 계좌">
           <AccountSelectorCard
@@ -72,7 +71,9 @@ export function TransferPage() {
             accountNumber="123-456789-01207"
             icon={<WalletMinimal className="size-5" />}
             availableBalance={`출금가능금액: ${availableBalance.toLocaleString('ko-KR')}원`}
-            onAccountChange={() => {/* TODO: 계좌 선택 시트 */}}
+            onAccountChange={() => {
+              /* TODO: 계좌 선택 시트 */
+            }}
           />
         </Section>
 
@@ -88,7 +89,7 @@ export function TransferPage() {
              */
             formatPattern="###-######-#####"
             value={values.accountNumber}
-            onChange={e => handleChange('accountNumber', e.target.value)}
+            onChange={(e) => handleChange('accountNumber', e.target.value)}
             onBlur={() => handleBlur('accountNumber')}
             validationState={touched.accountNumber && errors.accountNumber ? 'error' : 'default'}
             helperText={
@@ -107,26 +108,22 @@ export function TransferPage() {
             placeholder="금액을 입력하세요"
             inputMode="numeric"
             value={values.amount}
-            onChange={e => {
+            onChange={(e) => {
               // 숫자만 허용 — 비숫자 문자 입력 무시
               const onlyNum = e.target.value.replace(/\D/g, '');
               handleChange('amount', onlyNum);
             }}
             onBlur={() => handleBlur('amount')}
             validationState={touched.amount && errors.amount ? 'error' : 'default'}
-            helperText={
-              touched.amount && errors.amount
-                ? errors.amount
-                : undefined
-            }
+            helperText={touched.amount && errors.amount ? errors.amount : undefined}
             /**
              * rightElement: 입력한 숫자를 "X,XXX원" 형식으로 표시.
              * amountDisplay는 hook에서 계산하므로 page는 표시만 담당한다.
              */
             rightElement={
-              amountDisplay
-                ? <span className="text-sm text-text-muted whitespace-nowrap">{amountDisplay}</span>
-                : undefined
+              amountDisplay ? (
+                <span className="text-sm text-text-muted whitespace-nowrap">{amountDisplay}</span>
+              ) : undefined
             }
             fullWidth
           />
@@ -145,18 +142,13 @@ export function TransferPage() {
             label="내 통장 표시 (선택)"
             placeholder="최대 10자"
             value={values.memo}
-            onChange={e => handleChange('memo', e.target.value)}
+            onChange={(e) => handleChange('memo', e.target.value)}
             onBlur={() => handleBlur('memo')}
             validationState={touched.memo && errors.memo ? 'error' : 'default'}
-            helperText={
-              touched.memo && errors.memo
-                ? errors.memo
-                : `${values.memo.length}/10`
-            }
+            helperText={touched.memo && errors.memo ? errors.memo : `${values.memo.length}/10`}
             fullWidth
           />
         </Section>
-
       </Stack>
     </PageLayout>
   );

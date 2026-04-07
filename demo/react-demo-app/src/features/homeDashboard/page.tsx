@@ -13,7 +13,6 @@
  *
  * 데이터·이벤트 출처: useHomeDashboard Hook (hook.ts)
  */
-import React from 'react';
 import {
   Wallet,
   ShoppingBag,
@@ -38,7 +37,7 @@ import {
   SectionHeader,
   Card,
   Stack,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useHomeDashboard } from './hook';
 
 /** 하나은행 로고 자리표시자 — 실제 배포 시 SVG 에셋으로 교체 */
@@ -88,25 +87,25 @@ export function HomeDashboardPage() {
   const bottomNavItems = [
     {
       id: 'asset',
-      icon: <Wallet        className="size-5" />,
+      icon: <Wallet className="size-5" />,
       label: '자산',
       onClick: () => handleBottomNavChange('asset'),
     },
     {
       id: 'product',
-      icon: <ShoppingBag   className="size-5" />,
+      icon: <ShoppingBag className="size-5" />,
       label: '상품',
       onClick: () => handleBottomNavChange('product'),
     },
     {
       id: 'home',
-      icon: <Home          className="size-6" />,
+      icon: <Home className="size-6" />,
       label: '홈',
       onClick: () => handleBottomNavChange('home'),
     },
     {
       id: 'card',
-      icon: <CreditCard    className="size-5" />,
+      icon: <CreditCard className="size-5" />,
       label: '카드',
       onClick: () => handleBottomNavChange('card'),
     },
@@ -120,7 +119,7 @@ export function HomeDashboardPage() {
 
   /** 상단 탭 목록 */
   const tabItems = [
-    { id: 'mine',  label: '해당금융' },
+    { id: 'mine', label: '해당금융' },
     { id: 'other', label: '다른금융' },
     { id: 'asset', label: '자산관리' },
   ];
@@ -217,11 +216,7 @@ export function HomeDashboardPage() {
                 title: data.connectionBanner.title,
                 description: data.connectionBanner.description,
                 action: (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleConnectionBanner}
-                  >
+                  <Button variant="outline" size="sm" onClick={handleConnectionBanner}>
                     {data.connectionBanner.actionLabel}
                   </Button>
                 ),
@@ -239,7 +234,7 @@ export function HomeDashboardPage() {
 
         {/* ── 공지 및 혜택 목록 ─────────────────────────── */}
         <div className="px-standard pt-standard pb-standard">
-          <SectionHeader title="공지 및 혜택" />
+          <SectionHeader title="공지 및 혜택" className="pb-3" />
           <Card>
             {data.notices.map((notice, index) => (
               <NoticeItem

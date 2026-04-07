@@ -21,7 +21,7 @@ import {
   SuccessHero,
   ActionLinkItem,
   Button,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import { useTransferSuccess } from './hook';
 import { TransferSummaryCard } from './TransferSummaryCard';
 
@@ -46,13 +46,8 @@ function formatKRW(amount: number): string {
  * useTransferSuccess Hook에서 데이터와 핸들러를 받아 UI를 렌더링한다.
  */
 export function TransferSuccessPage() {
-  const {
-    data,
-    handleAddTransfer,
-    handleConfirm,
-    handleShareKakao,
-    handleSaveFavorite,
-  } = useTransferSuccess();
+  const { data, handleAddTransfer, handleConfirm, handleShareKakao, handleSaveFavorite } =
+    useTransferSuccess();
 
   return (
     /* data-brand="hana": 하나은행 브랜드 토큰 적용 (청록색 계열) */
@@ -76,21 +71,11 @@ export function TransferSuccessPage() {
         bottomBar={
           <Inline gap="sm">
             {/* 추가 이체: outline 스타일 — 보조 액션 */}
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleAddTransfer}
-              fullWidth
-            >
+            <Button variant="outline" size="lg" onClick={handleAddTransfer} fullWidth>
               추가 이체
             </Button>
             {/* 확인: primary 스타일 — 주 액션, 더 넓게 표시 */}
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={handleConfirm}
-              fullWidth
-            >
+            <Button variant="primary" size="lg" onClick={handleConfirm} fullWidth>
               확인
             </Button>
           </Inline>
@@ -100,10 +85,7 @@ export function TransferSuccessPage() {
           {/* ── 성공 히어로 섹션 ──────────────────────────
               Confetti 장식 + 성공 아이콘 + "{이름}님께 {금액} 이체 완료" */}
           <section>
-            <SuccessHero
-              recipientName={data.recipientName}
-              amount={formatKRW(data.amount)}
-            />
+            <SuccessHero recipientName={data.recipientName} amount={formatKRW(data.amount)} />
           </section>
 
           {/* ── 이체 요약 카드 섹션 ───────────────────────

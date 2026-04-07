@@ -15,28 +15,22 @@
  */
 
 import { Link2, Menu } from 'lucide-react';
-import {
-  PageLayout,
-  TabNav,
-  Stack,
-  Button,
-  EmptyState,
-} from '@reactive-springware/component-library';
+import { PageLayout, TabNav, Stack, Button, EmptyState } from '@neobnsrnd-team/reactive-springware';
 import { useAccountList } from './hook';
 import { AccountGroupSection } from './AccountGroupSection';
 
 /** 금융기관 탭 항목 — '해당금융'(내 계좌) / '다른금융'(타행 연결) */
 const INSTITUTION_TABS = [
-  { id: 'mine',  label: '해당금융' },
+  { id: 'mine', label: '해당금융' },
   { id: 'other', label: '다른금융' },
 ];
 
 /** 상품 카테고리 탭 항목 */
 const PRODUCT_CATEGORY_TABS = [
   { id: 'deposit', label: '예금' },
-  { id: 'trust',   label: '신탁' },
-  { id: 'fund',    label: '펀드' },
-  { id: 'loan',    label: '대출' },
+  { id: 'trust', label: '신탁' },
+  { id: 'fund', label: '펀드' },
+  { id: 'loan', label: '대출' },
 ];
 
 export function AccountListPage() {
@@ -85,7 +79,6 @@ export function AccountListPage() {
         ) : undefined
       }
     >
-
       {/* ── 금융기관 탭: 해당금융 / 다른금융 (underline 스타일) ── */}
       <TabNav
         items={INSTITUTION_TABS}
@@ -127,9 +120,7 @@ export function AccountListPage() {
             ) : undefined
           }
           title={
-            isOtherTab
-              ? '연결된 다른 금융 계좌가 없습니다.'
-              : '계좌 정보를 불러오지 못했습니다'
+            isOtherTab ? '연결된 다른 금융 계좌가 없습니다.' : '계좌 정보를 불러오지 못했습니다'
           }
           description={isOtherTab ? '다른 금융 계좌를 연결해 보세요.' : undefined}
           action={
@@ -143,7 +134,7 @@ export function AccountListPage() {
       ) : (
         /* 정상 상태: 계좌 그룹 목록 */
         <Stack gap="xl" className="px-standard py-standard">
-          {groups.map(group => (
+          {groups.map((group) => (
             <AccountGroupSection
               key={group.type}
               group={group}
@@ -154,7 +145,6 @@ export function AccountListPage() {
           ))}
         </Stack>
       )}
-
     </PageLayout>
   );
 }

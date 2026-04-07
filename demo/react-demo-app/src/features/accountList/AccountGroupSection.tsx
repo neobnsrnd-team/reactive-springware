@@ -27,7 +27,7 @@ import {
   LabelValueRow,
   CollapsibleSection,
   AccountSummaryCard,
-} from '@reactive-springware/component-library';
+} from '@neobnsrnd-team/reactive-springware';
 import type { AccountGroup } from './types';
 
 interface AccountGroupSectionProps {
@@ -51,10 +51,7 @@ export function AccountGroupSection({
   return (
     <CollapsibleSection
       header={
-        <SectionHeader
-          title={group.label}
-          badge={isEmpty ? undefined : group.accounts.length}
-        />
+        <SectionHeader title={group.label} badge={isEmpty ? undefined : group.accounts.length} />
       }
     >
       {/* 나의자산 현황: 레이블(좌) + 합계 잔액(우) */}
@@ -79,7 +76,7 @@ export function AccountGroupSection({
         />
       ) : (
         <Stack gap="sm">
-          {group.accounts.map(account => (
+          {group.accounts.map((account) => (
             <AccountSummaryCard
               key={account.id}
               /* group.type이 AccountType과 호환되므로 그대로 전달 */
@@ -93,18 +90,10 @@ export function AccountGroupSection({
                  AccountSummaryCard 내부의 [&>*]:flex-1이 각 버튼에 적용됨 */
               actions={
                 <>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onViewHistory(account.id)}
-                  >
+                  <Button variant="outline" size="sm" onClick={() => onViewHistory(account.id)}>
                     거래내역
                   </Button>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={() => onTransfer(account.id)}
-                  >
+                  <Button variant="primary" size="sm" onClick={() => onTransfer(account.id)}>
                     이체
                   </Button>
                 </>
