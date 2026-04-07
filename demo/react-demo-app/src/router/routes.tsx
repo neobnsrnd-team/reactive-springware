@@ -7,9 +7,9 @@
  * - 동적 세그먼트는 콜론 prefix 사용 (예: :id)
  */
 
-import { HomeDashboardPage } from '@/pages/HomeDashboardPage';
-import { AccountListPage } from '@/pages/AccountListPage';
-import { TransferSuccessPage } from '@/pages/TransferSuccessPage';
+import { HomeDashboardPage } from '@/features/homeDashboard/page';
+import { AccountListPage } from '@/features/accountList/page';
+import { TransferSuccessPage } from '@/features/transferSuccess/page';
 import { KbHomePage } from '@/features/kbHome/page';
 import { KbTransactionHistoryListPage } from '@/features/kbTransactionHistory/page';
 import { HanaTransactionHistoryListPage } from '@/features/hanaTransactionHistory/page';

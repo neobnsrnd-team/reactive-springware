@@ -58,6 +58,34 @@
 | `rules/10-brand.md`           | 페이지 루트 data-brand / data-domain 적용 규칙           |
 | `rules/11-component-props.md` | 컴포넌트별 허용 prop 값 레퍼런스 (variant·size·color 등) |
 
+## 규칙 선택적 로드 프로토콜 (Context Efficiency)
+
+65KB+ 규칙 파일 전체를 매 세션마다 로드하면 컨텍스트가 낭비된다.
+아래 기준에 따라 **요청 성격별로 필요한 파일만 선택적으로 읽는다.**
+
+### 항상 로드 (Core — 모든 코드 생성 요청)
+
+| 파일 | 이유 |
+|------|------|
+| `rules/01-architecture.md` | 레이어 구조 — 모든 파일 생성에 영향 |
+| `rules/02-naming.md` | 네이밍 — 모든 파일명·변수명에 영향 |
+| `rules/03-component.md` | 컴포넌트 사용 — UI 코드 전체에 영향 |
+| `rules/04-state-data.md` | 상태 관리 — Hook/Page 분리 기준 |
+| `rules/06-event.md` | 이벤트 핸들러 — 모든 인터랙션에 영향 |
+| `rules/08-generation.md` | 생성 절차 — 파일 순서·라우터 등록 |
+
+### 요청 성격별 추가 로드 (On-Demand)
+
+| 조건 | 추가 로드 파일 |
+|------|--------------|
+| Figma URL 또는 디자인 설명이 포함된 경우 | `rules/07-figma.md` |
+| 새 컴포넌트 생성 또는 prop 확인 필요 시 | `rules/11-component-props.md` |
+| 브랜드(하나·KB·신한 등) 명시된 경우 | `rules/10-brand.md` |
+| Repository / API 패턴 작성 시 | `rules/05-repository.md` |
+| 개발자 확인 판단 기준이 불명확한 경우 | `rules/09-confirmation.md` |
+
+> 단순 질문·설명 요청은 Core 파일도 필수가 아니다. **코드 생성 직전에만** 해당 파일을 읽는다.
+
 ---
 
 # 🚨 Rule Priority (Highest Priority)
