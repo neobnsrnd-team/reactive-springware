@@ -14,7 +14,6 @@
  * UI 컴포넌트: AccountGroupSection (AccountGroupSection.tsx)
  */
 
-import React from 'react';
 import { Link2, Menu } from 'lucide-react';
 import {
   PageLayout,
@@ -30,7 +29,7 @@ import { AccountGroupSection } from './AccountGroupSection';
 const INSTITUTION_TABS = [
   { id: 'mine',  label: '해당금융' },
   { id: 'other', label: '다른금융' },
-] as const;
+];
 
 /** 상품 카테고리 탭 항목 */
 const PRODUCT_CATEGORY_TABS = [
@@ -38,13 +37,13 @@ const PRODUCT_CATEGORY_TABS = [
   { id: 'trust',   label: '신탁' },
   { id: 'fund',    label: '펀드' },
   { id: 'loan',    label: '대출' },
-] as const;
+];
 
 export function AccountListPage() {
   const {
     groups,
     isLoading,
-    error,
+    isError,
     institutionTab,
     productCategory,
     handleInstitutionTabChange,
@@ -106,14 +105,14 @@ export function AccountListPage() {
         className="px-standard py-sm"
       />
 
-      {/* ── 콘텐츠: isLoading → error → empty → 정상 순서로 처리 ── */}
+      {/* ── 콘텐츠: isLoading → isError → empty → 정상 순서로 처리 ── */}
       {isLoading ? (
         <EmptyState title="불러오는 중..." />
-      ) : error ? (
+      ) : isError ? (
         /* 에러 상태 */
         <EmptyState
           title="계좌 정보를 불러오지 못했습니다"
-          description={error}
+          description="잠시 후 다시 시도해 주세요."
         />
       ) : groups.length === 0 ? (
         /* 빈 상태 — 탭에 따라 메시지 분기

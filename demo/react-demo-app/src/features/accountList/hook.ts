@@ -3,11 +3,17 @@
  * @description 전계좌 조회 페이지의 상태 및 이벤트 핸들러 Hook.
  *
  * 책임:
- * - 금융기관 탭(해당금융/다른금융) 상태 관리 — 로컬 UI 상태
- * - 상품 카테고리 탭(예금/신탁/펀드/대출) 상태 관리 — 로컬 UI 상태
- * - 계좌 목록 데이터 패칭 (accountListRepository 호출)
- * - loading / error / empty 상태 관리
+ * - 금융기관 탭(해당금융/다른금융) 상태 관리 — 로컬 UI 상태 (useState)
+ * - 상품 카테고리 탭(예금/신탁/펀드/대출) 상태 관리 — 로컬 UI 상태 (useState)
+ * - 계좌 목록 데이터 패칭 (React Query useQuery)
+ * - loading / error 상태 관리
  * - 이벤트 핸들러 정의 후 Page에 전달
+ *
+ * React Query 전략 (rules/04-state-data.md §3):
+ *   queryKey: ['accounts', { institutionTab }]
+ *   - 'accounts': accountDetail과 동일한 네임스페이스 — 도메인 단위 일괄 무효화 가능
+ *   - institutionTab: 탭 변경 시 queryKey가 달라지므로 React Query가 자동 재조회
+ *   - setInstitutionTab(tab) 만 호출하면 re-fetch가 자동 발생 (수동 loadAccountList 불필요)
  *
  * 금지 사항:
  * - UI 렌더링 포함 금지
@@ -15,7 +21,9 @@
  * - Page에서 이 Hook의 내부 상태를 직접 수정하는 방식 금지
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { accountListRepository } from './repository';
 import type {
   InstitutionTabId,
@@ -31,10 +39,10 @@ const DEFAULT_PRODUCT_CATEGORY: ProductCategoryId = 'deposit';
 export interface UseAccountListReturn {
   /** 계좌 그룹 목록 */
   groups: AccountGroup[];
-  /** 데이터 로딩 중 여부 */
+  /** 최초 데이터 로딩 중 여부 (React Query: isPending) */
   isLoading: boolean;
-  /** 에러 메시지 (null이면 에러 없음) */
-  error: string | null;
+  /** 데이터 로드 실패 여부 */
+  isError: boolean;
   /** 현재 선택된 금융기관 탭 */
   institutionTab: InstitutionTabId;
   /** 현재 선택된 상품 카테고리 탭 */
@@ -45,7 +53,7 @@ export interface UseAccountListReturn {
   handleProductCategoryChange: (category: string) => void;
   /** 뒤로가기 핸들러 */
   handleBack: () => void;
-  /** 거래내역 조회 핸들러 */
+  /** 계좌 상세 조회 핸들러 — /accounts/:id 로 이동 */
   handleViewHistory: (accountId: string) => void;
   /** 이체 핸들러 */
   handleTransfer: (accountId: string) => void;
@@ -58,90 +66,79 @@ export interface UseAccountListReturn {
 }
 
 export function useAccountList(): UseAccountListReturn {
-  /* ── 탭 상태 (로컬 UI 상태) ── */
+  const navigate = useNavigate();
+
+  /* ── 탭 상태 (로컬 UI 상태 — 서버 데이터 아님) ── */
   const [institutionTab, setInstitutionTab] = useState<InstitutionTabId>(DEFAULT_INSTITUTION_TAB);
   const [productCategory, setProductCategory] = useState<ProductCategoryId>(DEFAULT_PRODUCT_CATEGORY);
 
-  /* ── 데이터 상태 ── */
-  const [groups, setGroups] = useState<AccountGroup[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  /* ── 계좌 목록 로드 함수 ── */
-  const loadAccountList = useCallback(async (tab: InstitutionTabId) => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const result = await accountListRepository.getAccountList(tab);
-      setGroups(result.groups);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '계좌 목록을 불러오지 못했습니다.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  /* 컴포넌트 마운트 시 1회 초기 로드 — useEffect로 사이드이펙트 처리 */
-  useEffect(() => {
-    void loadAccountList(institutionTab);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadAccountList]);
+  /**
+   * 서버 데이터 → useQuery (rules/04-state-data.md §3).
+   *
+   * queryKey에 institutionTab을 포함하므로 탭 변경 시 React Query가 자동으로 재조회한다.
+   * 수동 loadAccountList·useEffect 패턴이 필요 없다.
+   * App.tsx의 QueryClient 전역 설정(staleTime 5분, retry 2)을 그대로 따른다.
+   */
+  const { data, isPending, isError } = useQuery({
+    queryKey: ['accounts', { institutionTab }],
+    queryFn:  () => accountListRepository.getAccountList(institutionTab),
+  });
 
   /* ── 금융기관 탭 변경 핸들러 ── */
   const handleInstitutionTabChange = useCallback((tab: string) => {
     // TabNav의 onTabChange가 string을 전달하므로 타입 단언으로 좁힘
-    const typedTab = tab as InstitutionTabId;
-    setInstitutionTab(typedTab);
-    // 탭 변경 시 새 기관의 계좌 목록 재조회
-    void loadAccountList(typedTab);
-  }, [loadAccountList]);
+    setInstitutionTab(tab as InstitutionTabId);
+    // queryKey: ['accounts', { institutionTab }]가 바뀌므로 React Query가 자동 재조회
+    // 수동 fetch 호출 불필요
+  }, []);
 
   /* ── 상품 카테고리 탭 변경 핸들러 ── */
   const handleProductCategoryChange = useCallback((category: string) => {
-    // 카테고리 변경은 로컬 필터링 — 서버 재조회 없음
+    // 카테고리 변경은 클라이언트 사이드 필터링 — 서버 재조회 없음
     setProductCategory(category as ProductCategoryId);
   }, []);
 
   /* ── 뒤로가기 핸들러 ── */
   const handleBack = useCallback(() => {
-    // 실제 앱에서는 navigate(-1) 또는 router.back() 사용
-    console.log('뒤로가기');
-  }, []);
+    navigate(-1);
+  }, [navigate]);
 
-  /* ── 거래내역 조회 핸들러 ── */
+  /**
+   * 계좌 상세 이동 핸들러.
+   * AccountGroupSection의 onViewHistory prop을 통해 계좌 ID를 받아
+   * /accounts/:id 상세 페이지로 이동한다 (List-Detail 내비게이션 패턴).
+   */
   const handleViewHistory = useCallback((accountId: string) => {
-    // 실제 앱에서는 navigate(`/accounts/${accountId}/history`) 사용
-    console.log('거래내역 조회:', accountId);
-  }, []);
+    navigate(`/accounts/${accountId}`);
+  }, [navigate]);
 
   /* ── 이체 핸들러 ── */
   const handleTransfer = useCallback((accountId: string) => {
-    // 실제 앱에서는 navigate(`/transfer?from=${accountId}`) 사용
-    console.log('이체:', accountId);
-  }, []);
+    navigate(`/transfer?fromAccountId=${accountId}`);
+  }, [navigate]);
 
   /* ── 퇴직연금 가입하기 핸들러 ── */
   const handleJoinRetirement = useCallback(() => {
-    console.log('퇴직연금 가입하기');
+    // TODO: 퇴직연금 가입 플로우 페이지 라우트 확정 후 navigate 연결
+    console.log('[AccountList] 퇴직연금 가입하기');
   }, []);
 
   /* ── 다른금융 계좌 연결하기 핸들러 ── */
   const handleConnect = useCallback(() => {
-    // 실제 앱에서는 타행 계좌 연결 플로우 페이지로 이동
-    console.log('다른금융 계좌 연결하기');
+    // TODO: 타행 계좌 연결 플로우 라우트 확정 후 navigate 연결
+    console.log('[AccountList] 다른금융 계좌 연결하기');
   }, []);
 
   /* ── 헤더 메뉴 버튼 핸들러 ── */
   const handleMenu = useCallback(() => {
-    // 실제 앱에서는 설정·필터 등 메뉴 시트를 열거나 페이지로 이동
-    console.log('메뉴');
+    // TODO: 설정·필터 메뉴 시트 또는 페이지 라우트 확정 후 연결
+    console.log('[AccountList] 메뉴');
   }, []);
 
   return {
-    groups,
-    isLoading,
-    error,
+    groups:    data?.groups ?? [],  // 로딩·에러 시 빈 배열로 폴백
+    isLoading: isPending,           // isPending → isLoading alias (Page 일관성)
+    isError,
     institutionTab,
     productCategory,
     handleInstitutionTabChange,
