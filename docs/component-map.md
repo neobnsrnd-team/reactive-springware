@@ -661,14 +661,20 @@ export interface BannerProps {
   className?:   string;
 }
 
-// ── QuickMenuGrid (신규 제안 — biz/) ─────────────────────────
+// ── QuickMenuGrid (biz/) ─────────────────────────────────────
 // Figma 홈 화면의 퀵메뉴(2×N 그리드) 패턴
 export interface QuickMenuItem {
-  id:       string;
-  icon:     React.ReactNode;
-  label:    string;
-  onClick:  () => void;
-  badge?:   number;             // 알림 배지 숫자
+  id:         string;
+  icon:       React.ReactNode;
+  label:      string;
+  onClick:    () => void;
+  badge?:     number;             // 알림 배지 숫자
+  /**
+   * 아이콘 컨테이너 형태.
+   * - 'circle'  : 원형 (기본값)
+   * - 'rounded' : 각이 둥근 사각형 (rounded-2xl)
+   */
+  iconShape?: 'circle' | 'rounded';
 }
 
 export interface QuickMenuGridProps {
@@ -703,18 +709,27 @@ export interface SearchAccordionProps {
 - `badgeText` prop 존재 시에만 배지 노출 (미전달 시 배지 영역 렌더링 안 함)
 
 ```typescript
-export type AccountType = 'deposit' | 'savings' | 'loan';
+export type AccountType =
+  | 'deposit'
+  | 'savings'
+  | 'loan'
+  | 'foreignDeposit'
+  | 'retirement'
+  | 'securities';
 
 export interface AccountSummaryCardProps {
-  type:           AccountType;
-  accountName:    string;          // 예: '급여 통장', '청약저축'
-  accountNumber:  string;          // 예: '123-456-789012'
-  balance:        number;          // 원화 단위 숫자. 내부 포맷: Intl.NumberFormat
-  balanceLabel?:  string;          // 기본: '잔액' (대출은 '대출잔액' 등)
-  badgeText?:     string;          // 미전달 시 배지 미노출
-  onClick?:       () => void;
-  actions?:       React.ReactNode; // 이체·내역 버튼 슬롯
-  className?:     string;
+  type:            AccountType;
+  accountName:     string;          // 예: '급여 통장', '청약저축'
+  accountNumber:   string;          // 예: '123-456-789012'
+  balance:         number;          // 원화 단위 숫자. 내부 포맷: Intl.NumberFormat
+  balanceDisplay?: string;          // balance 대신 표시할 포맷 문자열 (외화 등)
+  balanceLabel?:   string;          // 기본: '잔액' (대출은 '대출잔액' 등)
+  badgeText?:      string;          // 미전달 시 배지 미노출
+  moreButton?:     'chevron' | 'ellipsis'; // 우측 더보기 버튼 아이콘 형태
+  onMoreClick?:    () => void;
+  onClick?:        () => void;
+  actions?:        React.ReactNode; // 이체·내역 버튼 슬롯
+  className?:      string;
 }
 ```
 
@@ -876,22 +891,57 @@ export interface EmptyStateProps {
 
 ---
 
-### 6.7 신규 생성 컴포넌트 목록 (확정)
+### 6.7 컴포넌트 구현 현황 (2026-04 기준)
 
-| 컴포넌트명 | 분류 | 우선순위 | 비고 |
-|----------|------|---------|-----|
-| `AccountSummaryCard` | biz/ | 높음 | §6.1 설계 확정 |
-| `AccountSelectorCard` | biz/ | 높음 | §6.8 설계 확정. AccountSummaryCard와 역할 구분 |
-| `TransactionListItem` | biz/ | 높음 | §6.3 그룹핑 패턴 연동 |
-| `BannerCarousel` | biz/ | 높음 | §6.4 슬라이더 로직 포함 |
-| `AmountInput` | modules/ | 높음 | 이체 폼 핵심. `Intl` 실시간 포맷 |
-| `TransactionSearchFilter` | modules/ | 높음 | §6.9 설계 확정. 거래내역 조회 조건 필터 |
-| `AppBrandHeader` | layout/ | 높음 | §6.10 설계 확정. 로그인·온보딩 화면 브랜드 로고 헤더 |
-| `DividerWithLabel` | modules/ | 높음 | §6.11 설계 확정. 텍스트 중앙 구분선 |
-| `SectionHeader` | modules/ | 중간 | 타이틀+액션 3회 이상 반복 패턴 |
-| `OtpInput` | modules/ | 중간 | 6자리 PIN 입력 전용 |
-| `QuickMenuGrid` | biz/ | 중간 | 홈 퀵메뉴 2×N 그리드 |
-| `TransferStepper` | biz/ | 낮음 | 단일 폼 방침 확정으로 우선순위 하향 |
+#### 구현 완료 ✅
+
+| 컴포넌트명 | 분류 | 경로 | 비고 |
+|----------|------|------|-----|
+| `AccountSummaryCard` | biz/ | biz/banking/ | §6.1 설계. `type` 6종, `moreButton` 추가 |
+| `AccountSelectorCard` | biz/ | biz/banking/ | §6.8 설계. `availableBalance` 추가 |
+| `BannerCarousel` | biz/ | biz/common/ | §6.4 슬라이더 로직 포함 |
+| `BrandBanner` | biz/ | biz/common/ | 단일 배너 |
+| `QuickMenuGrid` | biz/ | biz/common/ | `iconShape?: 'circle'\|'rounded'` 추가 |
+| `UserProfile` | biz/ | biz/common/ | §6.14 |
+| `CardSummaryCard` | biz/ | biz/card/ | §6.14 |
+| `SummaryCard` | biz/ | biz/card/ | §6.14 |
+| `StatementHeroCard` | biz/ | biz/card/ | §6.14 |
+| `LoanMenuBar` | biz/ | biz/card/ | §6.14. 드래그 패닝·반응형 |
+| `QuickShortcutCard` | biz/ | biz/card/ | §6.14 |
+| `CardPaymentSummary` | biz/ | biz/card/ | §6.14 |
+| `CardPaymentItem` | biz/ | biz/card/ | §6.14 |
+| `BillingPeriodLabel` | biz/ | biz/card/ | §6.14 |
+| `InsuranceSummaryCard` | biz/ | biz/insurance/ | §6.14 |
+| `AmountInput` | modules/ | modules/banking/ | 이체 폼 핵심 |
+| `TransactionSearchFilter` | modules/ | modules/banking/ | §6.9 설계 |
+| `OtpInput` | modules/ | modules/banking/ | 반응형 적용 |
+| `AccountSelectItem` | modules/ | modules/banking/ | §6.14 |
+| `NumberKeypad` | modules/ | modules/banking/ | §6.14 |
+| `PinDotIndicator` | modules/ | modules/banking/ | §6.14 |
+| `TransactionList` | modules/ | modules/banking/ | §6.14. 그룹핑 + 날짜 헤더 |
+| `TransferForm` | modules/ | modules/banking/ | §6.14 |
+| `DividerWithLabel` | modules/ | modules/common/ | §6.11 설계 |
+| `SectionHeader` | modules/ | modules/common/ | 타이틀+액션 패턴 |
+| `ActionLinkItem` | modules/ | modules/common/ | §6.14 |
+| `AlertBanner` | modules/ | modules/common/ | §6.14 |
+| `BalanceToggle` | modules/ | modules/common/ | §6.14 |
+| `Checkbox` | modules/ | modules/common/ | §6.14 |
+| `CollapsibleSection` | modules/ | modules/common/ | §6.14 |
+| `ErrorState` | modules/ | modules/common/ | §6.14 |
+| `InfoRow` | modules/ | modules/common/ | §6.14 |
+| `NoticeItem` | modules/ | modules/common/ | §6.14 |
+| `SelectableItem` | modules/ | modules/common/ | §6.14 |
+| `SidebarNav` | modules/ | modules/common/ | §6.14 |
+| `SuccessHero` | modules/ | modules/common/ | §6.14 |
+| `AppBrandHeader` | layout/ | layout/ | §6.10 설계 |
+| `BottomNav` | layout/ | layout/ | §6.14 |
+| `Section` | layout/ | layout/ | §6.14 |
+
+#### 미구현 ❌
+
+| 컴포넌트명 | 분류 | 비고 |
+|----------|------|-----|
+| `TransferStepper` | biz/ | 단일 폼 방침 확정으로 보류 |
 
 ---
 
@@ -912,14 +962,16 @@ export interface EmptyStateProps {
 ```typescript
 // AccountSelectorCard — biz/
 export interface AccountSelectorCardProps {
-  accountName:      string;            // 예: '하나 주거래 통장'
-  accountNumber:    string;            // 예: '123-456-789012'. 마스킹 없이 표시
-  icon?:            React.ReactNode;   // 우측 원형 버튼 아이콘. 기본: Landmark
+  accountName:       string;            // 예: '하나 주거래 통장'
+  accountNumber:     string;            // 예: '123-456-789012'. 마스킹 없이 표시
+  icon?:             React.ReactNode;   // 우측 원형 버튼 아이콘. 기본: Landmark
   /** 계좌명 클릭 시 콜백. 미전달 시 드롭다운 화살표 숨김 */
-  onAccountChange?: () => void;
+  onAccountChange?:  () => void;
   /** 우측 원형 아이콘 버튼 클릭 시 콜백 */
-  onIconClick?:     () => void;
-  className?:       string;
+  onIconClick?:      () => void;
+  iconAriaLabel?:    string;            // 우측 아이콘 버튼 접근성 레이블
+  availableBalance?: string;            // 가용 잔액 표시 문자열 (이체 화면 등)
+  className?:        string;
 }
 ```
 
@@ -1141,6 +1193,362 @@ HomePageLayout
 
 ---
 
+---
+
+### 6.14 2026-04 신규 확정 컴포넌트 TypeScript Interface
+
+> 2026-03-26 이후 추가된 컴포넌트 인터페이스 정의.
+
+#### Biz / Card 도메인
+
+```typescript
+// ── CardSummaryCard ───────────────────────────────────────────
+export type CardType = 'credit' | 'check' | 'prepaid';
+
+export interface CardSummaryCardProps {
+  type:         CardType;
+  cardName:     string;          // 예: '하나 머니 체크카드'
+  cardNumber:   string;          // 마스킹된 카드번호. 예: '1234 **** **** 5678'
+  amount:       number;          // credit: 당월 사용금액, check/prepaid: 잔액
+  limitAmount?: number;          // credit 전용. 표시 시 "사용금액/한도" 형태
+  badgeText?:   string;          // 미전달 시 배지 미노출
+  onClick?:     () => void;
+  actions?:     React.ReactNode; // 결제내역·충전 버튼 슬롯
+  className?:   string;
+}
+
+// ── SummaryCard ───────────────────────────────────────────────
+export type SummaryCardVariant = 'asset' | 'spending';
+
+export interface SummaryCardAction {
+  label:    string;
+  onClick:  () => void;
+  active?:  boolean;
+}
+
+export interface SummaryCardProps {
+  variant:    SummaryCardVariant; // 'asset': 자산합계, 'spending': 지출합계
+  title:      string;
+  amount:     number;
+  icon?:      React.ReactNode;   // 우측 원형 bg-brand-10 배경 아이콘 슬롯
+  actions?:   SummaryCardAction[];
+  onClick?:   () => void;
+  className?: string;
+}
+
+// ── StatementHeroCard ─────────────────────────────────────────
+export interface StatementHeroCardProps {
+  amount:     number;   // 청구·결제 금액
+  dueDate:    string;   // 결제 예정일. 예: '2026.04.14'
+  label?:     string;   // 기본: '이번달 결제금액'
+  onDetail?:  () => void;
+  className?: string;
+}
+
+// ── LoanMenuBar ───────────────────────────────────────────────
+// 드래그 패닝·터치 스와이프로 가로 스크롤. 스크롤바 숨김 처리 포함.
+export interface LoanMenuBarItem {
+  id:      string;
+  icon:    React.ReactNode;
+  label:   string;
+  onClick: () => void;
+}
+
+export interface LoanMenuBarProps {
+  items:      LoanMenuBarItem[];
+  className?: string;
+}
+
+// ── QuickShortcutCard ─────────────────────────────────────────
+export interface QuickShortcutCardProps {
+  title:      string;
+  subtitle:   string;
+  icon?:      React.ReactNode;
+  onClick?:   () => void;
+  className?: string;
+}
+
+// ── CardPaymentSummary ────────────────────────────────────────
+export interface CardPaymentSummaryProps {
+  dateFull:       string;   // 출금예정일. 예: '2026.04.08'
+  dateYM:         string;   // 청구 년월. 예: '26년 4월'
+  dateMD:         string;   // 기준일(오늘). 예: '04.08'
+  totalAmount:    number;
+  revolving?:     number;   // 기본: 0
+  cardLoan?:      number;   // 기본: 0
+  cashAdvance?:   number;   // 기본: 0
+  paymentAccount: string;   // 예: '하나은행 123-456789-01234'
+  paymentDate:    string;   // 예: '매월 14일'
+  className?:     string;
+}
+
+// ── CardPaymentItem ───────────────────────────────────────────
+export interface CardPaymentItemProps {
+  icon:             React.ReactNode;
+  iconBgClassName?: string;       // 기본: 'bg-brand-10'
+  cardEnName:       string;       // 카드 영문명. 예: 'HANA MONEY CHECK'
+  cardName:         string;       // 카드 한글명 또는 가맹점명
+  amount:           number;       // 음수: 취소/환불 (brand 색상으로 표시)
+  onDetailClick?:   () => void;   // 미전달 시 "상세보기" 버튼 미노출
+  onClick?:         () => void;   // 전달 시 행 전체가 버튼
+  className?:       string;
+}
+
+// ── BillingPeriodLabel ────────────────────────────────────────
+export interface BillingPeriodLabelProps {
+  startDate:  string;   // 예: '2025.03.01'
+  endDate:    string;   // 예: '2025.03.31'
+  className?: string;
+}
+```
+
+#### Biz / Insurance 도메인
+
+```typescript
+// ── InsuranceSummaryCard ──────────────────────────────────────
+export type InsuranceType   = 'life' | 'health' | 'car';
+export type InsuranceStatus = 'active' | 'pending' | 'expired';
+
+export interface InsuranceSummaryCardProps {
+  type:             InsuranceType;
+  insuranceName:    string;
+  contractNumber:   string;
+  premium:          number;          // 월 보험료 (원)
+  nextPaymentDate?: string;          // 다음 납부일. 예: '2026.04.14'
+  status:           InsuranceStatus;
+  badgeText?:       string;
+  onClick?:         () => void;
+  actions?:         React.ReactNode;
+  className?:       string;
+}
+```
+
+#### Biz / Common 도메인
+
+```typescript
+// ── UserProfile ───────────────────────────────────────────────
+export interface UserProfileProps {
+  name:             string;          // 예: '김하나'
+  lastLogin?:       string;          // 마지막 로그인 일시 문자열
+  onSettingsClick?: () => void;
+  className?:       string;
+}
+```
+
+#### Layout 신규
+
+```typescript
+// ── BottomNav ─────────────────────────────────────────────────
+export interface BottomNavItem {
+  id:          string;
+  icon:        React.ReactNode;
+  activeIcon?: React.ReactNode;  // 미전달 시 icon 재사용
+  label:       string;
+  onClick:     () => void;
+}
+
+export interface BottomNavProps {
+  items:      BottomNavItem[];
+  activeId:   string;
+  className?: string;
+}
+
+// ── Section ───────────────────────────────────────────────────
+export interface SectionProps {
+  title?:       string;
+  badge?:       number;          // 섹션 헤더 우측 알림 배지
+  actionLabel?: string;          // 우측 텍스트 링크 레이블
+  onAction?:    () => void;
+  children:     React.ReactNode;
+  gap?:         'xs' | 'sm' | 'md' | 'lg' | 'xl'; // 기본: 'md'
+  className?:   string;
+}
+```
+
+#### Modules / Banking 신규
+
+```typescript
+// ── AccountSelectItem ─────────────────────────────────────────
+export interface AccountSelectItemProps {
+  icon?:         React.ReactNode;
+  accountName:   string;
+  accountNumber: string;
+  balance:       string;         // 포맷된 잔액 문자열
+  selected?:     boolean;
+  onClick?:      () => void;
+  className?:    string;
+}
+
+// ── NumberKeypad ──────────────────────────────────────────────
+// 보안 숫자 키패드. 숫자 배열을 외부에서 주입하여 순서를 제어할 수 있음.
+export interface NumberKeypadProps {
+  digits:         number[];      // 표시할 숫자 배열 (섞기 구현 시 외부에서 전달)
+  onDigitPress:   (digit: number) => void;
+  onDelete:       () => void;
+  onShuffle:      () => void;    // 숫자 순서 섞기 버튼
+  className?:     string;
+}
+
+// ── PinDotIndicator ───────────────────────────────────────────
+export interface PinDotIndicatorProps {
+  length?:     number;   // 총 자릿수. 기본: 6
+  filledCount: number;   // 입력된 자릿수
+  className?:  string;
+}
+
+// ── TransactionList ───────────────────────────────────────────
+// 날짜 헤더를 자동 생성하며 그룹핑. §6.3 그룹핑 패턴 구현체.
+export type DateHeaderFormat = 'month-day' | 'year-month-day';
+
+export interface TransactionItem {
+  id:       string;
+  type:     'deposit' | 'withdrawal' | 'transfer';
+  title:    string;
+  date:     string;    // ISO 8601
+  amount:   number;
+  balance?: number;
+}
+
+export interface TransactionListProps {
+  items:             TransactionItem[];
+  loading?:          boolean;
+  emptyMessage?:     string;
+  onItemClick?:      (item: TransactionItem) => void;
+  dateHeaderFormat?: DateHeaderFormat; // 기본: 'month-day'
+  className?:        string;
+}
+
+// ── TransferForm ──────────────────────────────────────────────
+// §6.2 단일 폼 방침 구현체. 확인은 BottomSheet/Modal 없이 onSubmit 위임.
+export interface TransferFormData {
+  toAccount: string;
+  amount:    number;
+  memo:      string;
+}
+
+export interface TransferFormProps {
+  availableBalance: number;
+  onSubmit:         (data: TransferFormData) => void;
+  submitting?:      boolean;
+  className?:       string;
+}
+```
+
+#### Modules / Common 신규
+
+```typescript
+// ── ActionLinkItem ────────────────────────────────────────────
+export interface ActionLinkItemProps {
+  icon:             React.ReactNode;
+  iconBgClassName?: string;
+  label:            string;
+  size?:            'md' | 'sm';    // 기본: 'md'
+  showBorder?:      boolean;
+  onClick?:         () => void;
+  className?:       string;
+}
+
+// ── AlertBanner ───────────────────────────────────────────────
+export type AlertBannerIntent = 'warning' | 'danger' | 'success' | 'info';
+
+export interface AlertBannerProps {
+  intent?:    AlertBannerIntent;  // 기본: 'info'
+  children:   React.ReactNode;
+  icon?:      React.ReactNode;    // 미전달 시 intent별 기본 아이콘 사용
+  className?: string;
+}
+
+// ── BalanceToggle ─────────────────────────────────────────────
+// 잔액 숨김/표시 토글 버튼. hidden 상태 관리는 외부 Hook 담당.
+export interface BalanceToggleProps {
+  hidden:    boolean;
+  onToggle:  () => void;
+  className?: string;
+}
+
+// ── Checkbox ──────────────────────────────────────────────────
+export interface CheckboxProps {
+  checked:    boolean;
+  onChange:   (checked: boolean) => void;
+  label?:     React.ReactNode;
+  ariaLabel?: string;
+  disabled?:  boolean;
+  id?:        string;
+  className?: string;
+}
+
+// ── CollapsibleSection ────────────────────────────────────────
+export interface CollapsibleSectionProps {
+  header:           React.ReactNode;
+  children:         React.ReactNode;
+  defaultExpanded?: boolean;        // 기본: false
+  headerAlign?:     'center' | 'left'; // 기본: 'center'
+  className?:       string;
+}
+
+// ── ErrorState ────────────────────────────────────────────────
+export interface ErrorStateProps {
+  title?:       string;             // 기본: '오류가 발생했어요'
+  description?: string;
+  onRetry?:     () => void;         // 미전달 시 재시도 버튼 미노출
+  retryLabel?:  string;             // 기본: '다시 시도'
+  className?:   string;
+}
+
+// ── InfoRow ───────────────────────────────────────────────────
+export interface InfoRowProps {
+  label:           string;
+  value:           string | React.ReactNode;
+  valueClassName?: string;
+  showBorder?:     boolean;         // 하단 구분선
+  className?:      string;
+}
+
+// ── NoticeItem ────────────────────────────────────────────────
+export interface NoticeItemProps {
+  icon:             React.ReactNode;
+  iconBgClassName?: string;
+  title:            string;
+  description?:     string;
+  onClick?:         () => void;
+  showDivider?:     boolean;
+  className?:       string;
+}
+
+// ── SelectableItem ────────────────────────────────────────────
+export interface SelectableItemProps {
+  icon:       React.ReactNode;
+  label:      string;
+  selected?:  boolean;
+  onClick?:   () => void;
+  className?: string;
+}
+
+// ── SidebarNav ────────────────────────────────────────────────
+export interface SidebarNavItem {
+  id:    string;
+  label: string;
+}
+
+export interface SidebarNavProps {
+  items:        SidebarNavItem[];
+  activeId:     string;
+  onItemChange: (id: string) => void;
+  className?:   string;
+}
+
+// ── SuccessHero ───────────────────────────────────────────────
+export interface SuccessHeroProps {
+  recipientName: string;   // 수취인명
+  amount:        string;   // 포맷된 금액 문자열
+  subtitle?:     string;   // 추가 안내 문구
+  className?:    string;
+}
+```
+
+---
+
 *모든 미결 항목 해소 완료 — 2026-03-27*
+*2026-04-08: §6.7 구현 현황 전면 갱신, §6.14 신규 컴포넌트 인터페이스 추가*
 
 *본 문서는 Figma 디자인 열람 및 개발 진행에 따라 지속적으로 업데이트됩니다.*
