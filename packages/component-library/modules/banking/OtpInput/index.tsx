@@ -116,7 +116,7 @@ export function OtpInput({
 
   return (
     <div
-      className={cn('flex items-center gap-sm', className)}
+      className={cn('flex items-center w-full gap-sm', className)}
       role="group"
       aria-label={`${length}자리 인증번호 입력`}
     >
@@ -135,8 +135,11 @@ export function OtpInput({
           onKeyDown={(e) => handleKeyDown(idx, e)}
           onPaste={handlePaste}
           className={cn(
-            /* 정방형 입력칸 */
-            'size-11 text-center text-xl font-bold font-numeric',
+            /* 반응형 정방형 입력칸:
+               flex-1로 컨테이너 너비를 균등 분할하고 aspect-square로 정방형 유지.
+               max-w-[2.75rem]으로 넓은 화면에서 과도하게 커지는 것을 방지. */
+            'flex-1 min-w-0 aspect-square max-w-[2.75rem]',
+            'text-center text-base sm:text-xl font-bold font-numeric',
             'border rounded-md outline-none',
             'transition-all duration-150',
             /* 기본 상태 */

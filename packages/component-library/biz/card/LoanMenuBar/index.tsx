@@ -4,7 +4,10 @@
  *
  * 단기카드대출 / 장기카드대출 / 리볼빙 등 카드 금융 서비스 진입점을
  * 가로로 배열한 pill 형태의 메뉴 바다. 아이콘 + 텍스트 조합으로 각 서비스를 표시한다.
- * items 배열 길이에 따라 동일 너비로 분할되며, 항목이 많을 경우 가로 스크롤로 처리한다.
+ * 반응형 동작:
+ * - 아이템이 컨테이너 너비에 맞게 균등 분배 (flex-1)
+ * - 아이템이 많아 넘칠 경우 가로 스크롤로 전환 (min-w-max 보장)
+ * - 높이·패딩·텍스트·간격이 sm/md breakpoint에서 단계적으로 확장
  *
  * 스크롤 상호작용:
  * - 터치(모바일): 스와이프로 자연스럽게 가로 스크롤
@@ -58,10 +61,12 @@ export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
     <div
       ref={scrollRef}
       className={cn(
-        'flex items-center w-full h-[60px]',
+        /* 고정 높이 대신 반응형 패딩으로 높이 자연 결정 */
+        'flex items-center w-full',
+        'py-xs sm:py-sm md:py-md',
         'bg-surface-raised rounded-full',
         'overflow-x-auto [&::-webkit-scrollbar]:hidden',
-        'px-md gap-xs',
+        'px-sm sm:px-md gap-xs',
         /* 드래그 패닝 커서 — 마우스 사용자에게 드래그 가능 힌트 제공 */
         'cursor-grab active:cursor-grabbing select-none',
         className,
@@ -79,9 +84,11 @@ export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
           type="button"
           onClick={item.onClick}
           className={cn(
-            'flex items-center gap-sm shrink-0',
-            'px-md py-sm rounded-full',
-            'text-sm font-bold text-text-label',
+            /* flex-1로 여유 공간을 균등 분배, min-w-max로 텍스트 줄바꿈 방지 */
+            'flex items-center justify-center gap-xs sm:gap-sm',
+            'flex-1 min-w-max',
+            'px-sm sm:px-md py-xs sm:py-sm rounded-full',
+            'text-xs sm:text-sm font-bold text-text-label',
             'hover:bg-surface transition-colors duration-150',
             'whitespace-nowrap',
           )}
