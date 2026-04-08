@@ -132,7 +132,6 @@ CLAUDE.md가 참조하는 상세 규칙 파일 11개를 복사합니다.
 | `rs-rules/08-generation.md` | 페이지 생성 절차 |
 | `rs-rules/09-confirmation.md` | 개발자 확인 필요 상황 |
 | `rs-rules/12-component-mapping.md` | Figma 컴포넌트 → React 컴포넌트 라이브러리 매핑 규칙 |
-| `rs-rules/13-interpertation.md` | Figma UI 구조로 화면 유형을 판단하는 기준 |
 
 ### 4-4. rs-docs/ 복사
 

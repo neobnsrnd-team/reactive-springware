@@ -101,7 +101,6 @@ rs-rules/
   10-brand.md
   11-component-props.md
   12-component-mapping.md
-  13-interpertation.md
 
 ```
 
