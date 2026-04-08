@@ -17,6 +17,16 @@
     "name": {
       "$type": "string",
       "$value": "카드 기본"
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{brand.alt}",
+      "$description": "카드 도메인 액센트 컬러 (fallback). 실제 값은 브랜드별 brand.X.domain.card.accent로 오버라이드"
+    },
+    "accentText": {
+      "$type": "color",
+      "$value": "{brand.text}",
+      "$description": "카드 도메인 액센트 텍스트 컬러 (fallback). 실제 값은 브랜드별 오버라이드"
     }
   }
 }

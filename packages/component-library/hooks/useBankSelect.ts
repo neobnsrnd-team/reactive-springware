@@ -19,7 +19,7 @@
  * <BankSelectPage {...bankSelect} banks={BANKS} securities={SECURITIES} />
  */
 import { useState, useCallback, useMemo } from 'react';
-import type { BankSelectTab } from '../pages/BankSelectPage/types';
+import type { BankSelectTab } from '../pages/banking/BankSelectPage/types';
 
 export interface UseBankSelectOptions {
   /** 초기 활성 탭. 기본: 'bank' */
