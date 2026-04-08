@@ -19,14 +19,14 @@
  * @param onBack          - 뒤로가기 핸들러
  * @param onClose         - 닫기 핸들러
  */
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { X } from 'lucide-react';
 
-import { PageLayout }          from '../../../layout/PageLayout';
-import { Button }              from '../../../core/Button';
-import { Divider }             from '../../../modules/common/Divider';
-import { CardVisual }          from '../../../biz/card/CardVisual';
-import { CardLinkedBalance }   from '../../../biz/card/CardLinkedBalance';
+import { PageLayout } from '../../../layout/PageLayout';
+import { Button } from '../../../core/Button';
+import { Divider } from '../../../modules/common/Divider';
+import { CardVisual } from '../../../biz/card/CardVisual';
+import { CardLinkedBalance } from '../../../biz/card/CardLinkedBalance';
 import { CardManagementPanel } from '../../../biz/card/CardManagementPanel';
 
 import type { MyCardManagementPageProps } from './types';
@@ -40,6 +40,21 @@ export function MyCardManagementPage({
 }: MyCardManagementPageProps) {
   const [selectedCardId, setSelectedCardId] = useState(initialCardId ?? cards[0]?.id);
   const [balanceHidden,  setBalanceHidden]  = useState(false);
+  const [isCompact,      setIsCompact]      = useState(false);
+
+  const cardVisualRef = useRef<HTMLDivElement>(null);
+
+  /* CardVisual이 뷰포트에서 벗어나면 compact 모드로 전환 */
+  useEffect(() => {
+    const el = cardVisualRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsCompact(!entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const selectedCard = cards.find((c) => c.id === selectedCardId) ?? cards[0];
 
@@ -59,7 +74,6 @@ export function MyCardManagementPage({
       }
     >
       <div className="flex flex-col pt-standard">
-
         {/* ── 카드 선택 칩 탭 (가로 스크롤) ─────────────
          * 카드가 많아져도 가로 스크롤로 자연스럽게 확장.
          * 선택된 칩만 브랜드 색상 배경으로 강조.
@@ -75,10 +89,10 @@ export function MyCardManagementPage({
                   onClick={() => setSelectedCardId(card.id)}
                   className={
                     isSelected
-                      /* 선택: 브랜드 색상 배경 */
-                      ? 'flex items-center gap-xs px-md py-xs rounded-full bg-brand text-brand-fg text-sm font-bold transition-colors duration-150 whitespace-nowrap'
-                      /* 미선택: 회색 배경 */
-                      : 'flex items-center gap-xs px-md py-xs rounded-full bg-surface-raised text-text-secondary text-sm font-medium transition-colors duration-150 whitespace-nowrap hover:bg-surface-subtle'
+                      ? /* 선택: 브랜드 색상 배경 */
+                        'flex items-center gap-xs px-md py-xs rounded-full bg-brand text-brand-fg text-sm font-bold transition-colors duration-150 whitespace-nowrap'
+                      : /* 미선택: 회색 배경 */
+                        'flex items-center gap-xs px-md py-xs rounded-full bg-surface-raised text-text-secondary text-sm font-medium transition-colors duration-150 whitespace-nowrap hover:bg-surface-subtle'
                   }
                   aria-pressed={isSelected}
                   aria-label={card.name}
@@ -90,13 +104,28 @@ export function MyCardManagementPage({
           </div>
         </div>
 
-        {/* ── 카드 비주얼 ─────────────────────────────── */}
-        <CardVisual
-          cardImage={selectedCard?.image}
-          brand={selectedCard?.brand ?? 'VISA'}
-          cardName={selectedCard?.name ?? ''}
-          className="px-standard pb-lg"
-        />
+        {/* ── compact 서브헤더 — 카드 영역이 스크롤 밖으로 벗어날 때 노출
+         * top-14: PageLayout 헤더(h-14) 바로 아래 고정 */}
+        {isCompact && (
+          <div className="sticky top-14 z-10 bg-surface border-b border-border-subtle px-standard py-sm -mx-standard">
+            <CardVisual
+              cardImage={selectedCard?.image}
+              brand={selectedCard?.brand ?? 'VISA'}
+              cardName={selectedCard?.name ?? ''}
+              compact
+            />
+          </div>
+        )}
+
+        {/* ── 카드 비주얼 (풀 모드) ── ref로 IntersectionObserver 관찰 */}
+        <div ref={cardVisualRef}>
+          <CardVisual
+            cardImage={selectedCard?.image}
+            brand={selectedCard?.brand ?? 'VISA'}
+            cardName={selectedCard?.name ?? ''}
+            className="px-standard pb-lg"
+          />
+        </div>
 
         <Divider />
 
@@ -109,11 +138,7 @@ export function MyCardManagementPage({
         />
 
         {/* ── 카드 관리 패널 ───────────────────────────── */}
-        <CardManagementPanel
-          rows={managementRows}
-          className="px-standard pb-standard"
-        />
-
+        <CardManagementPanel rows={managementRows} className="px-standard pb-standard pt-lg" />
       </div>
     </PageLayout>
   );
