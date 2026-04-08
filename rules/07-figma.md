@@ -219,7 +219,7 @@ Figma 프레임의 최상위 구조를 보고 page / modal / bottomsheet 중 어
 | 구조 | Figma 특징 | React 컴포넌트 |
 |------|-----------|---------------|
 | **page** | 전체 화면을 차지하는 프레임. 상단에 헤더(뒤로가기 + 타이틀)가 있고 하단까지 콘텐츠가 이어진다. | `<PageLayout title="..." onBack={...}>` |
-| **bottomsheet** | 화면 하단에서 올라오는 부분 오버레이. 상단에 시트 타이틀 + X 닫기 버튼이 있고 배경이 딤(dim) 처리된다. 콘텐츠 높이가 화면 전체보다 작다. | `<BottomSheet open={...} onClose={...} title="...">` |
+| **bottomsheet** | 화면 하단에서 올라오는 부분 오버레이. 상단에 시트 타이틀이 있고 배경이 딤(dim) 처리된다. 콘텐츠 높이가 화면 전체보다 작다. | `<BottomSheet open={...} onClose={...} title="...">` |
 | **modal** | // TODO: 추후 Figma 예시 추가 후 보완 예정 | `<Modal isOpen={...} onClose={...}>` |
 
 **page 판단 기준:**
