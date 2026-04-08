@@ -77,14 +77,16 @@ BAD
 Figma 레이아웃을 React로 변환할 때 사용하는 컴포넌트 전체 목록.
 
 ```
-HomePageLayout   ← 홈 화면 전용 (헤더 + 인사말 + 스크롤 본문 + BottomNav withBottomNav prop)
-PageLayout       ← 일반 페이지 (헤더 + 뒤로가기)
-BlankPageLayout  ← 헤더 없는 빈 레이아웃 (로그인 화면 등 헤더가 필요 없는 페이지)
+AppBrandHeader   ← 로그인/온보딩 화면 상단 브랜드 헤더 (brandInitial, brandName prop)
+PageLayout       ← 일반 페이지 (헤더 + 뒤로가기, title과 onBack prop)
+BlankPageLayout  ← 헤더 없는 빈 레이아웃 (로그인 화면, align="top|center" prop)
+HomePageLayout   ← 홈 화면 전용 (헤더 + 인사말 + 스크롤 본문, withBottomNav prop)
+BottomNav        ← 홈 화면 하단 탭바 (items, activeId prop)
 Section          ← SectionHeader + 콘텐츠 묶음 (title 있을 때 SectionHeader 자동 포함)
-Stack            ← Vertical Auto Layout
-Inline           ← Horizontal Auto Layout
-Grid             ← Grid Layout (cols prop)
-Card             ← 테두리 있는 컨테이너
+Stack            ← Vertical Auto Layout (gap="xs|sm|md|lg|xl|2xl", align prop)
+Inline           ← Horizontal Auto Layout (gap="xs|sm|md|lg|xl|2xl", justify, align prop)
+Grid             ← Grid Layout (cols={1|2|3|4}, tabletCols prop)
+Card             ← 테두리 있는 컨테이너 (interactive 속성 선택)
 ```
 
 **사용하지 않는 컴포넌트:**
@@ -301,41 +303,83 @@ Page
 
 Figma 컴포넌트와 실제 컴포넌트 라이브러리 매핑.
 
-| Figma 컴포넌트 | React 컴포넌트 |
-| -------------- | -------------- |
-| Button | `<Button variant="primary/outline/..." />` |
-| Input | `<Input />` / 검색창은 `<Input leftIcon={<Search size={16} />} />` |
-| Select | `<Select options={...} />` |
-| 날짜 선택 | `<DatePicker />` |
-| 체크박스 | `<Checkbox />` |
-| Card | `<Card />` |
-| 라벨 + 값 나열 (세로) | `<LabelValueRow />` |
-| 라벨 + 값 나열 (가로) | `<InfoRow />` |
-| 구분선 | `<Divider />` / 텍스트 포함 구분선은 `<DividerWithLabel />` |
-| 접기 / 펼치기 영역 | `<CollapsibleSection />` |
-| 선택 가능한 항목 행 | `<SelectableItem />` |
-| 링크형 항목 행 | `<ActionLinkItem />` |
-| 공지 항목 | `<NoticeItem />` |
-| 오버레이 팝업 | `<Modal />` |
-| 하단 시트 | `<BottomSheet />` |
-| 빈 상태 | `<EmptyState />` |
-| 에러 상태 | `<ErrorState />` |
-| 경고/안내 배너 | `<AlertBanner intent="..." />` |
-| 계좌 카드 | `<AccountSummaryCard />` |
-| 뱅킹 금액 입력 | `<AmountInput />` |
-| 거래 검색 필터 | `<TransactionSearchFilter />` |
-| 거래 목록 | `<TransactionList />` |
-| 퀵메뉴 | `<QuickMenuGrid />` |
-| 슬라이드 배너 | `<BannerCarousel />` |
-| 브랜드 배너 | `<BrandBanner />` |
-| 하단 탭바 | `<BottomNav />` |
-| 상단 탭 | `<TabNav />` |
-| 성공 화면 | `<SuccessHero />` |
+각 컴포넌트에 명시된 variant / props는 **Figma 디자인에서 구현된 실제 옵션**입니다.
+표의 예시를 정확히 따라야 하며, 정의되지 않은 variant는 사용할 수 없습니다.
 
-> ❌ `Table → <DataTable />` — DataTable은 존재하지 않음
-> ❌ `List → <ListView />` — ListView는 존재하지 않음
+## Core 컴포넌트
+
+| Figma | React 컴포넌트 |
+|------|---|
+| Primary Button / Outline Button / Ghost Button / Danger Button | `<Button variant="primary\|outline\|ghost\|danger" size="sm\|md\|lg" />` |
+| Button with Loading | `<Button variant="..." loading />` |
+| Icon-only Button | `<Button variant="..." iconOnly />` |
+| Small Input | `<Input />` |
+| Search Input | `<Input leftIcon={<Search size={16} />} />` |
+| Dropdown Select | `<Select options={...} value={...} onChange={...} />` |
+| Small Badge / Brand Badge / Success / Danger / Warning / Neutral | `<Badge variant="primary\|brand\|success\|danger\|warning\|neutral" />` |
+| Dot Badge | `<Badge dot />` |
+| Text (xs / sm / base / lg / xl / 2xl / 3xl / 4xl) | `<Text variant="..." />` |
+| Plain Card | `<Card />` |
+| Interactive Card | `<Card interactive onClick={...} />` |
+
+## Layout 컴포넌트
+
+| Figma | React 컴포넌트 |
+|------|---|
+| 로그인/온보딩 헤더 | `<AppBrandHeader brandInitial="H" brandName="하나은행" />` |
+| 페이지 헤더 (뒤로가기 + 제목) | `<PageLayout title="..." onBack={...}>` |
+| 헤더 없는 전체 화면 | `<BlankPageLayout align="top\|center">` |
+| 홈 화면 (헤더 + 본문) | `<HomePageLayout title="..." logo={...} withBottomNav>` |
+| 홈 화면 하단 탭바 | `<BottomNav items={[...]} activeId={...} />` |
+| 섹션 (제목 포함) | `<Section title="..." gap="xs\|sm\|md\|lg\|xl">` |
+| 섹션 헤더 행 | `<SectionHeader title="..." actionLabel="..." onAction={...} />` |
+| 수직 자동 레이아웃 | `<Stack gap="xs\|sm\|md\|lg\|xl\|2xl" align="start\|center\|end\|stretch">` |
+| 수평 자동 레이아웃 | `<Inline gap="xs\|sm\|md\|lg\|xl\|2xl" justify="start\|center\|end\|between\|around\|evenly" align="start\|center\|end\|baseline\|stretch">` |
+| 격자 2열 / 3열 / 4열 | `<Grid cols={2\|3\|4} gap="..." tabletCols={...}>` |
+| 테두리 있는 박스 | `<Card />` |
+
+## 모듈 컴포넌트
+
+| Figma | React 컴포넌트 |
+|------|---|
+| 라벨 + 값 세로 나열 | `<LabelValueRow label="..." value="..." />` |
+| 라벨 + 값 가로 한 줄 | `<InfoRow label="..." value="..." />` |
+| 구분선 | `<Divider />` |
+| 텍스트 라벨 구분선 | `<DividerWithLabel label="..." />` |
+| 날짜 선택기 | `<DatePicker />` |
+| 체크박스 | `<Checkbox />` |
+| 접기/펼치기 섹션 | `<CollapsibleSection title="..." defaultOpen>` |
+| 선택 가능한 항목 행 | `<SelectableItem selected={...} onClick={...}>` |
+| 링크형 항목 행 | `<ActionLinkItem href="..." icon={...}>` |
+| 알림 항목 | `<NoticeItem />` |
+| 경고 / 위험 / 성공 / 안내 배너 | `<AlertBanner intent="warning\|danger\|success\|info">` |
+| 모달 팝업 | `<Modal isOpen={...} onClose={...}>` |
+| 하단 시트 | `<BottomSheet isOpen={...} onClose={...}>` |
+| 빈 상태 화면 | `<EmptyState />` |
+| 에러 상태 화면 | `<ErrorState />` |
+
+## 비즈니스 컴포넌트
+
+| Figma | React 컴포넌트 |
+|------|---|
+| 계좌 요약 카드 | `<AccountSummaryCard accountNumber="..." balance={...} />` |
+| 카드사 요약 카드 | `<CardSummaryCard cardName="..." balance={...} />` |
+| 보험 요약 카드 | `<InsuranceSummaryCard policyName="..." premium={...} />` |
+| 금액 입력 필드 | `<AmountInput label="금액" value={...} onChange={...} />` |
+| 거래 검색 필터 | `<TransactionSearchFilter onFilter={...} />` |
+| 거래 목록 | `<TransactionList transactions={...} />` |
+| 퀵메뉴 격자 | `<QuickMenuGrid items={...} onSelect={...} />` |
+| 슬라이드 배너 | `<BannerCarousel items={...} />` |
+| 브랜드 배너 | `<BrandBanner title="..." description="..." />` |
+| 하단 탭 네비게이션 | `<BottomNav items={...} activeId={...} />` |
+| 상단 탭 | `<TabNav items={...} activeTabId={...} onChange={...} />` |
+| 성공 결과 화면 | `<SuccessHero title="..." subtitle="..." actionLabel="..." />` |
+| 사용자 프로필 | `<UserProfile userName="..." profileImage={...} />` |
+
+> ❌ `Table → <DataTable />` — 존재하지 않음. 거래 목록은 `<TransactionList />` 사용
+> ❌ `List → <ListView />` — 존재하지 않음. 반복 목록은 `<Stack gap="...">` + `map()` 사용
 > ❌ `Pagination` — 존재하지 않음. TransactionList 내 무한 스크롤 사용
-> ❌ `DescriptionList` — 존재하지 않음. 세로 나열은 `LabelValueRow`, 가로 한 줄은 `InfoRow` 사용
+> ❌ `DescriptionList` — 존재하지 않음. 세로 나열은 `<LabelValueRow />`, 가로 한 줄은 `<InfoRow />` 사용
 
 ---
 
