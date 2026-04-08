@@ -43,7 +43,6 @@ npm run storybook    # Storybook (포트 6006)
 | `npm run build:all` | `build` → `build:manifest` → `extract:manifest` 순차 실행 |
 | `npm run typecheck` | emit 없이 타입 검사만 수행 (`tsc --noEmit`) |
 | `npm run lint` | ESLint 실행 (Flat Config, Storybook + React hooks 플러그인 포함) |
-| `npm run build-storybook` | GitHub Pages 배포용 Storybook 정적 빌드 (`storybook-static/` 출력) |
 
 빌드 결과물은 `dist/` 폴더에 출력됩니다.
 
