@@ -90,6 +90,9 @@ export * from './biz/card/CardPaymentItem';
 export * from './biz/card/BillingPeriodLabel';
 export * from './biz/card/CardInfoPanel';
 export * from './biz/card/StatementTotalCard';
+export * from './biz/card/CardVisual';
+export * from './biz/card/CardLinkedBalance';
+export * from './biz/card/CardManagementPanel';
 
 /* ── Biz / Insurance (보험 도메인 컴포넌트) ──────────────────── */
 export * from './biz/insurance/InsuranceSummaryCard';
