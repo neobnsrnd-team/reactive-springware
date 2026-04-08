@@ -4,8 +4,6 @@
  */
 import React from 'react';
 
-export type ModalSize = 'sm' | 'md' | 'lg' | 'fullscreen';
-
 export interface ModalProps {
   /** 모달 표시 여부 */
   open:              boolean;
@@ -17,13 +15,9 @@ export interface ModalProps {
   children:          React.ReactNode;
   /** 하단 버튼 영역. Button 조합 권장 */
   footer?:           React.ReactNode;
-  /**
-   * 데스크톱 기준 모달 최대 너비.
-   * 모바일에서는 항상 전체 너비 Bottom Sheet.
-   * @default 'md'
-   */
-  size?:             ModalSize;
   /** true이면 배경 클릭으로 닫기 비활성화 */
   disableBackdropClose?: boolean;
+  /** modal 을 띄울 대상 (기본 document.body) */
+  container?:        Element; 
   className?:        string;
 }

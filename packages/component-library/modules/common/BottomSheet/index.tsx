@@ -51,6 +51,7 @@ export function BottomSheet({
   snap = 'auto',
   disableBackdropClose = false,
   hideCloseButton = false,
+  container,
   className,
 }: BottomSheetProps) {
   /* ESC 키로 닫기 */
@@ -58,6 +59,9 @@ export function BottomSheet({
     (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); },
     [onClose],
   );
+
+  // container가 있을 때는 absolute, 없으면 fixed (viewport 기준)
+  const pos = container ? "absolute" : "fixed";
 
   useEffect(() => {
     if (!open) return;
@@ -80,7 +84,7 @@ export function BottomSheet({
     <div
       role="presentation"
       onClick={disableBackdropClose ? undefined : onClose}
-      className="fixed inset-0 z-modal flex items-end justify-center bg-black/50 backdrop-blur-sm"
+      className={`${pos} inset-0 z-modal flex items-end justify-center bg-black/50 backdrop-blur-sm`}
     >
       <div
         role="dialog"
@@ -147,6 +151,6 @@ export function BottomSheet({
         )}
       </div>
     </div>,
-    document.body,
+    container ?? document.body,
   );
 }

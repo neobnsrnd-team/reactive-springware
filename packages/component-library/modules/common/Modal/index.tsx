@@ -1,39 +1,8 @@
-/**
- * @file index.tsx
- * @description 오버레이 모달 컴포넌트.
- * React Portal로 document.body에 렌더링하며, z-modal(50)으로 최상위 레이어를 유지한다.
- *
- * 반응형 레이아웃:
- * - 모바일(md 미만): 화면 하단 Bottom Sheet
- * - 데스크톱(md 이상): 화면 중앙 다이얼로그
- *
- * @example
- * <Modal open={open} onClose={() => setOpen(false)} title="이체 확인"
- *   footer={
- *     <div className="flex gap-sm">
- *       <Button variant="outline" fullWidth onClick={() => setOpen(false)}>취소</Button>
- *       <Button fullWidth onClick={handleConfirm}>이체 확인</Button>
- *     </div>
- *   }
- * >
- *   <CardRow label="받는 분" value="홍길동" />
- *   <CardRow label="금액" value="1,000,000원" />
- * </Modal>
- */
 import React, { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '@lib/cn';
-import type { ModalProps, ModalSize } from './types';
-
-/** 데스크톱(md 이상)에서 적용할 최대 너비 클래스 */
-const PANEL_SIZE: Record<ModalSize, string> = {
-  sm:         'md:max-w-sm',
-  md:         'md:max-w-md',
-  lg:         'md:max-w-lg',
-  /* fullscreen: w-screen(=100vw) 대신 w-full 사용 — 스크롤바 너비 포함 가로 스크롤 방지 */
-  fullscreen: 'md:max-w-none md:w-full md:max-h-none md:rounded-none',
-};
+import type { ModalProps } from './types';
 
 export function Modal({
   open,
@@ -41,8 +10,8 @@ export function Modal({
   title,
   children,
   footer,
-  size = 'md',
   disableBackdropClose = false,
+  container,
   className,
 }: ModalProps) {
   /* ESC 키로 닫기 */
@@ -50,6 +19,9 @@ export function Modal({
     (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); },
     [onClose],
   );
+
+  // container가 있을 때는 absolute, 없으면 fixed (viewport 기준)
+  const pos = container ? "absolute" : "fixed";
 
   useEffect(() => {
     if (!open) return;
@@ -66,14 +38,12 @@ export function Modal({
 
   return createPortal(
     /*
-     * 백드롭: fixed inset-0으로 뷰포트 전체 덮기
-     * flex items-end → Bottom Sheet (모바일)
-     * md:items-center → 중앙 다이얼로그 (데스크톱)
+     * 백드롭: 모든 해상도에서 중앙 정렬 (items-center)
      */
     <div
       role="presentation"
       onClick={disableBackdropClose ? undefined : onClose}
-      className="fixed inset-0 z-modal flex items-end justify-center md:items-center bg-black/50 backdrop-blur-sm"
+      className={`${pos} inset-0 z-modal flex items-center justify-center bg-black/50 backdrop-blur-sm p-4`}
     >
       <div
         role="dialog"
@@ -82,18 +52,13 @@ export function Modal({
         onClick={e => e.stopPropagation()}
         className={cn(
           'flex flex-col',
-          'w-full max-h-[90dvh] overflow-hidden',
+          'w-full max-w-full', // 기본적으로 전체 너비 사용
           'bg-surface shadow-2xl',
-          'rounded-t-2xl md:rounded-2xl',
-          PANEL_SIZE[size],
+          'rounded-2xl', // 모든 해상도 동일 라운드 처리
+          'max-h-[calc(100dvh-80px)]', // 화면 높이를 벗어나지 않도록 제한
           className,
         )}
       >
-        {/* 드래그 핸들 — 모바일 Bottom Sheet 전용 */}
-        <div className="flex shrink-0 justify-center pt-3 pb-1 md:hidden" aria-hidden="true">
-          <span className="w-10 h-1 rounded-full bg-border" />
-        </div>
-
         {/* 헤더 (고정) */}
         <div className="flex shrink-0 items-center justify-between px-xl pt-md pb-md">
           {title ? (
@@ -101,7 +66,6 @@ export function Modal({
               {title}
             </h2>
           ) : (
-            /* 닫기 버튼을 오른쪽으로 밀기 위한 spacer */
             <span aria-hidden="true" />
           )}
           <button
@@ -118,11 +82,7 @@ export function Modal({
           </button>
         </div>
 
-        {/*
-         * 본문 (스크롤 영역)
-         * flex-1 + min-h-0: 헤더·푸터를 제외한 공간을 차지하면서 내부 스크롤 허용
-         * min-h-0 없으면 flex 컬럼에서 overflow-y-auto가 동작하지 않음
-         */}
+        {/* 본문 (스크롤 영역) */}
         <div className="flex-1 min-h-0 overflow-y-auto px-xl pb-md">
           {children}
         </div>
@@ -135,6 +95,6 @@ export function Modal({
         )}
       </div>
     </div>,
-    document.body,
+    container ?? document.body,
   );
 }

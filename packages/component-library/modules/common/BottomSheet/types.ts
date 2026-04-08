@@ -42,5 +42,7 @@ export interface BottomSheetProps {
    * true로 설정해도 ESC 키·백드롭 클릭 닫기는 유지된다.
    */
   hideCloseButton?: boolean;
+  /** BottomSheet를 띄울 대상 (기본 document.body) */
+  container?:        Element; 
   className?: string;
 }

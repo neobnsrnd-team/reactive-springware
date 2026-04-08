@@ -3,6 +3,7 @@
  * @description Button 컴포넌트의 TypeScript 타입 정의
  */
 import React from 'react';
+import { IconName } from '../../icons/iconRegistry';
 
 export type ButtonVariant = 'primary' | 'outline' | 'ghost' | 'danger';
 export type ButtonSize    = 'sm' | 'md' | 'lg';
@@ -22,8 +23,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   loading?:   boolean;
   /** true이면 정방형 아이콘 전용 버튼 (텍스트 숨김) */
   iconOnly?:  boolean;
-  leftIcon?:  React.ReactNode;
-  rightIcon?: React.ReactNode;
+  leftIcon?:  IconName;
+  rightIcon?: IconName;
   /** true이면 w-full 적용 */
   fullWidth?: boolean;
   /** 내부 정렬. 기본: 'center' */

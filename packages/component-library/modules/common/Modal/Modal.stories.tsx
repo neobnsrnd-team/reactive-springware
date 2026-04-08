@@ -12,7 +12,6 @@ const meta = {
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },
   argTypes: {
-    size:  { control: 'select', options: ['sm', 'md', 'lg', 'fullscreen'] },
     open:  { control: 'boolean' },
     title: { control: 'text' },
     disableBackdropClose: { control: 'boolean' },
@@ -20,7 +19,6 @@ const meta = {
   args: {
     open: true,
     title: '이체 확인',
-    size: 'md',
     disableBackdropClose: false,
   },
 } satisfies Meta<typeof Modal>;
@@ -89,30 +87,6 @@ export const Controlled: Story = {
             작업이 완료되었습니다.
           </p>
         </Modal>
-      </div>
-    );
-  },
-};
-
-export const Sizes: Story = {
-  render: () => {
-    const [size, setSize] = useState<'sm' | 'md' | 'lg' | null>(null);
-    return (
-      <div style={{ display: 'flex', gap: 8 }}>
-        {(['sm', 'md', 'lg'] as const).map(s => (
-          <button
-            key={s}
-            onClick={() => setSize(s)}
-            style={{ padding: '8px 16px', borderRadius: 8, border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer' }}
-          >
-            {s}
-          </button>
-        ))}
-        {size && (
-          <Modal open title={`size="${size}"`} onClose={() => setSize(null)} size={size}>
-            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>모달 크기: {size}</p>
-          </Modal>
-        )}
       </div>
     );
   },

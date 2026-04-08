@@ -6,9 +6,12 @@
   "main": "./index.ts",
   "module": "./index.ts",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./cms": "./cms/index.ts"
   },
   "files": [
+    "cms",
+    "icons",
     "core",
     "modules",
     "layout",

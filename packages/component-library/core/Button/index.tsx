@@ -17,6 +17,7 @@ import React from 'react';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { ButtonProps, ButtonGroupProps } from './types';
+import Icon from '../../icons';
 
 /** variant별 배경·텍스트·hover 스타일 */
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
@@ -108,21 +109,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           /* between 모드: leftIcon+children을 왼쪽, rightIcon을 오른쪽으로 분리 */
           <>
             <span className={cn('inline-flex items-center', gap, loading && 'invisible')}>
-              {leftIcon && <span aria-hidden="true" className="shrink-0">{leftIcon}</span>}
+              {leftIcon && <span aria-hidden="true" className="shrink-0"><Icon name={leftIcon} /></span>}
               {!iconOnly && children}
             </span>
             {rightIcon && (
               <span aria-hidden="true" className={cn('shrink-0', loading && 'invisible')}>
-                {rightIcon}
+                <Icon name={rightIcon} />
               </span>
             )}
           </>
         ) : (
           /* center 모드(기본): 모두 하나의 span으로 묶어 가운데 정렬 */
           <span className={cn('inline-flex items-center', gap, loading && 'invisible')}>
-            {leftIcon && <span aria-hidden="true" className="shrink-0">{leftIcon}</span>}
+            {leftIcon && <span aria-hidden="true" className="shrink-0"><Icon name={leftIcon} /></span>}
             {!iconOnly && children}
-            {rightIcon && <span aria-hidden="true" className="shrink-0">{rightIcon}</span>}
+            {rightIcon && <span aria-hidden="true" className="shrink-0"><Icon name={rightIcon} /></span>}
           </span>
         )}
       </button>

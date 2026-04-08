@@ -1,0 +1,11 @@
+{
+  "terminal.integrated.env.windows": {
+    "GITHUB_TOKEN": "ghp_your_token_here"
+  },
+  "terminal.integrated.env.osx": {
+    "GITHUB_TOKEN": "ghp_your_token_here"
+  },
+  "terminal.integrated.env.linux": {
+    "GITHUB_TOKEN": "ghp_your_token_here"
+  }
+}
