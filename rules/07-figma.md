@@ -580,7 +580,7 @@ Figma에서 Frame 내부에 Absolute 위치 레이어가 있는 경우에만 `re
 # 핵심 체크리스트
 
 ✔ Auto Layout(Vertical) → `Stack`, Auto Layout(Horizontal) → `Inline`
-✔ gap 수치 → gap 토큰 (4px=xs / 8px=sm / 16px=md / 24px=lg / 32px+=xl)
+✔ gap 수치 → gap 토큰 (4px=xs / 8px=sm / 12px=md / 20px=lg / 24px+=xl)
 ✔ `direction` `spacing` `columns` prop 사용 금지
 ✔ `Row` `Column` `ButtonGroup` `FilterBar` `DataTable` 사용 금지
 ✔ 레이어·프레임에 의미 있는 이름 사용
