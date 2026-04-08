@@ -31,6 +31,8 @@
 import React from 'react';
 import { cn } from '@lib/cn';
 import type { CardPaymentSummaryProps } from './types';
+import { Typography } from '../../../core/Text';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 /** 금액을 한국식 원화 형식으로 변환. 예: 350000 → '350,000원' */
 function formatAmount(amount: number): string {
@@ -61,12 +63,14 @@ function SummaryCol({ label, amount, bordered, onClick }: SummaryColProps) {
         <button
           type="button"
           onClick={onClick}
-          className="text-xs text-brand hover:underline text-center leading-tight break-keep"
+          className="text-xs text-brand hover:underline text-center leading-tight break-keep whitespace-pre-wrap"
         >
-          {label}
+          {label.split('\\n').join('\n')}
         </button>
       ) : (
-        <span className="text-xs text-text-muted text-center leading-tight">{label}</span>
+        <span className="text-xs text-text-muted text-center leading-tight">
+          {label.split('\\n').join('\n')}
+        </span>
       )}
       {/* 금액이 0이면 영역 미노출 */}
       {amount > 0 && (
@@ -84,11 +88,10 @@ export function CardPaymentSummary({
   revolving = 0,
   cardLoan = 0,
   cashAdvance = 0,
-  paymentAccount,
-  paymentDate,
   onRevolving,
   onCardLoan,
   onCashAdvance,
+  onDateClick,
   className,
 }: CardPaymentSummaryProps) {
   return (
@@ -102,44 +105,41 @@ export function CardPaymentSummary({
     >
       {/* 상단: 총 청구금액 */}
       <div className="flex flex-col items-center gap-xs pt-lg px-md">
-        <span className="text-lg text-text-muted">{dateYM} 청구금액</span>
+        {/* 날짜 영역 — onDateClick 전달 시 버튼으로 렌더링해 날짜 선택 모달 진입 */}
+        <button
+          type="button"
+          onClick={onDateClick}
+          disabled={!onDateClick}
+          className="flex items-center gap-xs text-lg text-text-muted disabled:cursor-default"
+        >
+          {dateYM}
+          <ChevronDown className="size-4" />
+        </button>
         <span className="text-sm text-text-muted">
           {dateFull} 출금예정 ({dateMD}기준)
         </span>
         <span className="text-3xl font-bold text-brand pt-lg">{formatAmount(totalAmount)}</span>
       </div>
 
-      {/* 중단: 세부 항목 3열 그리드 — 각 레이블은 해당 서비스 진입 버튼 */}
-      <div className="flex items-start pt-lg pb-md">
+      {/* 하단: 세부 항목 3열 그리드 — 각 레이블은 해당 서비스 진입 버튼 */}
+      <div className="flex items-start pb-md pt-lg -mx-xs">
         <SummaryCol
-          label="일부결제금액이월약정(리볼빙)"
+          label="일부결제금액\n이월약정(리볼빙)"
           amount={revolving}
           onClick={onRevolving}
         />
         {/* 중간 열에 border-x 적용해 좌우 항목과 시각적으로 구분 */}
         <SummaryCol
-          label="장기카드대출(카드론)"
+          label="장기카드대출\n(카드론)"
           amount={cardLoan}
           bordered
           onClick={onCardLoan}
         />
         <SummaryCol
-          label="단기카드대출(현금서비스)"
+          label="단기카드대출\n(현금서비스)"
           amount={cashAdvance}
           onClick={onCashAdvance}
         />
-      </div>
-
-      {/* 하단: 결제 계좌·결제일 메타 정보 */}
-      <div className="bg-surface-subtle px-md py-sm flex flex-col gap-xs">
-        <div className="flex justify-between items-center">
-          <span className="text-xs text-text-muted">결제계좌</span>
-          <span className="text-xs font-medium text-text-base">{paymentAccount}</span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-xs text-text-muted">결제일</span>
-          <span className="text-xs font-medium text-text-base">{paymentDate}</span>
-        </div>
       </div>
     </div>
   );

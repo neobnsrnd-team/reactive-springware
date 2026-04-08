@@ -21,15 +21,13 @@ export interface CardPaymentSummaryProps {
   cardLoan?: number;
   /** 현금서비스 금액 (원). 0이면 표시하지 않음 */
   cashAdvance?: number;
-  /** 결제 계좌. 예: '하나은행 123-456789-01234' */
-  paymentAccount: string;
-  /** 결제일. 예: '매월 14일' */
-  paymentDate: string;
   /** 리볼빙(일부결제금액이월약정) 버튼 클릭 핸들러. 미전달 시 버튼 비활성 */
   onRevolving?: () => void;
   /** 카드론(장기카드대출) 버튼 클릭 핸들러. 미전달 시 버튼 비활성 */
   onCardLoan?: () => void;
   /** 현금서비스(단기카드대출) 버튼 클릭 핸들러. 미전달 시 버튼 비활성 */
   onCashAdvance?: () => void;
+  /** 날짜(년월) 영역 클릭 핸들러. 전달 시 날짜 선택 모달 등을 열 수 있음 */
+  onDateClick?: () => void;
   className?: string;
 }
