@@ -36,9 +36,13 @@ export function CardLinkedBalance({
 }: CardLinkedBalanceProps) {
   return (
     <div className={cn('flex flex-col gap-xs', className)}>
-      {/* 레이블 + 보기/숨기기 배지 버튼 */}
+      <span className="text-xs sm:text-sm text-text-muted">연결계좌 잔액</span>
+
+      {/* 금액 + 보기/숨기기 배지 버튼 */}
       <div className="flex items-center gap-xs">
-        <span className="text-xs sm:text-sm text-text-muted">연결계좌 잔액</span>
+        <span className="text-xl sm:text-2xl font-bold text-text-heading">
+          {hidden ? '잔액 숨김 중' : formatAmount(balance)}
+        </span>
         {/* 배지를 버튼으로 감싸 클릭 이벤트 부여 */}
         <button
           type="button"
@@ -49,11 +53,6 @@ export function CardLinkedBalance({
           <Badge variant="neutral">{hidden ? '보기' : '숨기기'}</Badge>
         </button>
       </div>
-
-      {/* 금액 — hidden이면 마스킹 문자 표시 */}
-      <span className="text-xl sm:text-2xl font-bold text-text-heading">
-        {hidden ? '•••••' : formatAmount(balance)}
-      </span>
     </div>
   );
 }
