@@ -128,7 +128,8 @@ export function AccountSummaryCard({
             {displayBalance}
           </span>
         }
-        className="mb-lg"
+        /* actions 있을 때만 mb-lg 적용 — 없으면 하단 여백을 잡지 않음 */
+        className={cn(actions && 'mb-lg')}
       />
 
       {/* ── 액션 버튼 슬롯: 버튼이 균등하게 전체 너비 채움 ── */}

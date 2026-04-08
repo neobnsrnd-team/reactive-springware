@@ -96,7 +96,8 @@ export function InsuranceSummaryCard({
       <p className="text-xs text-text-muted mb-md">{contractNumber}</p>
 
       {/* ── 보험료 영역 ───────────────────────────────────── */}
-      <div className="mb-lg">
+      {/* actions 있을 때만 mb-lg 적용 — 없으면 하단 여백을 잡지 않음 */}
+      <div className={cn(actions && 'mb-lg')}>
         <p className="text-xs text-text-muted mb-xs">월 납입 보험료</p>
         <p
           className="text-xl font-bold font-numeric tabular-nums text-text-heading"
