@@ -27,9 +27,9 @@
  *   />
  * </Grid>
  */
-import React from 'react'
-import { cn } from '@lib/cn'
-import type { QuickShortcutCardProps } from './types'
+import React from 'react';
+import { cn } from '@lib/cn';
+import type { QuickShortcutCardProps } from './types';
 
 export function QuickShortcutCard({
   title,
@@ -38,7 +38,7 @@ export function QuickShortcutCard({
   onClick,
   className,
 }: QuickShortcutCardProps) {
-  const Tag = onClick ? 'button' : 'div'
+  const Tag = onClick ? 'button' : 'div';
 
   return (
     <Tag
@@ -62,9 +62,7 @@ export function QuickShortcutCard({
       </div>
 
       {/* 우측: 아이콘 슬롯 */}
-      {icon && (
-        <span className="shrink-0 text-text-muted">{icon}</span>
-      )}
+      {icon && <span className="shrink-0 text-text-muted">{icon}</span>}
     </Tag>
-  )
+  );
 }

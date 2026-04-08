@@ -40,7 +40,7 @@ export function HomePageLayout({
   ...props
 }: HomePageLayoutProps) {
   return (
-    <div className={cn('flex flex-col min-h-dvh', className)} {...props}>
+    <div className={cn('flex flex-col h-dvh', className)} {...props}>
       {/* ── 상단 고정 헤더 ────────────────────────────── */}
       {/*
        * backdrop-blur + 반투명 흰 배경: 스크롤 시 콘텐츠가 헤더 아래로 자연스럽게 가려짐.
@@ -91,12 +91,13 @@ export function HomePageLayout({
       {/* ── 스크롤 가능한 본문 영역 ────────────────────── */}
       <main
         className={cn(
-          'flex-1 overflow-y-auto',
+          'flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden',
           /* 좌우 기본 여백 + 상하 여백 — 콘텐츠가 화면 끝에 붙지 않도록 */
           'py-md',
           /* 하단 탭바(80px) 높이만큼 여백 확보 — 탭바가 콘텐츠를 가리지 않도록 */
           withBottomNav && 'pb-nav',
         )}
+        style={{ scrollbarWidth: 'none' }}
       >
         {children}
       </main>

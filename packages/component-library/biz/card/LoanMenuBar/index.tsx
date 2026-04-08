@@ -25,34 +25,34 @@
  *   ]}
  * />
  */
-import React, { useRef } from 'react'
-import { cn } from '@lib/cn'
-import type { LoanMenuBarProps } from './types'
+import React, { useRef } from 'react';
+import { cn } from '@lib/cn';
+import type { LoanMenuBarProps } from './types';
 
 export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null);
   /* 드래그 패닝 상태 — ref로 관리해 리렌더 없이 처리 */
-  const isDragging = useRef(false)
-  const startX    = useRef(0)
-  const scrollLeft = useRef(0)
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
   function onMouseDown(e: React.MouseEvent) {
-    if (!scrollRef.current) return
-    isDragging.current  = true
-    startX.current      = e.pageX - scrollRef.current.offsetLeft
-    scrollLeft.current  = scrollRef.current.scrollLeft
+    if (!scrollRef.current) return;
+    isDragging.current = true;
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
   }
 
   function onMouseMove(e: React.MouseEvent) {
-    if (!isDragging.current || !scrollRef.current) return
-    e.preventDefault()
-    const x = e.pageX - scrollRef.current.offsetLeft
+    if (!isDragging.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
     /* 이동 거리에 1.5 배율 적용해 패닝 감도 향상 */
-    scrollRef.current.scrollLeft = scrollLeft.current - (x - startX.current) * 1.5
+    scrollRef.current.scrollLeft = scrollLeft.current - (x - startX.current) * 1.5;
   }
 
   function stopDragging() {
-    isDragging.current = false
+    isDragging.current = false;
   }
 
   return (
@@ -64,7 +64,7 @@ export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
         /* 고정 높이 대신 반응형 패딩으로 높이 자연 결정 */
         'flex items-center w-full',
         'py-xs sm:py-sm md:py-md',
-        'bg-surface-raised rounded-full',
+        'bg-surface-raised rounded-xl',
         'overflow-x-auto [&::-webkit-scrollbar]:hidden',
         'px-sm sm:px-md gap-xs',
         /* 드래그 패닝 커서 — 마우스 사용자에게 드래그 가능 힌트 제공 */
@@ -78,7 +78,7 @@ export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
       onMouseUp={stopDragging}
       onMouseLeave={stopDragging}
     >
-      {items.map(item => (
+      {items.map((item) => (
         <button
           key={item.id}
           type="button"
@@ -87,7 +87,7 @@ export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
             /* flex-1로 여유 공간을 균등 분배, min-w-max로 텍스트 줄바꿈 방지 */
             'flex items-center justify-center gap-xs sm:gap-sm',
             'flex-1 min-w-max',
-            'px-sm sm:px-md py-xs sm:py-sm rounded-full',
+            'px-sm sm:px-md py-xs sm:py-sm rounded-lg',
             'text-xs sm:text-sm font-bold text-text-label',
             'hover:bg-surface transition-colors duration-150',
             'whitespace-nowrap',
@@ -100,5 +100,5 @@ export function LoanMenuBar({ items, className }: LoanMenuBarProps) {
         </button>
       ))}
     </div>
-  )
+  );
 }
