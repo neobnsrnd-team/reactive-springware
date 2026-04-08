@@ -1,6 +1,6 @@
 {
   "name": "@neobnsrnd-team/reactive-springware",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "type": "module",
   "description": "Figma 디자인 → React 컴포넌트 라이브러리 (Bank App 기반)",
   "main": "./dist/index.js",
