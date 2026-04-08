@@ -30,7 +30,7 @@
  */
 import React from 'react';
 import { cn } from '@lib/cn';
-import { SectionHeader } from '../../modules/SectionHeader';
+import { SectionHeader } from '../../modules/common/SectionHeader';
 import type { SectionProps } from './types';
 
 export type { SectionProps } from './types';

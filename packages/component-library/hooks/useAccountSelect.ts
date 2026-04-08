@@ -19,7 +19,7 @@
  * <AccountSelectPage {...accountSelect} accounts={ACCOUNTS} otherAccounts={OTHER_ACCOUNTS} />
  */
 import { useState, useCallback, useMemo } from 'react';
-import type { AccountSelectTab } from '../pages/AccountSelectPage/types';
+import type { AccountSelectTab } from '../pages/banking/AccountSelectPage/types';
 
 export interface UseAccountSelectOptions {
   /** 초기 활성 탭. 기본: 'mine' */
