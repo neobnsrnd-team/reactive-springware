@@ -100,8 +100,8 @@ rs-rules/
   09-confirmation.md
   10-brand.md
   11-component-props.md
-  component.md
-  interpretation-rules.md
+  12-component-mapping.md
+  13-interpertation.md
 
 ```
 
