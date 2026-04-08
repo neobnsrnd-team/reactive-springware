@@ -18,9 +18,6 @@
  * <CMSApp blocks={blocks} overlays={overlays} layoutRenderer={layoutRenderer} />
  */
 import React from 'react';
-import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
-import { cn } from '@lib/cn';
 import type { OverlayTemplate, OverlayRendererProps } from "@neobnsrnd-team/cms-core";
 import { BottomSheet } from '../modules/common/BottomSheet';
 import { Modal } from '../modules/common/Modal';
@@ -46,19 +43,17 @@ function BottomSheetRenderer({ open, onClose, children, container, props }: Over
   const snap            = (props?.snap           as string | undefined) ?? 'auto';
   const hideCloseButton = (props?.hideCloseButton as boolean | undefined) ?? false;
 
-  /** snap 프리셋 → 최대 높이 클래스 */
-  const snapClass: Record<string, string> = {
-    auto: 'max-h-[90dvh]',
-    half: 'max-h-[50dvh]',
-    full: 'max-h-[90dvh]',
-  };
-
   return (
-    <div className='relative'>
-      <BottomSheet open={open} onClose={onClose} title="이체 확인">
-        {children}
-      </BottomSheet>
-    </div>
+    <BottomSheet
+      open={open}
+      onClose={onClose}
+      title={title}
+      snap={snap as 'auto' | 'half' | 'full'}
+      hideCloseButton={hideCloseButton}
+      container={container}
+    >
+      {children}
+    </BottomSheet>
   );
 }
 
@@ -84,24 +79,18 @@ function ModalRenderer({ open, onClose, children, container, props }: OverlayRen
   if (!open) return null;
 
   const title               = props?.title               as string | undefined;
-  const size                = (props?.size               as string | undefined) ?? 'md';
   const disableBackdropClose = (props?.disableBackdropClose as boolean | undefined) ?? false;
 
-  /** 데스크톱(md 이상)에서 적용할 최대 너비 클래스 */
-  const panelSizeClass: Record<string, string> = {
-    sm:         'md:max-w-sm',
-    md:         'md:max-w-md',
-    lg:         'md:max-w-lg',
-    fullscreen: 'md:max-w-none md:w-full md:max-h-none md:rounded-none',
-  };
-
   return (
-    <div className='relative'>
-      <Modal open={open} onClose={onClose} 
-        title={(title as string) ?? "모달 제목"}>
-        {children}
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={title ?? "모달 제목"}
+      disableBackdropClose={disableBackdropClose}
+      container={container}
+    >
+      {children}
+    </Modal>
   );
 }
 

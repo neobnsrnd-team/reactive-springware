@@ -61,18 +61,32 @@ export function BottomSheet({
   );
 
   // container가 있을 때는 absolute, 없으면 fixed (viewport 기준)
-  const pos = container ? "absolute" : "fixed";
+  // const pos = container ? "absolute" : "fixed";
+  const target = container ?? document.body;
+  const isContainer = !!container;
+
+  const overlayStyle = isContainer
+    ? { position: 'absolute' as const, inset: 0 }
+    : { position: 'fixed' as const, inset: 0 };
 
   useEffect(() => {
     if (!open) return;
+
     document.addEventListener('keydown', handleKeyDown);
+    
     /* 시트가 열린 동안 body 스크롤 잠금 */
-    document.body.style.overflow = 'hidden';
+    if (!isContainer) {
+      document.body.style.overflow = 'hidden';
+    }
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      
+      if (!isContainer) {
+        document.body.style.overflow = '';
+      }
     };
-  }, [open, handleKeyDown]);
+  }, [open, handleKeyDown, isContainer]);
 
   if (!open) return null;
 
@@ -84,7 +98,10 @@ export function BottomSheet({
     <div
       role="presentation"
       onClick={disableBackdropClose ? undefined : onClose}
-      className={`${pos} inset-0 z-modal flex items-end justify-center bg-black/50 backdrop-blur-sm`}
+      style={overlayStyle}
+      className={cn(
+        'z-modal flex items-end justify-center bg-black/50 backdrop-blur-sm'
+      )}
     >
       <div
         role="dialog"
@@ -151,6 +168,6 @@ export function BottomSheet({
         )}
       </div>
     </div>,
-    container ?? document.body,
+    target,
   );
 }
