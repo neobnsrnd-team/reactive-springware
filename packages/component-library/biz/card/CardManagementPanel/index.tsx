@@ -37,10 +37,8 @@ function NavRow({ label, subText, onClick }: CardManagementNavRow) {
       onClick={onClick}
       className={cn(
         'flex items-center justify-between w-full',
-        'py-md sm:py-lg',
-        'border-b border-border-subtle last:border-b-0',
-        /* 음수 마진으로 컨테이너 패딩을 상쇄해 hover 영역을 전체 너비로 확장 */
-        'hover:bg-surface-subtle transition-colors duration-150 -mx-md px-md',
+        'py-md sm:py-lg px-md',
+        'hover:bg-surface-subtle transition-colors duration-150',
       )}
     >
       <span className="text-sm sm:text-base font-medium text-text-heading">{label}</span>
@@ -60,10 +58,13 @@ export function CardManagementPanel({ rows, className }: CardManagementPanelProp
       {/* SectionHeader — "카드 관리" 섹션 제목 */}
       <SectionHeader title="카드 관리" className="mb-xs" />
 
-      {rows.map((row, index) => (
-        /* subText가 없는 행도 있으므로 label+index로 key 구성 */
-        <NavRow key={`${row.label}-${index}`} {...row} />
-      ))}
+      {/* border로 감싸 행 목록을 하나의 카드처럼 표시 */}
+      <div className="border border-border-subtle rounded-lg overflow-hidden">
+        {rows.map((row, index) => (
+          /* subText가 없는 행도 있으므로 label+index로 key 구성 */
+          <NavRow key={`${row.label}-${index}`} {...row} />
+        ))}
+      </div>
     </div>
   );
 }
