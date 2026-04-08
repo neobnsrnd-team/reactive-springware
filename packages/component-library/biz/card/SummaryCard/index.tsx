@@ -15,7 +15,6 @@
  * 반드시 `[data-domain='card']` 컨텍스트 내에서 렌더링되어야 한다.
  *
  * @param variant  - 'asset' | 'spending'
- * @param label    - 영문 보조 레이블 (e.g. "TOTAL ASSETS")
  * @param title    - 한글 제목 (e.g. "총 자산")
  * @param amount   - 원화 금액 (정수)
  * @param icon     - 우측 상단 아이콘 슬롯 (ReactNode)
@@ -25,7 +24,6 @@
  * @example
  * <SummaryCard
  *   variant="asset"
- *   label="TOTAL ASSETS"
  *   title="총 자산"
  *   amount={42850000}
  *   icon={<Building2 size={36} />}
@@ -35,16 +33,15 @@
  *   ]}
  * />
  */
-import React from 'react'
-import { cn } from '@lib/cn'
-import type { SummaryCardProps } from './types'
+import React from 'react';
+import { cn } from '@lib/cn';
+import type { SummaryCardProps } from './types';
 
 /** 원화 금액 포맷터 */
-const krwFormatter = new Intl.NumberFormat('ko-KR')
+const krwFormatter = new Intl.NumberFormat('ko-KR');
 
 export function SummaryCard({
   variant,
-  label,
   title,
   amount,
   icon,
@@ -52,9 +49,9 @@ export function SummaryCard({
   onClick,
   className,
 }: SummaryCardProps) {
-  const Tag = onClick ? 'button' : 'div'
-  const formattedAmount = `${krwFormatter.format(amount)}원`
-  const isSpending = variant === 'spending'
+  const Tag = onClick ? 'button' : 'div';
+  const formattedAmount = `${krwFormatter.format(amount)}원`;
+  const isSpending = variant === 'spending';
 
   return (
     <Tag
@@ -71,18 +68,16 @@ export function SummaryCard({
         className,
       )}
     >
-      <div className={cn(
-        'flex flex-col gap-lg',
-        /* spending variant: border-l 만큼 시각 보정 — 내부 padding 균일 유지 */
-        isSpending ? 'p-xl' : 'p-xl',
-      )}>
+      <div
+        className={cn(
+          'flex flex-col gap-lg',
+          /* spending variant: border-l 만큼 시각 보정 — 내부 padding 균일 유지 */
+          isSpending ? 'p-xl' : 'p-xl',
+        )}
+      >
         {/* ── 상단: 레이블 + 제목 + 금액 / 우측 아이콘 ── */}
         <div className="flex items-start justify-between gap-md">
           <div className="flex flex-col gap-xs">
-            {/* 영문 보조 레이블 */}
-            <span className="text-[10px] font-bold uppercase tracking-tight text-text-muted">
-              {label}
-            </span>
             {/* 한글 메인 제목 */}
             <span className="text-xl font-bold text-text-heading">{title}</span>
             {/* 금액: asset은 브랜드 색상, spending은 기본 헤딩 색상 */}
@@ -97,9 +92,11 @@ export function SummaryCard({
             </span>
           </div>
 
-          {/* 우측 아이콘 슬롯 */}
+          {/* 우측 아이콘 슬롯 — 동그란 브랜드 배경 + 브랜드 아이콘 색상 */}
           {icon && (
-            <span className="shrink-0 text-text-muted">{icon}</span>
+            <span className="shrink-0 flex items-center justify-center size-12 rounded-full bg-brand-10 text-brand">
+              {icon}
+            </span>
           )}
         </div>
 
@@ -108,9 +105,9 @@ export function SummaryCard({
           <div
             className="flex gap-sm"
             /* 카드 onClick 버블링 방지 */
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
-            {actions.map(action => (
+            {actions.map((action) => (
               <button
                 key={action.label}
                 type="button"
@@ -118,10 +115,10 @@ export function SummaryCard({
                 className={cn(
                   'flex-1 py-md rounded-full text-xs font-bold transition-colors duration-150',
                   action.active
-                    /* 활성 상태: 도메인 액센트 배경 + 액센트 텍스트 */
-                    ? 'bg-[var(--domain-card-accent)] text-[var(--domain-card-accent-text)]'
-                    /* 비활성 상태: 회색 배경 + 헤딩 텍스트 */
-                    : 'bg-surface-raised text-text-heading',
+                    ? /* 활성 상태: 도메인 액센트 배경 + 액센트 텍스트 */
+                      'bg-[var(--domain-card-accent)] text-[var(--domain-card-accent-text)]'
+                    : /* 비활성 상태: 회색 배경 + 헤딩 텍스트 */
+                      'bg-surface-raised text-text-heading',
                 )}
               >
                 {action.label}
@@ -131,5 +128,5 @@ export function SummaryCard({
         )}
       </div>
     </Tag>
-  )
+  );
 }
