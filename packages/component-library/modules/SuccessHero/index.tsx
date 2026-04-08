@@ -76,7 +76,7 @@ export function SuccessHero({
               /* 2단계: 팝인 종료 직후부터 부유 반복 시작 */
               `confetti-float 2.5s ease-in-out ${item.popDelay + POP_DURATION_MS}ms infinite`,
             ].join(', '),
-          } as React.CSSProperties}
+          } as unknown as React.CSSProperties}
         />
       ))}
 
