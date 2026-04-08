@@ -18,7 +18,7 @@ import { BlankPageLayout }  from '../../../layout/BlankPageLayout';
 import { AppBrandHeader }   from '../../../layout/AppBrandHeader';
 import { Stack }            from '../../../layout/Stack';
 import { Inline }           from '../../../layout/Inline';
-import { Text }             from '../../../core/Text';
+import { Typography }             from '../../../core/Typography';
 import { Input }            from '../../../core/Input';
 import { Button }           from '../../../core/Button';
 import { DividerWithLabel } from '../../../modules/common/DividerWithLabel';
@@ -63,12 +63,12 @@ export function LoginPage({ hasError = false }: LoginPageProps) {
         <Stack gap="xs" className="pb-md">
           {/* text-3xl(30px) 로 Figma 원본 크기 재현.
               Text의 heading variant(text-2xl=24px)보다 커서 className으로 override. */}
-          <Text as="h1" variant="heading" color="heading" className="text-3xl">
+          <Typography as="h1" variant="heading" color="heading" className="text-3xl">
             로그인
-          </Text>
-          <Text variant="body" color="muted">
+          </Typography>
+          <Typography variant="body" color="muted">
             하나원큐에 오신 것을 환영합니다
-          </Text>
+          </Typography>
         </Stack>
 
         {/* 입력 폼 */}

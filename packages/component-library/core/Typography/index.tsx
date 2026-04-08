@@ -4,8 +4,7 @@
  * variant prop으로 heading~caption 스케일을 선택하고,
  * numeric prop으로 금액/숫자에 적합한 Manrope 폰트를 적용한다.
  *
- * 컴포넌트명: Typography (이전: Text — DOM 내장 Text 인터페이스 충돌로 변경)
- * 하위 호환성: Text = Typography alias로 함께 export.
+ * 컴포넌트명: Typography
  *
  * @example
  * <Typography variant="heading" weight="bold">잔액 조회</Typography>
@@ -80,5 +79,3 @@ export function Typography({
   );
 }
 
-/* 하위 호환성 alias — 기존 <Text> 사용 코드가 그대로 동작하도록 유지 */
-export { Typography as Text };

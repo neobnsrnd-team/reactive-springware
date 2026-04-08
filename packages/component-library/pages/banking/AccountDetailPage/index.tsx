@@ -47,7 +47,7 @@ import { Inline } from '../../../layout/Inline';
 /* ── Core ────────────────────────────────────────────────────── */
 import { Badge } from '../../../core/Badge';
 import { Button } from '../../../core/Button';
-import { Typography } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
 import { Card } from '../../../modules/common/Card';

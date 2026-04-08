@@ -40,7 +40,7 @@ import { Inline }     from '../../../layout/Inline';
 import { Button } from '../../../core/Button';
 import { Input }  from '../../../core/Input';
 import { Select } from '../../../core/Select';
-import { Text }   from '../../../core/Text';
+import { Typography }   from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
 import { AmountInput }        from '../../../modules/banking/AmountInput';
@@ -427,9 +427,9 @@ export function TransferInputPage({
                 defaultExpanded={cmsSectionExpanded}
                 headerAlign="left"
                 header={
-                  <Text variant="body-sm" color="secondary">
+                  <Typography variant="body-sm" color="secondary">
                     통장표시내용/CMS
-                  </Text>
+                  </Typography>
                 }
                 className="p-0 bg-transparent"
               >
@@ -458,16 +458,16 @@ export function TransferInputPage({
                 defaultExpanded={false}
                 headerAlign="left"
                 header={
-                  <Text variant="body-sm" color="muted">
+                  <Typography variant="body-sm" color="muted">
                     꼭 알아두세요!
-                  </Text>
+                  </Typography>
                 }
                 className="p-0 bg-transparent border-t border-border-subtle pt-md"
               >
-                <Text variant="caption" color="muted" className="leading-relaxed">
+                <Typography variant="caption" color="muted" className="leading-relaxed">
                   이체 실행 전 받는 계좌번호와 금액을 반드시 확인하세요.
                   착오송금 발생 시 반환 절차에 시간이 소요될 수 있습니다.
-                </Text>
+                </Typography>
               </CollapsibleSection>
             </Stack>
           </section>

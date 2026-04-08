@@ -21,8 +21,8 @@
  * <BlankPageLayout>
  *   <img src="/onboarding-1.png" alt="" className="w-full" />
  *   <Stack gap="lg" className="px-xl pt-xl">
- *     <Text variant="heading">간편하게 시작하세요</Text>
- *     <Text variant="body-sm" color="muted">...</Text>
+ *     <Typography variant="heading">간편하게 시작하세요</Typography>
+ *     <Typography variant="body-sm" color="muted">...</Typography>
  *   </Stack>
  * </BlankPageLayout>
  */

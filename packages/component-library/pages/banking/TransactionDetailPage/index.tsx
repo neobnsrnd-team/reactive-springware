@@ -34,7 +34,7 @@ import { Inline }     from '../../../layout/Inline';
 import { Badge }      from '../../../core/Badge';
 import { Button }     from '../../../core/Button';
 import { Input }      from '../../../core/Input';
-import { Typography } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
 import { BottomSheet }                      from '../../../modules/common/BottomSheet';

@@ -37,7 +37,7 @@ import { Stack } from '../../../layout/Stack';
 import { Inline } from '../../../layout/Inline';
 
 /* ── Core ────────────────────────────────────────────────────────── */
-import { Text } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 import type { AccountPasswordPageProps } from './types';
 
@@ -61,9 +61,9 @@ export function AccountPasswordPage({
     >
       <Stack gap="md">
         {/* 부제목 — 입력 안내 문구 */}
-        <Text variant="body-sm" color="muted" className="text-center">
+        <Typography variant="body-sm" color="muted" className="text-center">
           출금 계좌의 비밀번호 4자리를 입력하세요.
-        </Text>
+        </Typography>
 
         {/* PIN 도트 인디케이터 — 중앙 정렬 */}
         <div className="flex justify-center py-md">
@@ -81,9 +81,9 @@ export function AccountPasswordPage({
         {/* 보안 안내 — opacity-60으로 강조 완화 */}
         <Inline gap="xs" align="center" justify="center" className="opacity-60 py-sm">
           <Lock className="size-3 text-text-secondary shrink-0" aria-hidden="true" />
-          <Text variant="caption" color="secondary">
+          <Typography variant="caption" color="secondary">
             보안을 위해 키패드 숫자가 재배열되었습니다.
-          </Text>
+          </Typography>
         </Inline>
       </Stack>
     </BottomSheet>

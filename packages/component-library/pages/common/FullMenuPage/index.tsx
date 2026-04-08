@@ -54,7 +54,7 @@ import { Inline } from '../../../layout/Inline';
 /* ── Core ────────────────────────────────────────────────────── */
 import { Button } from '../../../core/Button';
 import { Input } from '../../../core/Input';
-import { Text } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
 import { SidebarNav } from '../../../modules/common/SidebarNav';
@@ -223,9 +223,9 @@ export function FullMenuPage({ onClose, onHome, onLogout, activeCategory, onCate
         <div className="flex-1 min-w-0">
           <Stack gap="xl" className="p-xl">
             {/* 카테고리 소제목 — 12px uppercase (Figma 원본 스타일 재현) */}
-            <Text variant="caption" color="muted" className="uppercase tracking-widest">
+            <Typography variant="caption" color="muted" className="uppercase tracking-widest">
               {currentCategory?.label} 메뉴
-            </Text>
+            </Typography>
 
             {/* 메뉴 아이템 목록 */}
             <Stack gap="xs">

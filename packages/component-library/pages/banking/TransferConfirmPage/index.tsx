@@ -36,7 +36,7 @@ import { AlertBanner } from '../../../modules/common/AlertBanner';
 
 /* ── Core ────────────────────────────────────────────────────────── */
 import { Button } from '../../../core/Button';
-import { Text } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 /* ── Layout ──────────────────────────────────────────────────────── */
 import { Stack } from '../../../layout/Stack';
@@ -96,13 +96,13 @@ export function TransferConfirmPage({
     >
       <Stack gap="xl">
         {/* 멀티컬러 타이틀 — 수취인·금액을 브랜드 색으로 강조 */}
-        <Text as="h2" variant="subheading" className="text-center whitespace-pre-line">
+        <Typography as="h2" variant="subheading" className="text-center whitespace-pre-line">
           {/* 수취인명과 이체금액만 브랜드 색 */}
           <span className="text-brand-text">{recipientName}</span>
           {'님께 '}
           <span className="text-brand-text">{formattedAmount}원</span>
           {'을\n이체 하시겠습니까?'}
-        </Text>
+        </Typography>
 
         {/* 이체 정보 목록 — 배열+filter로 선택 항목 유무와 무관하게 마지막 행 구분선을 동적 처리 */}
         <div>

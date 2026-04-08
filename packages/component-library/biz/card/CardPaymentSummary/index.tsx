@@ -31,7 +31,7 @@
 import React from 'react';
 import { cn } from '@lib/cn';
 import type { CardPaymentSummaryProps } from './types';
-import { Typography } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 /** 금액을 한국식 원화 형식으로 변환. 예: 350000 → '350,000원' */
