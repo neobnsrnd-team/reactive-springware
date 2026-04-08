@@ -37,7 +37,7 @@ function NavRow({ label, subText, onClick }: CardManagementNavRow) {
       onClick={onClick}
       className={cn(
         'flex items-center justify-between w-full',
-        'sm:py-md px-md mt-2',
+        'sm:py-md px-md mt-2 p-md',
         'border border-border-subtle rounded-md hover:bg-surface-subtle transition-colors duration-150',
       )}
     >
