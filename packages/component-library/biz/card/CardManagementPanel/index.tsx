@@ -37,15 +37,13 @@ function NavRow({ label, subText, onClick }: CardManagementNavRow) {
       onClick={onClick}
       className={cn(
         'flex items-center justify-between w-full',
-        'py-md sm:py-lg px-md',
-        'hover:bg-surface-subtle transition-colors duration-150',
+        'sm:py-md px-md mt-2',
+        'border border-border-subtle rounded-md hover:bg-surface-subtle transition-colors duration-150',
       )}
     >
       <span className="text-sm sm:text-base font-medium text-text-heading">{label}</span>
       <div className="flex items-center gap-xs shrink-0">
-        {subText && (
-          <span className="text-xs sm:text-sm text-text-muted">{subText}</span>
-        )}
+        {subText && <span className="text-xs sm:text-sm text-text-muted">{subText}</span>}
         <ChevronRight size={16} className="text-text-muted" aria-hidden="true" />
       </div>
     </button>
@@ -59,7 +57,7 @@ export function CardManagementPanel({ rows, className }: CardManagementPanelProp
       <SectionHeader title="카드 관리" className="mb-xs" />
 
       {/* border로 감싸 행 목록을 하나의 카드처럼 표시 */}
-      <div className="border border-border-subtle rounded-lg overflow-hidden">
+      <div className="overflow-hidden">
         {rows.map((row, index) => (
           /* subText가 없는 행도 있으므로 label+index로 key 구성 */
           <NavRow key={`${row.label}-${index}`} {...row} />

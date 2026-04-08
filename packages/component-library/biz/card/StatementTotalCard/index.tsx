@@ -64,7 +64,7 @@ export function StatementTotalCard({
         type="button"
         onClick={onDetailClick}
         disabled={!onDetailClick}
-        className="flex items-center justify-between disabled:cursor-default group"
+        className="flex items-center disabled:cursor-default group"
         aria-label="이용내역 보기"
       >
         <span className="text-3xl font-bold text-text-heading">{formatAmount(amount)}</span>
@@ -79,13 +79,31 @@ export function StatementTotalCard({
 
       {/* 하단: 액션 버튼 3개 — Button outline sm, 텍스트 줄바꿈 허용 */}
       <div className="flex gap-xs">
-        <Button variant="outline" size="sm" fullWidth onClick={onInstallment} className="break-keep whitespace-normal h-auto py-xs">
+        <Button
+          variant="outline"
+          size="sm"
+          fullWidth
+          onClick={onInstallment}
+          className="break-keep whitespace-normal h-auto py-xs"
+        >
           분할납부
         </Button>
-        <Button variant="outline" size="sm" fullWidth onClick={onImmediatePayment} className="break-keep whitespace-normal h-auto py-xs">
+        <Button
+          variant="outline"
+          size="sm"
+          fullWidth
+          onClick={onImmediatePayment}
+          className="break-keep whitespace-normal h-auto py-xs"
+        >
           즉시결제
         </Button>
-        <Button variant="outline" size="sm" fullWidth onClick={onRevolving} className="break-keep whitespace-normal h-auto py-xs">
+        <Button
+          variant="outline"
+          size="sm"
+          fullWidth
+          onClick={onRevolving}
+          className="break-keep whitespace-normal h-auto py-xs"
+        >
           일부결제금액이월약정(리볼빙)
         </Button>
       </div>
