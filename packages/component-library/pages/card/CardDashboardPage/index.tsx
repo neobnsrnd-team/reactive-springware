@@ -55,11 +55,11 @@ import { HomePageLayout } from '../../../layout/HomePageLayout';
 import { BottomNav } from '../../../layout/BottomNav';
 import { Button } from '../../../core/Button';
 import { SectionHeader } from '../../../modules/common/SectionHeader';
-import { Card } from '../../../modules/common/Card';
 import { StatementHeroCard } from '../../../biz/card/StatementHeroCard';
-import { LoanMenuBar }       from '../../../biz/card/LoanMenuBar';
+import { LoanMenuBar } from '../../../biz/card/LoanMenuBar';
 import { QuickShortcutCard } from '../../../biz/card/QuickShortcutCard';
-import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
+import { QuickMenuGrid }  from '../../../biz/common/QuickMenuGrid';
+import { BannerCarousel } from '../../../biz/common/BannerCarousel';
 
 import type { CardDashboardPageProps } from './types';
 
@@ -214,17 +214,31 @@ export function CardDashboardPage({
         <div className="px-standard pt-standard">
           <LoanMenuBar
             items={[
-              { id: 'short-loan', icon: <CreditCard size={14} />, label: '단기카드대출', onClick: onShortLoan },
-              { id: 'long-loan',  icon: <Banknote   size={14} />, label: '장기카드대출', onClick: onLongLoan },
-              { id: 'revolving',  icon: <RefreshCw  size={14} />, label: '리볼빙',       onClick: onRevolving },
+              {
+                id: 'short-loan',
+                icon: <CreditCard size={14} />,
+                label: '단기카드대출(현금서비스)',
+                onClick: onShortLoan,
+              },
+              {
+                id: 'long-loan',
+                icon: <Banknote size={14} />,
+                label: '장기카드대출(카드론)',
+                onClick: onLongLoan,
+              },
+              {
+                id: 'revolving',
+                icon: <RefreshCw size={14} />,
+                label: '일부결제금액이월약정(리볼빙)',
+                onClick: onRevolving,
+              },
             ]}
           />
         </div>
 
-        {/* ── 바로가기 카드 3열 (카드추천 / 금융·대출 / 보험) ── */}
+        {/* ── 바로가기 카드 2열 (카드추천 / 금융·대출 / 보험) ── */}
         <div className="px-standard pt-standard">
-          <SectionHeader title="바로가기" className="mb-sm" />
-          <div className="grid grid-cols-3 gap-sm">
+          <div className="grid grid-cols-2 gap-sm">
             <QuickShortcutCard
               title="카드추천"
               subtitle="맞춤 추천"
@@ -247,8 +261,34 @@ export function CardDashboardPage({
         </div>
 
         {/* ── 퀵메뉴 그리드 4열 (사각형 아이콘) ──────────── */}
-        <div className="px-standard pt-standard pb-standard">
+        <div className="px-standard pt-standard">
           <QuickMenuGrid items={quickMenuItems} cols={4} />
+        </div>
+
+        {/* ── 이벤트 배너 (3개, 자동 슬라이드) ───────────── */}
+        <div className="px-standard pt-standard pb-standard">
+          <BannerCarousel
+            items={[
+              {
+                id:          'event-1',
+                variant:     'promo',
+                title:       '카드 신규 발급 이벤트',
+                description: '첫 달 연회비 면제 + 캐시백 최대 3만원',
+              },
+              {
+                id:          'event-2',
+                variant:     'promo',
+                title:       '무이자 할부 혜택',
+                description: '5만원 이상 결제 시 2~3개월 무이자',
+              },
+              {
+                id:          'event-3',
+                variant:     'info',
+                title:       '카드 이용 실적 안내',
+                description: '이번 달 실적을 확인하고 혜택을 챙겨보세요',
+              },
+            ]}
+          />
         </div>
       </HomePageLayout>
 
