@@ -85,6 +85,9 @@ export * from './biz/card/SummaryCard';
 export * from './biz/card/StatementHeroCard';
 export * from './biz/card/LoanMenuBar';
 export * from './biz/card/QuickShortcutCard';
+export * from './biz/card/CardPaymentSummary';
+export * from './biz/card/CardPaymentItem';
+export * from './biz/card/BillingPeriodLabel';
 
 /* ── Biz / Insurance (보험 도메인 컴포넌트) ──────────────────── */
 export * from './biz/insurance/InsuranceSummaryCard';
