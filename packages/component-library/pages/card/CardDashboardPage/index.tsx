@@ -5,6 +5,7 @@
  * 화면 구성:
  *   - 상단바: "마이" 타이틀 + 알림·메뉴 아이콘
  *   - StatementHeroCard: 이번 달 명세서 금액 + 결제일 (클릭 시 상세 이동)
+ *   - LoanMenuBar: 단기카드대출 / 장기카드대출 / 리볼빙 진입 버튼
  *   - QuickShortcutCard × 3: 카드추천 / 금융·대출 / 보험 (3열 그리드)
  *   - QuickMenuGrid: 카드별 실적 / 이용내역 / 보유카드 / 쿠폰함 / 한도조회 / 무이자할부 / 카드신청 (4열, 사각형 아이콘)
  *   - 하단 탭바: 마이 / 혜택·실적 / 결제 / 쇼핑·여행 / 자산
@@ -35,6 +36,7 @@ import {
   Star,
   Banknote,
   Shield,
+  RefreshCw,
   BarChart2,
   List,
   CreditCard,
@@ -55,6 +57,7 @@ import { Button } from '../../../core/Button';
 import { SectionHeader } from '../../../modules/common/SectionHeader';
 import { Card } from '../../../modules/common/Card';
 import { StatementHeroCard } from '../../../biz/card/StatementHeroCard';
+import { LoanMenuBar }       from '../../../biz/card/LoanMenuBar';
 import { QuickShortcutCard } from '../../../biz/card/QuickShortcutCard';
 import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
 
@@ -98,6 +101,9 @@ export function CardDashboardPage({
   onNotification,
   onMenu,
   onStatementDetail,
+  onShortLoan,
+  onLongLoan,
+  onRevolving,
   onCardRecommend,
   onFinanceLoan,
   onInsurance,
@@ -173,7 +179,7 @@ export function CardDashboardPage({
   ];
 
   return (
-    <>
+    <div data-brand="hana" data-domain="card">
       <HomePageLayout
         title="마이"
         rightAction={
@@ -202,6 +208,17 @@ export function CardDashboardPage({
         {/* ── 이번 달 명세서 히어로 카드 ────────────────── */}
         <div className="px-standard pt-standard">
           <StatementHeroCard amount={1_250_000} dueDate="1월 25일" onDetail={onStatementDetail} />
+        </div>
+
+        {/* ── 대출 메뉴 바 (단기카드대출 / 장기카드대출 / 리볼빙) ── */}
+        <div className="px-standard pt-standard">
+          <LoanMenuBar
+            items={[
+              { id: 'short-loan', icon: <CreditCard size={14} />, label: '단기카드대출', onClick: onShortLoan },
+              { id: 'long-loan',  icon: <Banknote   size={14} />, label: '장기카드대출', onClick: onLongLoan },
+              { id: 'revolving',  icon: <RefreshCw  size={14} />, label: '리볼빙',       onClick: onRevolving },
+            ]}
+          />
         </div>
 
         {/* ── 바로가기 카드 3열 (카드추천 / 금융·대출 / 보험) ── */}
@@ -237,6 +254,6 @@ export function CardDashboardPage({
 
       {/* ── 하단 고정 탭바 ──────────────────────────────── */}
       <BottomNav items={BOTTOM_NAV_ITEMS(handleBottomNavChange)} activeId={activeBottomTab} />
-    </>
+    </div>
   );
 }

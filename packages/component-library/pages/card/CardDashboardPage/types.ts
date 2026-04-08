@@ -14,6 +14,11 @@ export interface CardDashboardPageProps {
   /** StatementHeroCard — 명세서 상세 화면 이동 */
   onStatementDetail?: () => void;
 
+  /** LoanMenuBar 핸들러 */
+  onShortLoan?:  () => void;
+  onLongLoan?:   () => void;
+  onRevolving?:  () => void;
+
   /** QuickShortcutCard 핸들러 */
   onCardRecommend?: () => void;
   onFinanceLoan?:   () => void;
