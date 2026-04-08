@@ -61,9 +61,9 @@ import { SidebarNav } from '../../../modules/common/SidebarNav';
 import { ActionLinkItem } from '../../../modules/common/ActionLinkItem';
 
 /* ── Biz ─────────────────────────────────────────────────────── */
-import { QuickMenuGrid } from '../../../biz/home/QuickMenuGrid';
-import { UserProfile } from '../../../biz/home/UserProfile';
-import { BrandBanner } from '../../../biz/home/BrandBanner';
+import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
+import { UserProfile } from '../../../biz/common/UserProfile';
+import { BrandBanner } from '../../../biz/common/BrandBanner';
 
 import type { FullMenuPageProps, MenuCategoryId } from './types';
 

@@ -19,7 +19,7 @@ const SAMPLE_ITEMS = [
 ];
 
 const meta = {
-  title: 'Biz/Home/QuickMenuGrid',
+  title: 'Biz/Common/QuickMenuGrid',
   component: QuickMenuGrid,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking' },

@@ -22,7 +22,7 @@ import { Text }             from '../../../core/Text';
 import { Input }            from '../../../core/Input';
 import { Button }           from '../../../core/Button';
 import { DividerWithLabel } from '../../../modules/common/DividerWithLabel';
-import { QuickMenuGrid }    from '../../../biz/home/QuickMenuGrid';
+import { QuickMenuGrid }    from '../../../biz/common/QuickMenuGrid';
 import type { LoginPageProps } from './types';
 
 export type { LoginPageProps } from './types';

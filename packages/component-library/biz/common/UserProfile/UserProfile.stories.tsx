@@ -8,7 +8,7 @@ import React from 'react';
 import { UserProfile } from './index';
 
 const meta = {
-  title: 'Biz/Home/UserProfile',
+  title: 'Biz/Common/UserProfile',
   component: UserProfile,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking' },

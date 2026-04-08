@@ -47,13 +47,13 @@ import { Button } from '../../../core/Button';
 import { TabNav } from '../../../modules/common/TabNav';
 import { Card } from '../../../modules/common/Card';
 import { EmptyState } from '../../../modules/common/EmptyState';
-import { BannerCarousel } from '../../../biz/home/BannerCarousel';
+import { BannerCarousel } from '../../../biz/common/BannerCarousel';
 import { SectionHeader } from '../../../modules/common/SectionHeader';
 import { NoticeItem } from '../../../modules/common/NoticeItem';
 
 /* ── Biz ─────────────────────────────────────────────────────── */
 import { AccountSummaryCard } from '../../../biz/banking/AccountSummaryCard';
-import { QuickMenuGrid } from '../../../biz/home/QuickMenuGrid';
+import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
 
 import type { HomeDashboardPageProps, HomeTab } from './types';
 

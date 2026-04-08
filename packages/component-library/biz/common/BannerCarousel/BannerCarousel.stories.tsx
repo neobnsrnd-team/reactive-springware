@@ -7,7 +7,7 @@ import React from 'react';
 import { BannerCarousel } from './index';
 
 const meta = {
-  title: 'Biz/Home/BannerCarousel',
+  title: 'Biz/Common/BannerCarousel',
   component: BannerCarousel,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },

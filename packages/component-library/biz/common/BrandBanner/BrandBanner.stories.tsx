@@ -9,7 +9,7 @@ import { Star, ChevronRight, Gift } from 'lucide-react';
 import { BrandBanner } from './index';
 
 const meta = {
-  title: 'Biz/Home/BrandBanner',
+  title: 'Biz/Common/BrandBanner',
   component: BrandBanner,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },

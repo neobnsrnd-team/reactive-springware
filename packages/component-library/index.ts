@@ -70,10 +70,10 @@ export * from './hooks/useBankSelect';
 export * from './hooks/useTransferConfirm';
 
 /* ── Biz / Home (홈 화면 공통 컴포넌트) ──────────────────────── */
-export * from './biz/home/BannerCarousel';
-export * from './biz/home/BrandBanner';
-export * from './biz/home/QuickMenuGrid';
-export * from './biz/home/UserProfile';
+export * from './biz/common/BannerCarousel';
+export * from './biz/common/BrandBanner';
+export * from './biz/common/QuickMenuGrid';
+export * from './biz/common/UserProfile';
 
 /* ── Biz / Banking (뱅킹 계좌 요약 컴포넌트) ─────────────────── */
 export * from './biz/banking/AccountSelectorCard';
