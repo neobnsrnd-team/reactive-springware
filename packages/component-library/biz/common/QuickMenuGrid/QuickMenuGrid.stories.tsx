@@ -46,3 +46,18 @@ export const WithBadges: Story = {
     ),
   },
 };
+
+/** 아이콘 컨테이너를 각이 둥근 사각형으로 표시 */
+export const RoundedSquare: Story = {
+  args: { items: SAMPLE_ITEMS.map(item => ({ ...item, iconShape: 'rounded' as const })) },
+};
+
+/** circle / rounded 혼합 — 두 형태 비교 */
+export const MixedShape: Story = {
+  args: {
+    items: SAMPLE_ITEMS.map((item, i) => ({
+      ...item,
+      iconShape: (i % 2 === 0 ? 'circle' : 'rounded') as 'circle' | 'rounded',
+    })),
+  },
+};

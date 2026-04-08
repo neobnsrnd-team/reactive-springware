@@ -46,9 +46,13 @@ function QuickMenuItemButton({ item }: QuickMenuItemButtonProps) {
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-20',
       )}
     >
-      {/* 아이콘 컨테이너 */}
+      {/* 아이콘 컨테이너 — iconShape에 따라 원형/둥근 사각형 전환 */}
       <span
-        className="relative flex items-center justify-center size-12 rounded-xl bg-brand-5 text-brand-text"
+        className={cn(
+          'relative flex items-center justify-center size-12 bg-brand-5 text-brand-text',
+          /* 기본(circle): rounded-full / rounded: rounded-2xl */
+          item.iconShape === 'rounded' ? 'rounded-2xl' : 'rounded-full',
+        )}
         aria-hidden="true"
       >
         {item.icon}
