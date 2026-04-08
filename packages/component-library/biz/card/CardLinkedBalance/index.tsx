@@ -2,8 +2,8 @@
  * @file index.tsx
  * @description 내카드관리 화면 연결계좌 잔액 컴포넌트.
  *
- * "연결계좌 잔액" 레이블과 금액을 표시한다.
- * 잔액 표시·숨김 전환은 modules/common/BalanceToggle 컴포넌트를 사용한다.
+ * "연결계좌 잔액" 레이블 옆에 배지 버튼(보기/숨기기)을 배치하고,
+ * 클릭 시 금액 마스킹 상태를 전환한다.
  * hidden 상태 관리는 외부 Hook 담당.
  *
  * 반응형 동작:
@@ -12,7 +12,7 @@
  *
  * @param balance  - 연결계좌 잔액 (원)
  * @param hidden   - true: 금액 마스킹
- * @param onToggle - 보기/숨기기 토글 클릭 핸들러
+ * @param onToggle - 보기/숨기기 배지 클릭 핸들러
  *
  * @example
  * const [hidden, setHidden] = useState(false);
@@ -20,7 +20,7 @@
  */
 import React from 'react';
 import { cn } from '@lib/cn';
-import { BalanceToggle } from '../../../modules/common/BalanceToggle';
+import { Badge } from '../../../core/Badge';
 import type { CardLinkedBalanceProps } from './types';
 
 /** 금액을 한국식 원화 형식으로 변환. 예: 1200000 → '1,200,000원' */
@@ -35,18 +35,25 @@ export function CardLinkedBalance({
   className,
 }: CardLinkedBalanceProps) {
   return (
-    <div className={cn('flex items-end justify-between gap-sm', className)}>
-      {/* 좌: 레이블 + 금액 */}
-      <div className="flex flex-col gap-xs">
+    <div className={cn('flex flex-col gap-xs', className)}>
+      {/* 레이블 + 보기/숨기기 배지 버튼 */}
+      <div className="flex items-center gap-xs">
         <span className="text-xs sm:text-sm text-text-muted">연결계좌 잔액</span>
-        <span className="text-xl sm:text-2xl font-bold text-text-heading">
-          {/* hidden이면 마스킹 문자, 아니면 실제 금액 */}
-          {hidden ? '잔액 숨김 중' : formatAmount(balance)}
-        </span>
+        {/* 배지를 버튼으로 감싸 클릭 이벤트 부여 */}
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-label={hidden ? '잔액 보기' : '잔액 숨기기'}
+          className="cursor-pointer"
+        >
+          <Badge variant="neutral">{hidden ? '보기' : '숨기기'}</Badge>
+        </button>
       </div>
 
-      {/* 우: BalanceToggle — 숨기기/보이기 토글 스위치 */}
-      <BalanceToggle hidden={hidden} onToggle={onToggle} />
+      {/* 금액 — hidden이면 마스킹 문자 표시 */}
+      <span className="text-xl sm:text-2xl font-bold text-text-heading">
+        {hidden ? '•••••' : formatAmount(balance)}
+      </span>
     </div>
   );
 }
