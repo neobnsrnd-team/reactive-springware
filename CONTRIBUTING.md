@@ -126,7 +126,9 @@ GitHub Packages 배포 + GitHub Release 생성
 
 Prettier는 프로젝트 의존성이 아닙니다. `.prettierrc` 설정 파일만 제공하며, **IDE 확장(VS Code Prettier 확장 등)을 직접 설치**해야 적용됩니다.
 
-> VS Code 사용자: [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) 확장 설치 후 자동으로 `.prettierrc`를 읽습니다.
+> **VS Code**: [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) 확장 설치 후 자동으로 `.prettierrc`를 읽습니다.
+>
+> **IntelliJ**: Prettier가 전역 설치되어 있어야 합니다. `npm install -g prettier` 후 `Settings → Languages & Frameworks → JavaScript → Prettier`에서 Prettier package 경로를 지정하세요.
 
 | 옵션 | 값 |
 |------|-----|
