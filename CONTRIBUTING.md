@@ -25,38 +25,6 @@
 | Node.js | 20.x 이상 |
 | npm | 최신 버전 |
 
-### GitHub 인증 설정 (최초 1회)
-
-이 패키지는 GitHub Packages에 배포되어 있습니다.
-로컬에서 `npm ci`를 실행하려면 GitHub Personal Access Token(PAT)이 필요합니다.
-
-**1. PAT 발급**
-
-1. [github.com/settings/tokens/new](https://github.com/settings/tokens/new) 접속
-2. **Note**: 토큰 이름 입력 (예: `reactive-springware-dev`)
-3. **Select scopes**: `read:packages` 체크
-4. **Generate token** 클릭 → 생성된 토큰 값 복사 (`ghp_` 로 시작)
-   > 페이지를 벗어나면 다시 볼 수 없으니 반드시 복사
-
-**2. `.npmrc` 파일 생성**
-
-프로젝트 루트에 `.npmrc` 파일을 생성하고 아래 내용을 작성합니다.
-`YOUR_GITHUB_TOKEN` 자리에 발급받은 토큰을 입력합니다.
-
-```
-@neobnsrnd-team:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
-```
-
-**3. `.gitignore`에 `.npmrc` 등록**
-
-`.npmrc`에 토큰이 포함되므로 반드시 git에서 제외합니다.
-
-```
-# .gitignore
-.npmrc
-```
-
 ### 개발 서버 실행
 
 ```bash
