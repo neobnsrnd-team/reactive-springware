@@ -38,35 +38,54 @@ function formatAmount(amount: number): string {
 }
 
 interface SummaryColProps {
+  /** 버튼에 표시할 전체 서비스명. 예: '일부결제금액이월약정(리볼빙)' */
   label: string;
   amount: number;
   /** 중간 열: 좌우 border 구분선 적용 */
   bordered?: boolean;
+  /** 전달 시 레이블을 클릭 가능한 버튼으로 렌더링 */
+  onClick?: () => void;
 }
 
-/** 청구 세부 항목 1열 — 레이블 + 금액 */
-function SummaryCol({ label, amount, bordered }: SummaryColProps) {
+/** 청구 세부 항목 1열 — 서비스명 버튼 + 금액 */
+function SummaryCol({ label, amount, bordered, onClick }: SummaryColProps) {
   return (
     <div
       className={cn(
-        'flex-1 flex flex-col items-center gap-[2px]',
+        'flex-1 flex flex-col items-center gap-xs px-xs',
         bordered && 'border-x border-border-subtle',
       )}
     >
-      <span className="text-xs text-text-muted">{label}</span>
+      {/* onClick 전달 시 버튼, 미전달 시 일반 텍스트 */}
+      {onClick ? (
+        <button
+          type="button"
+          onClick={onClick}
+          className="text-xs text-brand hover:underline text-center leading-tight break-keep"
+        >
+          {label}
+        </button>
+      ) : (
+        <span className="text-xs text-text-muted text-center leading-tight">{label}</span>
+      )}
       <span className="text-sm font-bold text-text-heading">{formatAmount(amount)}</span>
     </div>
   );
 }
 
 export function CardPaymentSummary({
-  month,
+  dateFull,
+  dateYM,
+  dateMD,
   totalAmount,
   revolving = 0,
   cardLoan = 0,
   cashAdvance = 0,
   paymentAccount,
   paymentDate,
+  onRevolving,
+  onCardLoan,
+  onCashAdvance,
   className,
 }: CardPaymentSummaryProps) {
   return (
@@ -80,16 +99,32 @@ export function CardPaymentSummary({
     >
       {/* 상단: 총 청구금액 */}
       <div className="flex flex-col items-center gap-xs pt-lg px-md">
-        <span className="text-sm text-text-muted">{month} 청구금액</span>
-        <span className="text-3xl font-bold text-brand">{formatAmount(totalAmount)}</span>
+        <span className="text-lg text-text-muted">{dateYM} 청구금액</span>
+        <span className="text-sm text-text-muted">
+          {dateFull} 출금예정 ({dateMD}기준)
+        </span>
+        <span className="text-3xl font-bold text-brand pt-lg">{formatAmount(totalAmount)}</span>
       </div>
 
-      {/* 중단: 세부 항목 3열 그리드 */}
-      <div className="flex items-start px-md pb-md">
-        <SummaryCol label="리볼빙" amount={revolving} />
+      {/* 중단: 세부 항목 3열 그리드 — 각 레이블은 해당 서비스 진입 버튼 */}
+      <div className="flex items-start pt-lg pb-md">
+        <SummaryCol
+          label="일부결제금액이월약정(리볼빙)"
+          amount={revolving}
+          onClick={onRevolving}
+        />
         {/* 중간 열에 border-x 적용해 좌우 항목과 시각적으로 구분 */}
-        <SummaryCol label="카드론" amount={cardLoan} bordered />
-        <SummaryCol label="현금서비스" amount={cashAdvance} />
+        <SummaryCol
+          label="장기카드대출(카드론)"
+          amount={cardLoan}
+          bordered
+          onClick={onCardLoan}
+        />
+        <SummaryCol
+          label="단기카드대출(현금서비스)"
+          amount={cashAdvance}
+          onClick={onCashAdvance}
+        />
       </div>
 
       {/* 하단: 결제 계좌·결제일 메타 정보 */}

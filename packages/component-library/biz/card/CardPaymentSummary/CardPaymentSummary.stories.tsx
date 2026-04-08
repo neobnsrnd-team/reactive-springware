@@ -11,15 +11,26 @@ const meta = {
   component: CardPaymentSummary,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'card' },
-  decorators: [(Story: React.ComponentType) => <div style={{ width: 390, padding: 16 }}><Story /></div>],
+  decorators: [
+    (Story: React.ComponentType) => (
+      <div style={{ width: 390, padding: 16 }}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
-    month:          '3월',
-    totalAmount:    350000,
-    revolving:      50000,
-    cardLoan:       0,
-    cashAdvance:    0,
+    dateFull: '2026.04.08',
+    dateYM: '26년 4월',
+    dateMD: '04.08',
+    totalAmount: 350000,
+    revolving: 50000,
+    cardLoan: 0,
+    cashAdvance: 0,
     paymentAccount: '하나은행 123-456789-01234',
-    paymentDate:    '매월 14일',
+    paymentDate: '매월 14일',
+    onRevolving: () => {},
+    onCardLoan: () => {},
+    onCashAdvance: () => {},
   },
 } satisfies Meta<typeof CardPaymentSummary>;
 
@@ -31,8 +42,8 @@ export const Default: Story = {};
 /** 리볼빙·카드론·현금서비스 모두 0인 경우 */
 export const NoExtras: Story = {
   args: {
-    revolving:   0,
-    cardLoan:    0,
+    revolving: 0,
+    cardLoan: 0,
     cashAdvance: 0,
   },
 };
@@ -40,9 +51,9 @@ export const NoExtras: Story = {
 /** 세부 항목 모두 있는 경우 */
 export const WithAllExtras: Story = {
   args: {
-    totalAmount:  820000,
-    revolving:    200000,
-    cardLoan:     300000,
-    cashAdvance:  50000,
+    totalAmount: 820000,
+    revolving: 200000,
+    cardLoan: 300000,
+    cashAdvance: 50000,
   },
 };

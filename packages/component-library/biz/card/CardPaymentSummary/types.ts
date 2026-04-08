@@ -7,19 +7,29 @@
  */
 
 export interface CardPaymentSummaryProps {
-  /** 청구 월. 예: '3월' */
-  month:          string;
+  /** 출금예정일. 예: '2026.04.08' */
+  dateFull: string;
+  /** 청구 년월. 예: '26년 4월' */
+  dateYM: string;
+  /** 오늘날짜. 예: '04.08' */
+  dateMD: string;
   /** 총 청구금액 (원) */
-  totalAmount:    number;
+  totalAmount: number;
   /** 리볼빙 금액 (원). 0이면 표시하지 않음 */
-  revolving?:     number;
+  revolving?: number;
   /** 카드론 금액 (원). 0이면 표시하지 않음 */
-  cardLoan?:      number;
+  cardLoan?: number;
   /** 현금서비스 금액 (원). 0이면 표시하지 않음 */
-  cashAdvance?:   number;
+  cashAdvance?: number;
   /** 결제 계좌. 예: '하나은행 123-456789-01234' */
   paymentAccount: string;
   /** 결제일. 예: '매월 14일' */
-  paymentDate:    string;
-  className?:     string;
+  paymentDate: string;
+  /** 리볼빙(일부결제금액이월약정) 버튼 클릭 핸들러. 미전달 시 버튼 비활성 */
+  onRevolving?: () => void;
+  /** 카드론(장기카드대출) 버튼 클릭 핸들러. 미전달 시 버튼 비활성 */
+  onCardLoan?: () => void;
+  /** 현금서비스(단기카드대출) 버튼 클릭 핸들러. 미전달 시 버튼 비활성 */
+  onCashAdvance?: () => void;
+  className?: string;
 }
