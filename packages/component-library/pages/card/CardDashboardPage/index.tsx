@@ -58,7 +58,7 @@ import { SectionHeader } from '../../../modules/common/SectionHeader';
 import { StatementHeroCard } from '../../../biz/card/StatementHeroCard';
 import { LoanMenuBar } from '../../../biz/card/LoanMenuBar';
 import { QuickShortcutCard } from '../../../biz/card/QuickShortcutCard';
-import { QuickMenuGrid }  from '../../../biz/common/QuickMenuGrid';
+import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
 import { BannerCarousel } from '../../../biz/common/BannerCarousel';
 
 import type { CardDashboardPageProps } from './types';
@@ -270,21 +270,21 @@ export function CardDashboardPage({
           <BannerCarousel
             items={[
               {
-                id:          'event-1',
-                variant:     'promo',
-                title:       '카드 신규 발급 이벤트',
+                id: 'event-1',
+                variant: 'promo',
+                title: '카드 신규 발급 이벤트',
                 description: '첫 달 연회비 면제 + 캐시백 최대 3만원',
               },
               {
-                id:          'event-2',
-                variant:     'promo',
-                title:       '무이자 할부 혜택',
+                id: 'event-2',
+                variant: 'promo',
+                title: '무이자 할부 혜택',
                 description: '5만원 이상 결제 시 2~3개월 무이자',
               },
               {
-                id:          'event-3',
-                variant:     'info',
-                title:       '카드 이용 실적 안내',
+                id: 'event-3',
+                variant: 'promo',
+                title: '카드 이용 실적 안내',
                 description: '이번 달 실적을 확인하고 혜택을 챙겨보세요',
               },
             ]}
