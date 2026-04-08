@@ -40,7 +40,7 @@ export function HomePageLayout({
   ...props
 }: HomePageLayoutProps) {
   return (
-    <div className={cn('flex flex-col min-h-dvh', className)} {...props}>
+    <div className={cn('flex flex-col h-dvh', className)} {...props}>
       {/* ── 상단 고정 헤더 ────────────────────────────── */}
       {/*
        * backdrop-blur + 반투명 흰 배경: 스크롤 시 콘텐츠가 헤더 아래로 자연스럽게 가려짐.
