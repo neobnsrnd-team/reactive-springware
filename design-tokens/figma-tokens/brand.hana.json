@@ -47,6 +47,20 @@
     "name": {
       "$type": "string",
       "$value": "하나은행"
+    },
+    "domain": {
+      "card": {
+        "accent": {
+          "$type": "color",
+          "$value": "#caee5d",
+          "$description": "하나카드 소비 카드 액센트 컬러 (라임)"
+        },
+        "accentText": {
+          "$type": "color",
+          "$value": "#546b00",
+          "$description": "하나카드 액센트 배경 위 텍스트 컬러 (올리브)"
+        }
+      }
     }
   }
 }
