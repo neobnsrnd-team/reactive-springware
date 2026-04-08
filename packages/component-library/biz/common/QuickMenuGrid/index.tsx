@@ -83,10 +83,7 @@ function QuickMenuItemButton({ item }: QuickMenuItemButtonProps) {
 
 export function QuickMenuGrid({ items, cols = 4, className }: QuickMenuGridProps) {
   return (
-    <nav
-      aria-label="퀵메뉴"
-      className={cn('grid', colsClass[cols], className)}
-    >
+    <nav aria-label="퀵메뉴" className={cn('grid', colsClass[cols], className)}>
       {items.map((item) => (
         <QuickMenuItemButton key={item.id} item={item} />
       ))}

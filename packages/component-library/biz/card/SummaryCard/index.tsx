@@ -92,7 +92,7 @@ export function SummaryCard({
             </span>
           </div>
 
-          {/* 우측 아이콘 슬롯 — 동그란 브랜드 배경 + 브랜드 아이콘 색상 */}
+          {/* 우측 아이콘 슬롯 */}
           {icon && (
             <span className="shrink-0 flex items-center justify-center size-12 rounded-full bg-brand-10 text-brand">
               {icon}
