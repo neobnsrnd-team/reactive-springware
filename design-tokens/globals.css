@@ -229,9 +229,18 @@
 /* ── 카드 기본 ─────────────────────────────────────── */
 [data-brand='card'] {
   --brand-primary: #1a56db;
-  --brand-alt: #4f86f7;
-  --brand-bg: #f4f7ff;
-  --brand-name: '카드 기본';
+  --brand-alt:     #4f86f7;
+  --brand-fg:      #ffffff;
+  --brand-text:    #1a56db;
+  --brand-dark:    #1648c0;
+  --brand-darker:  #1240aa;
+  --brand-5:       rgba(26, 86, 219, 0.05);
+  --brand-10:      rgba(26, 86, 219, 0.1);
+  --brand-20:      rgba(26, 86, 219, 0.2);
+  --brand-shadow:  rgba(26, 86, 219, 0.25);
+  --brand-bg:      #f4f7ff;
+  --brand-name:    '카드 기본';
+  --shadow-primary: 0px 8px 20px -4px var(--brand-shadow);
 }
 
 /* ── 지로 기본 ─────────────────────────────────────── */
