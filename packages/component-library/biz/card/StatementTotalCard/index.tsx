@@ -26,34 +26,12 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { StatementTotalCardProps } from './types';
+import { Badge } from '../../../core/Badge';
+import { Button } from '../../../core/Button';
 
 /** 금액을 한국식 원화 형식으로 변환. 예: 350000 → '350,000원' */
 function formatAmount(amount: number): string {
   return `${amount.toLocaleString('ko-KR')}원`;
-}
-
-/** 하단 액션 버튼 1개 — outline ghost 스타일 */
-function ActionButton({
-  label,
-  onClick,
-}: {
-  label: string;
-  onClick?: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        'flex-1 px-xs py-sm',
-        'border border-border rounded-xl',
-        'text-xs font-medium text-text-base text-center leading-tight break-keep',
-        'hover:bg-surface-subtle transition-colors duration-150',
-      )}
-    >
-      {label}
-    </button>
-  );
 }
 
 export function StatementTotalCard({
@@ -78,11 +56,7 @@ export function StatementTotalCard({
       <div className="flex items-center gap-xs">
         <span className="text-sm text-text-muted">총 결제금액</span>
         {/* badge가 '예정'일 때만 노출 */}
-        {badge && (
-          <span className="px-xs py-[2px] rounded-full bg-brand-10 text-brand text-[10px] font-bold">
-            {badge}
-          </span>
-        )}
+        {badge && <Badge variant="brand">{badge}</Badge>}
       </div>
 
       {/* 중단: 금액 + 우측 화살표 */}
@@ -93,9 +67,7 @@ export function StatementTotalCard({
         className="flex items-center justify-between disabled:cursor-default group"
         aria-label="이용내역 보기"
       >
-        <span className="text-3xl font-bold text-text-heading">
-          {formatAmount(amount)}
-        </span>
+        <span className="text-3xl font-bold text-text-heading">{formatAmount(amount)}</span>
         {/* onDetailClick 전달 시 화살표 노출 */}
         {onDetailClick && (
           <ChevronRight
@@ -105,11 +77,17 @@ export function StatementTotalCard({
         )}
       </button>
 
-      {/* 하단: 액션 버튼 3개 */}
+      {/* 하단: 액션 버튼 3개 — Button outline sm, 텍스트 줄바꿈 허용 */}
       <div className="flex gap-xs">
-        <ActionButton label="분할납부" onClick={onInstallment} />
-        <ActionButton label="즉시결제" onClick={onImmediatePayment} />
-        <ActionButton label="일부결제금액이월약정(리볼빙)" onClick={onRevolving} />
+        <Button variant="outline" size="sm" fullWidth onClick={onInstallment} className="break-keep whitespace-normal h-auto py-xs">
+          분할납부
+        </Button>
+        <Button variant="outline" size="sm" fullWidth onClick={onImmediatePayment} className="break-keep whitespace-normal h-auto py-xs">
+          즉시결제
+        </Button>
+        <Button variant="outline" size="sm" fullWidth onClick={onRevolving} className="break-keep whitespace-normal h-auto py-xs">
+          일부결제금액이월약정(리볼빙)
+        </Button>
       </div>
     </div>
   );
