@@ -91,12 +91,13 @@ export function HomePageLayout({
       {/* ── 스크롤 가능한 본문 영역 ────────────────────── */}
       <main
         className={cn(
-          'flex-1 overflow-y-auto',
+          'flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden',
           /* 좌우 기본 여백 + 상하 여백 — 콘텐츠가 화면 끝에 붙지 않도록 */
           'py-md',
           /* 하단 탭바(80px) 높이만큼 여백 확보 — 탭바가 콘텐츠를 가리지 않도록 */
           withBottomNav && 'pb-nav',
         )}
+        style={{ scrollbarWidth: 'none' }}
       >
         {children}
       </main>
