@@ -68,7 +68,10 @@ function SummaryCol({ label, amount, bordered, onClick }: SummaryColProps) {
       ) : (
         <span className="text-xs text-text-muted text-center leading-tight">{label}</span>
       )}
-      <span className="text-sm font-bold text-text-heading">{formatAmount(amount)}</span>
+      {/* 금액이 0이면 영역 미노출 */}
+      {amount > 0 && (
+        <span className="text-sm font-bold text-text-heading">{formatAmount(amount)}</span>
+      )}
     </div>
   );
 }
