@@ -2,8 +2,13 @@
  * @file index.tsx
  * @description 내카드관리 화면 카드 관리 패널 컴포넌트.
  *
- * "카드 관리" 섹션 헤더 아래에 4개의 네비게이션 항목을 세로로 배치한다.
- * 각 항목은 레이블(좌) + 서브텍스트(우) + ChevronRight 아이콘으로 구성된다.
+ * SectionHeader로 "카드 관리" 제목을 표시하고,
+ * 4개의 네비게이션 행(레이블 + 서브텍스트 + ChevronRight)을 세로로 배치한다.
+ *
+ * 반응형 동작:
+ * - 행 패딩: py-md → sm:py-lg
+ * - 레이블: text-sm → sm:text-base
+ * - 서브텍스트: text-xs → sm:text-sm
  *
  * @param maskedCardNumber    - 마스킹된 카드번호. 예: '1234 **** **** 5678'
  * @param paymentBank         - 결제 은행명. 예: '하나은행'
@@ -27,13 +32,14 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@lib/cn';
+import { SectionHeader } from '../../../modules/common/SectionHeader';
 import type { CardManagementPanelProps } from './types';
 
 interface NavRowProps {
-  label:      string;
+  label:    string;
   /** 우측 보조 텍스트. 미전달 시 미노출 */
-  subText?:   string;
-  onClick?:   () => void;
+  subText?: string;
+  onClick?: () => void;
 }
 
 /** 카드 관리 네비게이션 단일 행 */
@@ -44,15 +50,16 @@ function NavRow({ label, subText, onClick }: NavRowProps) {
       onClick={onClick}
       className={cn(
         'flex items-center justify-between w-full',
-        'py-md',
+        'py-md sm:py-lg',
         'border-b border-border-subtle last:border-b-0',
+        /* 음수 마진으로 컨테이너 패딩을 상쇄해 hover 영역을 전체 너비로 확장 */
         'hover:bg-surface-subtle transition-colors duration-150 -mx-md px-md',
       )}
     >
-      <span className="text-sm font-medium text-text-heading">{label}</span>
+      <span className="text-sm sm:text-base font-medium text-text-heading">{label}</span>
       <div className="flex items-center gap-xs shrink-0">
         {subText && (
-          <span className="text-xs text-text-muted">{subText}</span>
+          <span className="text-xs sm:text-sm text-text-muted">{subText}</span>
         )}
         <ChevronRight size={16} className="text-text-muted" aria-hidden="true" />
       </div>
@@ -72,7 +79,8 @@ export function CardManagementPanel({
 }: CardManagementPanelProps) {
   return (
     <div className={cn('flex flex-col', className)}>
-      <p className="text-sm font-bold text-text-heading mb-xs">카드 관리</p>
+      {/* SectionHeader — "카드 관리" 섹션 제목 */}
+      <SectionHeader title="카드 관리" className="mb-xs" />
 
       <NavRow
         label="카드정보 확인"
