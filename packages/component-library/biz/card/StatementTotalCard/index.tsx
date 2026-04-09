@@ -27,7 +27,7 @@ import { ChevronRight } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { StatementTotalCardProps } from './types';
 import { Badge } from '../../../core/Badge';
-import { Button } from '../../../core/Button';
+import { CardPaymentActions } from '../CardPaymentActions';
 
 /** 금액을 한국식 원화 형식으로 변환. 예: 350000 → '350,000원' */
 function formatAmount(amount: number): string {
@@ -77,36 +77,12 @@ export function StatementTotalCard({
         )}
       </button>
 
-      {/* 하단: 액션 버튼 3개 — Button outline sm, 텍스트 줄바꿈 허용 */}
-      <div className="flex gap-xs">
-        <Button
-          variant="outline"
-          size="sm"
-          fullWidth
-          onClick={onInstallment}
-          className="break-keep whitespace-normal h-auto py-xs"
-        >
-          분할납부
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          fullWidth
-          onClick={onImmediatePayment}
-          className="break-keep whitespace-normal h-auto py-xs"
-        >
-          즉시결제
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          fullWidth
-          onClick={onRevolving}
-          className="break-keep whitespace-normal h-auto py-xs"
-        >
-          일부결제금액이월약정(리볼빙)
-        </Button>
-      </div>
+      {/* 하단: 결제 액션 버튼 3개 */}
+      <CardPaymentActions
+        onInstallment={onInstallment}
+        onImmediatePayment={onImmediatePayment}
+        onRevolving={onRevolving}
+      />
     </div>
   );
 }
