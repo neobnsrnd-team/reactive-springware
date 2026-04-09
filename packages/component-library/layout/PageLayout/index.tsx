@@ -26,15 +26,20 @@
  * </PageLayout>
  */
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Menu, X } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { PageLayoutProps } from './types';
+import { Button, ButtonGroup } from '../../core/Button';
 
 export function PageLayout({
   title,
-  onBack,
+  showBack = true,
+  onBack = () => {},
   rightAction,
-  bottomBar,
+  rightBtnType = 'close',
+  bottomBtnCnt,
+  bottomBtn1Label = "확인",
+  bottomBtn2Label = "취소",
   className,
   children,
   ...props
@@ -46,7 +51,7 @@ export function PageLayout({
         {/* relative: 타이틀 absolute 포지셔닝의 기준점 */}
         <div className="relative flex items-center h-14 px-standard">
           {/* 뒤로가기 버튼 — onBack이 전달된 경우만 렌더링 */}
-          {onBack && (
+          {showBack && (
             <button
               type="button"
               onClick={onBack}
@@ -69,7 +74,11 @@ export function PageLayout({
           </h1>
 
           {/* 우측 액션 슬롯 (닫기·알림·설정 버튼 등) — ml-auto로 우측 끝에 고정 */}
-          {rightAction && <div className="ml-auto shrink-0">{rightAction}</div>}
+          {rightAction ? <div className="ml-auto shrink-0">{rightAction}</div>
+            : ( rightBtnType == 'close' ? <div className="ml-auto shrink-0"><X className="size-5" aria-hidden="true" /></div>
+              : (rightBtnType == 'menu' ?  <div className="ml-auto shrink-0"><Menu className="size-5" aria-hidden="true" /></div>
+              : undefined)) 
+          }
         </div>
       </header>
 
@@ -81,18 +90,16 @@ export function PageLayout({
       {/* flex flex-col: 자식 컴포넌트가 flex-1을 사용해 남은 높이를 채울 수 있도록 flex 컨테이너로 설정 */}
       <main className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden py-md [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
         {children}
-        {/* bottomBar가 있을 때 하단 고정 바 높이만큼 spacer를 추가하여
-            마지막 콘텐츠가 고정 바에 가려지지 않도록 한다 */}
-        {bottomBar && <div aria-hidden="true" className="h-28 shrink-0" />}
       </main>
 
       {/* ── 하단 고정 액션 바 (iOS 스타일) ──────────────
           backdrop-blur: 스크롤 중에도 하단 버튼이 배경에 묻히지 않도록 처리
           fixed: 화면 하단에 항상 고정 위치 */}
-      {bottomBar && (
-        <div className="fixed bottom-0 left-0 right-0 z-sticky backdrop-blur-sm bg-surface/80 border-t border-border-subtle px-standard pt-standard pb-2xl">
-          {bottomBar}
-        </div>
+      {(Number(bottomBtnCnt) > 0) && (
+        <ButtonGroup className="sticky bottom-0 left-0 right-0 z-sticky backdrop-blur-sm bg-surface/80 border-t border-border-subtle px-standard pt-standard pb-2xl">
+          {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" fullWidth>{bottomBtn2Label}</Button>}
+          <Button variant="primary" fullWidth>{bottomBtn1Label}</Button>
+        </ButtonGroup>
       )}
     </div>
   );

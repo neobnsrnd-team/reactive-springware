@@ -25,7 +25,9 @@ export interface HomePageLayoutProps extends React.HTMLAttributes<HTMLDivElement
    * 기본: false
    */
   hasNotification?: boolean;
-  /** 하단 글로벌 탭바 영역 여백 자동 추가 여부. 기본: true */
+  /** 하단 글로벌 탭바 영역 여부 */
   withBottomNav?: boolean;
+  /** 하단 글로벌 탭바 활성화 탭 */
+  activeId?: string;
   className?: string;
 }

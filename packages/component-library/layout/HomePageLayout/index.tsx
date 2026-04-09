@@ -16,9 +16,10 @@
  * </HomePageLayout>
  */
 import React from 'react';
-import { Bell, User, Menu } from 'lucide-react';
+import { Bell, User, Menu, Wallet, ShoppingBag, Home, CreditCard, MessageSquare } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { HomePageLayoutProps } from './types';
+import { BottomNav } from '../BottomNav';
 
 export type { HomePageLayoutProps } from './types';
 
@@ -29,12 +30,21 @@ const iconBtnCls = cn(
   'transition-colors duration-150',
 );
 
+const tabs = [
+  { id: 'asset',   icon: <Wallet className="size-5" />,        label: '자산',   onClick: () => {}  },
+  { id: 'product', icon: <ShoppingBag className="size-5" />,   label: '상품',   onClick: () => {}  },
+  { id: 'home',    icon: <Home className="size-6" />,          label: '홈',     onClick: () => {}    },
+  { id: 'card',    icon: <CreditCard className="size-5" />,    label: '카드',   onClick: () => {}  },
+  { id: 'chat',    icon: <MessageSquare className="size-5" />, label: '챗봇',   onClick: () => {}  },
+];
+
 export function HomePageLayout({
   title,
   logo,
   rightAction,
   hasNotification = false,
   withBottomNav = true,
+  activeId = 'home',
   className,
   children,
   ...props
@@ -94,13 +104,12 @@ export function HomePageLayout({
           'flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden',
           /* 좌우 기본 여백 + 상하 여백 — 콘텐츠가 화면 끝에 붙지 않도록 */
           'py-md',
-          /* 하단 탭바(80px) 높이만큼 여백 확보 — 탭바가 콘텐츠를 가리지 않도록 */
-          withBottomNav && 'pb-nav',
         )}
         style={{ scrollbarWidth: 'none' }}
       >
         {children}
       </main>
+      { withBottomNav && <BottomNav items={tabs} activeId={activeId} /> }
     </div>
   );
 }
