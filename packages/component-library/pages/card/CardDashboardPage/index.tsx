@@ -65,9 +65,11 @@ import { SummaryCard } from '../../../biz/card/SummaryCard';
 import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
 import { QuickShortcutCard } from '../../../biz/card/QuickShortcutCard';
 import { BannerCarousel } from '../../../biz/common/BannerCarousel';
+import { BalanceToggle } from '../../../modules/common/BalanceToggle';
 
 import type { CardDashboardPageProps } from './types';
 import { cn } from '@lib/cn';
+import { Typography } from '../../../core/Typography';
 
 /** 하단 탭바 항목 정의 */
 const BOTTOM_NAV_ITEMS = (onBottomNavChange: (id: string) => void) => [
@@ -131,6 +133,8 @@ export function CardDashboardPage({
 }: CardDashboardPageProps) {
   /** Storybook 확인용 내부 상태 — 실제 앱에서는 Hook에서 관리 */
   const [activeBottomTab, setActiveBottomTab] = useState(activeBottomTabProp ?? 'my');
+  /** 금액 숨김 여부 — 토글 버튼으로 대시보드 전체 금액을 일괄 마스킹 */
+  const [amountHidden, setAmountHidden] = useState(false);
 
   const handleBottomNavChange = (id: string) => {
     setActiveBottomTab(id);
@@ -228,7 +232,12 @@ export function CardDashboardPage({
       >
         {/* ── 이번 달 명세서 히어로 카드 ────────────────── */}
         <div className="px-standard pt-standard">
-          <StatementHeroCard amount={1_250_000} dueDate="1월 25일" onDetail={onStatementDetail} />
+          <StatementHeroCard
+            amount={1_250_000}
+            dueDate="1월 25일"
+            onDetail={onStatementDetail}
+            hidden={amountHidden}
+          />
         </div>
 
         {/* ── 대출 메뉴 바 (단기카드대출 / 장기카드대출 / 리볼빙) ── */}
@@ -263,10 +272,11 @@ export function CardDashboardPage({
             variant="asset"
             title="총 자산"
             amount={42_850_000}
+            hidden={amountHidden}
             icon={<Building2 size={36} />}
             actions={[
-              { label: '내 계좌',  onClick: onMyAccount  ?? (() => {}) },
-              { label: '금융진단', onClick: onDiagnosis  ?? (() => {}) },
+              { label: '내 계좌', onClick: onMyAccount ?? (() => {}) },
+              { label: '금융진단', onClick: onDiagnosis ?? (() => {}) },
               { label: '보험진단', onClick: onInsuranceDiag ?? (() => {}) },
             ]}
           />
@@ -278,11 +288,12 @@ export function CardDashboardPage({
             variant="spending"
             title="이번 달 소비"
             amount={842_300}
+            hidden={amountHidden}
             icon={<Wallet size={32} />}
             actions={[
-              { label: '가계부',    onClick: onHouseholdBook    ?? (() => {}) },
+              { label: '가계부', onClick: onHouseholdBook ?? (() => {}) },
               { label: '소비브리핑', onClick: onSpendingBriefing ?? (() => {}), active: true },
-              { label: '고정지출',  onClick: onFixedExpenses    ?? (() => {}) },
+              { label: '고정지출', onClick: onFixedExpenses ?? (() => {}) },
             ]}
           />
         </div>
@@ -340,6 +351,11 @@ export function CardDashboardPage({
               },
             ]}
           />
+        </div>
+
+        {/* ── 금액 보기/숨기기 — 스크롤 콘텐츠 맨 아래 ── */}
+        <div className="flex justify-center py-sm">
+          <BalanceToggle hidden={amountHidden} onToggle={() => setAmountHidden((prev) => !prev)} />
         </div>
       </HomePageLayout>
 

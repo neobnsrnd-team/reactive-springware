@@ -18,5 +18,7 @@ export interface StatementHeroCardProps {
   label?: string
   /** 상세 화살표 클릭 핸들러 (전달 시 화살표 아이콘 노출) */
   onDetail?: () => void
+  /** true이면 금액을 마스킹 처리하여 숨긴다 */
+  hidden?: boolean
   className?: string
 }

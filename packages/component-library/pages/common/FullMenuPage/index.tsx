@@ -187,7 +187,8 @@ export function FullMenuPage({ onClose, onHome, onLogout, activeCategory, onCate
       <UserProfile
         name="김하나님"
         lastLogin="2026.01.01 10:30:15"
-        onSettingsClick={() => console.log('설정')}
+        onProfileManageClick={() => console.log('내 정보 관리')}
+        onLogoutClick={() => console.log('로그아웃')}
       />
 
       {/* 퀵 서비스 그리드 */}

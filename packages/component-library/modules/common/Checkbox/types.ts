@@ -16,6 +16,12 @@ export interface CheckboxProps {
    * label이 없으면 반드시 전달해야 WCAG 접근성 기준을 충족한다.
    */
   ariaLabel?: string;
+  /**
+   * 체크박스 모양. 기본: 'square'
+   * - 'square' : 둥근 모서리 사각형 (기본값, 일반 체크박스)
+   * - 'circle' : 원형 (라디오 버튼 느낌의 단독 선택 등에 사용)
+   */
+  shape?: 'square' | 'circle';
   /** 비활성화 여부 */
   disabled?: boolean;
   /**

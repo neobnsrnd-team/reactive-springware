@@ -177,7 +177,8 @@ packages/component-library/
 | SelectableItem     | `<SelectableItem />`   | icon, label, selected (아이콘+레이블 카드 타일) |
 | SelectableListItem | `<SelectableListItem />` | label, isSelected, onClick (텍스트 단순 선택 행) |
 | RecentRecipientItem | `<RecentRecipientItem />` | name, bankName, maskedAccount, onClick |
-| Checkbox           | `<Checkbox />`         | checked, onChange, label, disabled |
+| Checkbox           | `<Checkbox />`         | checked, onChange, label, shape: 'square'\|'circle', disabled |
+| DropdownMenu       | `<DropdownMenu />`     | items: DropdownMenuItem[], align: 'left'\|'right', children(트리거) |
 
 ## 입력 관련
 
@@ -229,7 +230,7 @@ packages/component-library/
 | CardSummaryCard          | `<CardSummaryCard />`       | type: 'credit'\|'check'\|'prepaid', cardName, cardNumber, amount |
 | CardVisual               | `<CardVisual />`            | cardImage, brand: 'VISA'\|'Mastercard'\|'AMEX'\|'JCB'\|'UnionPay', cardName, compact |
 | CardInfoPanel            | `<CardInfoPanel />`         | sections: CardInfoSection[] (결제정보·이용기간 등 레이블-값 섹션) |
-| StatementHeroCard        | `<StatementHeroCard />`     | amount, dueDate, label, onDetail |
+| StatementHeroCard        | `<StatementHeroCard />`     | amount, dueDate, label, onDetail, hidden(금액 마스킹) |
 | StatementTotalCard       | `<StatementTotalCard />`    | amount, badge, onDetailClick, onInstallment, onImmediatePayment, onRevolving |
 | CardPaymentSummary       | `<CardPaymentSummary />`    | totalAmount, dateFull, dateYM, revolving, cardLoan, cashAdvance |
 | CardPaymentItem          | `<CardPaymentItem />`       | icon, cardName, amount, onDetailClick (이용내역 행) |
@@ -247,7 +248,7 @@ packages/component-library/
 | AccountSelectCard        | `<AccountSelectCard />`     | bankName, maskedAccount, isSelected, onClick |
 | PaymentAccountCard       | `<PaymentAccountCard />`    | title, hours, icon |
 | UsageHistoryFilterSheet  | `<UsageHistoryFilterSheet />` | open, onClose, 이용내역 필터 BottomSheet |
-| SummaryCard              | `<SummaryCard />`           | variant: 'asset'\|'spending', title, amount (카드 대시보드 요약 카드) |
+| SummaryCard              | `<SummaryCard />`           | variant: 'asset'\|'spending', title, amount, hidden(금액 마스킹) |
 
 ---
 
@@ -257,7 +258,7 @@ packages/component-library/
 | -------------- | ------------------ | ---------- |
 | BannerCarousel | `<BannerCarousel />` | items: BannerCarouselItem[], autoPlayInterval (복수 슬라이더) |
 | BrandBanner    | `<BrandBanner />`  | title, subtitle, icon, onClick (단일 고정 배너) |
-| UserProfile    | `<UserProfile />`  | name, lastLogin, onSettingsClick |
+| UserProfile    | `<UserProfile />`  | name, lastLogin, onProfileManageClick, onLogoutClick (설정 버튼 → DropdownMenu) |
 | QuickMenuGrid  | `<QuickMenuGrid />` | items: QuickMenuItem[], cols: 2\|3\|4 (홈 퀵메뉴 그리드) |
 
 ---

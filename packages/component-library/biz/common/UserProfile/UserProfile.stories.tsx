@@ -20,19 +20,21 @@ const meta = {
     ),
   ],
   argTypes: {
-    onSettingsClick: { action: '설정 클릭' },
+    onProfileManageClick: { action: '내 정보 관리 클릭' },
+    onLogoutClick: { action: '로그아웃 클릭' },
   },
   args: {
     name: '김하나님',
     lastLogin: '2023.11.01 10:30:15',
-    onSettingsClick: () => {},
+    onProfileManageClick: () => {},
+    onLogoutClick: () => {},
   },
 } satisfies Meta<typeof UserProfile>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** 기본 상태 — 이름 + 최근 접속 + 설정 버튼 */
+/** 기본 상태 — 이름 + 최근 접속 + 설정 버튼(드롭다운: 내 정보 관리 · 로그아웃) */
 export const Default: Story = {};
 
 /** 최근 접속 없음 */
@@ -40,9 +42,9 @@ export const NoLastLogin: Story = {
   args: { lastLogin: undefined },
 };
 
-/** 설정 버튼 없음 */
+/** 설정 버튼 없음 — 핸들러 미전달 시 버튼 미표시 */
 export const NoSettingsButton: Story = {
-  args: { onSettingsClick: undefined },
+  args: { onProfileManageClick: undefined, onLogoutClick: undefined },
 };
 
 /** 긴 이름 */

@@ -1247,6 +1247,7 @@ export interface SummaryCardProps {
   icon?:      React.ReactNode;   // 우측 원형 bg-brand-10 배경 아이콘 슬롯
   actions?:   SummaryCardAction[];
   onClick?:   () => void;
+  hidden?:    boolean;           // true: 금액 마스킹 처리
   className?: string;
 }
 
@@ -1256,6 +1257,7 @@ export interface StatementHeroCardProps {
   dueDate:    string;   // 결제 예정일. 예: '2026.04.14'
   label?:     string;   // 기본: '이번달 결제금액'
   onDetail?:  () => void;
+  hidden?:    boolean;  // true: 금액 마스킹 처리
   className?: string;
 }
 
@@ -1342,10 +1344,11 @@ export interface InsuranceSummaryCardProps {
 ```typescript
 // ── UserProfile ───────────────────────────────────────────────
 export interface UserProfileProps {
-  name:             string;          // 예: '김하나'
-  lastLogin?:       string;          // 마지막 로그인 일시 문자열
-  onSettingsClick?: () => void;
-  className?:       string;
+  name:                   string;    // 예: '김하나'
+  lastLogin?:             string;    // 마지막 로그인 일시 문자열
+  onProfileManageClick?:  () => void; // 내 정보 관리 클릭 — 전달 시 설정 드롭다운에 표시
+  onLogoutClick?:         () => void; // 로그아웃 클릭 — 전달 시 설정 드롭다운에 표시
+  className?:             string;
 }
 ```
 
@@ -1486,8 +1489,24 @@ export interface CheckboxProps {
   onChange:   (checked: boolean) => void;
   label?:     React.ReactNode;
   ariaLabel?: string;
+  shape?:     'square' | 'circle'; // 기본: 'square'. 'circle': 원형 체크박스
   disabled?:  boolean;
   id?:        string;
+  className?: string;
+}
+
+// ── DropdownMenu ──────────────────────────────────────────────
+export interface DropdownMenuItem {
+  label:    string;
+  icon?:    React.ReactNode;
+  onClick:  () => void;
+  variant?: 'default' | 'danger'; // 'danger': 빨간 텍스트 (로그아웃·삭제 등)
+}
+
+export interface DropdownMenuProps {
+  children:   React.ReactNode; // 드롭다운을 여는 트리거 요소
+  items:      DropdownMenuItem[];
+  align?:     'left' | 'right'; // 패널 정렬. 기본: 'right'
   className?: string;
 }
 

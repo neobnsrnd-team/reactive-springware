@@ -16,10 +16,15 @@ export interface UserProfileProps {
    */
   lastLogin?: string;
   /**
-   * 설정 버튼 클릭 핸들러.
-   * 미전달 시 설정 버튼 미표시.
+   * 내 정보 관리 클릭 핸들러.
+   * onProfileManageClick 또는 onLogoutClick 중 하나라도 전달되면 설정 버튼이 표시된다.
    */
-  onSettingsClick?: () => void;
+  onProfileManageClick?: () => void;
+  /**
+   * 로그아웃 클릭 핸들러.
+   * onProfileManageClick 또는 onLogoutClick 중 하나라도 전달되면 설정 버튼이 표시된다.
+   */
+  onLogoutClick?: () => void;
   /** 추가 Tailwind 클래스 */
   className?: string;
 }
