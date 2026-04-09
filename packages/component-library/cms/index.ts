@@ -18,6 +18,7 @@ export { bizBlocks }      from "./biz";
 export { moduleBlocks }   from "./modules";
 // export { pageBlocks }     from "./pages";
 export { layoutRenderer } from "./layouts";
+export { LAYOUT_TEMPLATES } from "./layouts"; 
 export { overlays }       from "./overlays";
 
 import { coreBlocks }   from "./core";

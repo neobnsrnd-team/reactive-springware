@@ -35,14 +35,14 @@ import SelectableItemDefinition          from "../modules/common/SelectableItem/
 import SidebarNavDefinition              from "../modules/common/SidebarNav/SidebarNav.cms";
 import SuccessHeroDefinition             from "../modules/common/SuccessHero/SuccessHero.cms";
 import TabNavDefinition                  from "../modules/common/TabNav/TabNav.cms";
-// import BottomSheetDefinition             from "../modules/common/BottomSheet/BottomSheet.cms";
-// import ModalDefinition                   from "../modules/Modal/Modal.cms";
+import BalanceToggleDefinition            from "../modules/common/BalanceToggle/BalanceToggle.cms";
 
 export {
   AccountSelectItemDefinition,
   ActionLinkItemDefinition,
   AlertBannerDefinition,
   AmountInputDefinition,
+  BalanceToggleDefinition,
   CardDefinition,
   CheckboxDefinition,
   CollapsibleSectionDefinition,
@@ -73,6 +73,7 @@ export const moduleBlocks = [
   ActionLinkItemDefinition,
   AlertBannerDefinition,
   AmountInputDefinition,
+  BalanceToggleDefinition,
   CardDefinition,
   CheckboxDefinition,
   CollapsibleSectionDefinition,

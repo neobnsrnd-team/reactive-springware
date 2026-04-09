@@ -22,6 +22,9 @@ import TransactionHistoryPageDefinition from "../pages/banking/TransactionHistor
 import TransferConfirmPageDefinition  from "../pages/banking/TransferConfirmPage/TransferConfirmPage.cms";
 import TransferInputPageDefinition    from "../pages/banking/TransferInputPage/TransferInputPage.cms";
 import TransferSuccessPageDefinition  from "../pages/banking/TransferSuccessPage/TransferSuccessPage.cms";
+// pages - card
+import CardDashboardPageDefinition    from "../pages/card/CardDashboardPage/CardDashboardPage.cms";
+import MyCardManagementPageDefinition from "../pages/card/MyCardManagementPage/MyCardManagementPage.cms";
 
 export {
   AccountDetailPageDefinition,
@@ -29,9 +32,11 @@ export {
   AccountSelectPageDefinition,
   AllAccountsPageDefinition,
   BankSelectPageDefinition,
+  CardDashboardPageDefinition,
   FullMenuPageDefinition,
   HomeDashboardPageDefinition,
   LoginPageDefinition,
+  MyCardManagementPageDefinition,
   TransactionDetailPageDefinition,
   TransactionHistoryPageDefinition,
   TransferConfirmPageDefinition,
@@ -46,9 +51,11 @@ export const pageBlocks = [
   AccountSelectPageDefinition,
   AllAccountsPageDefinition,
   BankSelectPageDefinition,
+  CardDashboardPageDefinition,
   FullMenuPageDefinition,
   HomeDashboardPageDefinition,
   LoginPageDefinition,
+  MyCardManagementPageDefinition,
   TransactionDetailPageDefinition,
   TransactionHistoryPageDefinition,
   TransferConfirmPageDefinition,

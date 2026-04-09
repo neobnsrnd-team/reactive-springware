@@ -16,7 +16,18 @@ import UserProfileDefinition         from "../biz/common/UserProfile/UserProfile
 import AccountSelectorCardDefinition from "../biz/banking/AccountSelectorCard/AccountSelectorCard.cms";
 import AccountSummaryCardDefinition  from "../biz/banking/AccountSummaryCard/AccountSummaryCard.cms";
 // biz - card
+import BillingPeriodLabelDefinition  from "../biz/card/BillingPeriodLabel/BillingPeriodLabel.cms";
+import CardLinkedBalanceDefinition   from "../biz/card/CardLinkedBalance/CardLinkedBalance.cms";
+import CardManagementPanelDefinition from "../biz/card/CardManagementPanel/CardManagementPanel.cms";
+import CardPaymentItemDefinition     from "../biz/card/CardPaymentItem/CardPaymentItem.cms";
+import CardPaymentSummaryDefinition  from "../biz/card/CardPaymentSummary/CardPaymentSummary.cms";
 import CardSummaryCardDefinition     from "../biz/card/CardSummaryCard/CardSummaryCard.cms";
+import CardVisualDefinition          from "../biz/card/CardVisual/CardVisual.cms";
+import LoanMenuBarDefinition         from "../biz/card/LoanMenuBar/LoanMenuBar.cms";
+import QuickShortcutCardDefinition   from "../biz/card/QuickShortcutCard/QuickShortcutCard.cms";
+import StatementHeroCardDefinition   from "../biz/card/StatementHeroCard/StatementHeroCard.cms";
+import StatementTotalCardDefinition  from "../biz/card/StatementTotalCard/StatementTotalCard.cms";
+import SummaryCardDefinition         from "../biz/card/SummaryCard/SummaryCard.cms";
 // biz - insurance
 import InsuranceSummaryCardDefinition from "../biz/insurance/InsuranceSummaryCard/InsuranceSummaryCard.cms";
 
@@ -24,10 +35,21 @@ export {
   AccountSelectorCardDefinition,
   AccountSummaryCardDefinition,
   BannerCarouselDefinition,
+  BillingPeriodLabelDefinition,
   BrandBannerDefinition,
+  CardLinkedBalanceDefinition,
+  CardManagementPanelDefinition,
+  CardPaymentItemDefinition,
+  CardPaymentSummaryDefinition,
   CardSummaryCardDefinition,
+  CardVisualDefinition,
   InsuranceSummaryCardDefinition,
+  LoanMenuBarDefinition,
   QuickMenuGridDefinition,
+  QuickShortcutCardDefinition,
+  StatementHeroCardDefinition,
+  StatementTotalCardDefinition,
+  SummaryCardDefinition,
   UserProfileDefinition,
 };
 
@@ -36,9 +58,20 @@ export const bizBlocks = [
   AccountSelectorCardDefinition,
   AccountSummaryCardDefinition,
   BannerCarouselDefinition,
+  BillingPeriodLabelDefinition,
   BrandBannerDefinition,
+  CardLinkedBalanceDefinition,
+  CardManagementPanelDefinition,
+  CardPaymentItemDefinition,
+  CardPaymentSummaryDefinition,
   CardSummaryCardDefinition,
+  CardVisualDefinition,
   InsuranceSummaryCardDefinition,
+  LoanMenuBarDefinition,
   QuickMenuGridDefinition,
+  QuickShortcutCardDefinition,
+  StatementHeroCardDefinition,
+  StatementTotalCardDefinition,
+  SummaryCardDefinition,
   UserProfileDefinition,
 ];
