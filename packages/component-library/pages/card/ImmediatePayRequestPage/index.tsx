@@ -72,7 +72,8 @@ export function ImmediatePayRequestPage({
   }
 
   function handleNext() {
-    onNext?.(usageType, Number(payAmount) || payableAmount);
+    /* 이용구분은 일시불 고정 — 현재 화면에서 다른 구분 선택 불가 */
+    onNext?.('lump', Number(payAmount) || payableAmount);
   }
 
   return (
