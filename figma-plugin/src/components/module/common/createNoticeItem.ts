@@ -4,9 +4,9 @@
  * 아이콘 + 제목 + 설명 + ChevronRight 구조.
  * 컴포넌트 이름: "NoticeItem"
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
-import { createComponent, setAutoLayout, setPadding, clearFill, setFill, addText } from '../helpers';
-import { createIcon } from '../icons';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
+import { createComponent, setAutoLayout, setPadding, clearFill, setFill, addText } from '../../../helpers';
+import { createIcon } from '../../../icons';
 
 export async function createNoticeItem(): Promise<ComponentNode> {
   const comp = createComponent('NoticeItem');

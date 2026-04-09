@@ -11,11 +11,11 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없으면 tokens.ts의 RGB fallback 적용.
  */
 
-import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../tokens';
+import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFill, setFillWithVar, setStroke, clearStroke, addText, addRect,
-} from '../helpers';
+} from '../../helpers';
 
 type ButtonVariant = 'Primary' | 'Outline' | 'Ghost' | 'Danger';
 type ButtonSize    = 'Small' | 'Medium' | 'Large';

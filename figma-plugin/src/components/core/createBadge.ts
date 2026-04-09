@@ -13,11 +13,11 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없을 경우 tokens.ts의 RGB 값으로 fallback한다.
  */
 
-import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, COLOR_VAR } from '../tokens';
+import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, COLOR_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFillWithVar, addText,
-} from '../helpers';
+} from '../../helpers';
 
 type BadgeVariant = 'Primary' | 'Brand' | 'Success' | 'Danger' | 'Warning' | 'Neutral';
 

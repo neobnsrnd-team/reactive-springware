@@ -7,15 +7,15 @@
  * Variant 형식: "Type=Default" | "Type=Interactive" | "Type=WithHeader" | "Type=WithRow"
  */
 
-import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
+import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFill, setStroke, addText, addDivider,
-} from '../helpers';
+} from '../../../helpers';
 
 const CARD_WIDTH = 328; // 390px 화면 기준 양쪽 standard(16px) 패딩 제외
 
-function createDefaultCard(): ComponentNode {
+async function createDefaultCard(): Promise<ComponentNode> {
   const comp = createComponent('Type=Default');
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -30,7 +30,7 @@ function createDefaultCard(): ComponentNode {
   return comp;
 }
 
-function createInteractiveCard(): ComponentNode {
+async function createInteractiveCard(): Promise<ComponentNode> {
   const comp = createComponent('Type=Interactive');
   setAutoLayout(comp, 'VERTICAL', SPACING.sm);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -46,7 +46,7 @@ function createInteractiveCard(): ComponentNode {
   return comp;
 }
 
-function createCardWithHeader(): ComponentNode {
+async function createCardWithHeader(): Promise<ComponentNode> {
   const comp = createComponent('Type=WithHeader');
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -79,7 +79,7 @@ function createCardWithHeader(): ComponentNode {
   return comp;
 }
 
-function createCardWithRow(): ComponentNode {
+async function createCardWithRow(): Promise<ComponentNode> {
   const comp = createComponent('Type=WithRow');
   setAutoLayout(comp, 'VERTICAL', 0);
   setPadding(comp, SPACING.standard, SPACING.standard);
@@ -96,7 +96,8 @@ function createCardWithRow(): ComponentNode {
     { label: '잔액', value: '1,234,567원' },
   ];
 
-  rows.forEach(({ label, value }, i) => {
+  for (let i = 0; i < rows.length; i++) {
+    const { label, value } = rows[i];
     const row = figma.createFrame();
     row.name = 'CardRow';
     setAutoLayout(row, 'HORIZONTAL', SPACING.md);
@@ -115,17 +116,17 @@ function createCardWithRow(): ComponentNode {
     comp.appendChild(row);
     /* 마지막 행 제외 구분선 */
     if (i < rows.length - 1) addDivider(comp, COLOR.borderSubtle);
-  });
+  }
 
   return comp;
 }
 
 export async function createCard(): Promise<ComponentSetNode> {
   const components = [
-    createDefaultCard(),
-    createInteractiveCard(),
-    createCardWithHeader(),
-    createCardWithRow(),
+    await createDefaultCard(),
+    await createInteractiveCard(),
+    await createCardWithHeader(),
+    await createCardWithRow(),
   ];
   /* cols=2: 4개 variant를 2행 2열로 배치 */
   return combineVariants(components, 'Card', 2);

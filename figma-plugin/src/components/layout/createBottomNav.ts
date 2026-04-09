@@ -6,9 +6,9 @@
  * 컴포넌트 이름: "BottomNav"
  */
 
-import { BRAND, COLOR, SPACING, FONT_SIZE } from '../tokens';
-import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
-import { createIcon, type IconName } from '../icons';
+import { BRAND, COLOR, SPACING, FONT_SIZE } from '../../tokens';
+import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../../helpers';
+import { createIcon, type IconName } from '../../icons';
 
 const NAV_WIDTH  = 390;
 const NAV_HEIGHT = 60;

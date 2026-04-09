@@ -4,8 +4,8 @@
  * 이체 완료 화면의 성공 아이콘 + 금액 + 부제목 중앙 배치 구조.
  * 컴포넌트 이름: "SuccessHero"
  */
-import { COLOR, BRAND, SPACING, FONT_SIZE } from '../tokens';
-import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
+import { COLOR, BRAND, SPACING, FONT_SIZE } from '../../../tokens';
+import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../../../helpers';
 
 export async function createSuccessHero(): Promise<ComponentNode> {
   const comp = createComponent('SuccessHero');

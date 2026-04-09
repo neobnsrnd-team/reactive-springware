@@ -4,8 +4,8 @@
  * 양쪽 선 + 중앙 레이블 패턴.
  * 컴포넌트 이름: "DividerWithLabel"
  */
-import { COLOR, SPACING, FONT_SIZE } from '../tokens';
-import { createComponent, setAutoLayout, clearFill, addText, setFill } from '../helpers';
+import { COLOR, SPACING, FONT_SIZE } from '../../../tokens';
+import { createComponent, setAutoLayout, clearFill, addText, setFill } from '../../../helpers';
 
 export async function createDividerWithLabel(): Promise<ComponentNode> {
   const comp = createComponent('DividerWithLabel');

@@ -5,9 +5,9 @@
  * 컴포넌트 이름: "Select"
  * Variant 형식: "State=Closed" | "State=Open" | "State=OpenWithOptions"
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, setStroke, clearFill, clearStroke, addText } from '../helpers';
-import { createIcon } from '../icons';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, setStroke, clearFill, clearStroke, addText } from '../../helpers';
+import { createIcon } from '../../icons';
 
 const SELECT_WIDTH = 280;
 /** 옵션 항목 높이 — 터치 최소 권장 크기 44px */

@@ -7,16 +7,16 @@
  * Variant 형식: "Variant=Underline" | "Variant=Pill"
  */
 
-import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
+import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
   setFill, setStroke, clearFill, addText,
-} from '../helpers';
+} from '../../helpers';
 
 const TAB_LABELS = ['탭 1', '탭 2', '탭 3'];
 const TAB_WIDTH = 390;
 
-function createUnderlineTabNav(): ComponentNode {
+async function createUnderlineTabNav(): Promise<ComponentNode> {
   const comp = createComponent('Variant=Underline');
   setAutoLayout(comp, 'HORIZONTAL', 0);
   comp.resize(TAB_WIDTH, 44);
@@ -32,9 +32,10 @@ function createUnderlineTabNav(): ComponentNode {
   comp.strokeLeftWeight = 0;
   comp.strokeRightWeight = 0;
 
-  TAB_LABELS.forEach((label, i) => {
+  for (let i = 0; i < TAB_LABELS.length; i++) {
+    const label = TAB_LABELS[i];
     const tab = figma.createFrame();
-    tab.name = i === 0 ? 'Tab (Active)' : `Tab`;
+    tab.name = i === 0 ? 'Tab (Active)' : 'Tab';
     setAutoLayout(tab, 'HORIZONTAL', 0);
     setPadding(tab, SPACING.xs, SPACING.standard, SPACING.md, SPACING.standard);
     tab.layoutGrow = 1;
@@ -63,12 +64,12 @@ function createUnderlineTabNav(): ComponentNode {
     }
 
     comp.appendChild(tab);
-  });
+  }
 
   return comp;
 }
 
-function createPillTabNav(): ComponentNode {
+async function createPillTabNav(): Promise<ComponentNode> {
   const comp = createComponent('Variant=Pill');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
   setPadding(comp, SPACING.xs, SPACING.xs);
@@ -78,7 +79,8 @@ function createPillTabNav(): ComponentNode {
   comp.cornerRadius = RADIUS.full;
   setFill(comp, COLOR.surfaceRaised);
 
-  TAB_LABELS.forEach((label, i) => {
+  for (let i = 0; i < TAB_LABELS.length; i++) {
+    const label = TAB_LABELS[i];
     const isActive = i === 0;
     const tab = figma.createFrame();
     tab.name = isActive ? 'Tab (Active)' : 'Tab';
@@ -106,13 +108,16 @@ function createPillTabNav(): ComponentNode {
     text.layoutGrow = 1;
 
     comp.appendChild(tab);
-  });
+  }
 
   return comp;
 }
 
 export async function createTabNav(): Promise<ComponentSetNode> {
-  const components = [createUnderlineTabNav(), createPillTabNav()];
+  const components = [
+    await createUnderlineTabNav(),
+    await createPillTabNav(),
+  ];
   /* cols=1: Underline / Pill을 세로로 나열 */
   return combineVariants(components, 'TabNav', 1);
 }
