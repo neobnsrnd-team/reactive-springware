@@ -35,7 +35,7 @@ async function createBalanceToggleVariant(hidden: boolean): Promise<ComponentNod
   clearFill(comp);
 
   /* 레이블 텍스트: hidden 상태에 따라 "보이기" / "숨기기" 전환 */
-  const labelText = await addTextWithVar(
+  await addTextWithVar(
     comp,
     hidden ? '보이기' : '숨기기',
     FONT_SIZE.xs,        // 12px — React: text-[10px] 의 최근접 토큰
