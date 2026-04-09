@@ -61,8 +61,9 @@ export async function createHomeHeader(): Promise<ComponentNode> {
   comp.counterAxisSizingMode = 'FIXED';
   comp.primaryAxisAlignItems = 'SPACE_BETWEEN';
   comp.counterAxisAlignItems = 'CENTER';
-  /* backdrop-blur는 Figma에서 직접 표현 불가 — 흰 배경 80% 불투명도로 대체 */
-  setFill(comp, { ...COLOR.surface, a: 0.8 });
+  /* backdrop-blur는 Figma에서 직접 표현 불가 — 흰 배경 80% 불투명도로 대체.
+   * Figma API의 SolidPaint.color는 {r,g,b}만 허용하므로 opacity는 setFill 두 번째 인자로 전달 */
+  setFill(comp, COLOR.surface, 0.8);
 
   /* 좌측: 브랜드 타이틀 (greeting 제거됨) */
   const left = figma.createFrame();

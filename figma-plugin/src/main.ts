@@ -8,10 +8,10 @@
  *                 Badge,
  *                 Input, Input/WithLabel, Input/WithHelper, Input/WithIcon, Input/Format, Input/FullWidth,
  *                 Typography, Select
- * ● Modules     — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
- *                 DividerWithLabel, SelectableItem, AccountSelectItem,
- *                 ActionLinkItem, NoticeItem, AmountInput, OtpInput,
- *                 CollapsibleSection, Modal, BottomSheet, SuccessHero, Card
+ * ● Modules/Common  — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
+ *                    DividerWithLabel, SelectableItem, ActionLinkItem, NoticeItem,
+ *                    CollapsibleSection, Modal, BottomSheet, SuccessHero, Card, BalanceToggle
+ * ● Modules/Banking — AccountSelectItem, AmountInput, OtpInput
  * ● Layout      — PageHeader, HomeHeader, BottomNav, TabNav
  * ● Biz         — AccountSummaryCard, AccountSelectorCard, QuickMenuGrid,
  *                 BannerCarousel, UserProfile, BrandBanner
@@ -56,6 +56,7 @@ import { createCollapsibleSection}from './components/module/common/createCollaps
 import { createModal, createBottomSheet } from './components/module/common/createModal';
 import { createSuccessHero }      from './components/module/common/createSuccessHero';
 import { createCard }             from './components/module/common/createCard';
+import { createBalanceToggle }    from './components/module/common/createBalanceToggle';
 
 /* layout */
 import { createBottomNav }        from './components/layout/createBottomNav';
@@ -85,22 +86,24 @@ function createSectionLabel(text: string, x: number, y: number): FrameNode {
   frame.primaryAxisSizingMode = 'AUTO';
   frame.counterAxisSizingMode = 'AUTO';
   frame.fills = [];
-  frame.x = x;
-  frame.y = y;
 
   const dot = figma.createEllipse();
   dot.resize(10, 10);
   dot.fills = [solid(BRAND.primary)];
   frame.appendChild(dot);
 
-  const label = figma.createTypography();
+  const label = figma.createText();
   label.fontName = { family: FONT_FAMILY.sans, style: 'Bold' };
   label.fontSize = FONT_SIZE.lg;
   label.characters = text;
   label.fills = [solid(COLOR.textHeading)];
   frame.appendChild(label);
 
+  /* x, y는 페이지에 추가된 이후에 설정해야 실제 캔버스 위치에 반영된다.
+   * appendChild 이전에 설정하면 페이지 삽입 시 (0, 0)으로 리셋된다. */
   figma.currentPage.appendChild(frame);
+  frame.x = x;
+  frame.y = y;
   return frame;
 }
 
@@ -162,7 +165,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createSelect(),
   ];
 
-  const moduleNodes: SceneNode[] = [
+  const moduleCommonNodes: SceneNode[] = [
     await createSectionHeader(),
     await createAlertBanner(),
     await createEmptyState(),
@@ -170,16 +173,20 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createLabelValueRow(),
     await createDividerWithLabel(),
     await createSelectableItem(),
-    await createAccountSelectItem(),
     await createActionLinkItem(),
     await createNoticeItem(),
-    await createAmountInput(),
-    await createOtpInput(),
     await createCollapsibleSection(),
     await createModal(),
     await createBottomSheet(),
     await createSuccessHero(),
     await createCard(),
+    await createBalanceToggle(),
+  ];
+
+  const moduleBankingNodes: SceneNode[] = [
+    await createAccountSelectItem(),
+    await createAmountInput(),
+    await createOtpInput(),
   ];
 
   const layoutNodes: SceneNode[] = [
@@ -200,16 +207,17 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
 
   /* 3. 섹션별 배치 */
   let nextY = 0;
-  nextY = layoutSection('Core',    coreNodes,   nextY);
-  nextY = layoutSection('Modules', moduleNodes, nextY);
-  nextY = layoutSection('Layout',  layoutNodes, nextY);
-  nextY = layoutSection('Biz',     bizNodes,    nextY);
+  nextY = layoutSection('Core',            coreNodes,          nextY);
+  nextY = layoutSection('Modules/Common',  moduleCommonNodes,  nextY);
+  nextY = layoutSection('Modules/Banking', moduleBankingNodes, nextY);
+  nextY = layoutSection('Layout',          layoutNodes,        nextY);
+  nextY = layoutSection('Biz',             bizNodes,           nextY);
 
   /* 4. 뷰포트 맞춤 */
   figma.viewport.scrollAndZoomIntoView([
-    ...coreNodes, ...moduleNodes, ...layoutNodes, ...bizNodes,
+    ...coreNodes, ...moduleCommonNodes, ...moduleBankingNodes, ...layoutNodes, ...bizNodes,
   ]);
-  figma.closePlugin('✅ React Component Library 생성 완료! (총 40개 컴포넌트)');
+  figma.closePlugin('✅ React Component Library 생성 완료! (총 41개 컴포넌트)');
 })().catch((err) => {
   /* 어떤 createXxx()에서 에러가 났는지 플러그인 알림으로 표시 */
   figma.closePlugin(`❌ 오류: ${err instanceof Error ? err.message : String(err)}`);

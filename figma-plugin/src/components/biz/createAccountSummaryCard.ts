@@ -53,7 +53,7 @@ async function createAccountSummaryVariant(type: AccountType): Promise<Component
 
 export async function createAccountSummaryCard(): Promise<ComponentSetNode> {
   return combineVariants(
-    ['Deposit', 'Savings', 'Loan'].map((t) => createAccountSummaryVariant(t as AccountType)),
+    await Promise.all(['Deposit', 'Savings', 'Loan'].map((t) => createAccountSummaryVariant(t as AccountType))),
     'AccountSummaryCard', 3,
   );
 }
