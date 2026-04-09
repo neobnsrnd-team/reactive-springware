@@ -6,8 +6,11 @@
  *   - 상단바: "마이" 타이틀 + 알림·메뉴 아이콘
  *   - StatementHeroCard: 이번 달 명세서 금액 + 결제일 (클릭 시 상세 이동)
  *   - LoanMenuBar: 단기카드대출 / 장기카드대출 / 리볼빙 진입 버튼
- *   - QuickShortcutCard × 3: 카드추천 / 금융·대출 / 보험 (3열 그리드)
+ *   - SummaryCard (asset): 총 자산 — 내 계좌·금융진단·보험진단 액션
+ *   - SummaryCard (spending): 이번 달 소비 — 가계부·소비브리핑·고정지출 액션
  *   - QuickMenuGrid: 카드별 실적 / 이용내역 / 보유카드 / 쿠폰함 / 한도조회 / 무이자할부 / 카드신청 (4열, 사각형 아이콘)
+ *   - QuickShortcutCard × 3: 카드추천 / 금융·대출 / 보험 (2열 그리드)
+ *   - BannerCarousel: 이벤트 배너 3개 (자동 슬라이드)
  *   - 하단 탭바: 마이 / 혜택·실적 / 결제 / 쇼핑·여행 / 자산
  *
  * Storybook 확인 목적으로 내부 useState 사용.
@@ -49,6 +52,7 @@ import {
   Wallet,
   ShoppingBag,
   PieChart,
+  Building2,
 } from 'lucide-react';
 
 import { HomePageLayout } from '../../../layout/HomePageLayout';
@@ -57,11 +61,13 @@ import { Button } from '../../../core/Button';
 import { SectionHeader } from '../../../modules/common/SectionHeader';
 import { StatementHeroCard } from '../../../biz/card/StatementHeroCard';
 import { LoanMenuBar } from '../../../biz/card/LoanMenuBar';
-import { QuickShortcutCard } from '../../../biz/card/QuickShortcutCard';
+import { SummaryCard } from '../../../biz/card/SummaryCard';
 import { QuickMenuGrid } from '../../../biz/common/QuickMenuGrid';
+import { QuickShortcutCard } from '../../../biz/card/QuickShortcutCard';
 import { BannerCarousel } from '../../../biz/common/BannerCarousel';
 
 import type { CardDashboardPageProps } from './types';
+import { cn } from '@lib/cn';
 
 /** 하단 탭바 항목 정의 */
 const BOTTOM_NAV_ITEMS = (onBottomNavChange: (id: string) => void) => [
@@ -104,6 +110,12 @@ export function CardDashboardPage({
   onShortLoan,
   onLongLoan,
   onRevolving,
+  onMyAccount,
+  onDiagnosis,
+  onInsuranceDiag,
+  onHouseholdBook,
+  onSpendingBriefing,
+  onFixedExpenses,
   onCardRecommend,
   onFinanceLoan,
   onInsurance,
@@ -178,6 +190,13 @@ export function CardDashboardPage({
     },
   ];
 
+  /** 헤더 아이콘 버튼 공통 스타일 */
+  const iconBtnCls = cn(
+    'flex items-center justify-center size-9 rounded-full',
+    'text-text-muted hover:bg-surface-raised hover:text-text-heading',
+    'transition-colors duration-150',
+  );
+
   return (
     <div data-brand="hana" data-domain="card">
       <HomePageLayout
@@ -192,6 +211,7 @@ export function CardDashboardPage({
               leftIcon={<Bell className="size-5" />}
               onClick={onNotification}
               aria-label="알림"
+              className={iconBtnCls}
             />
             <Button
               variant="ghost"
@@ -200,6 +220,7 @@ export function CardDashboardPage({
               leftIcon={<Menu className="size-5" />}
               onClick={onMenu}
               aria-label="메뉴"
+              className={iconBtnCls}
             />
           </div>
         }
@@ -236,6 +257,41 @@ export function CardDashboardPage({
           />
         </div>
 
+        {/* ── 총 자산 요약 카드 ──────────────────────────── */}
+        <div className="px-standard pt-standard">
+          <SummaryCard
+            variant="asset"
+            title="총 자산"
+            amount={42_850_000}
+            icon={<Building2 size={36} />}
+            actions={[
+              { label: '내 계좌',  onClick: onMyAccount  ?? (() => {}) },
+              { label: '금융진단', onClick: onDiagnosis  ?? (() => {}) },
+              { label: '보험진단', onClick: onInsuranceDiag ?? (() => {}) },
+            ]}
+          />
+        </div>
+
+        {/* ── 이번 달 소비 요약 카드 ─────────────────────── */}
+        <div className="px-standard pt-standard">
+          <SummaryCard
+            variant="spending"
+            title="이번 달 소비"
+            amount={842_300}
+            icon={<Wallet size={32} />}
+            actions={[
+              { label: '가계부',    onClick: onHouseholdBook    ?? (() => {}) },
+              { label: '소비브리핑', onClick: onSpendingBriefing ?? (() => {}), active: true },
+              { label: '고정지출',  onClick: onFixedExpenses    ?? (() => {}) },
+            ]}
+          />
+        </div>
+
+        {/* ── 퀵메뉴 그리드 4열 (사각형 아이콘) ──────────── */}
+        <div className="px-standard pt-standard">
+          <QuickMenuGrid items={quickMenuItems} cols={4} />
+        </div>
+
         {/* ── 바로가기 카드 2열 (카드추천 / 금융·대출 / 보험) ── */}
         <div className="px-standard pt-standard">
           <div className="grid grid-cols-2 gap-sm">
@@ -258,11 +314,6 @@ export function CardDashboardPage({
               onClick={onInsurance}
             />
           </div>
-        </div>
-
-        {/* ── 퀵메뉴 그리드 4열 (사각형 아이콘) ──────────── */}
-        <div className="px-standard pt-standard">
-          <QuickMenuGrid items={quickMenuItems} cols={4} />
         </div>
 
         {/* ── 이벤트 배너 (3개, 자동 슬라이드) ───────────── */}

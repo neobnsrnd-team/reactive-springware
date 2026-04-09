@@ -19,10 +19,15 @@ export interface CardDashboardPageProps {
   onLongLoan?:   () => void;
   onRevolving?:  () => void;
 
-  /** QuickShortcutCard 핸들러 */
-  onCardRecommend?: () => void;
-  onFinanceLoan?:   () => void;
-  onInsurance?:     () => void;
+  /** SummaryCard (asset) 액션 핸들러 */
+  onMyAccount?:       () => void;
+  onDiagnosis?:       () => void;
+  onInsuranceDiag?:   () => void;
+
+  /** SummaryCard (spending) 액션 핸들러 */
+  onHouseholdBook?:     () => void;
+  onSpendingBriefing?:  () => void;
+  onFixedExpenses?:     () => void;
 
   /** QuickMenuGrid 핸들러 */
   onCardPerformance?: () => void;
