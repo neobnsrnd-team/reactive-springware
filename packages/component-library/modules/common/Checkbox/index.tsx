@@ -32,6 +32,7 @@ export function Checkbox({
   onChange,
   label,
   ariaLabel,
+  shape = 'square',
   disabled = false,
   id: idProp,
   className,
@@ -54,7 +55,7 @@ export function Checkbox({
         id={inputId}
         checked={checked}
         disabled={disabled}
-        onChange={e => onChange(e.target.checked)}
+        onChange={(e) => onChange(e.target.checked)}
         className="sr-only"
       />
       {/* 커스텀 체크박스 UI
@@ -69,23 +70,18 @@ export function Checkbox({
         disabled={disabled}
         onClick={() => !disabled && onChange(!checked)}
         className={cn(
-          'shrink-0 size-4 rounded-sm border transition-colors duration-150',
+          /* shape prop에 따라 사각형(rounded-xs) 또는 원형(rounded-full) 적용 */
+          'shrink-0 size-4 border transition-colors duration-150',
+          shape === 'circle' ? 'rounded-full' : 'rounded-xs',
           'flex items-center justify-center',
-          checked
-            ? 'bg-brand-text border-brand-text'
-            : 'bg-surface border-border',
+          checked ? 'bg-brand-text border-brand-text' : 'bg-surface border-border',
           !disabled && 'hover:border-brand-text cursor-pointer',
           disabled && 'cursor-not-allowed',
         )}
       >
         {/* 체크 아이콘 — checked 상태일 때만 표시 */}
         {checked && (
-          <svg
-            viewBox="0 0 12 10"
-            fill="none"
-            className="size-2.5"
-            aria-hidden="true"
-          >
+          <svg viewBox="0 0 12 10" fill="none" className="size-2.5" aria-hidden="true">
             <path
               d="M1 5L4.5 8.5L11 1.5"
               stroke="white"

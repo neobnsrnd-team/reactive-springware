@@ -18,22 +18,23 @@
  *   onDetail={() => navigate('/statement')}
  * />
  */
-import React from 'react'
-import { ChevronRight } from 'lucide-react'
-import { cn } from '@lib/cn'
-import type { StatementHeroCardProps } from './types'
+import React from 'react';
+import { ChevronRight } from 'lucide-react';
+import { cn } from '@lib/cn';
+import type { StatementHeroCardProps } from './types';
 
 /** 원화 금액 포맷터 */
-const krwFormatter = new Intl.NumberFormat('ko-KR')
+const krwFormatter = new Intl.NumberFormat('ko-KR');
 
 export function StatementHeroCard({
   amount,
   dueDate,
   label = '이번 달 명세서',
   onDetail,
+  hidden = false,
   className,
 }: StatementHeroCardProps) {
-  const formattedAmount = krwFormatter.format(amount)
+  const formattedAmount = krwFormatter.format(amount);
 
   return (
     <div
@@ -59,11 +60,12 @@ export function StatementHeroCard({
         <div className="flex items-end gap-xs">
           <span
             className="text-4xl font-bold text-brand-fg tabular-nums font-numeric leading-tight"
-            aria-label={`${label} ${formattedAmount}원`}
+            aria-label={hidden ? '금액 숨김' : `${label} ${formattedAmount}원`}
           >
-            {formattedAmount}
+            {/* hidden이면 마스킹 문자로 대체 */}
+            {hidden ? '금액 숨김 중' : formattedAmount}
           </span>
-          <span className="text-xl font-bold text-brand-fg pb-1">원</span>
+          {!hidden && <span className="text-xl font-bold text-brand-fg pb-1">원</span>}
         </div>
 
         {/* ── 결제일 뱃지 + 화살표 ── */}
@@ -89,5 +91,5 @@ export function StatementHeroCard({
         </div>
       </div>
     </div>
-  )
+  );
 }
