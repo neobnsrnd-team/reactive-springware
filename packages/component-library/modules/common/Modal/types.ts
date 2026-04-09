@@ -4,7 +4,13 @@
  */
 import React from 'react';
 
-export type ModalSize = 'sm' | 'md' | 'lg' | 'fullscreen';
+export type ModalSize      = 'sm' | 'md' | 'lg' | 'fullscreen';
+/**
+ * 모달 헤더 타이틀 정렬 방향.
+ * - 'left'  (기본): 타이틀 좌측 정렬, X 버튼 우측 배치 (일반 확인 모달)
+ * - 'center': 타이틀 중앙 정렬, X 버튼 절대 배치 우측 (경고/안내 모달)
+ */
+export type ModalTitleAlign = 'left' | 'center';
 
 export interface ModalProps {
   /** 모달 표시 여부 */
@@ -25,5 +31,12 @@ export interface ModalProps {
   size?:             ModalSize;
   /** true이면 배경 클릭으로 닫기 비활성화 */
   disableBackdropClose?: boolean;
+  /**
+   * 헤더 타이틀 정렬.
+   * - 'left'  (기본): 타이틀 좌측, X 버튼 우측 (일반 확인 모달)
+   * - 'center': 타이틀 중앙, X 버튼 절대 우측 (경고·안내 모달)
+   * @default 'left'
+   */
+  titleAlign?:       ModalTitleAlign;
   className?:        string;
 }
