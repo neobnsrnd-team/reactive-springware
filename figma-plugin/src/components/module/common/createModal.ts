@@ -96,7 +96,8 @@ async function createBottomSheetVariant(snap: SnapMode): Promise<ComponentNode> 
   handle.resize(32, 4);
   handle.cornerRadius = 2;
   setFill(handle, COLOR.border);
-  handle.layoutAlign = 'CENTER';
+  /* 부모(comp)의 counterAxisAlignItems='CENTER'가 가로 중앙 정렬을 담당하므로
+   * 개별 layoutAlign='CENTER' 설정 불필요 (Figma 신 API에서 CENTER 값 deprecated) */
   comp.appendChild(handle);
 
   const title = await addText(comp, '바텀시트 제목', FONT_SIZE.base, COLOR.textHeading, true);

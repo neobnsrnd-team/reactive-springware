@@ -17,7 +17,7 @@
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFill, setFillWithVar, setStroke, addText, addRect,
+  setFill, setFillWithVar, setStroke, addTextWithVar, addRect,
 } from '../../helpers';
 
 type InputSize  = 'Medium' | 'Large';
@@ -96,10 +96,9 @@ async function buildInputField(
   comp.strokeAlign  = 'INSIDE';
 
   /* placeholder 텍스트 */
-  const placeholder = await addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
+  const placeholder = await addTextWithVar(comp, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
   placeholder.layoutGrow = 1;
   placeholder.textAlignVertical = 'CENTER';
-  await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
   /* Disabled: 투명도로 표현 (opacity 50%) */
   if (state === 'Disabled') {
@@ -161,8 +160,7 @@ export async function createInputWithLabel(): Promise<ComponentSetNode> {
       comp.strokes = [];
 
       /* label 텍스트 */
-      const label = await addText(comp, '레이블', FONT_SIZE.xs, COLOR.textLabel, true);
-      await setFillWithVar(label, COLOR_VAR.textLabel, COLOR.textLabel);
+      const label = await addTextWithVar(comp, '레이블', FONT_SIZE.xs, COLOR_VAR.textLabel, COLOR.textLabel, true);
 
       /* 입력 필드 프레임 */
       const field = figma.createFrame();
@@ -192,10 +190,9 @@ export async function createInputWithLabel(): Promise<ComponentSetNode> {
       field.strokeWeight = 1;
       field.strokeAlign  = 'INSIDE';
 
-      const placeholder = await addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(field, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       comp.appendChild(field);
       components.push(comp);
@@ -263,17 +260,15 @@ export async function createInputWithHelper(): Promise<ComponentSetNode> {
       field.strokeWeight = 1;
       field.strokeAlign  = 'INSIDE';
 
-      const placeholder = await addText(field, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(field, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       comp.appendChild(field);
 
       /* helperText */
       const { varName, fallback } = helperStyle[state];
-      const helper = await addText(comp, '안내 문구입니다', FONT_SIZE.xs, fallback);
-      await setFillWithVar(helper, varName, fallback);
+      await addTextWithVar(comp, '안내 문구입니다', FONT_SIZE.xs, varName, fallback);
 
       components.push(comp);
     }
@@ -315,10 +310,9 @@ export async function createInputWithIcon(): Promise<ComponentSetNode> {
       }
 
       /* placeholder */
-      const placeholder = await addText(comp, '입력해주세요', fontSize, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(comp, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       /* 우측 아이콘 */
       if (icon === 'Right' || icon === 'Both') {
@@ -367,10 +361,9 @@ export async function createInputFormat(): Promise<ComponentSetNode> {
       comp.strokeAlign  = 'INSIDE';
 
       /* 포맷 패턴을 placeholder로 표시 */
-      const placeholder = await addText(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
-      await setFillWithVar(placeholder, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
 
       components.push(comp);
     }

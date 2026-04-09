@@ -16,7 +16,7 @@
 import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, COLOR_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFillWithVar, addText,
+  setFillWithVar, addTextWithVar,
 } from '../../helpers';
 
 type BadgeVariant = 'Primary' | 'Brand' | 'Success' | 'Danger' | 'Warning' | 'Neutral';
@@ -84,9 +84,7 @@ async function createBadgeVariant(variant: BadgeVariant, dot: boolean): Promise<
     comp.cornerRadius = RADIUS.full;
     await setFillWithVar(comp, bgVar, bgFallback);
 
-    const label = await addText(comp, variant, FONT_SIZE.xs, textFallback, true);
-    /* 텍스트에도 Figma 변수 바인딩 — addText가 TextNode를 반환하므로 직접 적용 */
-    await setFillWithVar(label, textVar, textFallback);
+    const label = await addTextWithVar(comp, variant, FONT_SIZE.xs, textVar, textFallback, true);
     label.textAlignHorizontal = 'CENTER';
   }
 

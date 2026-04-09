@@ -169,6 +169,32 @@ export async function addText(
 }
 
 /**
+ * TextNode를 생성·설정하고 fill을 Figma 변수에 바인딩한 뒤 부모에 추가한다.
+ * addText + setFillWithVar 두 단계를 하나로 합친 헬퍼다.
+ *
+ * @param parent     - 부모 노드
+ * @param characters - 표시할 텍스트
+ * @param fontSize   - 폰트 크기
+ * @param colorVar   - Figma 변수 전체 경로 (예: 'color/text/muted')
+ * @param fallback   - 변수를 찾지 못했을 때 사용할 RGB 값
+ * @param bold       - 굵게 여부 (기본 false)
+ */
+export async function addTextWithVar(
+  parent: FrameNode | ComponentNode,
+  characters: string,
+  fontSize: number,
+  colorVar: string,
+  fallback: RGB,
+  bold = false,
+): Promise<TextNode> {
+  const text = figma.createText();
+  await applyText(text, characters, fontSize, fallback, bold);
+  await setFillWithVar(text, colorVar, fallback);
+  parent.appendChild(text);
+  return text;
+}
+
+/**
  * ComponentNode 생성 헬퍼.
  * name은 Figma variant 형식 "Property=Value, ..." 또는 단순 이름.
  */

@@ -492,9 +492,10 @@ design-tokens/
 `tokens.ts`는 **Figma 플러그인 전용** 파일이다.
 globals.css와 완전히 동기화할 필요 없으며, 아래 토큰만 관리한다.
 
-- Figma 컴포넌트 생성 시 레이아웃에 사용하는 공통 숫자값 (SPACING, RADIUS, FONT_SIZE 등)
-- Figma Variables 바인딩에 필요한 공통 시맨틱 색상 (COLOR_VAR — color/surface, color/brand 등)
+- Figma 컴포넌트 생성 시 사용하는 **변수 경로 상수** (Figma Variables 바인딩용 경로)
 - 브랜드별·도메인별 색상은 tokens.ts에 포함하지 않는다.
+
+Figma 컴포넌트를 생성할 때 필요한 변수 경로 상수가 tokens.ts에 없는 경우, 임의로 추가하지 않고 **반드시 개발자에게 확인** 후 진행한다.
 
 temp.json 업데이트 작업에서 tokens.ts는 수정하지 않는다.
 tokens.ts 수정이 필요한 경우 개발자에게 별도로 확인한다.

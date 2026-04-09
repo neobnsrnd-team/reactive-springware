@@ -44,7 +44,7 @@ async function createBannerCarouselVariant(variant: BannerVariant): Promise<Comp
 
 export async function createBannerCarousel(): Promise<ComponentSetNode> {
   return combineVariants(
-    ['Promo', 'Info', 'Warning'].map((v) => createBannerCarouselVariant(v as BannerVariant)),
+    await Promise.all(['Promo', 'Info', 'Warning'].map((v) => createBannerCarouselVariant(v as BannerVariant))),
     'BannerCarousel', 3,
   );
 }

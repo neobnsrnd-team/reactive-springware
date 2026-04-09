@@ -14,7 +14,7 @@
 import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFill, setFillWithVar, setStroke, clearStroke, addText, addRect,
+  setFill, setFillWithVar, setStroke, clearStroke, addTextWithVar, addRect,
 } from '../../helpers';
 
 type ButtonVariant = 'Primary' | 'Outline' | 'Ghost' | 'Danger';
@@ -164,9 +164,8 @@ export async function createButton(): Promise<ComponentSetNode> {
 
         /* 텍스트 레이블 — Loading 상태에서는 텍스트 없이 스피너만 표시 */
         if (text && state !== 'Loading') {
-          const label = await addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
+          const label = await addTextWithVar(comp, '버튼', SIZE_CONFIG[size].fontSize, text.varName, text.fallback, true);
           label.textAlignHorizontal = 'CENTER';
-          await setFillWithVar(label, text.varName, text.fallback);
         }
 
         /* Loading 스피너 — 스피너 색상은 텍스트 색과 동일 */
@@ -221,9 +220,8 @@ export async function createButtonWithIcon(): Promise<ComponentSetNode> {
         if (icon === 'Left') addIconPlaceholder(comp, size);
 
         if (text) {
-          const label = await addText(comp, '버튼', SIZE_CONFIG[size].fontSize, text.fallback, true);
+          const label = await addTextWithVar(comp, '버튼', SIZE_CONFIG[size].fontSize, text.varName, text.fallback, true);
           label.textAlignHorizontal = 'CENTER';
-          await setFillWithVar(label, text.varName, text.fallback);
         }
 
         if (icon === 'Right') addIconPlaceholder(comp, size);
@@ -329,9 +327,8 @@ export async function createButtonFullWidth(): Promise<ComponentSetNode> {
       }
 
       if (text) {
-        const label = await addText(comp, '버튼', FONT_SIZE.sm, text.fallback, true);
+        const label = await addTextWithVar(comp, '버튼', FONT_SIZE.sm, text.varName, text.fallback, true);
         label.textAlignHorizontal = justify === 'Center' ? 'CENTER' : 'LEFT';
-        await setFillWithVar(label, text.varName, text.fallback);
       }
 
       if (justify === 'Between') {

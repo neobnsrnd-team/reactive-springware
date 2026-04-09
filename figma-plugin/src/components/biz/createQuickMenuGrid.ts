@@ -4,7 +4,7 @@
  * 3열 / 4열 두 가지 variant를 가진 ComponentSet을 반환한다.
  */
 import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../tokens';
-import { createComponent, combineVariants, setAutoLayout, clearFill, addText } from '../../helpers';
+import { createComponent, combineVariants, setAutoLayout, setFill, clearFill, addText } from '../../helpers';
 
 type GridCols = 3 | 4;
 
@@ -47,7 +47,7 @@ async function createQuickMenuGridVariant(cols: GridCols): Promise<ComponentNode
 
 export async function createQuickMenuGrid(): Promise<ComponentSetNode> {
   return combineVariants(
-    [createQuickMenuGridVariant(3), createQuickMenuGridVariant(4)],
+    await Promise.all([createQuickMenuGridVariant(3), createQuickMenuGridVariant(4)]),
     'QuickMenuGrid', 2,
   );
 }
