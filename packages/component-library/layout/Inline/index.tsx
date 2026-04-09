@@ -6,7 +6,7 @@
  * @example
  * // 섹션 헤더: 타이틀 ↔ 전체보기 버튼 좌우 분리
  * <Inline justify="between" align="center" className="mb-md">
- *   <Text variant="subheading">최근 거래</Text>
+ *   <Typography variant="subheading">최근 거래</Typography>
  *   <button className="text-xs text-brand-text">전체보기</button>
  * </Inline>
  *

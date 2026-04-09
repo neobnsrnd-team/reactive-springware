@@ -40,7 +40,7 @@ import { Stack } from '../../../layout/Stack';
 import { Inline } from '../../../layout/Inline';
 
 /* ── Core ────────────────────────────────────────────────────── */
-import { Text } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 import { Button } from '../../../core/Button';
 
 /* ── Modules ─────────────────────────────────────────────────── */
@@ -217,12 +217,12 @@ function MyBankingContent() {
       <Card className="bg-brand-5 border-brand-10 shadow-none rounded-3xl">
         <Inline justify="between" align="center" gap="md">
           <Stack gap="xs" className="flex-1">
-            <Text variant="body-sm" color="secondary">
+            <Typography variant="body-sm" color="secondary">
               다른 금융 계좌를 연결하고
-            </Text>
-            <Text variant="body-sm" color="secondary">
+            </Typography>
+            <Typography variant="body-sm" color="secondary">
               한눈에 관리하세요
-            </Text>
+            </Typography>
           </Stack>
           <Button variant="primary" size="sm" onClick={() => console.log('연결하기')}>
             연결하기
@@ -332,9 +332,9 @@ export function HomeDashboardPage({ activeTab, onTabChange }: HomeDashboardPageP
     >
       {/* ── 인사 텍스트 ─────────────────────────────────── */}
       <div className="px-standard pt-xl pb-md">
-        <Text as="h2" variant="heading" color="heading">
+        <Typography as="h2" variant="heading" color="heading">
           안녕하세요, 김하나님!
-        </Text>
+        </Typography>
       </div>
 
       {/* ── 탭 네비게이션 ────────────────────────────────── */}
