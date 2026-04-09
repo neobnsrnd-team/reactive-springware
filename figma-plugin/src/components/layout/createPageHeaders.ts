@@ -7,14 +7,14 @@
  * - "HomeHeader"  (HomePageLayout 상단 헤더: 브랜드 타이틀 + 프로필·벨·메뉴 3버튼)
  */
 
-import { COLOR, BRAND, SPACING, FONT_SIZE } from '../tokens';
-import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
-import { createIcon } from '../icons';
+import { COLOR, BRAND, SPACING, FONT_SIZE } from '../../tokens';
+import { createComponent, setAutoLayout, setPadding, setFill, clearFill, addText } from '../../helpers';
+import { createIcon } from '../../icons';
 
 const HEADER_WIDTH  = 390;
 const HEADER_HEIGHT = 56;
 
-export async function createPageHeader(): ComponentNode {
+export async function createPageHeader(): Promise<ComponentNode> {
   const comp = createComponent('PageHeader');
   setAutoLayout(comp, 'HORIZONTAL', 0);
   setPadding(comp, 0, SPACING.standard);
@@ -52,7 +52,7 @@ export async function createPageHeader(): ComponentNode {
   return comp;
 }
 
-export async function createHomeHeader(): ComponentNode {
+export async function createHomeHeader(): Promise<ComponentNode> {
   const comp = createComponent('HomeHeader');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);

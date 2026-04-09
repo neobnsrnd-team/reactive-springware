@@ -4,11 +4,11 @@
  * Expanded(true|false) 2 variants.
  * 컴포넌트 이름: "CollapsibleSection"
  */
-import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../helpers';
-import { createIcon } from '../icons';
+import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../../../helpers';
+import { createIcon } from '../../../icons';
 
-async function createCollapsibleVariant(expanded: boolean): ComponentNode {
+async function createCollapsibleVariant(expanded: boolean): Promise<ComponentNode> {
   const comp = createComponent(`Expanded=${expanded ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', 0);
   setPadding(comp, SPACING.md, SPACING.md);
@@ -54,7 +54,7 @@ async function createCollapsibleVariant(expanded: boolean): ComponentNode {
 
 export async function createCollapsibleSection(): Promise<ComponentSetNode> {
   return combineVariants(
-    [createCollapsibleVariant(false), createCollapsibleVariant(true)],
+    await Promise.all([createCollapsibleVariant(false), createCollapsibleVariant(true)]),
     'CollapsibleSection', 2,
   );
 }

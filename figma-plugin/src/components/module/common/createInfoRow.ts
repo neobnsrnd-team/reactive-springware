@@ -5,11 +5,11 @@
  * - InfoRow: 레이블(secondary) + 값(heading), 선택적 구분선
  * - LabelValueRow: 레이블(xs/muted) + 값(sm/bold)
  */
-import { COLOR, SPACING, FONT_SIZE } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, addText, setStroke } from '../helpers';
+import { COLOR, SPACING, FONT_SIZE } from '../../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, addText, setStroke } from '../../../helpers';
 
 /* ── InfoRow ──────────────────────────────────────────────── */
-async function createInfoRowVariant(showBorder: boolean): ComponentNode {
+async function createInfoRowVariant(showBorder: boolean): Promise<ComponentNode> {
   const comp = createComponent(`ShowBorder=${showBorder ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.sm, SPACING.standard);
@@ -29,13 +29,13 @@ async function createInfoRowVariant(showBorder: boolean): ComponentNode {
 
 export async function createInfoRow(): Promise<ComponentSetNode> {
   return combineVariants(
-    [createInfoRowVariant(false), createInfoRowVariant(true)],
+    await Promise.all([createInfoRowVariant(false), createInfoRowVariant(true)]),
     'InfoRow', 2,
   );
 }
 
 /* ── LabelValueRow ────────────────────────────────────────── */
-async function createLabelValueRowNode(): ComponentNode {
+async function createLabelValueRowNode(): Promise<ComponentNode> {
   const comp = createComponent('LabelValueRow');
   setAutoLayout(comp, 'HORIZONTAL', SPACING.md);
   setPadding(comp, SPACING.xs, SPACING.standard);
@@ -51,7 +51,7 @@ async function createLabelValueRowNode(): ComponentNode {
 }
 
 export async function createLabelValueRow(): Promise<ComponentNode> {
-  const comp = createLabelValueRowNode();
+  const comp = await createLabelValueRowNode();
   figma.currentPage.appendChild(comp);
   return comp;
 }

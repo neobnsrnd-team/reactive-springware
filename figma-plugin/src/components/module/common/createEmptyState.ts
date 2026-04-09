@@ -4,10 +4,10 @@
  * 중앙 정렬 일러스트 + 타이틀 + 설명 + 액션 버튼 구조.
  * 컴포넌트 이름: "EmptyState" / Variant: "HasAction=True" | "HasAction=False"
  */
-import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, setFill, addText } from '../helpers';
+import { COLOR, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, clearFill, setFill, addText } from '../../../helpers';
 
-async function createEmptyStateVariant(hasAction: boolean): ComponentNode {
+async function createEmptyStateVariant(hasAction: boolean): Promise<ComponentNode> {
   const comp = createComponent(`HasAction=${hasAction ? 'True' : 'False'}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING['3xl'], SPACING.xl);
@@ -49,7 +49,7 @@ async function createEmptyStateVariant(hasAction: boolean): ComponentNode {
 
 export async function createEmptyState(): Promise<ComponentSetNode> {
   return combineVariants(
-    [createEmptyStateVariant(false), createEmptyStateVariant(true)],
+    await Promise.all([createEmptyStateVariant(false), createEmptyStateVariant(true)]),
     'EmptyState', 2,
   );
 }

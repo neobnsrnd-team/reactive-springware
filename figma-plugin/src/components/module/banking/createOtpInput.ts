@@ -4,10 +4,10 @@
  * Length(4|6) × State(Default|Error) = 4 variants.
  * 컴포넌트 이름: "OtpInput"
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, clearFill, setFill, setStroke, addText } from '../helpers';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
+import { createComponent, combineVariants, setAutoLayout, clearFill, setFill, setStroke, addText } from '../../../helpers';
 
-async function createOtpVariant(length: 4 | 6, state: 'Default' | 'Error'): ComponentNode {
+async function createOtpVariant(length: 4 | 6, state: 'Default' | 'Error'): Promise<ComponentNode> {
   const cellSize = 44;
   const totalWidth = length * cellSize + (length - 1) * SPACING.sm;
 
@@ -48,11 +48,11 @@ async function createOtpVariant(length: 4 | 6, state: 'Default' | 'Error'): Comp
 }
 
 export async function createOtpInput(): Promise<ComponentSetNode> {
-  const components: ComponentNode[] = [
+  const components = await Promise.all([
     createOtpVariant(4, 'Default'),
     createOtpVariant(4, 'Error'),
     createOtpVariant(6, 'Default'),
     createOtpVariant(6, 'Error'),
-  ];
+  ]);
   return combineVariants(components, 'OtpInput', 2);
 }

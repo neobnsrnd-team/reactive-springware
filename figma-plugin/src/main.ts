@@ -183,8 +183,8 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
   ];
 
   const layoutNodes: SceneNode[] = [
-    createPageHeader(),
-    createHomeHeader(),
+    await createPageHeader(),
+    await createHomeHeader(),
     await createBottomNav(),
     await createTabNav(),
   ];

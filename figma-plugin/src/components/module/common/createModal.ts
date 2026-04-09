@@ -3,9 +3,9 @@
  * @description Figma Modal / BottomSheet 컴포넌트 세트 생성.
  * Modal: size(sm|md|lg) variants / BottomSheet: snap(auto|half|full) variants.
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../helpers';
-import { createIcon } from '../icons';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../../../helpers';
+import { createIcon } from '../../../icons';
 
 /* ── Modal ─────────────────────────────────────────────────── */
 type ModalSize = 'Small' | 'Medium' | 'Large';
@@ -15,7 +15,7 @@ const MODAL_SIZE_CONFIG: Record<ModalSize, { w: number; h: number }> = {
   Large:  { w: 390, h: 360 },
 };
 
-async function createModalVariant(size: ModalSize): ComponentNode {
+async function createModalVariant(size: ModalSize): Promise<ComponentNode> {
   const { w, h } = MODAL_SIZE_CONFIG[size];
   const comp = createComponent(`Size=${size}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
@@ -48,7 +48,8 @@ async function createModalVariant(size: ModalSize): ComponentNode {
   footer.layoutAlign = 'STRETCH';
   footer.fills = [];
 
-  ['취소', '확인'].forEach(async (label, i) => {
+  let btnIdx = 0;
+  for (const label of ['취소', '확인']) {
     const btn = figma.createFrame();
     setAutoLayout(btn, 'HORIZONTAL', 0);
     btn.primaryAxisAlignItems = 'CENTER';
@@ -56,10 +57,11 @@ async function createModalVariant(size: ModalSize): ComponentNode {
     btn.layoutGrow = 1;
     btn.resize(120, 44);
     btn.cornerRadius = RADIUS.md;
-    setFill(btn, i === 1 ? BRAND.primary : COLOR.surfaceRaised);
-    await addText(btn, label, FONT_SIZE.sm, i === 1 ? BRAND.fg : COLOR.textBase, true);
+    setFill(btn, btnIdx === 1 ? BRAND.primary : COLOR.surfaceRaised);
+    await addText(btn, label, FONT_SIZE.sm, btnIdx === 1 ? BRAND.fg : COLOR.textBase, true);
     footer.appendChild(btn);
-  });
+    btnIdx++;
+  }
   comp.appendChild(footer);
 
   return comp;
@@ -67,7 +69,7 @@ async function createModalVariant(size: ModalSize): ComponentNode {
 
 export async function createModal(): Promise<ComponentSetNode> {
   return combineVariants(
-    ['Small', 'Medium', 'Large'].map((s) => createModalVariant(s as ModalSize)),
+    await Promise.all(['Small', 'Medium', 'Large'].map((s) => createModalVariant(s as ModalSize))),
     'Modal', 3,
   );
 }
@@ -76,7 +78,7 @@ export async function createModal(): Promise<ComponentSetNode> {
 type SnapMode = 'Auto' | 'Half' | 'Full';
 const SNAP_HEIGHT: Record<SnapMode, number> = { Auto: 300, Half: 420, Full: 680 };
 
-async function createBottomSheetVariant(snap: SnapMode): ComponentNode {
+async function createBottomSheetVariant(snap: SnapMode): Promise<ComponentNode> {
   const comp = createComponent(`Snap=${snap}`);
   setAutoLayout(comp, 'VERTICAL', SPACING.md);
   setPadding(comp, SPACING.md, SPACING.xl, SPACING.xl, SPACING.xl);
@@ -111,7 +113,7 @@ async function createBottomSheetVariant(snap: SnapMode): ComponentNode {
 
 export async function createBottomSheet(): Promise<ComponentSetNode> {
   return combineVariants(
-    ['Auto', 'Half', 'Full'].map((s) => createBottomSheetVariant(s as SnapMode)),
+    await Promise.all(['Auto', 'Half', 'Full'].map((s) => createBottomSheetVariant(s as SnapMode))),
     'BottomSheet', 3,
   );
 }

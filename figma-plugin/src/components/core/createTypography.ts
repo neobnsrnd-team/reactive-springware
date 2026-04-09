@@ -4,8 +4,8 @@
  * React Text의 variant(heading|subheading|body-lg|body|body-sm|caption)를 Figma variant로 매핑한다.
  * 컴포넌트 이름: "Typography" / Variant 형식: "Variant=Heading, Weight=Bold"
  */
-import { COLOR, FONT_SIZE, LINE_HEIGHT } from '../tokens';
-import { createComponent, combineVariants, clearFill, addText } from '../helpers';
+import { COLOR, FONT_SIZE, LINE_HEIGHT } from '../../tokens';
+import { createComponent, combineVariants, clearFill, addText } from '../../helpers';
 
 type TypographyVariant = 'Heading' | 'Subheading' | 'BodyLg' | 'Body' | 'BodySm' | 'Caption';
 type TypographyWeight  = 'Normal' | 'Bold';
@@ -19,7 +19,7 @@ const VARIANT_CONFIG: Record<TypographyVariant, { fontSize: number; lineHeight: 
   Caption:    { fontSize: FONT_SIZE.xs,    lineHeight: LINE_HEIGHT.xs     },
 };
 
-async function createTypographyVariant(variant: TypographyVariant, weight: TypographyWeight): ComponentNode {
+async function createTypographyVariant(variant: TypographyVariant, weight: TypographyWeight): Promise<ComponentNode> {
   const { fontSize } = VARIANT_CONFIG[variant];
   const comp = createComponent(`Variant=${variant}, Weight=${weight}`);
   comp.layoutMode = 'HORIZONTAL';
@@ -36,7 +36,7 @@ export async function createTypography(): Promise<ComponentSetNode> {
   const components: ComponentNode[] = [];
   for (const variant of variants) {
     for (const weight of weights) {
-      components.push(createTypographyVariant(variant, weight));
+      components.push(await createTypographyVariant(variant, weight));
     }
   }
   /* cols=2: Normal / Bold를 한 행에 나란히 */

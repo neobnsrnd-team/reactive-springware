@@ -4,10 +4,10 @@
  * 타이틀 + 선택적 배지 + 우측 액션 링크 구조.
  * 컴포넌트 이름: "SectionHeader" / Variant: "HasAction=True" | "HasAction=False"
  */
-import { COLOR, BRAND, SPACING, FONT_SIZE, RADIUS } from '../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, clearFill, addText } from '../helpers';
+import { COLOR, BRAND, SPACING, FONT_SIZE, RADIUS } from '../../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, clearFill, addText } from '../../../helpers';
 
-async function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
+async function createSectionHeaderVariant(hasAction: boolean): Promise<ComponentNode> {
   const comp = createComponent(`HasAction=${hasAction ? 'True' : 'False'}`);
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
   setPadding(comp, 0, SPACING.standard);
@@ -49,7 +49,7 @@ async function createSectionHeaderVariant(hasAction: boolean): ComponentNode {
 
 export async function createSectionHeader(): Promise<ComponentSetNode> {
   return combineVariants(
-    [createSectionHeaderVariant(false), createSectionHeaderVariant(true)],
+    await Promise.all([createSectionHeaderVariant(false), createSectionHeaderVariant(true)]),
     'SectionHeader', 1,
   );
 }
