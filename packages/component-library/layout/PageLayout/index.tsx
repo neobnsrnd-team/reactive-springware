@@ -2,7 +2,7 @@
  * @file index.tsx
  * @description 일반 페이지 레이아웃 컴포넌트.
  * 상단 고정 헤더(타이틀 + 뒤로가기 + 우측 액션)와 스크롤 가능한 본문 영역으로 구성된다.
- * bottomBar prop 전달 시 iOS 스타일 하단 고정 액션 바를 함께 렌더링한다.
+ * bottomBtnCnt prop 전달 시 iOS 스타일 하단 고정 액션 바를 함께 렌더링한다.
  * layoutType: 'page' (계좌 목록·상세, 이체 폼, 이체 완료 화면 등)
  *
  * @example
@@ -11,16 +11,13 @@
  *   <TransferForm ... />
  * </PageLayout>
  *
- * // 하단 고정 버튼 바 포함
+ * // 하단 고정 버튼 바 포함 (버튼 2개)
  * <PageLayout
  *   title="이체 완료"
  *   rightAction={<CloseButton />}
- *   bottomBar={
- *     <Inline gap="sm">
- *       <Button variant="outline" size="lg">추가 이체</Button>
- *       <Button variant="primary" size="lg" fullWidth>확인</Button>
- *     </Inline>
- *   }
+ *   bottomBtnCnt="2"
+ *   bottomBtn1Label="확인"
+ *   bottomBtn2Label="추가 이체"
  * >
  *   <SuccessHero ... />
  * </PageLayout>

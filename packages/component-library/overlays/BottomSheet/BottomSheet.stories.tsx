@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { BottomSheet } from './index';
 
 const meta = {
-  title: 'Modules/Common/BottomSheet',
+  title: 'Overlays/BottomSheet',
   component: BottomSheet,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },
@@ -28,16 +28,9 @@ export const Default: Story = {
   render: (args) => (
     <BottomSheet
       {...args}
-      footer={
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button style={{ flex: 1, padding: '12px 0', borderRadius: 12, border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer', fontWeight: 700 }}>
-            취소
-          </button>
-          <button style={{ flex: 1, padding: '12px 0', borderRadius: 12, border: 'none', background: 'var(--color-brand, #00857a)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>
-            이체 확인
-          </button>
-        </div>
-      }
+      bottomBtnCnt = "2"
+      bottomBtn1Label = "이체 확인"
+      bottomBtn2Label = "취소"
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 14 }}>
         {[['받는 분', '홍길동'], ['계좌번호', '123-456-789012'], ['이체 금액', '50,000원'], ['메모', '점심값']].map(([label, value]) => (
@@ -66,14 +59,9 @@ export const Controlled: Story = {
           open={open}
           onClose={() => setOpen(false)}
           title="옵션 선택"
-          footer={
-            <button
-              onClick={() => setOpen(false)}
-              style={{ width: '100%', padding: '12px 0', borderRadius: 12, border: 'none', background: 'var(--color-brand, #00857a)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}
-            >
-              확인
-            </button>
-          }
+          bottomBtnCnt="1"
+          bottomBtn1Label="확인"
+          onClickBtn1={() => setOpen(false)}
         >
           <p style={{ fontSize: 14, color: '#64748b' }}>시트 본문 콘텐츠 영역입니다.</p>
         </BottomSheet>
@@ -85,7 +73,10 @@ export const Controlled: Story = {
 export const HalfSnap: Story = {
   args: { snap: 'half', title: '날짜 선택' },
   render: (args) => (
-    <BottomSheet {...args} footer={<button style={{ width: '100%', padding: '12px 0', borderRadius: 12, border: 'none', background: 'var(--color-brand, #00857a)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>선택 완료</button>}>
+    <BottomSheet {...args} 
+      bottomBtnCnt="1"
+      bottomBtn1Label="선택 완료"
+    >
       <p style={{ fontSize: 14, color: '#64748b' }}>snap="half" — 화면 절반 높이 고정</p>
     </BottomSheet>
   ),
@@ -96,11 +87,8 @@ export const DisabledBackdrop: Story = {
   render: (args) => (
     <BottomSheet
       {...args}
-      footer={
-        <button style={{ width: '100%', padding: '12px 0', borderRadius: 12, border: 'none', background: 'var(--color-brand, #00857a)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>
-          모두 동의하고 계속
-        </button>
-      }
+      bottomBtnCnt="1"
+      bottomBtn1Label="모두 동의하고 계속"
     >
       <p style={{ fontSize: 14, color: '#64748b' }}>백드롭 클릭으로 닫을 수 없는 필수 액션 시트입니다.</p>
     </BottomSheet>

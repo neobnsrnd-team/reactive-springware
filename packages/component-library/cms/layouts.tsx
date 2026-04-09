@@ -281,6 +281,7 @@ export const LAYOUT_TEMPLATES: LayoutTemplate[] = [
     id: "home",
     label: "Home Page Layout",
     description: "홈 레이아웃 (홈 헤더 + 내용 + 바텀 탭 바)",
+    componentName: "HomePageLayout",
     defaultProps: {
       title: "홈 타이틀",
       logo: "landmark",
@@ -299,22 +300,13 @@ export const LAYOUT_TEMPLATES: LayoutTemplate[] = [
         ? <HomeFooter activeId={(p.activeId as string | undefined) ?? "home"} />
         : undefined,
     }),
-    codegen: {
-      componentName: "HomePageLayout",
-      importFrom: "@reactivespringware/component-library",
-      toJSXProps: (p) => ({
-        title:         p.title,
-        logo:          p.logo,
-        withBottomNav: p.withBottomNav,
-        activeId:      p.activeId,
-      }),
-    },
   },
   // ── Page ─────────────────────────────────────────────────────
   {
     id: "page",
     label: "Page Layout",
     description: "페이지 레이아웃 (헤더 + 내용 + 하단 버튼)",
+    componentName: "PageLayout",
     defaultProps: {
       title: "페이지 제목",
       showBack: true,
@@ -324,7 +316,7 @@ export const LAYOUT_TEMPLATES: LayoutTemplate[] = [
       bottomBtn2Label: "취소"
     },
     propSchema: {
-      title:           { type: "string",  label: "타이틀",           default: "페이지 제목" },
+      title:           { type: "string",  label: "타이틀",          default: "페이지 제목" },
       showBack:        { type: "boolean", label: "뒤로가기 버튼",    default: true },
       rightBtnType:    { type: "select",  label: "헤더 오른쪽 버튼", options: ["close", "menu", "none"], default: "close" },
       bottomBtnCnt:    { type: "select",  label: "하단 버튼 수",     options: ["0", "1", "2"],           default: "0" },
@@ -350,23 +342,12 @@ export const LAYOUT_TEMPLATES: LayoutTemplate[] = [
         ) : undefined,
       };
     },
-    codegen: {
-      componentName: "PageLayout",
-      importFrom: "@reactivespringware/component-library",
-      toJSXProps: (p) => ({
-        title:           p.title,
-        showBack:        p.showBack,
-        rightBtnType:    p.rightBtnType,
-        bottomBtnCnt:    p.bottomBtnCnt,
-        bottomBtn1Label: p.bottomBtn1Label,
-        bottomBtn2Label: p.bottomBtn2Label,
-      }),
-    },
   },
   // ── Blank ───────────────────────────────────────────────
   {
     id: "blank",
     label: "Blank Layout",
+    componentName: "BlankLayout",
     description: "빈 레이아웃",
     defaultProps: {},
   },

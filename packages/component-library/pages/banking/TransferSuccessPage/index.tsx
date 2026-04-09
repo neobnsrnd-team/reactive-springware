@@ -24,7 +24,7 @@
  * @param showKakaoShare       - 카카오톡 공유 액션 표시 여부
  */
 import React from 'react';
-import { X, MessageSquare, Star } from 'lucide-react';
+import { MessageSquare, Star } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
 import { PageLayout } from '../../../layout/PageLayout';
@@ -105,7 +105,7 @@ export function TransferSuccessPage({
             variant="ghost"
             size="md"
             iconOnly
-            leftIcon={<X className="size-4" />}
+            leftIcon="x"
             onClick={() => console.log('닫기')}
             aria-label="닫기"
             className="text-text-heading"

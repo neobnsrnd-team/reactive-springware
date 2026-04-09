@@ -31,8 +31,6 @@
  */
 import React, { useState } from 'react';
 import {
-  Bell,
-  Menu,
   Star,
   Banknote,
   Shield,
@@ -189,7 +187,7 @@ export function CardDashboardPage({
               variant="ghost"
               size="md"
               iconOnly
-              leftIcon={<Bell className="size-5" />}
+              leftIcon="bell"
               onClick={onNotification}
               aria-label="알림"
             />
@@ -197,7 +195,7 @@ export function CardDashboardPage({
               variant="ghost"
               size="md"
               iconOnly
-              leftIcon={<Menu className="size-5" />}
+              leftIcon="menu"
               onClick={onMenu}
               aria-label="메뉴"
             />

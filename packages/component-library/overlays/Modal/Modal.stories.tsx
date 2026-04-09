@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { Modal } from './index';
 
 const meta = {
-  title: 'Modules/Common/Modal',
+  title: 'Overlays/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },
@@ -30,16 +30,9 @@ export const Default: Story = {
   render: (args) => (
     <Modal
       {...args}
-      footer={
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button style={{ flex: 1, padding: '12px 0', borderRadius: 12, border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer', fontWeight: 700 }}>
-            취소
-          </button>
-          <button style={{ flex: 1, padding: '12px 0', borderRadius: 12, border: 'none', background: 'var(--color-brand)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}>
-            확인
-          </button>
-        </div>
-      }
+      bottomBtnCnt="2"
+      bottomBtn1Label="확인"
+      bottomBtn2Label="취소"
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -74,14 +67,9 @@ export const Controlled: Story = {
           open={open}
           onClose={() => setOpen(false)}
           title="확인"
-          footer={
-            <button
-              onClick={() => setOpen(false)}
-              style={{ width: '100%', padding: '12px 0', borderRadius: 12, border: 'none', background: 'var(--color-brand)', color: '#fff', cursor: 'pointer', fontWeight: 700 }}
-            >
-              닫기
-            </button>
-          }
+          bottomBtnCnt="1"
+          bottomBtn1Label="닫기"
+          onClickBtn1={() => setOpen(false)}
         >
           <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', textAlign: 'center' }}>
             작업이 완료되었습니다.

@@ -32,17 +32,16 @@
 import React from 'react';
 import { Wallet } from 'lucide-react';
 
+/* ── Overlays ─────────────────────────────────────────────────────── */
+import { BottomSheet } from '../../../overlays/BottomSheet';
+
 /* ── Modules ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../modules/common/BottomSheet';
 import { TabNav } from '../../../modules/common/TabNav';
 import { EmptyState } from '../../../modules/common/EmptyState';
 import { AccountSelectItem } from '../../../modules/banking/AccountSelectItem';
 
 /* ── Layout ──────────────────────────────────────────────────────── */
 import { Stack } from '../../../layout/Stack';
-
-/* ── Core ────────────────────────────────────────────────────────── */
-import { Button } from '../../../core/Button';
 
 import type { AccountSelectPageProps, AccountSelectTab } from './types';
 
@@ -96,13 +95,9 @@ export function AccountSelectPage({
       onClose={onClose}
       title="출금 계좌 선택"
       /* 다른 금융 빈 상태일 때만 Footer CTA 표시 */
-      footer={
-        isOtherEmpty && onConnectOtherAccount ? (
-          <Button fullWidth size="lg" onClick={onConnectOtherAccount}>
-            다른 금융 계좌 연결하기
-          </Button>
-        ) : undefined
-      }
+      bottomBtnCnt={isOtherEmpty && onConnectOtherAccount ? '1' : '0'}
+      bottomBtn1Label="다른 금융 계좌 연결하기"
+      onClickBtn1={onConnectOtherAccount}
     >
       <Stack gap="md">
         {/* 해당금융/다른 금융 가로 탭 */}

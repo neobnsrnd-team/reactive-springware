@@ -3,7 +3,7 @@
  * @description Button 컴포넌트 스토리.
  */
 import type { Meta, StoryObj } from '@storybook/react';
-import { ChevronDown, Plus, Trash2 } from 'lucide-react';
+
 import React from 'react';
 import { Button } from './index';
 
@@ -59,9 +59,9 @@ export const Sizes: Story = {
 export const WithIcons: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-      <Button leftIcon={<Plus size={16} />}>항목 추가</Button>
-      <Button variant="outline" rightIcon={<ChevronDown size={16} />}>펼치기</Button>
-      <Button variant="danger" leftIcon={<Trash2 size={16} />}>삭제</Button>
+      <Button leftIcon="plus">항목 추가</Button>
+      <Button variant="outline" rightIcon="chevron-down">펼치기</Button>
+      <Button variant="danger" leftIcon="trash-2">삭제</Button>
     </div>
   ),
 };
@@ -92,7 +92,7 @@ export const FullWidth: Story = {
 export const JustifyBetween: Story = {
   args: {
     variant: 'outline', justify: 'between', fullWidth: true,
-    rightIcon: <ChevronDown size={16} />, children: '섹션 펼치기',
+    rightIcon: 'chevron-down', children: '섹션 펼치기',
   },
   decorators: [(Story) => <div style={{ width: 280 }}><Story /></div>],
 };

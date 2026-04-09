@@ -24,7 +24,7 @@
  * @param filterExpanded - 조회 조건 설정 패널 초기 펼침 여부
  */
 import React, { useState } from 'react';
-import { Menu, BookOpen, ChevronDown } from 'lucide-react';
+import { Menu, BookOpen } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
 import { PageLayout } from '../../../layout/PageLayout';
@@ -193,7 +193,7 @@ export function TransactionHistoryPage({
               <Button
                 variant="ghost"
                 size="sm"
-                rightIcon={<ChevronDown className="size-4" aria-hidden="true" />}
+                rightIcon="chevron-down"
                 onClick={handleLoadMore}
               >
                 더보기

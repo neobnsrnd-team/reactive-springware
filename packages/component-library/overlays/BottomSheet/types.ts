@@ -23,8 +23,12 @@ export interface BottomSheetProps {
   title?: string;
   /** 본문 슬롯 */
   children?: React.ReactNode;
-  /** 하단 고정 버튼 영역 슬롯 */
-  footer?: React.ReactNode;
+  /** 하단 고정 버튼 영역 */
+  bottomBtnCnt?:       '0' | '1' | '2';
+  bottomBtn1Label?:   string;
+  bottomBtn2Label?:   string;
+  onClickBtn1?:       () => void;
+  onClickBtn2?:       () => void;
   /**
    * 시트 최대 높이 프리셋. 기본: 'auto'
    * 콘텐츠가 프리셋 높이를 초과하면 본문 영역이 내부 스크롤로 전환

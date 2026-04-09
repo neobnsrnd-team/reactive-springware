@@ -32,7 +32,7 @@
  * @param onTransfer    - 이체 버튼 핸들러
  */
 import React, { useState } from 'react';
-import { Landmark, Link, ChevronRight } from 'lucide-react';
+import { Landmark } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
 import { PageLayout } from '../../../layout/PageLayout';
@@ -279,7 +279,7 @@ function MineTabContent({
             <Button
               variant="ghost"
               size="sm"
-              rightIcon={<ChevronRight className="size-4" aria-hidden="true" />}
+              rightIcon="chevron-right"
             >
               신탁 가입하기
             </Button>
@@ -479,7 +479,7 @@ export function AllAccountsPage({
             variant="primary"
             size="lg"
             fullWidth
-            leftIcon={<Link className="size-4" aria-hidden="true" />}
+            leftIcon="link"
             onClick={onConnectAccount}
           >
             연결하기

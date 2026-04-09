@@ -27,8 +27,10 @@
 import React from 'react';
 import { Lock } from 'lucide-react';
 
+/* ── Overlays ─────────────────────────────────────────────────────── */
+import { BottomSheet } from '../../../overlays/BottomSheet';
+
 /* ── Modules ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../modules/common/BottomSheet';
 import { PinDotIndicator } from '../../../modules/banking/PinDotIndicator';
 import { NumberKeypad } from '../../../modules/banking/NumberKeypad';
 

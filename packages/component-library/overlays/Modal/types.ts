@@ -13,8 +13,12 @@ export interface ModalProps {
   title?:            string;
   /** 본문 영역. 내용이 길면 내부 스크롤 */
   children:          React.ReactNode;
-  /** 하단 버튼 영역. Button 조합 권장 */
-  footer?:           React.ReactNode;
+  /** 하단 고정 버튼 영역 */
+  bottomBtnCnt?:      '0' | '1' | '2';
+  bottomBtn1Label?:   string;
+  bottomBtn2Label?:   string;
+  onClickBtn1?:       () => void;
+  onClickBtn2?:       () => void;
   /** true이면 배경 클릭으로 닫기 비활성화 */
   disableBackdropClose?: boolean;
   /** modal 을 띄울 대상 (기본 document.body) */

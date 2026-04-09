@@ -8,17 +8,17 @@
  * - 이체 확인, 약관 동의, 옵션 선택 등 모바일 액션 시트에 사용
  *
  * @example
- * // 이체 확인 시트
+ * // 이체 확인 시트 (버튼 2개)
  * <BottomSheet
  *   open={open}
  *   onClose={() => setOpen(false)}
  *   title="이체 확인"
- *   footer={
- *     <div className="flex gap-sm">
- *       <Button variant="outline" fullWidth onClick={() => setOpen(false)}>취소</Button>
- *       <Button fullWidth onClick={handleConfirm}>이체 확인</Button>
- *     </div>
- *   }
+ *   hideCloseButton
+ *   bottomBtnCnt="2"
+ *   bottomBtn1Label="예"
+ *   bottomBtn2Label="아니오"
+ *   onClickBtn1={handleConfirm}
+ *   onClickBtn2={() => setOpen(false)}
  * >
  *   <CardRow label="받는 분" value="홍길동" />
  *   <CardRow label="금액" value="50,000원" />
@@ -29,6 +29,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { BottomSheetProps, BottomSheetSnap } from './types';
+import { Button, ButtonGroup } from '../../core/Button';
 
 export type { BottomSheetProps, BottomSheetSnap } from './types';
 
@@ -47,7 +48,11 @@ export function BottomSheet({
   onClose,
   title,
   children,
-  footer,
+  bottomBtnCnt = '0',
+  bottomBtn1Label = "확인",
+  bottomBtn2Label = "취소",
+  onClickBtn1 = () => {},
+  onClickBtn2 = () => {},
   snap = 'auto',
   disableBackdropClose = false,
   hideCloseButton = false,
@@ -93,7 +98,7 @@ export function BottomSheet({
   return createPortal(
     /*
      * 백드롭: fixed inset-0으로 뷰포트 전체 덮기
-     * items-end justify-center: 항상 하단 고정 (Modal처럼 md:items-center 반응형 없음)
+     * items-end justify-center: 항상 하단 고정
      */
     <div
       role="presentation"
@@ -161,10 +166,11 @@ export function BottomSheet({
         </div>
 
         {/* 푸터 (고정) — 하단 안전 영역(Safe Area) 여백 pb-safe 포함 */}
-        {footer && (
-          <div className="shrink-0 border-t border-border-subtle px-xl pt-md pb-[calc(env(safe-area-inset-bottom,0px)+theme(spacing.xl))]">
-            {footer}
-          </div>
+        {(Number(bottomBtnCnt) > 0) && (
+          <ButtonGroup className='shrink-0 border-t border-border-subtle px-xl pt-md pb-[calc(env(safe-area-inset-bottom,0px)+theme(spacing.xl))]'>
+            {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" fullWidth onClick={onClickBtn2}>{bottomBtn2Label}</Button>}
+            <Button variant="primary" fullWidth onClick={onClickBtn1}>{bottomBtn1Label}</Button>
+          </ButtonGroup>
         )}
       </div>
     </div>,

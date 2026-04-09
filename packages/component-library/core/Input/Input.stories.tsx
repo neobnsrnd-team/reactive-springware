@@ -3,7 +3,7 @@
  * @description Input 컴포넌트 스토리.
  */
 import type { Meta, StoryObj } from '@storybook/react';
-import { Search } from 'lucide-react';
+
 import React, { useState } from 'react';
 import { Input } from './index';
 
@@ -45,7 +45,7 @@ export const ValidationStates: Story = {
 export const WithIcons: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 320 }}>
-      <Input label="검색" placeholder="검색어를 입력하세요" leftIcon={<Search size={16} />} fullWidth />
+      <Input label="검색" placeholder="검색어를 입력하세요" leftIcon="search" fullWidth />
       <Input
         label="금액"
         placeholder="금액 입력"
@@ -100,7 +100,7 @@ export const WithBothIcons: Story = {
       <Input
         label="검색 + 단위"
         placeholder="금액을 입력하세요"
-        leftIcon={<Search size={16} />}
+        leftIcon="search"
         rightElement={<span style={{ fontSize: 14, color: 'var(--color-text-muted)' }}>원</span>}
         fullWidth
       />
@@ -108,7 +108,7 @@ export const WithBothIcons: Story = {
         label="Large / 검색 + 단위"
         placeholder="금액을 입력하세요"
         size="lg"
-        leftIcon={<Search size={16} />}
+        leftIcon="search"
         rightElement={<span style={{ fontSize: 14, color: 'var(--color-text-muted)' }}>원</span>}
         fullWidth
       />
