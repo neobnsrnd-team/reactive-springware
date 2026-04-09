@@ -911,6 +911,15 @@ export interface EmptyStateProps {
 | `CardPaymentSummary` | biz/ | biz/card/ | §6.14 |
 | `CardPaymentItem` | biz/ | biz/card/ | §6.14 |
 | `BillingPeriodLabel` | biz/ | biz/card/ | §6.14 |
+| `CardPillTab` | biz/ | biz/card/ | 카드 목록 가로 스크롤 pill 탭 |
+| `CardChipItem` | biz/ | biz/card/ | 카드명+마스킹번호 칩 표시 |
+| `AccountSelectCard` | biz/ | biz/card/ | 출금계좌 선택 카드 (선택 강조) |
+| `PaymentAccountCard` | biz/ | biz/card/ | 당행/타행 계좌 정적 표시 카드 |
+| `CardPaymentActions` | biz/ | biz/card/ | 분할납부·즉시결제·리볼빙 액션 버튼 |
+| `UsageTransactionItem` | biz/ | biz/card/ | 이용내역 행 + 상세 BottomSheet 통합 |
+| `UsageHistoryFilterSheet` | biz/ | biz/card/ | 이용내역 검색 필터 BottomSheet |
+| `CardBenefitSummary` | biz/ | biz/card/ | 포인트·혜택 요약 (상하 2단 카드) |
+| `CardPerformanceBar` | biz/ | biz/card/ | 카드 이용실적 진행 바 |
 | `InsuranceSummaryCard` | biz/ | biz/insurance/ | §6.14 |
 | `AmountInput` | modules/ | modules/banking/ | 이체 폼 핵심 |
 | `TransactionSearchFilter` | modules/ | modules/banking/ | §6.9 설계 |
@@ -931,6 +940,11 @@ export interface EmptyStateProps {
 | `InfoRow` | modules/ | modules/common/ | §6.14 |
 | `NoticeItem` | modules/ | modules/common/ | §6.14 |
 | `SelectableItem` | modules/ | modules/common/ | §6.14 |
+| `SelectableListItem` | modules/ | modules/common/ | BottomSheet 목록 선택 아이템 |
+| `StepIndicator` | modules/ | modules/common/ | 단계 진행 dot 표시 |
+| `BankSelectGrid` | modules/ | modules/common/ | 은행 선택 그리드 (3·4열) |
+| `RecentRecipientItem` | modules/ | modules/common/ | 최근 이체 수취인 목록 행 |
+| `TransferLimitInfo` | modules/ | modules/common/ | 이체 한도 안내 (1회·1일·잔여) |
 | `SidebarNav` | modules/ | modules/common/ | §6.14 |
 | `SuccessHero` | modules/ | modules/common/ | §6.14 |
 | `AppBrandHeader` | layout/ | layout/ | §6.10 설계 |

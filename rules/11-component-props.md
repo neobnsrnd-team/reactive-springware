@@ -369,6 +369,157 @@ activeId: string
 
 ---
 
+---
+
+## Modules/Common 신규 컴포넌트
+
+### StepIndicator
+
+```ts
+total:      number   // 전체 단계 수
+current:    number   // 현재 단계 (1-based)
+className?: string
+```
+
+> 활성 step: 브랜드 색상 pill(w-4 h-2) / 비활성: 원형 dot(w-2 h-2)
+> ❌ `step=*` `activeStep=*` `count=*` — prop명은 `total` / `current`
+
+---
+
+### SelectableListItem
+
+```ts
+label:      string
+isSelected: boolean
+onClick:    () => void
+```
+
+> BottomSheet 내 목록 선택 패턴 전용. 선택 시 브랜드 색상·볼드.
+> ❌ `selected=*` `active=*` `value=*` — prop명은 `isSelected`
+
+---
+
+### BankSelectGrid
+
+```ts
+banks:         { code: string; name: string; icon?: React.ReactNode }[]
+selectedCode?: string
+onSelect:      (code: string) => void
+columns?:      3 | 4   // 기본: 4
+```
+
+> ❌ `cols=*` `value=*` `onChange=*` — prop명은 `columns` / `selectedCode` / `onSelect`
+
+---
+
+### RecentRecipientItem
+
+```ts
+name:          string
+bankName:      string
+maskedAccount: string
+onClick:       () => void
+```
+
+> 최근 이체 수취인 목록 단일 행. BottomSheet 내 수취인 선택에 사용.
+
+---
+
+### TransferLimitInfo
+
+```ts
+perTransferLimit: number   // 1회 이체 한도 (원)
+dailyLimit:       number   // 1일 이체 한도 (원)
+usedAmount?:      number   // 오늘 누적 이체 금액 — 전달 시 잔여 한도 함께 표시
+```
+
+> ❌ `limit=*` `maxAmount=*` — prop명은 `perTransferLimit` / `dailyLimit`
+
+---
+
+## Biz/Card 신규 컴포넌트
+
+### CardPillTab
+
+```ts
+label:      string
+isSelected: boolean
+onClick:    () => void
+```
+
+> 카드 목록 가로 스크롤 영역의 pill 탭. `CardPillTab` 여러 개를 `flex gap-xs`로 감싸 사용.
+> ❌ `active=*` `selected=*` — prop명은 `isSelected`
+
+---
+
+### CardChipItem
+
+```ts
+name:         string   // 카드명
+maskedNumber: string   // 마스킹된 카드번호
+```
+
+> 카드명 + 마스킹번호 칩 표시. CollapsibleSection 내 카드 목록에 사용.
+> ❌ `cardName=*` `number=*` — prop명은 `name` / `maskedNumber`
+
+---
+
+### AccountSelectCard
+
+```ts
+bankName:       string
+maskedAccount:  string
+isSelected:     boolean
+onClick:        () => void
+```
+
+> 출금계좌 선택 카드. 선택 시 브랜드 테두리 + 체크 아이콘 표시.
+> ❌ `selected=*` `active=*` — prop명은 `isSelected`
+
+---
+
+### PaymentAccountCard
+
+```ts
+title: string          // 예: '하나은행 (당행)'
+hours: string          // 예: '24시간 365일 이체 가능'
+icon:  React.ReactNode // 당행: Landmark, 타행: Building
+```
+
+> 즉시결제 진입 화면의 당행/타행 계좌 표시 카드. 클릭 이벤트 없는 정적 컴포넌트.
+> ❌ `onClick=*` — PaymentAccountCard는 클릭 불가 컴포넌트
+
+---
+
+### CardBenefitSummary
+
+```ts
+points:           number   // 보유 포인트 잔액
+benefits:         { label: string; amount: number; unit?: string }[]   // 이번달 혜택 목록
+onPointDetail?:   () => void
+onBenefitDetail?: () => void
+```
+
+> 포인트(상단) + 혜택(하단) 2단 카드. 혜택 항목은 최대 2개까지 표시.
+> ❌ `point=*` `benefit=*` — prop명은 `points` / `benefits`
+
+---
+
+### CardPerformanceBar
+
+```ts
+cardName:             string   // 카드명
+currentAmount:        number   // 이번달 이용금액 (원)
+targetAmount:         number   // 목표 실적 금액 (원)
+benefitDescription?:  string   // 달성 시 혜택 설명
+onDetail?:            () => void
+```
+
+> 이용실적 진행 바. 달성 시 완료 메시지, 미달 시 잔여 금액 안내 자동 표시.
+> ❌ `progress=*` `percent=*` — 달성률은 내부에서 자동 계산
+
+---
+
 ## 컴포넌트 선택 가이드
 
 | 하고 싶은 것 | 사용할 컴포넌트 |
@@ -384,3 +535,14 @@ activeId: string
 | API 오류 상태 표시 | `ErrorState` |
 | 데이터 없음 표시 | `EmptyState` |
 | 섹션 제목 + 콘텐츠 묶음 | `Section` (title prop으로 SectionHeader 자동 포함) |
+| 단계 진행 표시 | `StepIndicator` (total + current) |
+| BottomSheet 목록 선택 | `SelectableListItem` |
+| 은행 선택 그리드 | `BankSelectGrid` |
+| 최근 수취인 목록 행 | `RecentRecipientItem` |
+| 이체 한도 안내 | `TransferLimitInfo` |
+| 카드 목록 pill 탭 | `CardPillTab` |
+| 카드명+번호 칩 표시 | `CardChipItem` |
+| 출금계좌 선택 카드 | `AccountSelectCard` |
+| 당행/타행 계좌 표시 | `PaymentAccountCard` |
+| 포인트·혜택 요약 | `CardBenefitSummary` |
+| 카드 이용실적 바 | `CardPerformanceBar` |
