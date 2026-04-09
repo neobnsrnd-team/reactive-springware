@@ -43,6 +43,6 @@ export interface BottomSheetProps {
    */
   hideCloseButton?: boolean;
   /** BottomSheet를 띄울 대상 (기본 document.body) */
-  container?:        Element; 
+  container?:        Element | null; 
   className?: string;
 }

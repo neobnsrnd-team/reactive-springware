@@ -18,6 +18,6 @@ export interface ModalProps {
   /** true이면 배경 클릭으로 닫기 비활성화 */
   disableBackdropClose?: boolean;
   /** modal 을 띄울 대상 (기본 document.body) */
-  container?:        Element; 
+  container?:        Element | null; 
   className?:        string;
 }

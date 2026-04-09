@@ -35,11 +35,11 @@ export type { BottomSheetProps, BottomSheetSnap } from './types';
 /** snap 프리셋 → 최대 높이 Tailwind 클래스 */
 const SNAP_CLASS: Record<BottomSheetSnap, string> = {
   /* auto: 콘텐츠 높이 자동. max-h로 90dvh 상한만 지정 */
-  auto: 'max-h-[90dvh]',
+  auto: 'max-h-[90%]',
   /* half: 화면 절반 고정. 콘텐츠가 넘치면 본문 내부 스크롤 */
-  half: 'max-h-[50dvh]',
+  half: 'h-[50%] max-h-[50%]',
   /* full: 상단 안전 영역만 남기고 전체 화면 점유 */
-  full: 'max-h-[90dvh]',
+  full: 'h-[90%] max-h-[90%]',
 };
 
 export function BottomSheet({

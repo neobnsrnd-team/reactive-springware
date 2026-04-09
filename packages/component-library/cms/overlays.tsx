@@ -21,6 +21,7 @@ import React from 'react';
 import type { OverlayTemplate, OverlayRendererProps } from "@neobnsrnd-team/cms-core";
 import { BottomSheet } from '../modules/common/BottomSheet';
 import { Modal } from '../modules/common/Modal';
+import { Button, ButtonGroup } from '../core/Button';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // BottomSheet 렌더러
@@ -42,6 +43,11 @@ function BottomSheetRenderer({ open, onClose, children, container, props }: Over
   const title           = props?.title           as string | undefined;
   const snap            = (props?.snap           as string | undefined) ?? 'auto';
   const hideCloseButton = (props?.hideCloseButton as boolean | undefined) ?? false;
+  const content         = (props?.content)       as string | undefined;
+  const buttonNum = (props?.buttonNum as number | undefined) ?? 0;
+  const button1 = (props?.button1 as string | undefined) ?? "확인";
+  const button2 = (props?.button2 as string | undefined) ?? "취소";
+
 
   return (
     <BottomSheet
@@ -51,8 +57,20 @@ function BottomSheetRenderer({ open, onClose, children, container, props }: Over
       snap={snap as 'auto' | 'half' | 'full'}
       hideCloseButton={hideCloseButton}
       container={container}
+      footer = { buttonNum == 2 ? (
+        <ButtonGroup>
+            <Button variant="outline" fullWidth onClick={onClose}>{button2}</Button>
+            <Button fullWidth onClick={onClose}>{button1}</Button>
+        </ButtonGroup>
+      ) : ( buttonNum == 1 ? (
+        <ButtonGroup>
+            <Button fullWidth onClick={onClose}>{button1}</Button>
+        </ButtonGroup>
+      ): (
+        undefined
+      ))}
     >
-      {children}
+      { content ?? children }
     </BottomSheet>
   );
 }
@@ -79,7 +97,11 @@ function ModalRenderer({ open, onClose, children, container, props }: OverlayRen
   if (!open) return null;
 
   const title               = props?.title               as string | undefined;
+  const content             = props?.content               as string | undefined;
   const disableBackdropClose = (props?.disableBackdropClose as boolean | undefined) ?? false;
+  const buttonNum = (props?.buttonNum as number | undefined) ?? 0;
+  const button1 = (props?.button1 as string | undefined) ?? "확인";
+  const button2 = (props?.button2 as string | undefined) ?? "취소";
 
   return (
     <Modal
@@ -88,8 +110,20 @@ function ModalRenderer({ open, onClose, children, container, props }: OverlayRen
       title={title ?? "모달 제목"}
       disableBackdropClose={disableBackdropClose}
       container={container}
+      footer = { buttonNum == 2 ? (
+        <ButtonGroup>
+            <Button variant="outline" fullWidth onClick={onClose}>{button2}</Button>
+            <Button fullWidth onClick={onClose}>{button1}</Button>
+        </ButtonGroup>
+      ) : ( buttonNum == 1 ? (
+        <ButtonGroup>
+            <Button fullWidth onClick={onClose}>{button1}</Button>
+        </ButtonGroup>
+      ): (
+        undefined
+      ))}
     >
-      {children}
+      { content ?? children }
     </Modal>
   );
 }
@@ -102,59 +136,106 @@ function ModalRenderer({ open, onClose, children, container, props }: OverlayRen
  * CMS 빌더에 제공하는 오버레이 템플릿 목록.
  * CMSApp의 `overlays` prop에 그대로 전달한다.
  *
- * | id                    | type         | 설명                          |
- * |-----------------------|--------------|-------------------------------|
- * | tpl_bottomsheet       | BottomSheet  | 내부 블록 자유 구성 시트       |
- * | tpl_bottomsheet_title | BottomSheet  | 제목 포함 시트                 |
- * | tpl_modal             | Modal        | 반응형 모달 (모바일: 시트)     |
+ * | id                    | type         | 설명                         |
+ * |-----------------------|--------------|------------------------------|
+ * | tpl_bottomsheet       | BottomSheet  | 내부 블록 자유 구성 시트        |
+ * | tpl_bottomsheet_content | BottomSheet  | 텍스트 구성 시트             |
+ * | tpl_modal             | Modal        | 내부 블록 자유 구성 모달        |
+ * | tpl_modal_content     | Modal        | 텍스트 구성 모달               |
  */
 export const overlays: OverlayTemplate[] = [
-  // ── 기본 바텀시트 (제목 없음) ─────────────────────────────────
+  // ── 바텀시트 ─────────────────────────────────
   {
     id:          "tpl_bottomsheet",
     label:       "바텀시트",
-    description: "블록을 자유롭게 추가할 수 있는 하단 시트",
+    description: "블록을 자유롭게 추가할 수 있는 바텀 시트",
     type:        "BottomSheet",
-    defaultId:   "bottomSheet",
-    blocks:      [],
-    renderer: BottomSheetRenderer,
-  },
-
-  // ── 제목 포함 바텀시트 ────────────────────────────────────────
-  {
-    id:          "tpl_bottomsheet_title",
-    label:       "바텀시트 (제목 포함)",
-    description: "상단 제목과 닫기 버튼이 있는 하단 시트",
-    type:        "BottomSheet",
-    defaultId:   "bottomSheetWithTitle",
+    defaultId:   "bottomSheetWithBlocks",
     blocks:      [],
     props: {
-      title:           "시트 제목",
+      title:     "바텀시트 제목",
+      hideCloseButton: false,
+      buttonNum: 0,
+      button1:   "확인",
+      button2:   "취소"
+    },
+    propSchema: {
+      title:     { type: "string", label: "제목", default: "바텀시트 제목" },
+      hideCloseButton: { type: "boolean", label: "닫기 버튼 숨김 여부", default: false },
+      buttonNum: { type: "select", label: "하단 고정 버튼 개수", options: ["0", "1", "2"], default: 0},
+      button1:   { type: "string", label: "하단 고정 버튼1 이름", default: "확인" },
+      button2:   { type: "string", label: "하단 고정 버튼2 이름", default: "취소" }
+    },
+    renderer: BottomSheetRenderer,
+  },
+  {
+    id:          "tpl_bottomsheet_content",
+    label:       "바텀시트 (텍스트 구성)",
+    description: "텍스트로 구성하는 바텀 시트",
+    type:        "BottomSheet",
+    defaultId:   "bottomSheetWithContent",
+    blocks: [],
+    props: {
+      title:    "바텀시트 제목",
+      hideCloseButton: false,
+      content: "바텀시트 내용",
+      buttonNum: 0,
+      button1:   "확인",
+      button2:   "취소"
+    },
+    propSchema: {
+      title:     { type: "string", label: "제목", default: "바텀시트 제목" },
+      hideCloseButton: { type: "boolean", label: "닫기 버튼 숨김 여부", default: false },
+      content:   { type: "string", label: "바텀시트 내용 입니다.", default: "바텀시트 내용" },
+      buttonNum: { type: "select", label: "하단 고정 버튼 개수", options: ["0", "1", "2"], default: 0},
+      button1:   { type: "string", label: "하단 고정 버튼1 이름", default: "확인" },
+      button2:   { type: "string", label: "하단 고정 버튼2 이름", default: "취소" }
     },
     renderer: BottomSheetRenderer,
   },
 
-  // ── 기본 모달 ─────────────────────────────────────────────────
+  // ── 모달 ─────────────────────────────────────────────────
   {
     id:          "tpl_modal",
     label:       "모달",
-    description: "모바일에서는 하단 시트, 데스크톱에서는 중앙 다이얼로그",
+    description: "블록을 자유롭게 추가할 수 있는 모달",
     type:        "Modal",
-    defaultId:   "modal",
-    blocks:      [],
-    renderer: ModalRenderer,
-  },
-
-  // ── 제목 포함 모달 ────────────────────────────────────────────
-  {
-    id:          "tpl_modal_title",
-    label:       "모달 (제목 포함)",
-    description: "제목이 있는 반응형 모달",
-    type:        "Modal",
-    defaultId:   "modalWithTitle",
+    defaultId:   "modalWithBlocks",
     blocks:      [],
     props: {
-      title:                "모달 제목",
+      title:     "모달 제목",
+      buttonNum: 0,
+      button1:   "확인",
+      button2:   "취소"
+    },
+    propSchema: {
+      title:     { type: "string", label: "제목", default: "모달 제목" },
+      buttonNum: { type: "select", label: "하단 고정 버튼 개수", options: ["0", "1", "2"], default: 0},
+      button1:   { type: "string", label: "하단 고정 버튼1 이름", default: "확인" },
+      button2:   { type: "string", label: "하단 고정 버튼2 이름", default: "취소" }
+    },
+    renderer: ModalRenderer,
+  },
+  {
+    id:          "tpl_modal_content",
+    label:       "모달 (텍스트 구성)",
+    description: "텍스트로 구성하는 모달",
+    type:        "Modal",
+    defaultId:   "modalWithContent",
+    blocks:      [],
+    props: {
+      title:     "모달 제목",
+      content:   "모달 내용 입니다.",
+      buttonNum: 0,
+      button1:   "확인",
+      button2:   "취소"
+    },
+    propSchema: {
+      title:     { type: "string", label: "제목", default: "모달 제목" },
+      content:   { type: "string", label: "모달 내용", default: "모달 내용 입니다." },
+      buttonNum: { type: "select", label: "하단 고정 버튼 개수", options: ["0", "1", "2"], default: 0},
+      button1:   { type: "string", label: "하단 고정 버튼1 이름", default: "확인" },
+      button2:   { type: "string", label: "하단 고정 버튼2 이름", default: "취소" }
     },
     renderer: ModalRenderer,
   },
