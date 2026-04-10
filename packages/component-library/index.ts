@@ -17,7 +17,7 @@ export * from './core/Badge';
 export * from './core/Button';
 export * from './core/Input';
 export * from './core/Select';
-export * from './core/Text';
+export * from './core/Typography';
 
 /* ── Modules / Common (도메인 무관 분자 컴포넌트) ──────────────── */
 export * from './modules/common/BalanceToggle';

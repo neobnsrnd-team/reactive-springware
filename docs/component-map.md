@@ -911,6 +911,15 @@ export interface EmptyStateProps {
 | `CardPaymentSummary` | biz/ | biz/card/ | §6.14 |
 | `CardPaymentItem` | biz/ | biz/card/ | §6.14 |
 | `BillingPeriodLabel` | biz/ | biz/card/ | §6.14 |
+| `CardPillTab` | biz/ | biz/card/ | 카드 목록 가로 스크롤 pill 탭 |
+| `CardChipItem` | biz/ | biz/card/ | 카드명+마스킹번호 칩 표시 |
+| `AccountSelectCard` | biz/ | biz/card/ | 출금계좌 선택 카드 (선택 강조) |
+| `PaymentAccountCard` | biz/ | biz/card/ | 당행/타행 계좌 정적 표시 카드 |
+| `CardPaymentActions` | biz/ | biz/card/ | 분할납부·즉시결제·리볼빙 액션 버튼 |
+| `UsageTransactionItem` | biz/ | biz/card/ | 이용내역 행 + 상세 BottomSheet 통합 |
+| `UsageHistoryFilterSheet` | biz/ | biz/card/ | 이용내역 검색 필터 BottomSheet |
+| `CardBenefitSummary` | biz/ | biz/card/ | 포인트·혜택 요약 (상하 2단 카드) |
+| `CardPerformanceBar` | biz/ | biz/card/ | 카드 이용실적 진행 바 |
 | `InsuranceSummaryCard` | biz/ | biz/insurance/ | §6.14 |
 | `AmountInput` | modules/ | modules/banking/ | 이체 폼 핵심 |
 | `TransactionSearchFilter` | modules/ | modules/banking/ | §6.9 설계 |
@@ -931,6 +940,11 @@ export interface EmptyStateProps {
 | `InfoRow` | modules/ | modules/common/ | §6.14 |
 | `NoticeItem` | modules/ | modules/common/ | §6.14 |
 | `SelectableItem` | modules/ | modules/common/ | §6.14 |
+| `SelectableListItem` | modules/ | modules/common/ | BottomSheet 목록 선택 아이템 |
+| `StepIndicator` | modules/ | modules/common/ | 단계 진행 dot 표시 |
+| `BankSelectGrid` | modules/ | modules/common/ | 은행 선택 그리드 (3·4열) |
+| `RecentRecipientItem` | modules/ | modules/common/ | 최근 이체 수취인 목록 행 |
+| `TransferLimitInfo` | modules/ | modules/common/ | 이체 한도 안내 (1회·1일·잔여) |
 | `SidebarNav` | modules/ | modules/common/ | §6.14 |
 | `SuccessHero` | modules/ | modules/common/ | §6.14 |
 | `AppBrandHeader` | layout/ | layout/ | §6.10 설계 |
@@ -1233,6 +1247,7 @@ export interface SummaryCardProps {
   icon?:      React.ReactNode;   // 우측 원형 bg-brand-10 배경 아이콘 슬롯
   actions?:   SummaryCardAction[];
   onClick?:   () => void;
+  hidden?:    boolean;           // true: 금액 마스킹 처리
   className?: string;
 }
 
@@ -1242,6 +1257,7 @@ export interface StatementHeroCardProps {
   dueDate:    string;   // 결제 예정일. 예: '2026.04.14'
   label?:     string;   // 기본: '이번달 결제금액'
   onDetail?:  () => void;
+  hidden?:    boolean;  // true: 금액 마스킹 처리
   className?: string;
 }
 
@@ -1328,10 +1344,11 @@ export interface InsuranceSummaryCardProps {
 ```typescript
 // ── UserProfile ───────────────────────────────────────────────
 export interface UserProfileProps {
-  name:             string;          // 예: '김하나'
-  lastLogin?:       string;          // 마지막 로그인 일시 문자열
-  onSettingsClick?: () => void;
-  className?:       string;
+  name:                   string;    // 예: '김하나'
+  lastLogin?:             string;    // 마지막 로그인 일시 문자열
+  onProfileManageClick?:  () => void; // 내 정보 관리 클릭 — 전달 시 설정 드롭다운에 표시
+  onLogoutClick?:         () => void; // 로그아웃 클릭 — 전달 시 설정 드롭다운에 표시
+  className?:             string;
 }
 ```
 
@@ -1472,8 +1489,24 @@ export interface CheckboxProps {
   onChange:   (checked: boolean) => void;
   label?:     React.ReactNode;
   ariaLabel?: string;
+  shape?:     'square' | 'circle'; // 기본: 'square'. 'circle': 원형 체크박스
   disabled?:  boolean;
   id?:        string;
+  className?: string;
+}
+
+// ── DropdownMenu ──────────────────────────────────────────────
+export interface DropdownMenuItem {
+  label:    string;
+  icon?:    React.ReactNode;
+  onClick:  () => void;
+  variant?: 'default' | 'danger'; // 'danger': 빨간 텍스트 (로그아웃·삭제 등)
+}
+
+export interface DropdownMenuProps {
+  children:   React.ReactNode; // 드롭다운을 여는 트리거 요소
+  items:      DropdownMenuItem[];
+  align?:     'left' | 'right'; // 패널 정렬. 기본: 'right'
   className?: string;
 }
 

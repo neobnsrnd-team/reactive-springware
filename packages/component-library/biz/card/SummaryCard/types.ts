@@ -35,5 +35,7 @@ export interface SummaryCardProps {
   actions?: SummaryCardAction[];
   /** 카드 전체 클릭 핸들러 */
   onClick?: () => void;
+  /** true이면 금액을 마스킹 처리하여 숨긴다 */
+  hidden?: boolean;
   className?: string;
 }

@@ -41,7 +41,7 @@ import { Inline } from '../../../layout/Inline';
 
 /* ── Core ────────────────────────────────────────────────────── */
 import { Button } from '../../../core/Button';
-import { Typography } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
 import { TabNav } from '../../../modules/common/TabNav';

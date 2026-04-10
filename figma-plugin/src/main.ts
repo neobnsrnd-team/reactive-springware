@@ -8,11 +8,12 @@
  *                 Badge,
  *                 Input, Input/WithLabel, Input/WithHelper, Input/WithIcon, Input/Format, Input/FullWidth,
  *                 Typography, Select
- * ● Modules     — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
- *                 DividerWithLabel, SelectableItem, AccountSelectItem,
- *                 ActionLinkItem, NoticeItem, AmountInput, OtpInput,
- *                 CollapsibleSection, Modal, BottomSheet, SuccessHero
- * ● Layout      — PageHeader, HomeHeader, BottomNav
+ * ● Modules/Common  — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
+ *                    DividerWithLabel, SelectableItem, ActionLinkItem, NoticeItem,
+ *                    CollapsibleSection, Modal, BottomSheet, SuccessHero, Card, BalanceToggle,
+ *                    DropdownMenu
+ * ● Modules/Banking — AccountSelectItem, AmountInput, OtpInput
+ * ● Layout      — PageHeader, HomeHeader, BottomNav, TabNav
  * ● Biz         — AccountSummaryCard, AccountSelectorCard, QuickMenuGrid,
  *                 BannerCarousel, UserProfile, BrandBanner
  */
@@ -27,8 +28,8 @@ import {
   createButtonWithIcon,
   createButtonIconOnly,
   createButtonFullWidth,
-}                                  from './components/createButton';
-import { createBadge }            from './components/createBadge';
+}                                  from './components/core/createButton';
+import { createBadge }            from './components/core/createBadge';
 import {
   createInput,
   createInputWithLabel,
@@ -36,39 +37,41 @@ import {
   createInputWithIcon,
   createInputFormat,
   createInputFullWidth,
-}                                  from './components/createInput';
-import { createTypography }             from './components/createTypography';
-import { createSelect }           from './components/createSelect';
+}                                  from './components/core/createInput';
+import { createTypography }       from './components/core/createTypography';
+import { createSelect }           from './components/core/createSelect';
 
 /* modules */
-import { createSectionHeader }    from './components/createSectionHeader';
-import { createAlertBanner }      from './components/createAlertBanner';
-import { createEmptyState }       from './components/createEmptyState';
-import { createInfoRow, createLabelValueRow } from './components/createInfoRow';
-import { createDividerWithLabel } from './components/createDividerWithLabel';
-import { createSelectableItem }   from './components/createSelectableItem';
-import { createAccountSelectItem }from './components/createAccountSelectItem';
-import { createActionLinkItem }   from './components/createActionLinkItem';
-import { createNoticeItem }       from './components/createNoticeItem';
-import { createAmountInput }      from './components/createAmountInput';
-import { createOtpInput }         from './components/createOtpInput';
-import { createCollapsibleSection}from './components/createCollapsibleSection';
-import { createModal, createBottomSheet } from './components/createModal';
-import { createSuccessHero }      from './components/createSuccessHero';
+import { createSectionHeader }    from './components/module/common/createSectionHeader';
+import { createAlertBanner }      from './components/module/common/createAlertBanner';
+import { createEmptyState }       from './components/module/common/createEmptyState';
+import { createInfoRow, createLabelValueRow } from './components/module/common/createInfoRow';
+import { createDividerWithLabel } from './components/module/common/createDividerWithLabel';
+import { createSelectableItem }   from './components/module/common/createSelectableItem';
+import { createAccountSelectItem }from './components/module/banking/createAccountSelectItem';
+import { createActionLinkItem }   from './components/module/common/createActionLinkItem';
+import { createNoticeItem }       from './components/module/common/createNoticeItem';
+import { createAmountInput }      from './components/module/banking/createAmountInput';
+import { createOtpInput }         from './components/module/banking/createOtpInput';
+import { createCollapsibleSection}from './components/module/common/createCollapsibleSection';
+import { createModal, createBottomSheet } from './components/module/common/createModal';
+import { createSuccessHero }      from './components/module/common/createSuccessHero';
+import { createCard }             from './components/module/common/createCard';
+import { createBalanceToggle }    from './components/module/common/createBalanceToggle';
+import { createDropdownMenu }     from './components/module/common/createDropdownMenu';
 
 /* layout */
-import { createBottomNav }        from './components/createBottomNav';
-import { createPageHeader, createHomeHeader } from './components/createPageHeaders';
+import { createBottomNav }        from './components/layout/createBottomNav';
+import { createTabNav }           from './components/layout/createTabNav';
+import { createPageHeader, createHomeHeader } from './components/layout/createPageHeaders';
 
 /* biz */
-import {
-  createAccountSummaryCard,
-  createAccountSelectorCard,
-  createQuickMenuGrid,
-  createBannerCarousel,
-  createUserProfile,
-  createBrandBanner,
-} from './components/createBizComponents';
+import { createAccountSummaryCard }  from './components/biz/createAccountSummaryCard';
+import { createAccountSelectorCard } from './components/biz/createAccountSelectorCard';
+import { createQuickMenuGrid }       from './components/biz/createQuickMenuGrid';
+import { createBannerCarousel }      from './components/biz/createBannerCarousel';
+import { createUserProfile }         from './components/biz/createUserProfile';
+import { createBrandBanner }         from './components/biz/createBrandBanner';
 
 /* ── 레이아웃 상수 ──────────────────────────────────────────── */
 const COMPONENT_GAP = 48;  // 같은 행 내 컴포넌트 간격
@@ -85,22 +88,24 @@ function createSectionLabel(text: string, x: number, y: number): FrameNode {
   frame.primaryAxisSizingMode = 'AUTO';
   frame.counterAxisSizingMode = 'AUTO';
   frame.fills = [];
-  frame.x = x;
-  frame.y = y;
 
   const dot = figma.createEllipse();
   dot.resize(10, 10);
   dot.fills = [solid(BRAND.primary)];
   frame.appendChild(dot);
 
-  const label = figma.createTypography();
+  const label = figma.createText();
   label.fontName = { family: FONT_FAMILY.sans, style: 'Bold' };
   label.fontSize = FONT_SIZE.lg;
   label.characters = text;
   label.fills = [solid(COLOR.textHeading)];
   frame.appendChild(label);
 
+  /* x, y는 페이지에 추가된 이후에 설정해야 실제 캔버스 위치에 반영된다.
+   * appendChild 이전에 설정하면 페이지 삽입 시 (0, 0)으로 리셋된다. */
   figma.currentPage.appendChild(frame);
+  frame.x = x;
+  frame.y = y;
   return frame;
 }
 
@@ -162,7 +167,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createSelect(),
   ];
 
-  const moduleNodes: SceneNode[] = [
+  const moduleCommonNodes: SceneNode[] = [
     await createSectionHeader(),
     await createAlertBanner(),
     await createEmptyState(),
@@ -170,21 +175,28 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createLabelValueRow(),
     await createDividerWithLabel(),
     await createSelectableItem(),
-    await createAccountSelectItem(),
     await createActionLinkItem(),
     await createNoticeItem(),
-    await createAmountInput(),
-    await createOtpInput(),
     await createCollapsibleSection(),
     await createModal(),
     await createBottomSheet(),
     await createSuccessHero(),
+    await createCard(),
+    await createBalanceToggle(),
+    await createDropdownMenu(),
+  ];
+
+  const moduleBankingNodes: SceneNode[] = [
+    await createAccountSelectItem(),
+    await createAmountInput(),
+    await createOtpInput(),
   ];
 
   const layoutNodes: SceneNode[] = [
-    createPageHeader(),
-    createHomeHeader(),
+    await createPageHeader(),
+    await createHomeHeader(),
     await createBottomNav(),
+    await createTabNav(),
   ];
 
   const bizNodes: SceneNode[] = [
@@ -198,16 +210,17 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
 
   /* 3. 섹션별 배치 */
   let nextY = 0;
-  nextY = layoutSection('Core',    coreNodes,   nextY);
-  nextY = layoutSection('Modules', moduleNodes, nextY);
-  nextY = layoutSection('Layout',  layoutNodes, nextY);
-  nextY = layoutSection('Biz',     bizNodes,    nextY);
+  nextY = layoutSection('Core',            coreNodes,          nextY);
+  nextY = layoutSection('Modules/Common',  moduleCommonNodes,  nextY);
+  nextY = layoutSection('Modules/Banking', moduleBankingNodes, nextY);
+  nextY = layoutSection('Layout',          layoutNodes,        nextY);
+  nextY = layoutSection('Biz',             bizNodes,           nextY);
 
   /* 4. 뷰포트 맞춤 */
   figma.viewport.scrollAndZoomIntoView([
-    ...coreNodes, ...moduleNodes, ...layoutNodes, ...bizNodes,
+    ...coreNodes, ...moduleCommonNodes, ...moduleBankingNodes, ...layoutNodes, ...bizNodes,
   ]);
-  figma.closePlugin('✅ React Component Library 생성 완료! (총 38개 컴포넌트)');
+  figma.closePlugin('✅ React Component Library 생성 완료! (총 41개 컴포넌트)');
 })().catch((err) => {
   /* 어떤 createXxx()에서 에러가 났는지 플러그인 알림으로 표시 */
   figma.closePlugin(`❌ 오류: ${err instanceof Error ? err.message : String(err)}`);

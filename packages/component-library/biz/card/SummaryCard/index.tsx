@@ -47,6 +47,7 @@ export function SummaryCard({
   icon,
   actions,
   onClick,
+  hidden = false,
   className,
 }: SummaryCardProps) {
   const Tag = onClick ? 'button' : 'div';
@@ -80,15 +81,15 @@ export function SummaryCard({
           <div className="flex flex-col gap-xs">
             {/* 한글 메인 제목 */}
             <span className="text-xl font-bold text-text-heading">{title}</span>
-            {/* 금액: asset은 브랜드 색상, spending은 기본 헤딩 색상 */}
+            {/* 금액: asset은 브랜드 색상, spending은 기본 헤딩 색상 / hidden이면 마스킹 */}
             <span
               className={cn(
                 'text-lg font-bold tabular-nums font-numeric',
                 isSpending ? 'text-text-heading' : 'text-brand-text',
               )}
-              aria-label={`${title} ${formattedAmount}`}
+              aria-label={hidden ? '금액 숨김' : `${title} ${formattedAmount}`}
             >
-              {formattedAmount}
+              {hidden ? '금액 숨김 중' : formattedAmount}
             </span>
           </div>
 

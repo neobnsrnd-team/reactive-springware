@@ -52,7 +52,7 @@ import { Inline } from '../../../layout/Inline';
 /* ── Core ────────────────────────────────────────────────────── */
 import { Button } from '../../../core/Button';
 import { Input } from '../../../core/Input';
-import { Text } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
 import { SidebarNav } from '../../../modules/common/SidebarNav';
@@ -185,7 +185,8 @@ export function FullMenuPage({ onClose, onHome, onLogout, activeCategory, onCate
       <UserProfile
         name="김하나님"
         lastLogin="2026.01.01 10:30:15"
-        onSettingsClick={() => console.log('설정')}
+        onProfileManageClick={() => console.log('내 정보 관리')}
+        onLogoutClick={() => console.log('로그아웃')}
       />
 
       {/* 퀵 서비스 그리드 */}
@@ -221,9 +222,9 @@ export function FullMenuPage({ onClose, onHome, onLogout, activeCategory, onCate
         <div className="flex-1 min-w-0">
           <Stack gap="xl" className="p-xl">
             {/* 카테고리 소제목 — 12px uppercase (Figma 원본 스타일 재현) */}
-            <Text variant="caption" color="muted" className="uppercase tracking-widest">
+            <Typography variant="caption" color="muted" className="uppercase tracking-widest">
               {currentCategory?.label} 메뉴
-            </Text>
+            </Typography>
 
             {/* 메뉴 아이템 목록 */}
             <Stack gap="xs">

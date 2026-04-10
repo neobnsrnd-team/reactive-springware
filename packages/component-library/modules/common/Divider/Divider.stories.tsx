@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Divider } from './index';
 import { Stack } from '../../../layout/Stack';
-import { Typography } from '../../../core/Text';
+import { Typography } from '../../../core/Typography';
 
 const meta = {
   title: 'Modules/Common/Divider',

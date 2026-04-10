@@ -29,7 +29,9 @@ import { CardVisual } from '../../../biz/card/CardVisual';
 import { CardLinkedBalance } from '../../../biz/card/CardLinkedBalance';
 import { CardManagementPanel } from '../../../biz/card/CardManagementPanel';
 
+import { CardPillTab } from '../../../biz/card/CardPillTab';
 import type { MyCardManagementPageProps } from './types';
+import { cn } from '@lib/cn';
 
 export function MyCardManagementPage({
   cards,
@@ -39,8 +41,8 @@ export function MyCardManagementPage({
   onClose,
 }: MyCardManagementPageProps) {
   const [selectedCardId, setSelectedCardId] = useState(initialCardId ?? cards[0]?.id);
-  const [balanceHidden,  setBalanceHidden]  = useState(false);
-  const [isCompact,      setIsCompact]      = useState(false);
+  const [balanceHidden, setBalanceHidden] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
 
   const cardVisualRef = useRef<HTMLDivElement>(null);
 
@@ -48,15 +50,21 @@ export function MyCardManagementPage({
   useEffect(() => {
     const el = cardVisualRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsCompact(!entry.isIntersecting),
-      { threshold: 0.1 },
-    );
+    const observer = new IntersectionObserver(([entry]) => setIsCompact(!entry.isIntersecting), {
+      threshold: 0.1,
+    });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   const selectedCard = cards.find((c) => c.id === selectedCardId) ?? cards[0];
+
+  /** 헤더 아이콘 버튼 공통 스타일 */
+  const iconBtnCls = cn(
+    'flex items-center justify-center size-9 rounded-full',
+    'text-text-muted hover:bg-surface-raised hover:text-text-heading',
+    'transition-colors duration-150',
+  );
 
   return (
     <PageLayout
@@ -70,6 +78,7 @@ export function MyCardManagementPage({
           leftIcon="x"
           onClick={onClose}
           aria-label="닫기"
+          className={iconBtnCls}
         />
       }
     >
@@ -83,22 +92,12 @@ export function MyCardManagementPage({
             {cards.map((card) => {
               const isSelected = card.id === selectedCardId;
               return (
-                <button
+                <CardPillTab
                   key={card.id}
-                  type="button"
+                  label={card.name}
+                  isSelected={isSelected}
                   onClick={() => setSelectedCardId(card.id)}
-                  className={
-                    isSelected
-                      ? /* 선택: 브랜드 색상 배경 */
-                        'flex items-center gap-xs px-md py-xs rounded-full bg-brand text-brand-fg text-sm font-bold transition-colors duration-150 whitespace-nowrap'
-                      : /* 미선택: 회색 배경 */
-                        'flex items-center gap-xs px-md py-xs rounded-full bg-surface-raised text-text-secondary text-sm font-medium transition-colors duration-150 whitespace-nowrap hover:bg-surface-subtle'
-                  }
-                  aria-pressed={isSelected}
-                  aria-label={card.name}
-                >
-                  {card.name}
-                </button>
+                />
               );
             })}
           </div>

@@ -61,7 +61,9 @@ export function BottomSheet({
 }: BottomSheetProps) {
   /* ESC 키로 닫기 */
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); },
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    },
     [onClose],
   );
 
@@ -112,7 +114,7 @@ export function BottomSheet({
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'bottom-sheet-title' : undefined}
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         className={cn(
           'flex flex-col w-full',
           SNAP_CLASS[snap],
@@ -131,7 +133,10 @@ export function BottomSheet({
         {(title || !hideCloseButton) && (
           <div className="relative flex shrink-0 items-center justify-center px-xl pt-sm pb-md">
             {title && (
-              <h2 id="bottom-sheet-title" className="text-base font-bold text-text-heading text-center">
+              <h2
+                id="bottom-sheet-title"
+                className="text-base font-bold text-text-heading text-center"
+              >
                 {title}
               </h2>
             )}
@@ -161,7 +166,10 @@ export function BottomSheet({
          *   - 헤더 있음: 헤더 pb-md(12px) + 본문 pt-md(12px) = 24px 간격
          *   - 헤더 없음: 드래그 핸들 pb-1(4px) + 본문 pt-md(12px) = 16px 간격
          */}
-        <div className="flex-1 min-h-0 overflow-y-auto px-xl pt-md pb-md">
+        <div
+          className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden pt-md pb-md"
+          style={{ scrollbarWidth: 'none' }}
+        >
           {children}
         </div>
 
