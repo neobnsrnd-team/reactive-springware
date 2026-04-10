@@ -11,10 +11,10 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없으면 tokens.ts의 RGB fallback 적용.
  */
 
-import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../tokens';
+import { BRAND, COLOR, SPACING, RADIUS, FONT_SIZE, COLOR_VAR, SIZE_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFill, setFillWithVar, setStroke, clearStroke, addTextWithVar, addRect,
+  setFill, setFillWithVar, setStroke, clearStroke, addTextWithVar, addRect, setFloatVar,
 } from '../../helpers';
 
 type ButtonVariant = 'Primary' | 'Outline' | 'Ghost' | 'Danger';
@@ -25,12 +25,12 @@ type ButtonJustify = 'Center' | 'Between';
 
 /** size별 height / padding-x / font-size / border-radius / icon 크기 */
 const SIZE_CONFIG: Record<ButtonSize, {
-  height: number; px: number; fontSize: number; radius: number; iconSize: number;
+  height: number; px: number; pxVar: string; fontSize: number; fontSizeVar: string; radius: number; iconSize: number;
 }> = {
   /* radius=100: Storybook Button과 동일한 pill 형태 (RADIUS.full=999은 Figma에서 시각적으로 과도하게 표현됨) */
-  Small:  { height: 32, px: SPACING.md,       fontSize: FONT_SIZE.xs, radius: 100, iconSize: 12 },
-  Medium: { height: 40, px: SPACING.standard,  fontSize: FONT_SIZE.sm, radius: 100, iconSize: 14 },
-  Large:  { height: 56, px: SPACING.xl,        fontSize: FONT_SIZE.lg, radius: 100, iconSize: 16 },
+  Small:  { height: 32, px: SPACING.md,      pxVar: SIZE_VAR.spacingMd,       fontSize: FONT_SIZE.xs, fontSizeVar: SIZE_VAR.fontSizeXs, radius: 100, iconSize: 12 },
+  Medium: { height: 40, px: SPACING.standard, pxVar: SIZE_VAR.spacingStandard, fontSize: FONT_SIZE.sm, fontSizeVar: SIZE_VAR.fontSizeSm, radius: 100, iconSize: 14 },
+  Large:  { height: 56, px: SPACING.xl,       pxVar: SIZE_VAR.spacingXl,       fontSize: FONT_SIZE.lg, fontSizeVar: SIZE_VAR.fontSizeLg, radius: 100, iconSize: 16 },
 };
 
 /* ── 색상 헬퍼 ─────────────────────────────────────────────── */
@@ -69,17 +69,23 @@ function getTextStyle(variant: ButtonVariant, state: ButtonState) {
 /* ── 내부 레이아웃 적용 ────────────────────────────────────── */
 
 /** 버튼 프레임 기본 레이아웃 세팅 */
-function applyBaseLayout(
+async function applyBaseLayout(
   comp: ComponentNode,
   size: ButtonSize,
   fullWidth = false,
 ) {
-  const { height, px, radius } = SIZE_CONFIG[size];
+  const { height, px, pxVar, radius } = SIZE_CONFIG[size];
   setAutoLayout(comp, 'HORIZONTAL', SPACING.sm);
+  await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingSm, SPACING.sm);
   setPadding(comp, 0, px);
+  await setFloatVar(comp, 'paddingTop',    SIZE_VAR.spacing0, SPACING['0']);
+  await setFloatVar(comp, 'paddingBottom', SIZE_VAR.spacing0, SPACING['0']);
+  await setFloatVar(comp, 'paddingRight',  pxVar, px);
+  await setFloatVar(comp, 'paddingLeft',   pxVar, px);
   comp.resize(fullWidth ? 320 : 120, height);
   comp.primaryAxisSizingMode  = fullWidth ? 'FIXED' : 'AUTO';
   comp.counterAxisSizingMode  = 'FIXED';
+  /* radius=100은 디자인 토큰에 없는 pill 전용 값 — 변수 바인딩 없이 raw 값 유지 */
   comp.cornerRadius = radius;
 }
 
@@ -130,7 +136,7 @@ export async function createButton(): Promise<ComponentSetNode> {
         const comp = createComponent(
           `Variant=${variant}, Size=${size}, State=${state}`,
         );
-        applyBaseLayout(comp, size);
+        await applyBaseLayout(comp, size);
 
         const bg   = getBgStyle(variant, state);
         const text = getTextStyle(variant, state);
@@ -164,7 +170,7 @@ export async function createButton(): Promise<ComponentSetNode> {
 
         /* 텍스트 레이블 — Loading 상태에서는 텍스트 없이 스피너만 표시 */
         if (text && state !== 'Loading') {
-          const label = await addTextWithVar(comp, '버튼', SIZE_CONFIG[size].fontSize, text.varName, text.fallback, true);
+          const label = await addTextWithVar(comp, '버튼', SIZE_CONFIG[size].fontSize, text.varName, text.fallback, true, SIZE_CONFIG[size].fontSizeVar);
           label.textAlignHorizontal = 'CENTER';
         }
 
@@ -200,7 +206,7 @@ export async function createButtonWithIcon(): Promise<ComponentSetNode> {
         const comp = createComponent(
           `Variant=${variant}, Size=${size}, Icon=${icon}`,
         );
-        applyBaseLayout(comp, size);
+        await applyBaseLayout(comp, size);
 
         const bg   = getBgStyle(variant, 'Default');
         const text = getTextStyle(variant, 'Default');
@@ -220,7 +226,7 @@ export async function createButtonWithIcon(): Promise<ComponentSetNode> {
         if (icon === 'Left') addIconPlaceholder(comp, size);
 
         if (text) {
-          const label = await addTextWithVar(comp, '버튼', SIZE_CONFIG[size].fontSize, text.varName, text.fallback, true);
+          const label = await addTextWithVar(comp, '버튼', SIZE_CONFIG[size].fontSize, text.varName, text.fallback, true, SIZE_CONFIG[size].fontSizeVar);
           label.textAlignHorizontal = 'CENTER';
         }
 
@@ -300,7 +306,7 @@ export async function createButtonFullWidth(): Promise<ComponentSetNode> {
   for (const variant of variants) {
     for (const justify of justifies) {
       const comp = createComponent(`Variant=${variant}, Justify=${justify}`);
-      applyBaseLayout(comp, 'Medium', true);
+      await applyBaseLayout(comp, 'Medium', true);
 
       /* justify=Between: primaryAxisAlignItems를 SPACE_BETWEEN으로 설정 */
       if (justify === 'Between') {
@@ -327,7 +333,7 @@ export async function createButtonFullWidth(): Promise<ComponentSetNode> {
       }
 
       if (text) {
-        const label = await addTextWithVar(comp, '버튼', FONT_SIZE.sm, text.varName, text.fallback, true);
+        const label = await addTextWithVar(comp, '버튼', FONT_SIZE.sm, text.varName, text.fallback, true, SIZE_VAR.fontSizeSm);
         label.textAlignHorizontal = justify === 'Center' ? 'CENTER' : 'LEFT';
       }
 

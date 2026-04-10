@@ -1,10 +1,16 @@
 /**
  * @file Modal.stories.tsx
  * @description Modal 컴포넌트 스토리.
+ *
+ * footer 버튼은 Button / ButtonGroup 컴포넌트를 사용한다.
+ * - 두 버튼(취소+확인): ButtonGroup + 각 Button fullWidth → 동일 너비 균등 분할
+ * - 단일 버튼: Button fullWidth
+ * - 중앙 타이틀: titleAlign="center" prop
  */
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { Modal } from './index';
+import { Button } from '../../../core/Button';
 
 const meta = {
   title: 'Overlays/Common/Modal',
@@ -12,20 +18,28 @@ const meta = {
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },
   argTypes: {
-    open:  { control: 'boolean' },
-    title: { control: 'text' },
+    size:                 { control: 'select', options: ['sm', 'md', 'lg', 'fullscreen'] },
+    open:                 { control: 'boolean' },
+    title:                { control: 'text' },
+    titleAlign:           { control: 'select', options: ['left', 'center'] },
     disableBackdropClose: { control: 'boolean' },
   },
   args: {
-    open: true,
-    title: '이체 확인',
+    open:                 true,
+    title:                '이체 확인',
+    size:                 'md',
     disableBackdropClose: false,
+    titleAlign:           'left',
+    /* required props — render 함수에서 실제 값으로 대체되므로 placeholder */
+    onClose:  () => {},
+    children: null as unknown as React.ReactNode,
   },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/** 기본 — 좌측 타이틀, 두 버튼(취소·확인) 동일 너비 균등 분할 */
 export const Default: Story = {
   render: (args) => (
     <Modal
@@ -52,17 +66,65 @@ export const Default: Story = {
   ),
 };
 
+/** 중앙 타이틀 — titleAlign="center", X 버튼 절대 우측 배치 */
+export const CenteredTitle: Story = {
+  args: { title: '주의', titleAlign: 'center' },
+  render: (args) => (
+    <Modal
+      {...args}
+      bottomBtnCnt="2"
+      bottomBtn1Label="확인"
+      bottomBtn2Label="취소"
+    >
+      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', textAlign: 'center' }}>
+        이 작업은 되돌릴 수 없습니다.<br />정말 진행하시겠습니까?
+      </p>
+    </Modal>
+  ),
+};
+
+/** 단일 버튼 — 확인 버튼 1개, fullWidth */
+export const SingleButton: Story = {
+  args: { title: '안내' },
+  render: (args) => (
+    <Modal
+      {...args}
+      bottomBtnCnt="1"
+      bottomBtn1Label="확인"
+    >
+      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>
+        작업이 완료되었습니다.
+      </p>
+    </Modal>
+  ),
+};
+
+/** 단일 버튼 + 중앙 타이틀 */
+export const SingleButtonCentered: Story = {
+  args: { title: '완료', titleAlign: 'center' },
+  render: (args) => (
+    <Modal
+      {...args}
+      bottomBtnCnt="1"
+      bottomBtn1Label="확인"
+
+    >
+      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', textAlign: 'center' }}>
+        이체가 완료되었습니다.
+      </p>
+    </Modal>
+  ),
+};
+
+/** 모달 열기 버튼으로 제어 */
 export const Controlled: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
     return (
       <div>
-        <button
-          onClick={() => setOpen(true)}
-          style={{ background: 'var(--color-brand)', color: '#fff', border: 'none', borderRadius: 12, padding: '10px 24px', fontWeight: 700, cursor: 'pointer' }}
-        >
+        <Button variant="primary" onClick={() => setOpen(true)}>
           모달 열기
-        </button>
+        </Button>
         <Modal
           open={open}
           onClose={() => setOpen(false)}
@@ -75,6 +137,37 @@ export const Controlled: Story = {
             작업이 완료되었습니다.
           </p>
         </Modal>
+      </div>
+    );
+  },
+};
+
+/** size 프리셋 비교 */
+export const Sizes: Story = {
+  render: () => {
+    const [size, setSize] = useState<'sm' | 'md' | 'lg' | null>(null);
+    return (
+      <div style={{ display: 'flex', gap: 8 }}>
+        {(['sm', 'md', 'lg'] as const).map(s => (
+          <Button key={s} variant="outline" onClick={() => setSize(s)}>
+            {s}
+          </Button>
+        ))}
+        {size && (
+          <Modal
+            open
+            title={`size="${size}"`}
+            onClose={() => setSize(null)}
+            size={size}
+            bottomBtnCnt="2"
+            bottomBtn1Label="확인"
+            bottomBtn2Label="취소"
+          >
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>
+              모달 크기: {size}
+            </p>
+          </Modal>
+        )}
       </div>
     );
   },

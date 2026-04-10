@@ -169,15 +169,47 @@ export async function addText(
 }
 
 /**
- * TextNode를 생성·설정하고 fill을 Figma 변수에 바인딩한 뒤 부모에 추가한다.
- * addText + setFillWithVar 두 단계를 하나로 합친 헬퍼다.
+ * Figma FLOAT 변수를 노드의 수치 속성에 바인딩한다.
+ * COLOR 변수와 달리 fill이 아닌 cornerRadius/padding/itemSpacing/fontSize 등
+ * 수치 필드에 직접 바인딩하며, 변수를 찾지 못하면 fallback 숫자값을 적용한다.
  *
- * @param parent     - 부모 노드
- * @param characters - 표시할 텍스트
- * @param fontSize   - 폰트 크기
- * @param colorVar   - Figma 변수 전체 경로 (예: 'color/text/muted')
- * @param fallback   - 변수를 찾지 못했을 때 사용할 RGB 값
- * @param bold       - 굵게 여부 (기본 false)
+ * @param node         - 바인딩할 노드 (FrameNode, ComponentNode, TextNode 등)
+ * @param field        - 바인딩 대상 필드 (예: 'cornerRadius', 'paddingTop', 'fontSize')
+ * @param variableName - Figma 변수 전체 경로 (예: 'radius/full', 'spacing/xl')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 숫자값
+ */
+export async function setFloatVar(
+  node: BaseNode,
+  field: string,
+  variableName: string,
+  fallback: number,
+): Promise<void> {
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('FLOAT');
+    const variable = allVars.find(v => v.name === variableName);
+    if (variable) {
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      (node as any).setBoundVariable(field, variable);
+      return;
+    }
+  } catch {
+    /* 변수 API 오류 시 fallback으로 진행 */
+  }
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  (node as any)[field] = fallback;
+}
+
+/**
+ * TextNode를 생성·설정하고 fill과 fontSize를 Figma 변수에 바인딩한 뒤 부모에 추가한다.
+ * addText + setFillWithVar + setFloatVar(fontSize) 세 단계를 하나로 합친 헬퍼다.
+ *
+ * @param parent       - 부모 노드
+ * @param characters   - 표시할 텍스트
+ * @param fontSize     - 폰트 크기 (fallback)
+ * @param colorVar     - Figma 색상 변수 경로 (예: 'color/text/heading')
+ * @param fallback     - 색상 변수를 찾지 못했을 때 사용할 RGB 값
+ * @param bold         - 굵게 여부 (기본 false)
+ * @param fontSizeVar  - Figma fontSize 변수 경로 (예: 'text/base/fontSize'). 생략 시 바인딩 건너뜀
  */
 export async function addTextWithVar(
   parent: FrameNode | ComponentNode,
@@ -186,10 +218,14 @@ export async function addTextWithVar(
   colorVar: string,
   fallback: RGB,
   bold = false,
+  fontSizeVar?: string,
 ): Promise<TextNode> {
   const text = figma.createText();
   await applyText(text, characters, fontSize, fallback, bold);
   await setFillWithVar(text, colorVar, fallback);
+  if (fontSizeVar) {
+    await setFloatVar(text, 'fontSize', fontSizeVar, fontSize);
+  }
   parent.appendChild(text);
   return text;
 }
@@ -282,4 +318,61 @@ export function addDivider(
   setFill(line, color);
   parent.appendChild(line);
   return line;
+}
+
+/**
+ * Figma 색상 변수를 stroke에 바인딩한다.
+ * setStroke는 RGB만 받으므로 변수 바인딩이 필요한 경우 이 함수를 사용한다.
+ * 변수를 찾지 못하거나 오류 발생 시 fallback RGB를 직접 적용한다.
+ *
+ * @param node         - stroke를 적용할 노드
+ * @param variableName - Figma 변수 전체 경로 (예: 'color/border')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 RGB 값
+ * @param weight       - stroke 두께 (기본 1)
+ */
+export async function setStrokeWithVar(
+  node: GeometryMixin & IndividualStrokesMixin,
+  variableName: string,
+  fallback: RGB,
+  weight = 1,
+): Promise<void> {
+  const basePaint: SolidPaint = { type: 'SOLID', color: fallback };
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+    const variable = allVars.find(v => v.name === variableName);
+    if (variable) {
+      node.strokes = [figma.variables.setBoundVariableForPaint(basePaint, 'color', variable)];
+    } else {
+      node.strokes = [basePaint];
+    }
+  } catch {
+    node.strokes = [basePaint];
+  }
+  node.strokeWeight = weight;
+  node.strokeAlign = 'INSIDE';
+}
+
+/**
+ * TextNode lineHeight를 Figma FLOAT 변수에 바인딩한다.
+ * setFloatVar는 lineHeight의 객체 구조({ value, unit })를 처리하지 못하므로
+ * 별도 함수로 분리한다. 변수를 찾지 못하면 { value: fallback, unit: 'PIXELS' }로 설정한다.
+ *
+ * @param node         - 바인딩할 TextNode
+ * @param variableName - Figma 변수 전체 경로 (예: 'text/base/lineHeight')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 px 값
+ */
+export async function setLineHeightVar(
+  node: TextNode,
+  variableName: string,
+  fallback: number,
+): Promise<void> {
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('FLOAT');
+    const variable = allVars.find(v => v.name === variableName);
+    if (variable) {
+      node.setBoundVariable('lineHeight', variable);
+      return;
+    }
+  } catch { /* fallback */ }
+  node.lineHeight = { value: fallback, unit: 'PIXELS' };
 }
