@@ -10,9 +10,10 @@
  *                 Typography, Select
  * ● Modules/Common  — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
  *                    DividerWithLabel, SelectableItem, ActionLinkItem, NoticeItem,
- *                    CollapsibleSection, Modal, BottomSheet, SuccessHero, Card, BalanceToggle,
+ *                    CollapsibleSection, SuccessHero, Card, BalanceToggle,
  *                    DropdownMenu
  * ● Modules/Banking — AccountSelectItem, AmountInput, OtpInput
+ * ● Overlays/Common — BottomSheet, Modal
  * ● Layout      — PageHeader, HomeHeader, BottomNav, TabNav
  * ● Biz         — AccountSummaryCard, AccountSelectorCard, QuickMenuGrid,
  *                 BannerCarousel, UserProfile, BrandBanner
@@ -54,12 +55,14 @@ import { createNoticeItem }       from './components/module/common/createNoticeI
 import { createAmountInput }      from './components/module/banking/createAmountInput';
 import { createOtpInput }         from './components/module/banking/createOtpInput';
 import { createCollapsibleSection}from './components/module/common/createCollapsibleSection';
-import { createModal }       from './components/module/common/createModal';
-import { createBottomSheet } from './components/module/common/createBottomSheet';
 import { createSuccessHero }      from './components/module/common/createSuccessHero';
 import { createCard }             from './components/module/common/createCard';
 import { createBalanceToggle }    from './components/module/common/createBalanceToggle';
 import { createDropdownMenu }     from './components/module/common/createDropdownMenu';
+
+/* overlay */
+import { createModal }            from './components/overlay/common/createModal';
+import { createBottomSheet }      from './components/overlay/common/createBottomSheet';
 
 /* layout */
 import { createBottomNav }        from './components/layout/createBottomNav';
@@ -179,18 +182,21 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createActionLinkItem(),
     await createNoticeItem(),
     await createCollapsibleSection(),
-    await createModal(),
-    await createBottomSheet(),
     await createSuccessHero(),
     await createCard(),
     await createBalanceToggle(),
     await createDropdownMenu(),
   ];
-
+  
   const moduleBankingNodes: SceneNode[] = [
     await createAccountSelectItem(),
     await createAmountInput(),
     await createOtpInput(),
+  ];
+  
+  const overlayNodes: SceneNode[] = [
+    await createModal(),
+    await createBottomSheet(),
   ];
 
   const layoutNodes: SceneNode[] = [
@@ -214,6 +220,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
   nextY = layoutSection('Core',            coreNodes,          nextY);
   nextY = layoutSection('Modules/Common',  moduleCommonNodes,  nextY);
   nextY = layoutSection('Modules/Banking', moduleBankingNodes, nextY);
+  nextY = layoutSection('Overlay',         overlayNodes,       nextY);
   nextY = layoutSection('Layout',          layoutNodes,        nextY);
   nextY = layoutSection('Biz',             bizNodes,           nextY);
 

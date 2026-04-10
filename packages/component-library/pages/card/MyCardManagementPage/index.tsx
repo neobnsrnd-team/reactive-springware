@@ -20,7 +20,7 @@
  * @param onClose         - 닫기 핸들러
  */
 import React, { useState, useRef, useEffect } from 'react';
-import { X } from 'lucide-react';
+
 
 import { PageLayout } from '../../../layout/PageLayout';
 import { Button } from '../../../core/Button';
@@ -75,7 +75,7 @@ export function MyCardManagementPage({
           variant="ghost"
           size="md"
           iconOnly
-          leftIcon={<X className="size-5" />}
+          leftIcon="x"
           onClick={onClose}
           aria-label="닫기"
           className={iconBtnCls}

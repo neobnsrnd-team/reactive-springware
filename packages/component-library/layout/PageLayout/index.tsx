@@ -2,7 +2,7 @@
  * @file index.tsx
  * @description 일반 페이지 레이아웃 컴포넌트.
  * 상단 고정 헤더(타이틀 + 뒤로가기 + 우측 액션)와 스크롤 가능한 본문 영역으로 구성된다.
- * bottomBar prop 전달 시 iOS 스타일 하단 고정 액션 바를 함께 렌더링한다.
+ * bottomBtnCnt prop 전달 시 iOS 스타일 하단 고정 액션 바를 함께 렌더링한다.
  * layoutType: 'page' (계좌 목록·상세, 이체 폼, 이체 완료 화면 등)
  *
  * @example
@@ -11,30 +11,34 @@
  *   <TransferForm ... />
  * </PageLayout>
  *
- * // 하단 고정 버튼 바 포함
+ * // 하단 고정 버튼 바 포함 (버튼 2개)
  * <PageLayout
  *   title="이체 완료"
  *   rightAction={<CloseButton />}
- *   bottomBar={
- *     <Inline gap="sm">
- *       <Button variant="outline" size="lg">추가 이체</Button>
- *       <Button variant="primary" size="lg" fullWidth>확인</Button>
- *     </Inline>
- *   }
+ *   bottomBtnCnt="2"
+ *   bottomBtn1Label="확인"
+ *   bottomBtn2Label="추가 이체"
  * >
  *   <SuccessHero ... />
  * </PageLayout>
  */
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Menu, X } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { PageLayoutProps } from './types';
+import { Button, ButtonGroup } from '../../core/Button';
 
 export function PageLayout({
   title,
-  onBack,
+  showBack = true,
+  onBack = () => {},
   rightAction,
-  bottomBar,
+  rightBtnType = 'close',
+  bottomBtnCnt,
+  bottomBtn1Label = "확인",
+  bottomBtn2Label = "취소",
+  onClickBtn1 = () => {},
+  onClickBtn2 = () => {},
   className,
   children,
   ...props
@@ -46,7 +50,7 @@ export function PageLayout({
         {/* relative: 타이틀 absolute 포지셔닝의 기준점 */}
         <div className="relative flex items-center h-14 px-standard">
           {/* 뒤로가기 버튼 — onBack이 전달된 경우만 렌더링 */}
-          {onBack && (
+          {showBack && (
             <button
               type="button"
               onClick={onBack}
@@ -69,7 +73,11 @@ export function PageLayout({
           </h1>
 
           {/* 우측 액션 슬롯 (닫기·알림·설정 버튼 등) — ml-auto로 우측 끝에 고정 */}
-          {rightAction && <div className="ml-auto shrink-0">{rightAction}</div>}
+          {rightAction ? <div className="ml-auto shrink-0">{rightAction}</div>
+            : ( rightBtnType == 'close' ? <div className="ml-auto shrink-0"><X className="size-5" aria-hidden="true" /></div>
+              : (rightBtnType == 'menu' ?  <div className="ml-auto shrink-0"><Menu className="size-5" aria-hidden="true" /></div>
+              : undefined)) 
+          }
         </div>
       </header>
 
@@ -81,18 +89,16 @@ export function PageLayout({
       {/* flex flex-col: 자식 컴포넌트가 flex-1을 사용해 남은 높이를 채울 수 있도록 flex 컨테이너로 설정 */}
       <main className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden py-md [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
         {children}
-        {/* bottomBar가 있을 때 하단 고정 바 높이만큼 spacer를 추가하여
-            마지막 콘텐츠가 고정 바에 가려지지 않도록 한다 */}
-        {bottomBar && <div aria-hidden="true" className="h-28 shrink-0" />}
       </main>
 
       {/* ── 하단 고정 액션 바 (iOS 스타일) ──────────────
           backdrop-blur: 스크롤 중에도 하단 버튼이 배경에 묻히지 않도록 처리
           fixed: 화면 하단에 항상 고정 위치 */}
-      {bottomBar && (
-        <div className="fixed bottom-0 left-0 right-0 z-sticky backdrop-blur-sm bg-surface/80 border-t border-border-subtle px-standard pt-standard pb-2xl">
-          {bottomBar}
-        </div>
+      {(Number(bottomBtnCnt) > 0) && (
+        <ButtonGroup className="sticky bottom-0 left-0 right-0 z-sticky backdrop-blur-sm bg-surface/80 border-t border-border-subtle px-standard pt-standard pb-2xl">
+          {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" size='lg' fullWidth onClick={onClickBtn2}>{bottomBtn2Label}</Button>}
+          <Button variant="primary" size='lg' fullWidth onClick={onClickBtn1}>{bottomBtn1Label}</Button>
+        </ButtonGroup>
       )}
     </div>
   );

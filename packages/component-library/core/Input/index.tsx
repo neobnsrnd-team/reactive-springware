@@ -16,6 +16,7 @@
 import React from 'react';
 import { cn } from '@lib/cn';
 import type { InputProps, InputValidationState } from './types';
+import Icon from '../../icons';
 
 /**
  * 한국 휴대폰번호 포맷을 자릿수에 따라 동적으로 적용한다.
@@ -140,7 +141,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         >
           {leftIcon && (
             <span aria-hidden="true" className="shrink-0 pl-md text-text-muted">
-              {leftIcon}
+              <Icon name={leftIcon} />
             </span>
           )}
           <input

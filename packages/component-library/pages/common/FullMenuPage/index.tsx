@@ -25,8 +25,6 @@
 import React from 'react';
 import {
   Home,
-  X,
-  Search,
   ShieldCheck,
   Headphones,
   Shield,
@@ -163,7 +161,7 @@ function HeaderRightActions({
         size="sm"
         iconOnly
         aria-label="전체 메뉴 닫기"
-        leftIcon={<X size={16} aria-hidden="true" />}
+        leftIcon="x"
         onClick={onClose}
       />
     </Inline>
@@ -200,7 +198,7 @@ export function FullMenuPage({ onClose, onHome, onLogout, activeCategory, onCate
       <div className="px-standard py-sm">
         <Input
           placeholder="궁금하신 메뉴를 검색해 보세요"
-          leftIcon={<Search className="size-4" aria-hidden="true" />}
+          leftIcon="search"
           fullWidth
         />
       </div>

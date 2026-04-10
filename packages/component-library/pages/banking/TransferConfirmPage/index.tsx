@@ -29,8 +29,10 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
+/* ── Overlays ─────────────────────────────────────────────────────── */
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
+
 /* ── Modules ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../modules/common/BottomSheet';
 import { InfoRow } from '../../../modules/common/InfoRow';
 import { AlertBanner } from '../../../modules/common/AlertBanner';
 
@@ -40,30 +42,10 @@ import { Typography } from '../../../core/Typography';
 
 /* ── Layout ──────────────────────────────────────────────────────── */
 import { Stack } from '../../../layout/Stack';
-import { Inline } from '../../../layout/Inline';
 
 import type { TransferConfirmPageProps } from './types';
 
 export type { TransferConfirmPageProps } from './types';
-
-// ── 서브 컴포넌트 ─────────────────────────────────────────────────
-
-/**
- * BottomSheet footer 슬롯: "아니오" 아웃라인 버튼 + "예" 프라이머리 버튼.
- * "아니오"는 자연 너비, "예"는 flex-1 으로 남은 공간을 채운다.
- */
-function ConfirmFooter({ onClose, onConfirm }: { onClose: () => void; onConfirm: () => void }) {
-  return (
-    <Inline gap="md">
-      <Button variant="outline" size="lg" onClick={onClose}>
-        아니오
-      </Button>
-      <Button size="lg" fullWidth onClick={onConfirm}>
-        예
-      </Button>
-    </Inline>
-  );
-}
 
 // ── 메인 컴포넌트 ─────────────────────────────────────────────────
 
@@ -90,9 +72,13 @@ export function TransferConfirmPage({
     <BottomSheet
       open={open}
       onClose={onClose}
-      footer={<ConfirmFooter onClose={onClose} onConfirm={onConfirm} />}
       /* 이체 확인 화면: Footer의 "아니오"/"예" 버튼으로 닫기를 처리하므로 X 버튼 불필요 */
       hideCloseButton
+      bottomBtnCnt="2"
+      bottomBtn1Label="예"
+      bottomBtn2Label="아니오"
+      onClickBtn1={onConfirm}
+      onClickBtn2={onClose}
     >
       <Stack gap="xl">
         {/* 멀티컬러 타이틀 — 수취인·금액을 브랜드 색으로 강조 */}
@@ -146,7 +132,7 @@ export function TransferConfirmPage({
             <Button
               variant="ghost"
               size="sm"
-              leftIcon={<Plus className="size-3" aria-hidden="true" />}
+              leftIcon="plus"
               onClick={onAddTransfer}
             >
               추가이체

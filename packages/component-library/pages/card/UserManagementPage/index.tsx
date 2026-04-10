@@ -28,7 +28,6 @@
  * @param onDeleteUser  - 사용자 삭제 확인 클릭
  */
 import React, { useState } from 'react';
-import { Menu, Search, UserPlus } from 'lucide-react';
 
 import { PageLayout } from '../../../layout/PageLayout';
 import { Button } from '../../../core/Button';
@@ -37,7 +36,7 @@ import { Select } from '../../../core/Select';
 import { Badge } from '../../../core/Badge';
 import { Typography } from '../../../core/Typography';
 import { Card } from '../../../modules/common/Card';
-import { BottomSheet } from '../../../modules/common/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 import { Checkbox } from '../../../modules/common/Checkbox';
 import { Stack } from '../../../layout/Stack';
 import { Inline } from '../../../layout/Inline';
@@ -154,7 +153,7 @@ export function UserManagementPage({
             variant="ghost"
             size="md"
             iconOnly
-            leftIcon={<Menu className="size-5" />}
+            leftIcon="menu"
             onClick={onMenuClick}
             aria-label="메뉴"
           />
@@ -166,7 +165,7 @@ export function UserManagementPage({
             <Inline gap="sm" align="center">
               <Input
                 placeholder="사용자ID 또는 사용자명"
-                leftIcon={<Search className="size-4" />}
+                leftIcon="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 fullWidth
@@ -174,7 +173,7 @@ export function UserManagementPage({
               <Button
                 variant="primary"
                 size="md"
-                leftIcon={<UserPlus className="size-4" />}
+                leftIcon="user-plus"
                 onClick={() => setAddSheetOpen(true)}
               >
                 추가
@@ -221,11 +220,9 @@ export function UserManagementPage({
         onClose={() => setAddSheetOpen(false)}
         title="사용자 추가"
         snap="full"
-        footer={
-          <Button variant="primary" fullWidth onClick={handleAddSave}>
-            저장
-          </Button>
-        }
+        bottomBtnCnt="1"
+        bottomBtn1Label="저장"
+        onClickBtn1={handleAddSave}
       >
         <Stack gap="lg">
           {/* 기본 정보 입력 — 레이블 좌측 / 컨트롤 우측 */}
@@ -326,16 +323,11 @@ export function UserManagementPage({
         onClose={() => setEditSheetOpen(false)}
         title="사용자 수정"
         snap="full"
-        footer={
-          <Inline gap="sm">
-            <Button variant="primary" fullWidth onClick={handleEditSave}>
-              수정
-            </Button>
-            <Button variant="outline" fullWidth onClick={handleDelete}>
-              삭제
-            </Button>
-          </Inline>
-        }
+        bottomBtnCnt="2"
+        bottomBtn1Label="수정"
+        bottomBtn2Label="삭제"
+        onClickBtn1={handleEditSave}
+        onClickBtn2={handleDelete}
       >
         <Stack gap="lg">
           {/* 기본 정보 입력 — 레이블 좌측 / 컨트롤 우측 */}

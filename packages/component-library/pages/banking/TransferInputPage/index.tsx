@@ -29,7 +29,7 @@
  * @param cmsSectionExpanded - 통장표시내용/CMS 섹션 초기 펼침 여부 (기본: false)
  */
 import React, { useState } from 'react';
-import { Menu, WalletMinimal, Zap } from 'lucide-react';
+import { Menu, WalletMinimal } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
 import { PageLayout } from '../../../layout/PageLayout';
@@ -334,16 +334,9 @@ export function TransferInputPage({
             <Menu className="size-5" aria-hidden="true" />
           </button>
         }
-        bottomBar={
-          <Button
-            variant="primary"
-            size="lg"
-            fullWidth
-            onClick={() => console.log('다음')}
-          >
-            다음
-          </Button>
-        }
+        bottomBtnCnt="1"
+        bottomBtn1Label="다음"
+        onClickBtn1={() => console.log('다음')}
       >
         <Stack>
           {/* ── 출금 계좌 카드 ── */}
@@ -365,7 +358,7 @@ export function TransferInputPage({
               variant="outline"
               size="sm"
               fullWidth
-              leftIcon={<Zap className="size-4 text-brand-text" aria-hidden="true" />}
+              leftIcon="zap"
               onClick={() => console.log('빠른 이체')}
               className="rounded-3xl bg-surface-raised border-none text-text-secondary"
             >

@@ -37,9 +37,11 @@ import { Input }      from '../../../core/Input';
 import { Typography } from '../../../core/Typography';
 
 /* ── Modules ─────────────────────────────────────────────────── */
-import { BottomSheet }                      from '../../../modules/common/BottomSheet';
 import { CardRowPlain, CardActionRowPlain } from '../../../modules/common/Card';
 import { EmptyState }                       from '../../../modules/common/EmptyState';
+
+/* ── Overlays ─────────────────────────────────────────────────────── */
+import { BottomSheet }                      from '../../../overlays/common/BottomSheet';
 
 import type { TransactionDetailPageProps, TransactionDetailMockData } from './types';
 
@@ -161,7 +163,7 @@ function MemoRow({
           {/* 저장 버튼 */}
           <Button
             variant="primary" size="sm" iconOnly
-            leftIcon={<Check className="size-3" aria-hidden="true" />}
+            leftIcon="check"
             onClick={onSave}
             loading={isSaving}
             aria-label="메모 저장"
@@ -169,7 +171,7 @@ function MemoRow({
           {/* 취소 버튼 */}
           <Button
             variant="ghost" size="sm" iconOnly
-            leftIcon={<X className="size-3" aria-hidden="true" />}
+            leftIcon="x"
             onClick={onEditCancel}
             disabled={isSaving}
             aria-label="메모 편집 취소"
@@ -188,7 +190,7 @@ function MemoRow({
         {/* pencil 클릭 시 편집 모드로 전환 */}
         <Button
           variant="ghost" size="sm" iconOnly
-          leftIcon={<Pencil className="size-3" aria-hidden="true" />}
+          leftIcon="pencil"
           onClick={onEditStart}
           aria-label="메모 편집"
         />
@@ -283,11 +285,9 @@ export function TransactionDetailPage({
         open={isOpen}
         onClose={() => setIsOpen(false)}
         title="거래 상세 정보"
-        footer={
-          <Button variant="primary" size="lg" fullWidth onClick={() => setIsOpen(false)}>
-            확인
-          </Button>
-        }
+        bottomBtnCnt="1"
+        bottomBtn1Label="확인"
+        onClickBtn1={() => setIsOpen(false)}
       >
         {/* 로딩 상태 */}
         {isLoading && (

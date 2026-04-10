@@ -1,0 +1,22 @@
+{
+  // =====================================================================
+  // VS Code Workspace Settings Template
+  //
+  // 이 파일을 복사하여 settings.json을 만들고 실제 값을 입력하세요:
+  //   cp .vscode/settings.example.jsonc .vscode/settings.json
+  //
+  // settings.json은 .gitignore에 등록되어 있어 Git에 커밋되지 않습니다.
+  // =====================================================================
+
+  // 터미널 환경 변수 — GitHub Packages 인증
+  // https://github.com/settings/tokens (권한: read:packages, write:packages, repo)
+  "terminal.integrated.env.windows": {
+    "GITHUB_TOKEN": "ghp_your_token_here"
+  },
+  "terminal.integrated.env.osx": {
+    "GITHUB_TOKEN": "ghp_your_token_here"
+  },
+  "terminal.integrated.env.linux": {
+    "GITHUB_TOKEN": "ghp_your_token_here"
+  }
+}

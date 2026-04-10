@@ -32,8 +32,10 @@
 import React from 'react';
 import { TrendingUp } from 'lucide-react';
 
+/* ── Overlays ─────────────────────────────────────────────────────── */
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
+
 /* ── Modules ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../modules/common/BottomSheet';
 import { TabNav } from '../../../modules/common/TabNav';
 import { EmptyState } from '../../../modules/common/EmptyState';
 import { SelectableItem } from '../../../modules/common/SelectableItem';
@@ -97,13 +99,9 @@ export function BankSelectPage({
       onClose={onClose}
       title="금융권 선택"
       /* 증권사 빈 상태일 때만 Footer CTA 표시 */
-      footer={
-        isSecuritiesEmpty && onConnectSecurities ? (
-          <Button fullWidth size="lg" onClick={onConnectSecurities}>
-            증권사 연결하기
-          </Button>
-        ) : undefined
-      }
+      bottomBtnCnt={isSecuritiesEmpty && onConnectSecurities ? '1' : '0'}
+      bottomBtn1Label="증권사 연결하기"
+      onClickBtn1={onConnectSecurities}
     >
       <Stack gap="md">
         {/* 은행/증권사 가로 탭 */}

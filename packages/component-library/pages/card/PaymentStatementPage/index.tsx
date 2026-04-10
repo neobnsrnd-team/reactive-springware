@@ -32,14 +32,13 @@
  * @param onClose             - 닫기(X) 핸들러
  */
 import React, { useState, useMemo } from 'react';
-import { X } from 'lucide-react';
 
 import { PageLayout } from '../../../layout/PageLayout';
 import { Button } from '../../../core/Button';
 import { Select } from '../../../core/Select';
 import { TabNav } from '../../../modules/common/TabNav';
 import { Divider } from '../../../modules/common/Divider';
-import { BottomSheet } from '../../../modules/common/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 import { SelectableListItem } from '../../../modules/common/SelectableListItem';
 import { CollapsibleSection } from '../../../modules/common/CollapsibleSection';
 import { Typography } from '../../../core/Typography';
@@ -156,7 +155,7 @@ export function PaymentStatementPage({
             variant="ghost"
             size="md"
             iconOnly
-            leftIcon={<X className="size-5" />}
+            leftIcon="x"
             onClick={onClose}
             aria-label="닫기"
             className={iconBtnCls}

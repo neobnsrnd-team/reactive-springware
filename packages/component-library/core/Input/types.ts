@@ -3,6 +3,7 @@
  * @description Input 컴포넌트의 TypeScript 타입 정의
  */
 import React from 'react';
+import { IconName } from '../../icons/iconRegistry';
 
 export type InputSize            = 'md' | 'lg';
 export type InputValidationState = 'default' | 'error' | 'success';
@@ -19,7 +20,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
    * HTMLInputElement의 size(number)와 충돌하므로 Omit 후 재정의.
    */
   size?:            InputSize;
-  leftIcon?:        React.ReactNode;
+  leftIcon?:        IconName;
   /** 우측 버튼/단위 슬롯 (인증번호 전송, 단위 텍스트 등) */
   rightElement?:    React.ReactNode;
   /** true이면 w-full 적용 */

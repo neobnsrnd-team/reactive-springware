@@ -16,9 +16,6 @@
  */
 import React from 'react';
 import {
-  User,
-  Bell,
-  Menu,
   Link2,
   ListChecks,
   ArrowLeftRight,
@@ -148,7 +145,7 @@ function HeaderRightActions() {
       {/* 내 정보 */}
       <Button
         variant="ghost" size="sm" iconOnly aria-label="내 정보"
-        leftIcon={<User size={16} aria-hidden="true" />}
+        leftIcon="user"
       />
 
       {/* 알림 — 빨간 배지 표시 */}
@@ -156,7 +153,7 @@ function HeaderRightActions() {
         {/* iconOnly 모드에서는 icon을 leftIcon prop으로 전달해야 렌더링됨 */}
         <Button
           variant="ghost" size="sm" iconOnly aria-label="알림 (새 알림 있음)"
-          leftIcon={<Bell size={16} aria-hidden="true" />}
+          leftIcon="bell"
         />
         {/* 빨간 알림 배지 — 새 알림 존재 시 표시 */}
         <span
@@ -168,7 +165,7 @@ function HeaderRightActions() {
       {/* 전체 메뉴 */}
       <Button
         variant="ghost" size="sm" iconOnly aria-label="전체 메뉴"
-        leftIcon={<Menu size={18} aria-hidden="true" />}
+        leftIcon="menu"
       />
     </Inline>
   );

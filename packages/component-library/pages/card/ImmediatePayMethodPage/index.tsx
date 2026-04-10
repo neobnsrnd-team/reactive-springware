@@ -51,17 +51,15 @@ export function ImmediatePayMethodPage({
     <PageLayout
       title="즉시결제"
       onBack={onBack}
-      bottomBar={
-        <Button variant="primary" size="lg" fullWidth onClick={() => onApply?.(selectedId)}>
-          신청
-        </Button>
-      }
+      bottomBtnCnt="1"
+      bottomBtn1Label="신청"
+      onClickBtn1={() => onApply?.(selectedId)}
       rightAction={
         <Button
           variant="ghost"
           size="md"
           iconOnly
-          leftIcon={<X className="size-5" />}
+          leftIcon="x"
           onClick={onClose}
           aria-label="닫기"
         />

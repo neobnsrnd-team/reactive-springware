@@ -15,6 +15,8 @@ import { TransferSuccessPage } from '@/features/transferSuccess/page';
 import { KbHomePage } from '@/features/kbHome/page';
 import { KbTransactionHistoryListPage } from '@/features/kbTransactionHistory/page';
 import { HanaTransactionHistoryListPage } from '@/features/hanaTransactionHistory/page';
+import TestPage from '@/pages/TestPage';
+import TestPage1 from '@/pages/TestPage1';
 
 const routes = [
   {
@@ -49,6 +51,14 @@ const routes = [
     path: '/hana-transactions',
     element: <HanaTransactionHistoryListPage />,
   },
+  {
+    path: '/test',
+    element: <TestPage />
+  },
+  {
+    path: '/test1',
+    element: <TestPage1 />
+  }
 ];
 
 export default routes;

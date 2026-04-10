@@ -24,7 +24,7 @@
  * @param showKakaoShare       - 카카오톡 공유 액션 표시 여부
  */
 import React from 'react';
-import { X, MessageSquare, Star } from 'lucide-react';
+import { MessageSquare, Star } from 'lucide-react';
 
 /* ── Layout ──────────────────────────────────────────────────── */
 import { PageLayout } from '../../../layout/PageLayout';
@@ -105,23 +105,18 @@ export function TransferSuccessPage({
             variant="ghost"
             size="md"
             iconOnly
-            leftIcon={<X className="size-4" />}
+            leftIcon="x"
             onClick={() => console.log('닫기')}
             aria-label="닫기"
             className="text-text-heading"
           />
         }
         /* 하단 고정 버튼 바: 추가 이체(보조) + 확인(주) */
-        bottomBar={
-          <Inline gap="sm">
-            <Button variant="outline" size="lg" onClick={() => console.log('추가 이체')} fullWidth>
-              추가 이체
-            </Button>
-            <Button variant="primary" size="lg" onClick={() => console.log('확인')} fullWidth>
-              확인
-            </Button>
-          </Inline>
-        }
+        bottomBtnCnt="2"
+        bottomBtn1Label="확인"
+        bottomBtn2Label="추가 이체"
+        onClickBtn1={() => console.log('확인')}
+        onClickBtn2={() => console.log('추가 이체')}
       >
         <Stack gap="lg">
           {/* ── 성공 히어로 ── */}

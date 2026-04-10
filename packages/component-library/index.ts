@@ -23,7 +23,6 @@ export * from './core/Typography';
 export * from './modules/common/BalanceToggle';
 export * from './modules/common/ActionLinkItem';
 export * from './modules/common/AlertBanner';
-export * from './modules/common/BottomSheet';
 export * from './modules/common/Card';
 export * from './modules/common/Checkbox';
 export * from './modules/common/CollapsibleSection';
@@ -34,7 +33,6 @@ export * from './modules/common/EmptyState';
 export * from './modules/common/ErrorState';
 export * from './modules/common/InfoRow';
 export * from './modules/common/LabelValueRow';
-export * from './modules/common/Modal';
 export * from './modules/common/NoticeItem';
 export * from './modules/common/SectionHeader';
 export * from './modules/common/SelectableItem';
@@ -51,6 +49,10 @@ export * from './modules/banking/PinDotIndicator';
 export * from './modules/banking/TransactionList';
 export * from './modules/banking/TransactionSearchFilter';
 export * from './modules/banking/TransferForm';
+
+/* ── Overlays / Common (도메인 무관 오버레이 컴포넌트) ─────────────────────────────── */
+export * from './overlays/common/BottomSheet';
+export * from './overlays/common/Modal';
 
 /* ── Layout (레이아웃 컴포넌트) ─────────────────────────────── */
 export * from './layout/AppBrandHeader';
