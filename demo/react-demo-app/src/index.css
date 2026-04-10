@@ -57,34 +57,28 @@
 
 /* ── 신한은행 ──────────────────────────────────────── */
 [data-brand='shinhan'] {
-  --brand-primary: #0046ff;
-  --brand-alt: #4d7fff;
-  --brand-fg: #ffffff;
-  --brand-text: #0033cc;
-  --brand-dark: #0038cc;
-  --brand-darker: #002b99;
-  --brand-5: rgba(0, 70, 255, 0.05);
-  --brand-10: rgba(0, 70, 255, 0.1);
-  --brand-20: rgba(0, 70, 255, 0.2);
-  --brand-shadow: rgba(0, 70, 255, 0.25);
-  --brand-bg: #f4f6ff;
-  --brand-name: '신한은행';
-  --shadow-primary: 0px 8px 20px -4px var(--brand-shadow);
+  --color-brand: #0046ff;
+  --color-brand-alt: #4d7fff;
+  --color-brand-fg: #ffffff;
+  --color-brand-text: #0033cc;
+  --color-brand-dark: #0038cc;
+  --color-brand-darker: #002b99;
+  --color-brand-5: rgba(0, 70, 255, 0.05);
+  --color-brand-10: rgba(0, 70, 255, 0.1);
+  --color-brand-20: rgba(0, 70, 255, 0.2);
+  --color-brand-shadow: rgba(0, 70, 255, 0.25);
 }
 
 /* ── 우리은행 ──────────────────────────────────────── */
 [data-brand='woori'] {
-  --brand-primary: #0067ac;
-  --brand-alt: #3395d4;
-  --brand-fg: #ffffff;
-  --brand-text: #005490;
-  --brand-dark: #005490;
-  --brand-darker: #00416e;
-  --brand-5: rgba(0, 103, 172, 0.05);
-  --brand-10: rgba(0, 103, 172, 0.1);
-  --brand-20: rgba(0, 103, 172, 0.2);
-  --brand-shadow: rgba(0, 103, 172, 0.25);
-  --brand-bg: #f4f8fc;
-  --brand-name: '우리은행';
-  --shadow-primary: 0px 8px 20px -4px var(--brand-shadow);
+  --color-brand: #0067ac;
+  --color-brand-alt: #3395d4;
+  --color-brand-fg: #ffffff;
+  --color-brand-text: #005490;
+  --color-brand-dark: #005490;
+  --color-brand-darker: #00416e;
+  --color-brand-5: rgba(0, 103, 172, 0.05);
+  --color-brand-10: rgba(0, 103, 172, 0.1);
+  --color-brand-20: rgba(0, 103, 172, 0.2);
+  --color-brand-shadow: rgba(0, 103, 172, 0.25);
 }

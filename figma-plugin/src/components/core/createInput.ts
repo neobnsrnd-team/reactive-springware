@@ -14,10 +14,10 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없으면 tokens.ts의 RGB fallback 적용.
  */
 
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../tokens';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR, SIZE_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFill, setFillWithVar, setStroke, addTextWithVar, addRect,
+  setFillWithVar, setStrokeWithVar, addTextWithVar, addRect, setFloatVar,
 } from '../../helpers';
 
 type InputSize  = 'Medium' | 'Large';
@@ -26,9 +26,9 @@ type InputIcon  = 'Left' | 'Right' | 'Both';
 type InputFormat = 'Account' | 'Phone';
 
 /** size별 높이 / 가로패딩 / 폰트 크기 */
-const SIZE_CONFIG: Record<InputSize, { height: number; px: number; fontSize: number }> = {
-  Medium: { height: 48, px: SPACING.md,       fontSize: FONT_SIZE.sm   },
-  Large:  { height: 56, px: SPACING.standard, fontSize: FONT_SIZE.base },
+const SIZE_CONFIG: Record<InputSize, { height: number; px: number; pxVar: string; fontSize: number; fontSizeVar: string }> = {
+  Medium: { height: 48, px: SPACING.md,       pxVar: SIZE_VAR.spacingMd,       fontSize: FONT_SIZE.sm,   fontSizeVar: SIZE_VAR.fontSizeSm   },
+  Large:  { height: 56, px: SPACING.standard, pxVar: SIZE_VAR.spacingStandard, fontSize: FONT_SIZE.base, fontSizeVar: SIZE_VAR.fontSizeBase },
 };
 
 /** validationState별 배경·테두리 변수 및 fallback */
@@ -67,36 +67,26 @@ async function buildInputField(
   state: InputState,
   fullWidth = false,
 ): Promise<void> {
-  const { height, px, fontSize } = SIZE_CONFIG[size];
+  const { height, px, pxVar, fontSize, fontSizeVar } = SIZE_CONFIG[size];
   const { bgVar, bgFallback, borderVar, borderFallback } = STATE_STYLE[state];
 
   setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
+  await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
   setPadding(comp, 0, px);
+  await setFloatVar(comp, 'paddingTop',    SIZE_VAR.spacing0, SPACING['0']);
+  await setFloatVar(comp, 'paddingBottom', SIZE_VAR.spacing0, SPACING['0']);
+  await setFloatVar(comp, 'paddingRight',  pxVar, px);
+  await setFloatVar(comp, 'paddingLeft',   pxVar, px);
   comp.resize(fullWidth ? 320 : 280, height);
   comp.primaryAxisSizingMode  = 'FIXED';
   comp.counterAxisSizingMode  = 'FIXED';
-  comp.cornerRadius = RADIUS.sm;
+  await setFloatVar(comp, 'cornerRadius', SIZE_VAR.radiusSm, RADIUS.sm);
 
   await setFillWithVar(comp, bgVar, bgFallback);
-
-  /* 테두리: setStroke는 RGB만 받으므로 직접 strokes 세팅 */
-  const borderPaint = { type: 'SOLID' as const, color: borderFallback };
-  const boundBorder = await (async () => {
-    try {
-      const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
-      const variable = allVars.find(v => v.name === borderVar);
-      if (variable) {
-        return figma.variables.setBoundVariableForPaint(borderPaint, 'color', variable);
-      }
-    } catch (_) { /* fallback */ }
-    return borderPaint;
-  })();
-  comp.strokes = [boundBorder];
-  comp.strokeWeight = 1;
-  comp.strokeAlign  = 'INSIDE';
+  await setStrokeWithVar(comp, borderVar, borderFallback);
 
   /* placeholder 텍스트 */
-  const placeholder = await addTextWithVar(comp, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
+  const placeholder = await addTextWithVar(comp, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder, false, fontSizeVar);
   placeholder.layoutGrow = 1;
   placeholder.textAlignVertical = 'CENTER';
 
@@ -149,7 +139,7 @@ export async function createInputWithLabel(): Promise<ComponentSetNode> {
 
   for (const size of sizes) {
     for (const state of states) {
-      const { height, fontSize } = SIZE_CONFIG[size];
+      const { height, fontSize, fontSizeVar } = SIZE_CONFIG[size];
       const comp = createComponent(`Size=${size}, State=${state}`);
 
       /* 세로 Auto Layout: label + input field */
@@ -160,37 +150,28 @@ export async function createInputWithLabel(): Promise<ComponentSetNode> {
       comp.strokes = [];
 
       /* label 텍스트 */
-      const label = await addTextWithVar(comp, '레이블', FONT_SIZE.xs, COLOR_VAR.textLabel, COLOR.textLabel, true);
+      const label = await addTextWithVar(comp, '레이블', FONT_SIZE.xs, COLOR_VAR.textLabel, COLOR.textLabel, true, SIZE_VAR.fontSizeXs);
 
       /* 입력 필드 프레임 */
       const field = figma.createFrame();
       field.name = 'field';
       setAutoLayout(field, 'HORIZONTAL', SPACING.xs);
+      await setFloatVar(field, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
       setPadding(field, 0, SIZE_CONFIG[size].px);
+      await setFloatVar(field, 'paddingTop',    SIZE_VAR.spacing0,              SPACING['0']);
+      await setFloatVar(field, 'paddingBottom', SIZE_VAR.spacing0,              SPACING['0']);
+      await setFloatVar(field, 'paddingRight',  SIZE_CONFIG[size].pxVar, SIZE_CONFIG[size].px);
+      await setFloatVar(field, 'paddingLeft',   SIZE_CONFIG[size].pxVar, SIZE_CONFIG[size].px);
       field.resize(280, height);
       field.primaryAxisSizingMode = 'FIXED';
       field.counterAxisSizingMode = 'FIXED';
-      field.cornerRadius = RADIUS.sm;
+      await setFloatVar(field, 'cornerRadius', SIZE_VAR.radiusSm, RADIUS.sm);
 
       const { bgVar, bgFallback, borderVar, borderFallback } = STATE_STYLE[state];
       await setFillWithVar(field, bgVar, bgFallback);
+      await setStrokeWithVar(field, borderVar, borderFallback);
 
-      const borderPaint = { type: 'SOLID' as const, color: borderFallback };
-      try {
-        const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
-        const variable = allVars.find(v => v.name === borderVar);
-        if (variable) {
-          field.strokes = [figma.variables.setBoundVariableForPaint(borderPaint, 'color', variable)];
-        } else {
-          field.strokes = [borderPaint];
-        }
-      } catch (_) {
-        field.strokes = [borderPaint];
-      }
-      field.strokeWeight = 1;
-      field.strokeAlign  = 'INSIDE';
-
-      const placeholder = await addTextWithVar(field, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(field, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder, false, fontSizeVar);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
 
@@ -223,7 +204,7 @@ export async function createInputWithHelper(): Promise<ComponentSetNode> {
 
   for (const size of sizes) {
     for (const state of states) {
-      const { height, fontSize } = SIZE_CONFIG[size];
+      const { height, fontSize, fontSizeVar } = SIZE_CONFIG[size];
       const comp = createComponent(`Size=${size}, State=${state}`);
 
       setAutoLayout(comp, 'VERTICAL', SPACING.xs, 'MIN');
@@ -236,31 +217,22 @@ export async function createInputWithHelper(): Promise<ComponentSetNode> {
       const field = figma.createFrame();
       field.name = 'field';
       setAutoLayout(field, 'HORIZONTAL', SPACING.xs);
+      await setFloatVar(field, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
       setPadding(field, 0, SIZE_CONFIG[size].px);
+      await setFloatVar(field, 'paddingTop',    SIZE_VAR.spacing0,              SPACING['0']);
+      await setFloatVar(field, 'paddingBottom', SIZE_VAR.spacing0,              SPACING['0']);
+      await setFloatVar(field, 'paddingRight',  SIZE_CONFIG[size].pxVar, SIZE_CONFIG[size].px);
+      await setFloatVar(field, 'paddingLeft',   SIZE_CONFIG[size].pxVar, SIZE_CONFIG[size].px);
       field.resize(280, height);
       field.primaryAxisSizingMode = 'FIXED';
       field.counterAxisSizingMode = 'FIXED';
-      field.cornerRadius = RADIUS.sm;
+      await setFloatVar(field, 'cornerRadius', SIZE_VAR.radiusSm, RADIUS.sm);
 
       const { bgVar, bgFallback, borderVar, borderFallback } = STATE_STYLE[state];
       await setFillWithVar(field, bgVar, bgFallback);
+      await setStrokeWithVar(field, borderVar, borderFallback);
 
-      const borderPaint = { type: 'SOLID' as const, color: borderFallback };
-      try {
-        const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
-        const variable = allVars.find(v => v.name === borderVar);
-        if (variable) {
-          field.strokes = [figma.variables.setBoundVariableForPaint(borderPaint, 'color', variable)];
-        } else {
-          field.strokes = [borderPaint];
-        }
-      } catch (_) {
-        field.strokes = [borderPaint];
-      }
-      field.strokeWeight = 1;
-      field.strokeAlign  = 'INSIDE';
-
-      const placeholder = await addTextWithVar(field, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(field, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder, false, fontSizeVar);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
 
@@ -268,7 +240,7 @@ export async function createInputWithHelper(): Promise<ComponentSetNode> {
 
       /* helperText */
       const { varName, fallback } = helperStyle[state];
-      await addTextWithVar(comp, '안내 문구입니다', FONT_SIZE.xs, varName, fallback);
+      await addTextWithVar(comp, '안내 문구입니다', FONT_SIZE.xs, varName, fallback, false, SIZE_VAR.fontSizeXs);
 
       components.push(comp);
     }
@@ -289,20 +261,23 @@ export async function createInputWithIcon(): Promise<ComponentSetNode> {
 
   for (const size of sizes) {
     for (const icon of icons) {
-      const { height, px, fontSize } = SIZE_CONFIG[size];
+      const { height, px, pxVar, fontSize, fontSizeVar } = SIZE_CONFIG[size];
 
       const comp = createComponent(`Size=${size}, Icon=${icon}`);
       setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
+      await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
       setPadding(comp, 0, px);
+      await setFloatVar(comp, 'paddingTop',    SIZE_VAR.spacing0, SPACING['0']);
+      await setFloatVar(comp, 'paddingBottom', SIZE_VAR.spacing0, SPACING['0']);
+      await setFloatVar(comp, 'paddingRight',  pxVar, px);
+      await setFloatVar(comp, 'paddingLeft',   pxVar, px);
       comp.resize(280, height);
       comp.primaryAxisSizingMode = 'FIXED';
       comp.counterAxisSizingMode = 'FIXED';
-      comp.cornerRadius = RADIUS.sm;
+      await setFloatVar(comp, 'cornerRadius', SIZE_VAR.radiusSm, RADIUS.sm);
 
       await setFillWithVar(comp, COLOR_VAR.surface, COLOR.surface);
-      comp.strokes = [{ type: 'SOLID', color: COLOR.border }];
-      comp.strokeWeight = 1;
-      comp.strokeAlign  = 'INSIDE';
+      await setStrokeWithVar(comp, COLOR_VAR.border, COLOR.border);
 
       /* 좌측 아이콘 */
       if (icon === 'Left' || icon === 'Both') {
@@ -310,7 +285,7 @@ export async function createInputWithIcon(): Promise<ComponentSetNode> {
       }
 
       /* placeholder */
-      const placeholder = await addTextWithVar(comp, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(comp, '입력해주세요', fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder, false, fontSizeVar);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
 
@@ -345,23 +320,26 @@ export async function createInputFormat(): Promise<ComponentSetNode> {
 
   for (const size of sizes) {
     for (const format of formats) {
-      const { height, px, fontSize } = SIZE_CONFIG[size];
+      const { height, px, pxVar, fontSize, fontSizeVar } = SIZE_CONFIG[size];
 
       const comp = createComponent(`Size=${size}, Format=${format}`);
       setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
+      await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
       setPadding(comp, 0, px);
+      await setFloatVar(comp, 'paddingTop',    SIZE_VAR.spacing0, SPACING['0']);
+      await setFloatVar(comp, 'paddingBottom', SIZE_VAR.spacing0, SPACING['0']);
+      await setFloatVar(comp, 'paddingRight',  pxVar, px);
+      await setFloatVar(comp, 'paddingLeft',   pxVar, px);
       comp.resize(280, height);
       comp.primaryAxisSizingMode = 'FIXED';
       comp.counterAxisSizingMode = 'FIXED';
-      comp.cornerRadius = RADIUS.sm;
+      await setFloatVar(comp, 'cornerRadius', SIZE_VAR.radiusSm, RADIUS.sm);
 
       await setFillWithVar(comp, COLOR_VAR.surface, COLOR.surface);
-      comp.strokes = [{ type: 'SOLID', color: COLOR.border }];
-      comp.strokeWeight = 1;
-      comp.strokeAlign  = 'INSIDE';
+      await setStrokeWithVar(comp, COLOR_VAR.border, COLOR.border);
 
       /* 포맷 패턴을 placeholder로 표시 */
-      const placeholder = await addTextWithVar(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder);
+      const placeholder = await addTextWithVar(comp, FORMAT_PLACEHOLDER[format], fontSize, COLOR_VAR.textPlaceholder, COLOR.textPlaceholder, false, fontSizeVar);
       placeholder.layoutGrow = 1;
       placeholder.textAlignVertical = 'CENTER';
 
