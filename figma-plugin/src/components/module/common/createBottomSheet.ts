@@ -13,13 +13,16 @@
  * - footer: border-t border-border-subtle + 버튼 영역
  * - 모든 색상: Figma Variables 바인딩 (COLOR_VAR), fallback RGB 병행 제공
  *
+ * 색상 → COLOR_VAR + setFillWithVar / addTextWithVar
+ * 수치(spacing·radius·fontSize) → SIZE_VAR + setFloatVar
+ *
  * 핵심 규칙: layoutSizingHorizontal='FILL' / layoutGrow=1 은
  * 반드시 parent.appendChild(child) 이후에 설정해야 한다.
  * 이전에 설정하면 Figma가 조용히 무시한다.
  *
  * @returns Figma ComponentSetNode ('BottomSheet')
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../../tokens';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR, SIZE_VAR } from '../../../tokens';
 import {
   createComponent,
   combineVariants,
@@ -27,6 +30,7 @@ import {
   setPadding,
   setFillWithVar,
   addTextWithVar,
+  setFloatVar,
   solid,
 } from '../../../helpers';
 import { createIcon } from '../../../icons';
@@ -79,13 +83,18 @@ async function createBottomSheetVariant(
   /* VERTICAL Auto Layout.
    * counterAxisAlignItems='CENTER': 드래그 핸들(40px)이 390px 폭 내 가로 중앙 정렬 */
   setAutoLayout(comp, 'VERTICAL', SPACING.md, 'CENTER');
+  await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingMd, SPACING.md);
   setPadding(comp, SPACING.md, SPACING.xl, SPACING.xl, SPACING.xl);
+  await setFloatVar(comp, 'paddingTop',    SIZE_VAR.spacingMd, SPACING.md);
+  await setFloatVar(comp, 'paddingRight',  SIZE_VAR.spacingXl, SPACING.xl);
+  await setFloatVar(comp, 'paddingBottom', SIZE_VAR.spacingXl, SPACING.xl);
+  await setFloatVar(comp, 'paddingLeft',   SIZE_VAR.spacingXl, SPACING.xl);
   comp.resize(390, SNAP_HEIGHT[snap]);
   comp.primaryAxisSizingMode = 'FIXED';
   comp.counterAxisSizingMode = 'FIXED';
   /* index.tsx: rounded-t-2xl → Tailwind 기본값 1rem = 16px = RADIUS.lg */
-  comp.topLeftRadius     = RADIUS.lg;
-  comp.topRightRadius    = RADIUS.lg;
+  await setFloatVar(comp, 'topLeftRadius',  SIZE_VAR.radiusLg, RADIUS.lg);
+  await setFloatVar(comp, 'topRightRadius', SIZE_VAR.radiusLg, RADIUS.lg);
   comp.bottomLeftRadius  = 0;
   comp.bottomRightRadius = 0;
   await setFillWithVar(comp, COLOR_VAR.surface, COLOR.surface);
@@ -117,7 +126,7 @@ async function createBottomSheetVariant(
 
   /* addTextWithVar는 내부에서 header에 append하므로 layoutGrow 설정 시점 ✓ */
   const titleNode = await addTextWithVar(
-    header, '바텀시트 제목', FONT_SIZE.base, COLOR_VAR.textHeading, COLOR.textHeading, true,
+    header, '바텀시트 제목', FONT_SIZE.base, COLOR_VAR.textHeading, COLOR.textHeading, true, SIZE_VAR.fontSizeBase,
   );
   titleNode.layoutGrow = 1;
   titleNode.textAlignHorizontal = 'CENTER';
@@ -152,7 +161,10 @@ async function createBottomSheetVariant(
   const footer = figma.createFrame();
   footer.name = 'footer';
   setAutoLayout(footer, 'HORIZONTAL', SPACING.sm);
+  await setFloatVar(footer, 'itemSpacing', SIZE_VAR.spacingSm, SPACING.sm);
   setPadding(footer, SPACING.md, 0, SPACING.xl, 0);
+  await setFloatVar(footer, 'paddingTop',    SIZE_VAR.spacingMd, SPACING.md);
+  await setFloatVar(footer, 'paddingBottom', SIZE_VAR.spacingXl, SPACING.xl);
   footer.fills = [];
   /* border-t border-border-subtle 시뮬레이션: 상단에만 1px stroke 적용 */
   footer.strokes           = [solid(COLOR.borderSubtle)];
@@ -168,11 +180,13 @@ async function createBottomSheetVariant(
     setAutoLayout(btn, 'HORIZONTAL', 0, 'CENTER');
     btn.resize(80, 48); // h-12(48px) — BottomSheet 버튼은 Modal보다 높이 여유 있음
     btn.counterAxisSizingMode = 'FIXED';
-    btn.cornerRadius = RADIUS.full;
+    await setFloatVar(btn, 'cornerRadius', SIZE_VAR.radiusFull, RADIUS.full);
     setPadding(btn, 0, SPACING.standard, 0, SPACING.standard);
+    await setFloatVar(btn, 'paddingRight', SIZE_VAR.spacingStandard, SPACING.standard);
+    await setFloatVar(btn, 'paddingLeft',  SIZE_VAR.spacingStandard, SPACING.standard);
 
     await setFillWithVar(btn, bgVar, bgFallback);
-    await addTextWithVar(btn, label, FONT_SIZE.sm, textVar, textFallback, true);
+    await addTextWithVar(btn, label, FONT_SIZE.sm, textVar, textFallback, true, SIZE_VAR.fontSizeSm);
 
     /* appendChild 이후에 layoutGrow 설정 — footer 너비를 균등 분할 */
     footer.appendChild(btn);
