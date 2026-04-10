@@ -28,12 +28,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { cn } from '@lib/cn';
 import type { DropdownMenuProps } from './types';
 
-export function DropdownMenu({
-  children,
-  items,
-  align = 'right',
-  className,
-}: DropdownMenuProps) {
+export function DropdownMenu({ children, items, align = 'right', className }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +70,7 @@ export function DropdownMenu({
         <div
           role="menu"
           className={cn(
-            'absolute top-full mt-xs z-50 min-w-[140px]',
+            'absolute top-full mt-xs z-50 min-w-35',
             'bg-surface border border-border rounded-md shadow-md',
             /* align prop에 따라 패널 위치 결정 */
             align === 'right' ? 'right-0' : 'left-0',

@@ -10,7 +10,8 @@
  *                 Typography, Select
  * ● Modules/Common  — SectionHeader, AlertBanner, EmptyState, InfoRow, LabelValueRow,
  *                    DividerWithLabel, SelectableItem, ActionLinkItem, NoticeItem,
- *                    CollapsibleSection, Modal, BottomSheet, SuccessHero, Card, BalanceToggle
+ *                    CollapsibleSection, Modal, BottomSheet, SuccessHero, Card, BalanceToggle,
+ *                    DropdownMenu
  * ● Modules/Banking — AccountSelectItem, AmountInput, OtpInput
  * ● Layout      — PageHeader, HomeHeader, BottomNav, TabNav
  * ● Biz         — AccountSummaryCard, AccountSelectorCard, QuickMenuGrid,
@@ -57,6 +58,7 @@ import { createModal, createBottomSheet } from './components/module/common/creat
 import { createSuccessHero }      from './components/module/common/createSuccessHero';
 import { createCard }             from './components/module/common/createCard';
 import { createBalanceToggle }    from './components/module/common/createBalanceToggle';
+import { createDropdownMenu }     from './components/module/common/createDropdownMenu';
 
 /* layout */
 import { createBottomNav }        from './components/layout/createBottomNav';
@@ -181,6 +183,7 @@ function layoutSection(name: string, nodes: SceneNode[], startY: number): number
     await createSuccessHero(),
     await createCard(),
     await createBalanceToggle(),
+    await createDropdownMenu(),
   ];
 
   const moduleBankingNodes: SceneNode[] = [
