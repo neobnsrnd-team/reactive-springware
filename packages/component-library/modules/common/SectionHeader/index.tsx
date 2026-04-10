@@ -5,7 +5,10 @@
  * Figma의 "[제목 텍스트] [전체보기 →]" 패턴이 3곳 이상 반복되는 경우
  * 이 컴포넌트를 사용한다. (component-map.md §3.2-A)
  *
- * @param title - 섹션 제목 (text-subheading 스타일 적용)
+ * Figma 대응: SectionHeader (HasAction × HasBadge 4가지 variant)
+ *
+ * @param title - 섹션 제목 (text-xl font-bold text-text-heading)
+ * @param badge - 제목 우측 배지 숫자 (number → 문자열 자동 변환. Figma에서는 고정값 '3'으로 표현)
  * @param actionLabel - 우측 액션 텍스트 (예: '전체보기'). 미전달 시 미노출
  * @param onAction - 액션 클릭 핸들러
  * @param className - 추가 Tailwind 클래스
