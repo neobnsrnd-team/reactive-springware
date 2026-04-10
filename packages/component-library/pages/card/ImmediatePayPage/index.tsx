@@ -75,17 +75,15 @@ export function ImmediatePayPage({
     <PageLayout
       title="즉시결제"
       onBack={onBack}
-      bottomBar={
-        <Button variant="primary" size="lg" fullWidth onClick={onNext}>
-          다음
-        </Button>
-      }
+      bottomBtnCnt="1"
+      bottomBtn1Label="다음"
+      onClickBtn1={onNext}
       rightAction={
         <Button
           variant="ghost"
           size="md"
           iconOnly
-          leftIcon={<X className="size-5" />}
+          leftIcon="x"
           onClick={onClose}
           aria-label="닫기"
         />

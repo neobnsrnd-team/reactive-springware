@@ -38,11 +38,9 @@ export function ImmediatePayCompletePage({
   return (
     <PageLayout
       title="즉시결제"
-      bottomBar={
-        <Button variant="primary" size="lg" fullWidth onClick={onConfirm}>
-          확인
-        </Button>
-      }
+      bottomBtnCnt="1"
+      bottomBtn1Label="확인"
+      onClickBtn1={onConfirm}
     >
       <div className="flex flex-col gap-lg px-standard pt-md pb-xl">
         {/* ── 완료 아이콘 + 메시지 ────────────────────────────────

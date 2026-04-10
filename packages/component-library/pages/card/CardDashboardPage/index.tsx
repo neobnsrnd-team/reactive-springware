@@ -227,6 +227,7 @@ export function CardDashboardPage({
           </div>
         }
         withBottomNav
+        activeId={activeBottomTab}
       >
         {/* ── 이번 달 명세서 히어로 카드 ────────────────── */}
         <div className="px-standard pt-standard">

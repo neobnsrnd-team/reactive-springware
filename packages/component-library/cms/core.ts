@@ -11,7 +11,7 @@ import BadgeDefinition    from "../core/Badge/Badge.cms";
 import ButtonDefinition   from "../core/Button/Button.cms";
 import InputDefinition    from "../core/Input/Input.cms";
 import SelectDefinition   from "../core/Select/Select.cms";
-import TypographyDefinition from "../core/Text/Text.cms";
+import TypographyDefinition from "../core/Typography/Typography.cms";
 
 export { BadgeDefinition, ButtonDefinition, InputDefinition, SelectDefinition, TypographyDefinition };
 

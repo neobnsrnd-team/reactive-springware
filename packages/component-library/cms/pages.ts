@@ -23,8 +23,17 @@ import TransferConfirmPageDefinition  from "../pages/banking/TransferConfirmPage
 import TransferInputPageDefinition    from "../pages/banking/TransferInputPage/TransferInputPage.cms";
 import TransferSuccessPageDefinition  from "../pages/banking/TransferSuccessPage/TransferSuccessPage.cms";
 // pages - card
-import CardDashboardPageDefinition    from "../pages/card/CardDashboardPage/CardDashboardPage.cms";
-import MyCardManagementPageDefinition from "../pages/card/MyCardManagementPage/MyCardManagementPage.cms";
+import CardDashboardPageDefinition        from "../pages/card/CardDashboardPage/CardDashboardPage.cms";
+import HanaCardMenuPageDefinition         from "../pages/card/HanaCardMenuPage/HanaCardMenuPage.cms";
+import ImmediatePayCompletePageDefinition from "../pages/card/ImmediatePayCompletePage/ImmediatePayCompletePage.cms";
+import ImmediatePayMethodPageDefinition   from "../pages/card/ImmediatePayMethodPage/ImmediatePayMethodPage.cms";
+import ImmediatePayPageDefinition         from "../pages/card/ImmediatePayPage/ImmediatePayPage.cms";
+import ImmediatePayRequestPageDefinition  from "../pages/card/ImmediatePayRequestPage/ImmediatePayRequestPage.cms";
+import ImmediatePaymentPageDefinition     from "../pages/card/ImmediatePaymentPage/ImmediatePaymentPage.cms";
+import MyCardManagementPageDefinition     from "../pages/card/MyCardManagementPage/MyCardManagementPage.cms";
+import PaymentStatementPageDefinition     from "../pages/card/PaymentStatementPage/PaymentStatementPage.cms";
+import UsageHistoryPageDefinition         from "../pages/card/UsageHistoryPage/UsageHistoryPage.cms";
+import UserManagementPageDefinition       from "../pages/card/UserManagementPage/UserManagementPage.cms";
 
 export {
   AccountDetailPageDefinition,
@@ -34,14 +43,23 @@ export {
   BankSelectPageDefinition,
   CardDashboardPageDefinition,
   FullMenuPageDefinition,
+  HanaCardMenuPageDefinition,
   HomeDashboardPageDefinition,
+  ImmediatePayCompletePageDefinition,
+  ImmediatePayMethodPageDefinition,
+  ImmediatePayPageDefinition,
+  ImmediatePayRequestPageDefinition,
+  ImmediatePaymentPageDefinition,
   LoginPageDefinition,
   MyCardManagementPageDefinition,
+  PaymentStatementPageDefinition,
   TransactionDetailPageDefinition,
   TransactionHistoryPageDefinition,
   TransferConfirmPageDefinition,
   TransferInputPageDefinition,
   TransferSuccessPageDefinition,
+  UsageHistoryPageDefinition,
+  UserManagementPageDefinition,
 };
 
 /** pages 카테고리 블록 목록 — CMSApp의 blocks prop에 바로 전달 가능 */
@@ -53,12 +71,21 @@ export const pageBlocks = [
   BankSelectPageDefinition,
   CardDashboardPageDefinition,
   FullMenuPageDefinition,
+  HanaCardMenuPageDefinition,
   HomeDashboardPageDefinition,
+  ImmediatePayCompletePageDefinition,
+  ImmediatePayMethodPageDefinition,
+  ImmediatePayPageDefinition,
+  ImmediatePayRequestPageDefinition,
+  ImmediatePaymentPageDefinition,
   LoginPageDefinition,
   MyCardManagementPageDefinition,
+  PaymentStatementPageDefinition,
   TransactionDetailPageDefinition,
   TransactionHistoryPageDefinition,
   TransferConfirmPageDefinition,
   TransferInputPageDefinition,
   TransferSuccessPageDefinition,
+  UsageHistoryPageDefinition,
+  UserManagementPageDefinition,
 ];

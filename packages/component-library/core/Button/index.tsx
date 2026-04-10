@@ -109,21 +109,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           /* between 모드: leftIcon+children을 왼쪽, rightIcon을 오른쪽으로 분리 */
           <>
             <span className={cn('inline-flex items-center', gap, loading && 'invisible')}>
-              {leftIcon && <span aria-hidden="true" className="shrink-0"><Icon name={leftIcon} /></span>}
+              {leftIcon && <span aria-hidden="true" className="shrink-0"><Icon name={leftIcon} className='size-5' /></span>}
               {!iconOnly && children}
             </span>
             {rightIcon && (
               <span aria-hidden="true" className={cn('shrink-0', loading && 'invisible')}>
-                <Icon name={rightIcon} />
+                <Icon name={rightIcon} className='size-5' />
               </span>
             )}
           </>
         ) : (
           /* center 모드(기본): 모두 하나의 span으로 묶어 가운데 정렬 */
           <span className={cn('inline-flex items-center', gap, loading && 'invisible')}>
-            {leftIcon && <span aria-hidden="true" className="shrink-0"><Icon name={leftIcon} /></span>}
+            {leftIcon && <span aria-hidden="true" className="shrink-0"><Icon name={leftIcon} className='size-5' /></span>}
             {!iconOnly && children}
-            {rightIcon && <span aria-hidden="true" className="shrink-0"><Icon name={rightIcon} /></span>}
+            {rightIcon && <span aria-hidden="true" className="shrink-0"><Icon name={rightIcon} className='size-5' /></span>}
           </span>
         )}
       </button>

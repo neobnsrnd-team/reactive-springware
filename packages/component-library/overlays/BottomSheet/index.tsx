@@ -33,13 +33,13 @@ import { Button, ButtonGroup } from '../../core/Button';
 
 export type { BottomSheetProps, BottomSheetSnap } from './types';
 
-/** snap 프리셋 → 최대 높이 Tailwind 클래스 */
+/** snap 프리셋 → 높이 Tailwind 클래스
+ * half/full은 명시적 h-[...]로 height를 확정값으로 지정해 flex-1이 정상 동작.
+ * auto는 h-[min(fit-content,90%)]로 콘텐츠 높이를 기본으로 하되 90% 상한을 지정.
+ * max-h만 사용하면 flex 부모 height가 indefinite가 되어 body flex-1이 붕괴된다. */
 const SNAP_CLASS: Record<BottomSheetSnap, string> = {
-  /* auto: 콘텐츠 높이 자동. max-h로 90dvh 상한만 지정 */
-  auto: 'max-h-[90%]',
-  /* half: 화면 절반 고정. 콘텐츠가 넘치면 본문 내부 스크롤 */
+  auto: 'h-[min(fit-content,90%)]',
   half: 'h-[50%] max-h-[50%]',
-  /* full: 상단 안전 영역만 남기고 전체 화면 점유 */
   full: 'h-[90%] max-h-[90%]',
 };
 
@@ -167,7 +167,7 @@ export function BottomSheet({
          *   - 헤더 없음: 드래그 핸들 pb-1(4px) + 본문 pt-md(12px) = 16px 간격
          */}
         <div
-          className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden pt-md pb-md"
+          className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden p-md"
           style={{ scrollbarWidth: 'none' }}
         >
           {children}

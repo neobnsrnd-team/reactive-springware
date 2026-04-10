@@ -20,9 +20,8 @@ import React, { useState, useMemo } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@lib/cn';
 
-import { Button } from '../../../core/Button';
-import { Typography } from '../../../core/Typography';
-import { BottomSheet } from '../../../modules/common/BottomSheet';
+import { Typography } from '../../core/Typography';
+import { BottomSheet } from '../BottomSheet';
 
 import type {
   UsageHistoryFilterSheetProps,
@@ -169,16 +168,11 @@ export function UsageHistoryFilterSheet({
         onClose={onClose}
         title="검색"
         snap="full"
-        footer={
-          <div className="flex gap-sm">
-            <Button variant="outline" size="lg" onClick={handleReset} className="w-24 shrink-0">
-              초기화
-            </Button>
-            <Button variant="primary" size="lg" fullWidth onClick={handleApply}>
-              조회
-            </Button>
-          </div>
-        }
+        bottomBtnCnt="2"
+        bottomBtn1Label="조회"
+        bottomBtn2Label="초기화"
+        onClickBtn1={handleApply}
+        onClickBtn2={handleReset}
       >
         <div className="flex flex-col gap-lg px-lg">
           <FilterRow label="승인구분">

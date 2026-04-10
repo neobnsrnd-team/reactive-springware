@@ -5,7 +5,7 @@
  * Transaction·SearchFilter 등 세부 타입은 biz 컴포넌트에서 re-export한다.
  */
 export type { Transaction, MerchantInfo } from '../../../biz/card/UsageTransactionItem';
-export type { SearchFilter, CardOption }  from '../../../biz/card/UsageHistoryFilterSheet';
+export type { SearchFilter, CardOption }  from '../../../overlays/UsageHistoryFilterSheet';
 
 /** 페이지 상단 결제 요약 카드 데이터 */
 export interface UsagePaymentSummary {
@@ -19,12 +19,12 @@ export interface UsageHistoryPageProps {
   transactions:       import('../../../biz/card/UsageTransactionItem').Transaction[];
   totalCount:         number;
   paymentSummary:     UsagePaymentSummary;
-  cardOptions:        import('../../../biz/card/UsageHistoryFilterSheet').CardOption[];
+  cardOptions:        import('../../../overlays/UsageHistoryFilterSheet').CardOption[];
   onLoadMore?:        () => void;
   onInstallment?:     () => void;
   onImmediatePayment?: () => void;
   onRevolving?:       () => void;
-  onSearch?:          (filter: import('../../../biz/card/UsageHistoryFilterSheet').SearchFilter) => void;
+  onSearch?:          (filter: import('../../../overlays/UsageHistoryFilterSheet').SearchFilter) => void;
   onBack?:            () => void;
   onClose?:           () => void;
 }

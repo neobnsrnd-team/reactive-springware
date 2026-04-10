@@ -24,7 +24,6 @@
  * @param onClose            - 닫기(X)
  */
 import React, { useState } from 'react';
-import { X, Search } from 'lucide-react';
 
 import { PageLayout } from '../../../layout/PageLayout';
 import { Button } from '../../../core/Button';
@@ -33,7 +32,7 @@ import { BillingPeriodLabel } from '../../../biz/card/BillingPeriodLabel';
 import { CardPaymentActions } from '../../../biz/card/CardPaymentActions';
 
 import { UsageTransactionItem } from '../../../biz/card/UsageTransactionItem';
-import { UsageHistoryFilterSheet } from '../../../biz/card/UsageHistoryFilterSheet';
+import { UsageHistoryFilterSheet } from '../../../overlays/UsageHistoryFilterSheet';
 
 import type { UsageHistoryPageProps, SearchFilter } from './types';
 
@@ -131,7 +130,7 @@ export function UsageHistoryPage({
             variant="ghost"
             size="md"
             iconOnly
-            leftIcon={<X className="size-5" />}
+            leftIcon="x"
             onClick={onClose}
             aria-label="닫기"
           />
@@ -165,7 +164,7 @@ export function UsageHistoryPage({
             variant="ghost"
             size="md"
             iconOnly
-            leftIcon={<Search className="size-4" aria-hidden="true" />}
+            leftIcon="search"
             onClick={() => setSearchOpen(true)}
             aria-label="검색 필터 열기"
           />

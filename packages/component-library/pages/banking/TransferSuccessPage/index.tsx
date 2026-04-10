@@ -112,16 +112,11 @@ export function TransferSuccessPage({
           />
         }
         /* 하단 고정 버튼 바: 추가 이체(보조) + 확인(주) */
-        bottomBar={
-          <Inline gap="sm">
-            <Button variant="outline" size="lg" onClick={() => console.log('추가 이체')} fullWidth>
-              추가 이체
-            </Button>
-            <Button variant="primary" size="lg" onClick={() => console.log('확인')} fullWidth>
-              확인
-            </Button>
-          </Inline>
-        }
+        bottomBtnCnt="2"
+        bottomBtn1Label="확인"
+        bottomBtn2Label="추가 이체"
+        onClickBtn1={() => console.log('확인')}
+        onClickBtn2={() => console.log('추가 이체')}
       >
         <Stack gap="lg">
           {/* ── 성공 히어로 ── */}

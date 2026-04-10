@@ -472,20 +472,10 @@ export function AllAccountsPage({
     <PageLayout
       title="전계좌 조회"
       onBack={onBack}
-      bottomBar={
-        // 다른금융 탭일 때만 연결하기 버튼을 PageLayout 최하단 고정 바로 노출
-        activeTab === 'other' ? (
-          <Button
-            variant="primary"
-            size="lg"
-            fullWidth
-            leftIcon="link"
-            onClick={onConnectAccount}
-          >
-            연결하기
-          </Button>
-        ) : undefined
-      }
+      // 다른금융 탭일 때만 연결하기 버튼을 PageLayout 최하단 고정 바로 노출
+      bottomBtnCnt={activeTab === 'other' ? "1" : undefined}
+      bottomBtn1Label="연결하기"
+      onClickBtn1={onConnectAccount}
     >
       {/* flex-1: OtherTabContent가 남은 높이를 채워 EmptyState 세로 중앙 정렬을 위한 부모 flex 컨텍스트 */}
       <Stack gap="sm" className="flex-1">

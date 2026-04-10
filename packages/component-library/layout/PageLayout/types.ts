@@ -22,5 +22,7 @@ export interface PageLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   bottomBtnCnt?:  string;
   bottomBtn1Label?: string;
   bottomBtn2Label?: string;
+  onClickBtn1?:       () => void;
+  onClickBtn2?:       () => void;
   className?:    string;
 }

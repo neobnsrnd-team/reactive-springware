@@ -37,6 +37,8 @@ export function PageLayout({
   bottomBtnCnt,
   bottomBtn1Label = "확인",
   bottomBtn2Label = "취소",
+  onClickBtn1 = () => {},
+  onClickBtn2 = () => {},
   className,
   children,
   ...props
@@ -94,8 +96,8 @@ export function PageLayout({
           fixed: 화면 하단에 항상 고정 위치 */}
       {(Number(bottomBtnCnt) > 0) && (
         <ButtonGroup className="sticky bottom-0 left-0 right-0 z-sticky backdrop-blur-sm bg-surface/80 border-t border-border-subtle px-standard pt-standard pb-2xl">
-          {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" fullWidth>{bottomBtn2Label}</Button>}
-          <Button variant="primary" fullWidth>{bottomBtn1Label}</Button>
+          {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" size='lg' fullWidth onClick={onClickBtn2}>{bottomBtn2Label}</Button>}
+          <Button variant="primary" size='lg' fullWidth onClick={onClickBtn1}>{bottomBtn1Label}</Button>
         </ButtonGroup>
       )}
     </div>

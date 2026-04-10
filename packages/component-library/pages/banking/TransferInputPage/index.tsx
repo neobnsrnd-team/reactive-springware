@@ -334,16 +334,9 @@ export function TransferInputPage({
             <Menu className="size-5" aria-hidden="true" />
           </button>
         }
-        bottomBar={
-          <Button
-            variant="primary"
-            size="lg"
-            fullWidth
-            onClick={() => console.log('다음')}
-          >
-            다음
-          </Button>
-        }
+        bottomBtnCnt="1"
+        bottomBtn1Label="다음"
+        onClickBtn1={() => console.log('다음')}
       >
         <Stack>
           {/* ── 출금 계좌 카드 ── */}

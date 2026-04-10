@@ -1,12 +1,11 @@
 /**
- * @file Text.cms.tsx
- * @description Typography(Text) 컴포넌트의 CMS BlockDefinition.
+ * @file Typography.cms.tsx
+ * @description Typography 컴포넌트의 CMS BlockDefinition.
  * CMS 팔레트 'core' 카테고리에 Typography를 등록한다.
- * 컴포넌트명은 'Typography'로 등록하며, Text alias도 동일하게 동작한다.
  *
  * @example
  * // your-app/src/cms/index.ts 에서 import 후 blocks 배열에 추가
- * import TypographyDefinition from "@reactivespringware/component-library/core/Text/Text.cms";
+ * import TypographyDefinition from "@reactivespringware/component-library/core/Typography/Typography.cms";
  */
 import type { BlockDefinition } from "@neobnsrnd-team/cms-core";
 import { Typography } from "./index";

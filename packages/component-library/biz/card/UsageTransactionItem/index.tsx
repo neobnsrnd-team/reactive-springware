@@ -22,7 +22,7 @@ import React, { useState } from 'react';
 import { cn } from '@lib/cn';
 
 import { Typography }         from '../../../core/Typography';
-import { BottomSheet }        from '../../../modules/common/BottomSheet';
+import { BottomSheet }        from '../../../overlays/BottomSheet';
 import { CollapsibleSection } from '../../../modules/common/CollapsibleSection';
 import { Divider }            from '../../../modules/common/Divider';
 

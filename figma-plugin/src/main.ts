@@ -54,7 +54,7 @@ import { createNoticeItem }       from './components/module/common/createNoticeI
 import { createAmountInput }      from './components/module/banking/createAmountInput';
 import { createOtpInput }         from './components/module/banking/createOtpInput';
 import { createCollapsibleSection}from './components/module/common/createCollapsibleSection';
-import { createModal, createBottomSheet } from './components/module/common/createModal';
+import { createModal, createBottomSheet } from './components/overlay/createModal';
 import { createSuccessHero }      from './components/module/common/createSuccessHero';
 import { createCard }             from './components/module/common/createCard';
 import { createBalanceToggle }    from './components/module/common/createBalanceToggle';

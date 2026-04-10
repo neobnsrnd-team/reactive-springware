@@ -3,9 +3,9 @@
  * @description Figma Modal / BottomSheet 컴포넌트 세트 생성.
  * Modal: size(sm|md|lg) variants / BottomSheet: snap(auto|half|full) variants.
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../../tokens';
-import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../../../helpers';
-import { createIcon } from '../../../icons';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE } from '../../tokens';
+import { createComponent, combineVariants, setAutoLayout, setPadding, setFill, addText } from '../../helpers';
+import { createIcon } from '../../icons';
 
 /* ── Modal ─────────────────────────────────────────────────── */
 type ModalSize = 'Small' | 'Medium' | 'Large';
