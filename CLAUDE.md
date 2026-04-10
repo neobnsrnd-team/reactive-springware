@@ -39,125 +39,6 @@
 
 ---
 
-# ⚠️ 코드 생성 전 필수 절차
-
-페이지, 컴포넌트, Hook, Repository 등 **어떤 코드를 생성하기 전에도** 아래 rules 파일을 반드시 먼저 읽는다.
-읽지 않고 생성하면 규칙 위반 코드가 생성된다.
-
-| 파일                          | 역할                                                     |
-| ----------------------------- | -------------------------------------------------------- |
-| `rules/01-architecture.md`    | 프로젝트 구조 + Page/Hook/Repository 레이어 역할 분리    |
-| `rules/02-naming.md`          | 파일·변수·함수·이벤트 네이밍 규칙                        |
-| `rules/03-component.md`       | 컴포넌트 사용 규칙 + Figma 레이아웃 변환                 |
-| `rules/04-state-data.md`      | 상태 관리 위치 기준 + 데이터 처리 규칙                   |
-| `rules/05-repository.md`      | Repository 패턴 작성 규칙                                |
-| `rules/06-event.md`           | 이벤트 핸들러 정의·전달 규칙                             |
-| `rules/07-figma.md`           | Figma 디자인 구조 해석 기준                              |
-| `rules/08-generation.md`      | 페이지 생성 시 처리 절차 및 라우터 등록                  |
-| `rules/09-confirmation.md`    | 개발자 확인이 필요한 상황 정의                           |
-| `rules/10-brand.md`           | 페이지 루트 data-brand / data-domain 적용 규칙           |
-| `rules/11-component-props.md` | 컴포넌트별 허용 prop 값 레퍼런스 (variant·size·color 등) |
-
-## 규칙 선택적 로드 프로토콜 (Context Efficiency)
-
-65KB+ 규칙 파일 전체를 매 세션마다 로드하면 컨텍스트가 낭비된다.
-아래 기준에 따라 **요청 성격별로 필요한 파일만 선택적으로 읽는다.**
-
-### 항상 로드 (Core — 모든 코드 생성 요청)
-
-| 파일 | 이유 |
-|------|------|
-| `rules/01-architecture.md` | 레이어 구조 — 모든 파일 생성에 영향 |
-| `rules/02-naming.md` | 네이밍 — 모든 파일명·변수명에 영향 |
-| `rules/03-component.md` | 컴포넌트 사용 — UI 코드 전체에 영향 |
-| `rules/04-state-data.md` | 상태 관리 — Hook/Page 분리 기준 |
-| `rules/06-event.md` | 이벤트 핸들러 — 모든 인터랙션에 영향 |
-| `rules/08-generation.md` | 생성 절차 — 파일 순서·라우터 등록 |
-
-### 요청 성격별 추가 로드 (On-Demand)
-
-| 조건 | 추가 로드 파일 |
-|------|--------------|
-| Figma URL 또는 디자인 설명이 포함된 경우 | `rules/07-figma.md` |
-| 새 컴포넌트 생성 또는 prop 확인 필요 시 | `rules/11-component-props.md` |
-| 브랜드(하나·KB·신한 등) 명시된 경우 | `rules/10-brand.md` |
-| Repository / API 패턴 작성 시 | `rules/05-repository.md` |
-| 개발자 확인 판단 기준이 불명확한 경우 | `rules/09-confirmation.md` |
-
-> 단순 질문·설명 요청은 Core 파일도 필수가 아니다. **코드 생성 직전에만** 해당 파일을 읽는다.
-
----
-
-# 🚨 Rule Priority (Highest Priority)
-
-The following rule files MUST take priority over any existing project structure.
-
-Priority Order:
-
-1. CLAUDE.md (Highest Priority)
-2. .claude.rules
-3. rules/ (All rule files inside rules folder)
-4. project-structure.md
-5. Existing project structure (Lowest Priority)
-
-Claude MUST follow rule files over existing code structure.
-
-If there is any conflict between rules and existing project structure:
-→ **Rules MUST override existing structure**
-
-Claude MUST NOT reuse existing structure blindly.
-
-Before generating any code, Claude MUST:
-
-1. Read CLAUDE.md
-2. Read .claude.rules
-3. Read all files inside `rules/` folder
-4. Follow defined structure
-5. Then generate code
-
----
-
-# 📚 Rules Folder Enforcement
-
-Claude MUST read and follow **all rule files** inside:
-
-```
-rules/
-```
-
-Examples:
-
-```
-rules/
-  01-architecture.md
-  02-naming.md
-  03-component.md
-  04-state-data.md
-  05-repository.md
-  06-event.md
-  07-figma.md
-  08-generation.md
-  09-confirmation.md
-
-```
-
-All rules inside `rules/` folder are **mandatory**.
-
-Claude MUST:
-
-✔ Read all rule files
-✔ Follow all rule files
-✔ Apply rules during code generation
-✔ Validate rule compliance before output
-
-Claude MUST NOT:
-
-❌ Ignore rule files
-❌ Partially apply rules
-❌ Override rule files with existing structure
-
----
-
 # 🧪 Development Phase Rules
 
 This project is currently in **development phase**.
@@ -323,34 +204,6 @@ Repository 패턴을 사용하는 이유: API 응답 구조가 바뀌어도 Repo
 
 ---
 
-# 📐 아키텍처 방향
-
-### 파일 구조
-
-**Figma 화면 1개 = `src/features/` 하위 폴더 1개**
-
-각 feature 폴더 안에서 파일을 역할별로 분리한다.
-
-```
-src/features/
-  transactionDetail/
-    TransactionDetailPage.tsx   ← 라우팅 단위 (UI만)
-    useTransactionDetail.ts     ← 데이터 패칭·상태 관리
-    transactionDetailRepository.ts  ← HTTP 호출·데이터 가공
-    transactionDetailTypes.ts   ← TypeScript 타입 정의
-  accountList/
-    AccountListPage.tsx
-    useAccountList.ts
-    ...
-```
-
-각 파일의 역할:
-
-- `{Entity}Page.tsx` — 라우팅 단위. 비즈니스 로직 포함 금지.
-- `use{Entity}.ts` — 데이터 패칭·상태 로직 전담.
-- `{entity}Repository.ts` — HTTP 호출·데이터 가공·모델 변환·에러 처리 전담.
-- `{entity}Types.ts` — 타입 정의 전담.
-
 ### 컴포넌트 조합 규칙
 
 컴포넌트 계층은 Page → Layout → Section → Component 순서를 반드시 지킨다.
@@ -492,12 +345,88 @@ design-tokens/
 `tokens.ts`는 **Figma 플러그인 전용** 파일이다.
 globals.css와 완전히 동기화할 필요 없으며, 아래 토큰만 관리한다.
 
-- Figma 컴포넌트 생성 시 사용하는 **변수 경로 상수** (Figma Variables 바인딩용 경로)
+- Figma 컴포넌트 생성 시 사용하는 **변수 경로 상수** (Figma Variables 바인딩용 경로) 와 **값 상수**조합으로 이루어져있다.
 - 브랜드별·도메인별 색상은 tokens.ts에 포함하지 않는다.
+- Figma 컴포넌트를 생성할 때 필요한 변수 경로 상수가 tokens.ts에 없는 경우, 임의로 추가하지 않고 **반드시 개발자에게 확인** 후 진행한다.
+- temp.json 업데이트 작업에서 tokens.ts는 수정하지 않는다.
+- tokens.ts 수정이 필요한 경우 개발자에게 별도로 확인한다.
 
-Figma 컴포넌트를 생성할 때 필요한 변수 경로 상수가 tokens.ts에 없는 경우, 임의로 추가하지 않고 **반드시 개발자에게 확인** 후 진행한다.
+---
 
-temp.json 업데이트 작업에서 tokens.ts는 수정하지 않는다.
-tokens.ts 수정이 필요한 경우 개발자에게 별도로 확인한다.
+# 🔌 Figma 플러그인 컴포넌트 생성 규칙
+
+`figma-plugin/src/components/` 하위에 컴포넌트 생성 파일을 작성할 때 반드시 아래 규칙을 따른다.
+
+## 변수 바인딩 원칙
+
+모든 속성은 **Figma Variables가 존재하면 바인딩하고, 없으면 fallback 값으로 폴백**한다.
+속성 종류에 따라 사용하는 헬퍼가 다르다.
+
+### 색상 속성 → `COLOR_VAR + setFillWithVar / addTextWithVar`
+
+```ts
+// fill 색상 바인딩
+await setFillWithVar(node, COLOR_VAR.surface, COLOR.surface);
+
+// 텍스트 생성 + 색상 바인딩 (동시에 처리)
+await addTextWithVar(parent, '텍스트', FONT_SIZE.base, COLOR_VAR.textHeading, COLOR.textHeading, bold);
+```
+
+### 수치 속성(spacing, radius, fontSize) → `SIZE_VAR + setFloatVar`
+
+`setAutoLayout`, `setPadding`, `node.cornerRadius =` 등으로 fallback 값을 먼저 설정한 뒤,
+반드시 곧바로 `setFloatVar`로 동일 필드를 Variable에 바인딩한다.
+
+```ts
+// itemSpacing
+setAutoLayout(node, 'VERTICAL', SPACING.md);
+await setFloatVar(node, 'itemSpacing', SIZE_VAR.spacingMd, SPACING.md);
+
+// padding (setPadding으로 fallback 설정 후 각 필드를 개별 바인딩)
+setPadding(node, SPACING.xl, SPACING.xl);
+await setFloatVar(node, 'paddingTop',    SIZE_VAR.spacingXl, SPACING.xl);
+await setFloatVar(node, 'paddingRight',  SIZE_VAR.spacingXl, SPACING.xl);
+await setFloatVar(node, 'paddingBottom', SIZE_VAR.spacingXl, SPACING.xl);
+await setFloatVar(node, 'paddingLeft',   SIZE_VAR.spacingXl, SPACING.xl);
+
+// cornerRadius
+await setFloatVar(node, 'cornerRadius', SIZE_VAR.radiusFull, RADIUS.full);
+
+// 상단만 radius 적용하는 경우 (예: BottomSheet rounded-t-2xl)
+await setFloatVar(node, 'topLeftRadius',  SIZE_VAR.radiusLg, RADIUS.lg);
+await setFloatVar(node, 'topRightRadius', SIZE_VAR.radiusLg, RADIUS.lg);
+node.bottomLeftRadius  = 0;
+node.bottomRightRadius = 0;
+
+// fontSize — addTextWithVar의 7번째 인자로 전달
+await addTextWithVar(parent, '텍스트', FONT_SIZE.sm, COLOR_VAR.textBase, COLOR.textBase, bold, SIZE_VAR.fontSizeSm);
+```
+
+값이 `0`인 padding은 SIZE_VAR 바인딩을 생략한다.
+
+## `layoutSizingHorizontal = 'FILL'` / `layoutGrow = 1` 설정 순서
+
+반드시 `parent.appendChild(child)` **이후에** 설정한다. 이전에 설정하면 Figma가 조용히 무시한다.
+
+```ts
+// ❌ 잘못된 예 — Figma가 무시함
+node.layoutSizingHorizontal = 'FILL';
+parent.appendChild(node);
+
+// ✅ 올바른 예 — appendChild 이후에 설정
+parent.appendChild(node);
+node.layoutSizingHorizontal = 'FILL';
+```
+
+## 헬퍼 함수 (`figma-plugin/src/helpers.ts`)
+
+| 함수 | 용도 |
+|------|------|
+| `setFillWithVar(node, colorVar, fallback)` | fill에 COLOR 변수 바인딩 |
+| `setFloatVar(node, field, sizeVar, fallback)` | 수치 필드(padding/radius/itemSpacing 등)에 FLOAT 변수 바인딩 |
+| `addTextWithVar(parent, text, fontSize, colorVar, fallback, bold?, fontSizeVar?)` | 텍스트 생성 + 색상·fontSize 변수 바인딩 |
+| `setAutoLayout(node, direction, gap, align?)` | Auto Layout 설정 (gap은 fallback용 — 이후 setFloatVar로 바인딩) |
+| `setPadding(node, top, right, bottom?, left?)` | padding 설정 (fallback용 — 이후 setFloatVar로 바인딩) |
+| `combineVariants(components, name, cols?)` | variant 배열을 그리드 배치 후 ComponentSet으로 묶음 |
 
 ---
