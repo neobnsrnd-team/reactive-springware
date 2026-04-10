@@ -13,10 +13,10 @@
  * 색상은 Figma 색상 변수에 바인딩하며, 변수가 없을 경우 tokens.ts의 RGB 값으로 fallback한다.
  */
 
-import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, COLOR_VAR } from '../../tokens';
+import { BRAND, COLOR, FONT_SIZE, RADIUS, SPACING, COLOR_VAR, SIZE_VAR } from '../../tokens';
 import {
   createComponent, combineVariants, setAutoLayout, setPadding,
-  setFillWithVar, addTextWithVar,
+  setFillWithVar, addTextWithVar, setFloatVar,
 } from '../../helpers';
 
 type BadgeVariant = 'Primary' | 'Brand' | 'Success' | 'Danger' | 'Warning' | 'Neutral';
@@ -71,20 +71,24 @@ async function createBadgeVariant(variant: BadgeVariant, dot: boolean): Promise<
     /* dot=true: 텍스트 없는 8×8 원형 인디케이터
      * React Badge의 size-2(8px) rounded-full에 대응 */
     comp.resize(8, 8);
-    comp.cornerRadius = RADIUS.full;
+    await setFloatVar(comp, 'cornerRadius', SIZE_VAR.radiusFull, RADIUS.full);
     comp.layoutMode = 'NONE';
     await setFillWithVar(comp, bgVar, bgFallback);
   } else {
     /* dot=false: 기존 pill + 텍스트 형태
      * py=2, px=8: React의 px-sm py-0.5에 대응 */
     setAutoLayout(comp, 'HORIZONTAL', SPACING.xs);
+    await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
     setPadding(comp, 2, SPACING.sm);
+    /* paddingTop/Bottom = 2px는 디자인 토큰에 없으므로 raw 값 유지 */
+    await setFloatVar(comp, 'paddingRight', SIZE_VAR.spacingSm, SPACING.sm);
+    await setFloatVar(comp, 'paddingLeft',  SIZE_VAR.spacingSm, SPACING.sm);
     comp.primaryAxisSizingMode = 'AUTO';
     comp.counterAxisSizingMode = 'AUTO';
-    comp.cornerRadius = RADIUS.full;
+    await setFloatVar(comp, 'cornerRadius', SIZE_VAR.radiusFull, RADIUS.full);
     await setFillWithVar(comp, bgVar, bgFallback);
 
-    const label = await addTextWithVar(comp, variant, FONT_SIZE.xs, textVar, textFallback, true);
+    const label = await addTextWithVar(comp, variant, FONT_SIZE.xs, textVar, textFallback, true, SIZE_VAR.fontSizeXs);
     label.textAlignHorizontal = 'CENTER';
   }
 

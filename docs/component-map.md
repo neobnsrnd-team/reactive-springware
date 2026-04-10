@@ -196,7 +196,7 @@ Figma: [제목 텍스트]  [전체보기 →]
 </Inline>
 
 // 컴포넌트화 (반복 3회 이상) → modules/SectionHeader.tsx 생성
-<SectionHeader title="최근 거래" actionLabel="전체보기" onAction={...} />
+<SectionHeader title="최근 거래" actionLabel="전체보기" onAction={handleAction} />
 ```
 
 #### B. 구분선(Divider)

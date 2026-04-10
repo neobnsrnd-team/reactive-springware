@@ -319,3 +319,60 @@ export function addDivider(
   parent.appendChild(line);
   return line;
 }
+
+/**
+ * Figma 색상 변수를 stroke에 바인딩한다.
+ * setStroke는 RGB만 받으므로 변수 바인딩이 필요한 경우 이 함수를 사용한다.
+ * 변수를 찾지 못하거나 오류 발생 시 fallback RGB를 직접 적용한다.
+ *
+ * @param node         - stroke를 적용할 노드
+ * @param variableName - Figma 변수 전체 경로 (예: 'color/border')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 RGB 값
+ * @param weight       - stroke 두께 (기본 1)
+ */
+export async function setStrokeWithVar(
+  node: GeometryMixin & IndividualStrokesMixin,
+  variableName: string,
+  fallback: RGB,
+  weight = 1,
+): Promise<void> {
+  const basePaint: SolidPaint = { type: 'SOLID', color: fallback };
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+    const variable = allVars.find(v => v.name === variableName);
+    if (variable) {
+      node.strokes = [figma.variables.setBoundVariableForPaint(basePaint, 'color', variable)];
+    } else {
+      node.strokes = [basePaint];
+    }
+  } catch {
+    node.strokes = [basePaint];
+  }
+  node.strokeWeight = weight;
+  node.strokeAlign = 'INSIDE';
+}
+
+/**
+ * TextNode lineHeight를 Figma FLOAT 변수에 바인딩한다.
+ * setFloatVar는 lineHeight의 객체 구조({ value, unit })를 처리하지 못하므로
+ * 별도 함수로 분리한다. 변수를 찾지 못하면 { value: fallback, unit: 'PIXELS' }로 설정한다.
+ *
+ * @param node         - 바인딩할 TextNode
+ * @param variableName - Figma 변수 전체 경로 (예: 'text/base/lineHeight')
+ * @param fallback     - 변수를 찾지 못했을 때 사용할 px 값
+ */
+export async function setLineHeightVar(
+  node: TextNode,
+  variableName: string,
+  fallback: number,
+): Promise<void> {
+  try {
+    const allVars = await figma.variables.getLocalVariablesAsync('FLOAT');
+    const variable = allVars.find(v => v.name === variableName);
+    if (variable) {
+      node.setBoundVariable('lineHeight', variable);
+      return;
+    }
+  } catch { /* fallback */ }
+  node.lineHeight = { value: fallback, unit: 'PIXELS' };
+}

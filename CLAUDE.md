@@ -345,7 +345,7 @@ design-tokens/
 `tokens.ts`는 **Figma 플러그인 전용** 파일이다.
 globals.css와 완전히 동기화할 필요 없으며, 아래 토큰만 관리한다.
 
-- Figma 컴포넌트 생성 시 사용하는 **변수 경로 상수** (Figma Variables 바인딩용 경로) 와 **값 상수**조합으로 이루어져있다.
+- Figma 컴포넌트 생성 시 사용하는 **변수 경로 상수** (Figma Variables 바인딩용 경로) 와 **값 상수**(Figma Plugin API용 런타임 값) 조합으로 이루어져있다.
 - 브랜드별·도메인별 색상은 tokens.ts에 포함하지 않는다.
 - Figma 컴포넌트를 생성할 때 필요한 변수 경로 상수가 tokens.ts에 없는 경우, 임의로 추가하지 않고 **반드시 개발자에게 확인** 후 진행한다.
 - temp.json 업데이트 작업에서 tokens.ts는 수정하지 않는다.
@@ -402,7 +402,32 @@ node.bottomRightRadius = 0;
 await addTextWithVar(parent, '텍스트', FONT_SIZE.sm, COLOR_VAR.textBase, COLOR.textBase, bold, SIZE_VAR.fontSizeSm);
 ```
 
-값이 `0`인 padding은 SIZE_VAR 바인딩을 생략한다.
+값이 `0`인 padding도 `SIZE_VAR.spacing0`가 tokens.ts에 존재하므로 동일하게 바인딩한다.
+
+```ts
+// 예: paddingTop/Bottom = 0인 경우
+setPadding(node, 0, SPACING.md);
+await setFloatVar(node, 'paddingTop',    SIZE_VAR.spacing0,  SPACING['0']);
+await setFloatVar(node, 'paddingBottom', SIZE_VAR.spacing0,  SPACING['0']);
+await setFloatVar(node, 'paddingRight',  SIZE_VAR.spacingMd, SPACING.md);
+await setFloatVar(node, 'paddingLeft',   SIZE_VAR.spacingMd, SPACING.md);
+```
+
+### stroke 속성 → `COLOR_VAR + setStrokeWithVar`
+
+```ts
+// stroke에 COLOR 변수 바인딩 (setStroke는 RGB만 받으므로 반드시 이 헬퍼 사용)
+await setStrokeWithVar(node, COLOR_VAR.border, COLOR.border);
+await setStrokeWithVar(node, COLOR_VAR.brandPrimary, BRAND.primary, 2); // weight 지정 가능
+```
+
+### lineHeight 속성 → `SIZE_VAR + setLineHeightVar`
+
+```ts
+// lineHeight는 { value, unit } 객체 구조라 setFloatVar로 처리 불가 — 전용 헬퍼 사용
+const text = await addTextWithVar(parent, '텍스트', FONT_SIZE.base, COLOR_VAR.textHeading, COLOR.textHeading, bold, SIZE_VAR.fontSizeBase);
+await setLineHeightVar(text, SIZE_VAR.lineHeightBase, LINE_HEIGHT.base);
+```
 
 ## `layoutSizingHorizontal = 'FILL'` / `layoutGrow = 1` 설정 순서
 
@@ -423,7 +448,9 @@ node.layoutSizingHorizontal = 'FILL';
 | 함수 | 용도 |
 |------|------|
 | `setFillWithVar(node, colorVar, fallback)` | fill에 COLOR 변수 바인딩 |
+| `setStrokeWithVar(node, colorVar, fallback, weight?)` | stroke에 COLOR 변수 바인딩 (setStroke 대체) |
 | `setFloatVar(node, field, sizeVar, fallback)` | 수치 필드(padding/radius/itemSpacing 등)에 FLOAT 변수 바인딩 |
+| `setLineHeightVar(node, sizeVar, fallback)` | TextNode lineHeight에 FLOAT 변수 바인딩 (setFloatVar 대체) |
 | `addTextWithVar(parent, text, fontSize, colorVar, fallback, bold?, fontSizeVar?)` | 텍스트 생성 + 색상·fontSize 변수 바인딩 |
 | `setAutoLayout(node, direction, gap, align?)` | Auto Layout 설정 (gap은 fallback용 — 이후 setFloatVar로 바인딩) |
 | `setPadding(node, top, right, bottom?, left?)` | padding 설정 (fallback용 — 이후 setFloatVar로 바인딩) |
