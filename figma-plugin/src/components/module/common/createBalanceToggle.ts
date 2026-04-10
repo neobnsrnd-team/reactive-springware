@@ -9,7 +9,7 @@
  * React 대응 컴포넌트: packages/component-library/modules/common/BalanceToggle
  * React props: hidden(boolean), onToggle(() => void)
  */
-import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR } from '../../../tokens';
+import { COLOR, BRAND, SPACING, RADIUS, FONT_SIZE, COLOR_VAR, SIZE_VAR } from '../../../tokens';
 import {
   createComponent,
   combineVariants,
@@ -18,6 +18,7 @@ import {
   setFillWithVar,
   clearFill,
   addTextWithVar,
+  setFloatVar,
 } from '../../../helpers';
 
 /**
@@ -30,6 +31,7 @@ async function createBalanceToggleVariant(hidden: boolean): Promise<ComponentNod
 
   /* 바깥 컨테이너: 세로 flex, 오른쪽 정렬 (React: flex-col items-end gap-xs) */
   setAutoLayout(comp, 'VERTICAL', SPACING.xs, 'MAX');
+  await setFloatVar(comp, 'itemSpacing', SIZE_VAR.spacingXs, SPACING.xs);
   comp.primaryAxisSizingMode = 'AUTO';
   comp.counterAxisSizingMode = 'AUTO';
   clearFill(comp);
@@ -42,6 +44,7 @@ async function createBalanceToggleVariant(hidden: boolean): Promise<ComponentNod
     COLOR_VAR.textMuted, // Figma 변수 경로
     COLOR.textMuted,     // fallback RGB
     true,                // bold
+    SIZE_VAR.fontSizeXs,
   );
 
   /* 토글 pill (React: w-12=48px, h-6=24px, rounded-full, p-1=4px) */
@@ -54,8 +57,12 @@ async function createBalanceToggleVariant(hidden: boolean): Promise<ComponentNod
   pill.primaryAxisSizingMode = 'FIXED';
   pill.counterAxisSizingMode = 'FIXED';
   pill.resize(48, 24);
-  pill.cornerRadius = RADIUS.full; // rounded-full
+  await setFloatVar(pill, 'cornerRadius', SIZE_VAR.radiusFull, RADIUS.full); // rounded-full
   setPadding(pill, SPACING.xs, SPACING.xs); // p-1 = 4px
+  await setFloatVar(pill, 'paddingTop',    SIZE_VAR.spacingXs, SPACING.xs);
+  await setFloatVar(pill, 'paddingRight',  SIZE_VAR.spacingXs, SPACING.xs);
+  await setFloatVar(pill, 'paddingBottom', SIZE_VAR.spacingXs, SPACING.xs);
+  await setFloatVar(pill, 'paddingLeft',   SIZE_VAR.spacingXs, SPACING.xs);
 
   /* pill 색상: hidden=True → 브랜드(활성), hidden=False → surfaceRaised(비활성) */
   if (hidden) {
