@@ -4,7 +4,7 @@
  */
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-import { Button } from '../../core/Button';
+import { Button } from '../../../core/Button';
 import { UsageHistoryFilterSheet } from './index';
 import type { SearchFilter } from './types';
 
@@ -38,7 +38,7 @@ function FilterSheetDemo() {
 }
 
 const meta = {
-  title: 'Overlays/UsageHistoryFilterSheet',
+  title: 'Overlays/Card/UsageHistoryFilterSheet',
   component: UsageHistoryFilterSheet,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'card', layout: 'fullscreen' },

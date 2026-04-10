@@ -29,7 +29,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { BottomSheetProps, BottomSheetSnap } from './types';
-import { Button, ButtonGroup } from '../../core/Button';
+import { Button, ButtonGroup } from '../../../core/Button';
 
 export type { BottomSheetProps, BottomSheetSnap } from './types';
 

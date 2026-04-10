@@ -20,8 +20,8 @@ import React, { useState, useMemo } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@lib/cn';
 
-import { Typography } from '../../core/Typography';
-import { BottomSheet } from '../BottomSheet';
+import { Typography } from '../../../core/Typography';
+import { BottomSheet } from '../../common/BottomSheet';
 
 import type {
   UsageHistoryFilterSheetProps,

@@ -32,7 +32,7 @@ import { BillingPeriodLabel } from '../../../biz/card/BillingPeriodLabel';
 import { CardPaymentActions } from '../../../biz/card/CardPaymentActions';
 
 import { UsageTransactionItem } from '../../../biz/card/UsageTransactionItem';
-import { UsageHistoryFilterSheet } from '../../../overlays/UsageHistoryFilterSheet';
+import { UsageHistoryFilterSheet } from '../../../overlays/card/UsageHistoryFilterSheet';
 
 import type { UsageHistoryPageProps, SearchFilter } from './types';
 

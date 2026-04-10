@@ -38,7 +38,7 @@ import { Button } from '../../../core/Button';
 import { Select } from '../../../core/Select';
 import { TabNav } from '../../../modules/common/TabNav';
 import { Divider } from '../../../modules/common/Divider';
-import { BottomSheet } from '../../../overlays/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 import { SelectableListItem } from '../../../modules/common/SelectableListItem';
 import { CollapsibleSection } from '../../../modules/common/CollapsibleSection';
 import { Typography } from '../../../core/Typography';

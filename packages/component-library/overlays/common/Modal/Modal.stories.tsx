@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { Modal } from './index';
 
 const meta = {
-  title: 'Overlays/Modal',
+  title: 'Overlays/Common/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },

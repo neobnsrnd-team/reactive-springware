@@ -36,7 +36,7 @@ import { Select } from '../../../core/Select';
 import { Badge } from '../../../core/Badge';
 import { Typography } from '../../../core/Typography';
 import { Card } from '../../../modules/common/Card';
-import { BottomSheet } from '../../../overlays/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 import { Checkbox } from '../../../modules/common/Checkbox';
 import { Stack } from '../../../layout/Stack';
 import { Inline } from '../../../layout/Inline';

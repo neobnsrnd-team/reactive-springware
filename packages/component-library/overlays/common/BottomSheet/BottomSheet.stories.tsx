@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { BottomSheet } from './index';
 
 const meta = {
-  title: 'Overlays/BottomSheet',
+  title: 'Overlays/Common/BottomSheet',
   component: BottomSheet,
   tags: ['autodocs'],
   parameters: { brand: 'hana', domain: 'banking', layout: 'centered' },

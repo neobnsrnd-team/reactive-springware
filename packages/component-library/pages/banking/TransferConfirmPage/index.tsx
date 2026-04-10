@@ -30,7 +30,7 @@ import React from 'react';
 import { Plus } from 'lucide-react';
 
 /* ── Overlays ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../overlays/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 
 /* ── Modules ─────────────────────────────────────────────────────── */
 import { InfoRow } from '../../../modules/common/InfoRow';

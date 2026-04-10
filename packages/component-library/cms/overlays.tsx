@@ -19,8 +19,8 @@
  */
 import React from 'react';
 import type { OverlayTemplate, OverlayRendererProps } from "@neobnsrnd-team/cms-core";
-import { BottomSheet } from '../overlays/BottomSheet';
-import { Modal } from '../overlays/Modal';
+import { BottomSheet } from '../overlays/common/BottomSheet';
+import { Modal } from '../overlays/common/Modal';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // BottomSheet 렌더러

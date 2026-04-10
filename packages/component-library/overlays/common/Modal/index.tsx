@@ -24,7 +24,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '@lib/cn';
 import type { ModalProps } from './types';
-import { Button, ButtonGroup } from '../../core/Button';
+import { Button, ButtonGroup } from '../../../core/Button';
 
 export function Modal({
   open,
@@ -93,7 +93,7 @@ export function Modal({
         onClick={(e) => e.stopPropagation()}
         className={cn(
           'flex flex-col',
-          'w-full max-w-lg',
+          'w-full',
           'bg-surface shadow-2xl',
           'rounded-2xl',
           'pointer-events-auto',

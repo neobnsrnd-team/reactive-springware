@@ -41,7 +41,7 @@ import { CardRowPlain, CardActionRowPlain } from '../../../modules/common/Card';
 import { EmptyState }                       from '../../../modules/common/EmptyState';
 
 /* ── Overlays ─────────────────────────────────────────────────────── */
-import { BottomSheet }                      from '../../../overlays/BottomSheet';
+import { BottomSheet }                      from '../../../overlays/common/BottomSheet';
 
 import type { TransactionDetailPageProps, TransactionDetailMockData } from './types';
 

@@ -33,7 +33,7 @@ import React from 'react';
 import { Wallet } from 'lucide-react';
 
 /* ── Overlays ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../overlays/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 
 /* ── Modules ─────────────────────────────────────────────────────── */
 import { TabNav } from '../../../modules/common/TabNav';

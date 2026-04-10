@@ -28,7 +28,7 @@ import React from 'react';
 import { Lock } from 'lucide-react';
 
 /* ── Overlays ─────────────────────────────────────────────────────── */
-import { BottomSheet } from '../../../overlays/BottomSheet';
+import { BottomSheet } from '../../../overlays/common/BottomSheet';
 
 /* ── Modules ─────────────────────────────────────────────────────── */
 import { PinDotIndicator } from '../../../modules/banking/PinDotIndicator';
