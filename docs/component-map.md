@@ -69,11 +69,11 @@ Figma에서 `Primary / Brand` 계열 색상은 CSS 변수로 처리. **컴포넌
 
 | Figma 색상 역할 | CSS 변수 | Tailwind 클래스 | prop 노출 여부 |
 |---------------|----------|----------------|--------------|
-| 브랜드 메인 | `--bank-brand` | `bg-brand`, `text-brand` | ❌ (토큰 고정) |
-| 브랜드 대안 | `--bank-brand-alt` | `text-brand-alt` | ❌ |
-| 브랜드 전경색 | `--bank-brand-fg` | `text-brand-fg` | ❌ |
-| 브랜드 5% 투명도 | `--bank-brand-5` | `bg-brand-5` | ❌ |
-| 브랜드 그림자 | `--bank-brand-shadow` | `shadow-brand` | ❌ |
+| 브랜드 메인 | `--color-brand` | `bg-brand`, `text-brand` | ❌ (토큰 고정) |
+| 브랜드 대안 | `--color-brand-alt` | `text-brand-alt` | ❌ |
+| 브랜드 전경색 | `--color-brand-fg` | `text-brand-fg` | ❌ |
+| 브랜드 5% 투명도 | `--color-brand-5` | `bg-brand-5` | ❌ |
+| 브랜드 그림자 | `--color-brand-shadow` | `shadow-brand` | ❌ |
 
 #### 시맨틱 컬러 (공통 고정)
 
