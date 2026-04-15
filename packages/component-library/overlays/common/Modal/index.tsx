@@ -36,9 +36,9 @@ import { Button, ButtonGroup } from '../../../core/Button';
  * - sm: 320px / md: 360px / lg: 390px (createModal.ts MODAL_SIZE_CONFIG 기준)
  */
 const PANEL_SIZE: Record<ModalSize, string> = {
-  sm:         'max-w-[320px]',
-  md:         'max-w-[360px]',
-  lg:         'max-w-[390px]',
+  sm: 'max-w-[320px]',
+  md: 'max-w-[360px]',
+  lg: 'max-w-[390px]',
   /* fullscreen: w-screen(=100vw) 대신 w-full 사용 — 스크롤바 너비 포함 가로 스크롤 방지 */
   fullscreen: 'max-w-none w-full max-h-none rounded-none',
 };
@@ -61,7 +61,9 @@ export function Modal({
 }: ModalProps) {
   /* ESC 키로 닫기 */
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); },
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    },
     [onClose],
   );
 
@@ -95,106 +97,108 @@ export function Modal({
 
   return createPortal(
     <>
-    {/* Backdrop
-      * 백드롭: fixed inset-0으로 뷰포트 전체 덮기, bg-black/50으로 dim 처리
-      * items-center justify-center → 항상 화면 중앙에 팝업 표시
-      */}
-    <div
-      role="presentation"
-      onClick={disableBackdropClose ? undefined : onClose}
-      style={overlayStyle}
-      className="fixed inset-0 z-modal flex items-center justify-center bg-black/50 backdrop-blur-sm"
-    >
+      {/* Backdrop
+       * 백드롭: fixed inset-0으로 뷰포트 전체 덮기, bg-black/50으로 dim 처리
+       * items-center justify-center → 항상 화면 중앙에 팝업 표시
+       */}
       <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={title ? 'modal-title' : undefined}
-        onClick={(e) => e.stopPropagation()}
-        className={cn(
-          'flex flex-col',
-          /* mx-4: 좌우 여백으로 뷰포트 엣지에 붙지 않도록 */
-          'w-full mx-4 overflow-hidden',
-          'bg-surface shadow-2xl',
-          'rounded-2xl',
-          isContainer
-            ? 'max-h-full'
-            : 'max-h-[calc(100dvh-80px)]',
-          PANEL_SIZE[size],
-          className,
-        )}
+        role="presentation"
+        onClick={disableBackdropClose ? undefined : onClose}
+        style={overlayStyle}
+        className="fixed inset-0 z-modal flex items-center justify-center bg-black/50 backdrop-blur-sm"
       >
-        {/* 헤더 (고정) — titleAlign 에 따라 레이아웃 분기 */}
-        {titleAlign === 'center' ? (
-          /*
-           * center 모드: 타이틀 중앙 정렬, X 버튼 절대 우측 배치.
-           * BottomSheet 헤더와 동일한 패턴 (경고·안내 모달에서 사용).
-           */
-          <div className="relative flex shrink-0 items-center justify-center px-xl pt-md pb-md">
-            {title && (
-              <h2 id="modal-title" className="text-base font-bold text-text-heading text-center">
-                {title}
-              </h2>
-            )}
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="모달 닫기"
-              className={cn(
-                'absolute right-xl flex items-center justify-center size-8 rounded-lg',
-                'text-text-muted hover:bg-surface-raised hover:text-text-heading',
-                'transition-colors duration-150',
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={title ? 'modal-title' : undefined}
+          onClick={(e) => e.stopPropagation()}
+          className={cn(
+            'flex flex-col',
+            /* mx-4: 좌우 여백으로 뷰포트 엣지에 붙지 않도록 */
+            'w-full mx-4 overflow-hidden',
+            'bg-surface shadow-2xl',
+            'rounded-2xl',
+            isContainer ? 'max-h-full' : 'max-h-[calc(100dvh-80px)]',
+            PANEL_SIZE[size],
+            className,
+          )}
+        >
+          {/* 헤더 (고정) — titleAlign 에 따라 레이아웃 분기 */}
+          {titleAlign === 'center' ? (
+            /*
+             * center 모드: 타이틀 중앙 정렬, X 버튼 절대 우측 배치.
+             * BottomSheet 헤더와 동일한 패턴 (경고·안내 모달에서 사용).
+             */
+            <div className="relative flex shrink-0 items-center justify-center px-xl pt-md pb-md">
+              {title && (
+                <h2 id="modal-title" className="text-base font-bold text-text-heading text-center">
+                  {title}
+                </h2>
               )}
-            >
-              <X className="size-4" aria-hidden="true" />
-            </button>
-          </div>
-        ) : (
-          /*
-           * left 모드(기본): 타이틀 좌측, X 버튼 우측 (justify-between).
-           * 일반 확인·선택 모달에서 사용.
-           */
-          <div className="flex shrink-0 items-center justify-between px-xl pt-md pb-md">
-            {title ? (
-              <h2 id="modal-title" className="text-base font-bold text-text-heading">
-                {title}
-              </h2>
-            ) : (
-              /* 닫기 버튼을 오른쪽으로 밀기 위한 spacer */
-              <span aria-hidden="true" />
-            )}
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="모달 닫기"
-              className={cn(
-                'ml-auto flex items-center justify-center size-8 rounded-lg',
-                'text-text-muted hover:bg-surface-raised hover:text-text-heading',
-                'transition-colors duration-150',
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="모달 닫기"
+                className={cn(
+                  'absolute right-xl flex items-center justify-center size-8 rounded-lg',
+                  'text-text-muted hover:bg-surface-raised hover:text-text-heading',
+                  'transition-colors duration-150',
+                )}
+              >
+                <X className="size-4" aria-hidden="true" />
+              </button>
+            </div>
+          ) : (
+            /*
+             * left 모드(기본): 타이틀 좌측, X 버튼 우측 (justify-between).
+             * 일반 확인·선택 모달에서 사용.
+             */
+            <div className="flex shrink-0 items-center justify-between px-xl pt-md pb-md">
+              {title ? (
+                <h2 id="modal-title" className="text-base font-bold text-text-heading">
+                  {title}
+                </h2>
+              ) : (
+                /* 닫기 버튼을 오른쪽으로 밀기 위한 spacer */
+                <span aria-hidden="true" />
               )}
-            >
-              <X className="size-4" aria-hidden="true" />
-            </button>
-          </div>
-        )}
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="모달 닫기"
+                className={cn(
+                  'ml-auto flex items-center justify-center size-8 rounded-lg',
+                  'text-text-muted hover:bg-surface-raised hover:text-text-heading',
+                  'transition-colors duration-150',
+                )}
+              >
+                <X className="size-4" aria-hidden="true" />
+              </button>
+            </div>
+          )}
 
-        {/*
-         * 본문 (스크롤 영역)
-         * flex-1 + min-h-0: 헤더·푸터를 제외한 공간을 차지하면서 내부 스크롤 허용
-         * min-h-0 없으면 flex 컬럼에서 overflow-y-auto가 동작하지 않음
-         */}
-        <div className="flex-1 min-h-0 overflow-y-auto px-xl pb-md">
-          {children}
+          {/*
+           * 본문 (스크롤 영역)
+           * flex-1 + min-h-0: 헤더·푸터를 제외한 공간을 차지하면서 내부 스크롤 허용
+           * min-h-0 없으면 flex 컬럼에서 overflow-y-auto가 동작하지 않음
+           */}
+          <div className="flex-1 min-h-0 overflow-y-auto px-xl pb-md">{children}</div>
+
+          {/* Footer */}
+          {Number(bottomBtnCnt) > 0 && (
+            <ButtonGroup className="shrink-0 px-xl pt-md pb-xl">
+              {Number(bottomBtnCnt) == 2 && (
+                <Button variant="outline" fullWidth onClick={onClickBtn2}>
+                  {bottomBtn2Label}
+                </Button>
+              )}
+              <Button variant="primary" fullWidth onClick={onClickBtn1}>
+                {bottomBtn1Label}
+              </Button>
+            </ButtonGroup>
+          )}
         </div>
-
-        {/* Footer */}
-        {(Number(bottomBtnCnt) > 0) && (
-          <ButtonGroup className='shrink-0 border-t border-border-subtle px-xl pt-md pb-xl'>
-            {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" fullWidth onClick={onClickBtn2}>{bottomBtn2Label}</Button>}
-            <Button variant="primary" fullWidth onClick={onClickBtn1}>{bottomBtn1Label}</Button>
-          </ButtonGroup>
-        )}
       </div>
-    </div>
     </>,
     target,
   );

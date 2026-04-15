@@ -48,7 +48,7 @@ function DetailSheet({
   const isRefund = tx.amount < 0;
 
   const rows = [
-    { label: '거래일',   value: tx.date },
+    { label: '거래일시', value: tx.date },
     { label: '거래구분', value: tx.type },
     { label: '승인번호', value: tx.approvalNumber },
     { label: '거래상태', value: tx.status },
@@ -71,7 +71,7 @@ function DetailSheet({
 
       <Divider />
 
-      <div className="flex flex-col gap-sm p-lg">
+      <div className="flex flex-col gap-sm pt-lg">
         {rows.map(({ label, value }) => (
           <div key={label} className="flex justify-between items-center">
             <Typography variant="body-sm" color="muted">{label}</Typography>

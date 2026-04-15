@@ -49,8 +49,8 @@ export function BottomSheet({
   title,
   children,
   bottomBtnCnt = '0',
-  bottomBtn1Label = "확인",
-  bottomBtn2Label = "취소",
+  bottomBtn1Label = '확인',
+  bottomBtn2Label = '취소',
   onClickBtn1 = () => {},
   onClickBtn2 = () => {},
   snap = 'auto',
@@ -80,7 +80,7 @@ export function BottomSheet({
     if (!open) return;
 
     document.addEventListener('keydown', handleKeyDown);
-    
+
     /* 시트가 열린 동안 body 스크롤 잠금 */
     if (!isContainer) {
       document.body.style.overflow = 'hidden';
@@ -88,7 +88,7 @@ export function BottomSheet({
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      
+
       if (!isContainer) {
         document.body.style.overflow = '';
       }
@@ -106,9 +106,7 @@ export function BottomSheet({
       role="presentation"
       onClick={disableBackdropClose ? undefined : onClose}
       style={overlayStyle}
-      className={cn(
-        'z-modal flex items-end justify-center bg-black/50 backdrop-blur-sm'
-      )}
+      className={cn('z-modal flex items-end justify-center bg-black/50 backdrop-blur-sm')}
     >
       <div
         role="dialog"
@@ -174,10 +172,16 @@ export function BottomSheet({
         </div>
 
         {/* 푸터 (고정) — 하단 안전 영역(Safe Area) 여백 pb-safe 포함 */}
-        {(Number(bottomBtnCnt) > 0) && (
-          <ButtonGroup className='shrink-0 border-t border-border-subtle px-xl pt-md pb-[calc(env(safe-area-inset-bottom,0px)+theme(spacing.xl))]'>
-            {((Number(bottomBtnCnt) == 2)) && <Button variant="outline" fullWidth onClick={onClickBtn2}>{bottomBtn2Label}</Button>}
-            <Button variant="primary" fullWidth onClick={onClickBtn1}>{bottomBtn1Label}</Button>
+        {Number(bottomBtnCnt) > 0 && (
+          <ButtonGroup className="shrink-0 px-xl pt-md pb-[calc(env(safe-area-inset-bottom,0px)+theme(spacing.xl))]">
+            {Number(bottomBtnCnt) == 2 && (
+              <Button variant="outline" fullWidth onClick={onClickBtn2}>
+                {bottomBtn2Label}
+              </Button>
+            )}
+            <Button variant="primary" fullWidth onClick={onClickBtn1}>
+              {bottomBtn1Label}
+            </Button>
           </ButtonGroup>
         )}
       </div>
